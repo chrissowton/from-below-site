@@ -1,0 +1,23 @@
+/* Media for batch 15. Wikimedia Commons. */
+Object.assign(window.MEDIA, {
+  pobresParaguay: { f: "Historia de los pobres Margarita Durán.jpg", cap: "Margarita Durán Estragó's 'History of the Poor of Paraguay', a book banned by the Stroessner dictatorship.", by: "Writin (Wikimedia Commons)", lic: "CC BY 4.0", lu: "https://creativecommons.org/licenses/by/4.0" },
+  saramaka1910: { f: "Saramaka-1910.jpg", cap: "Saramaka people in Suriname, photographed around 1910.", by: "Sir Harry Hamilton Johnston", lic: "Public domain" },
+  saramakaGuyane: { f: "Tribus de Saramaka (Guyane Française).jpg", cap: "Saramaka people in French Guiana, in an early twentieth-century postcard.", by: "Désiré Lanes", lic: "Public domain" },
+  saramaccaRiver: { f: "Saramacca river (2719236371).jpg", cap: "Rainforest along a river in the Suriname interior, where the Saramaka made their homes.", by: "Jan Willem Broekema", lic: "CC BY-SA 2.0", lu: "https://creativecommons.org/licenses/by-sa/2.0" },
+  belgrade68: { f: "Studentske demonstracije u Beogradu 1968.jpg", cap: "Student demonstrators in Belgrade, June 1968.", by: "Stevan Kragujević", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  belgradeFaculty: { f: "Izlazak iz zgrade Filozofskog fakulteta za vreme protesta 1968.jpg", cap: "Students leaving the occupied Faculty of Philosophy, Belgrade, 1968.", by: "Stevan Kragujević", lic: "Public domain" },
+  samlout: { f: "Samlout Sangke River Trail (1).jpg", cap: "The Sangke river in Samlout district, Battambang, where the uprising began.", by: "333geek", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  ransomeKutiFamily: { f: "Family Ransome Kuti c1940.jpg", cap: "Funmilayo Ransome-Kuti (seated, right) with her husband Israel Oludotun Ransome-Kuti and their children, around 1940.", by: "Unknown photographer", lic: "Public domain" },
+  ransomeKutiBalewa: { f: "Funmilayo Ransome-Kuti and Abubakar Tafawa Balewa.gif", cap: "Funmilayo Ransome-Kuti greets Abubakar Tafawa Balewa, Nigeria's first Prime Minister, in the early 1960s.", by: "Unknown photographer", lic: "Public domain" },
+  alakePalace: { f: "Alake's Palace, Abeokuta, Ogun.jpg", cap: "The Alake's palace in Abeokuta, where the women held their protests.", by: "Solasly", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  gabrielaStamp: { f: "Gabriela Silang 1974 stamp of the Philippines.jpg", cap: "Gabriela Silang on a Philippine stamp of 1974.", by: "Philippine Postal Corporation", lic: "Public domain" },
+  gabrielaMonument: { f: "Gabriela Silang Monument (cropped).jpg", cap: "The monument to Gabriela Silang in Makati, Metro Manila.", by: "Ralff Nestor Nacor", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  nmPerera: { f: "N. M. Perera (cropped).jpg", cap: "N. M. Perera, leader of the Lanka Sama Samaja Party, in 1961.", by: "Abbie Rowe, White House", lic: "Public domain" },
+  tlatelolcoArmy: { f: "El ejército en Tlatelolco. México 1968.jpg", cap: "The army in Tlatelolco, Mexico City, 1968.", by: "Biblioteca Francisco Xavier Clavigero, Universidad Iberoamericana", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  mexico68: { f: "Movimiento estudiantil 68 05.jpg", cap: "The student movement in Mexico City, 1968.", by: "Héctor Gallardo", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  tlatelolcoMonument: { f: "Monumento a la memoria de los asesinados en la masacre de 1968.jpg", cap: "The memorial to those killed in the 1968 massacre, Plaza de las Tres Culturas.", by: "Luis Alvaz", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  candidoManifesto: { f: "João Cândido lendo o manifesto da Revolta da Chibata.jpg", cap: "João Cândido (left) reads the sailors' manifesto demanding an end to corporal punishment, November 1910.", by: "Unknown photographer", lic: "Public domain" },
+  candidoShip: { f: "Joao Candido.jpg", cap: "João Cândido (tall, centre) with reporters, officers and sailors aboard the battleship Minas Geraes, 26 November 1910.", by: "Unknown photographer", lic: "Public domain" },
+  tuzlaFire: { f: "Bosnian social protests Tuzla.jpg", cap: "The Tuzla canton government building in flames, 8 February 2014.", by: "Juniki San", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  sarajevoFire: { f: "Fire in B&H Presidency - riots February 7 2014.jpg", cap: "Fire at the Presidency building in Sarajevo, 7 February 2014.", by: "Palapa", lic: "CC BY-SA 2.5", lu: "https://creativecommons.org/licenses/by-sa/2.5" }
+});

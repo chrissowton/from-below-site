@@ -1,20 +1,23 @@
 # From Below — an atlas of radical history
 
-An interactive world map of radical history told from the bottom up. Each point on the map opens a story with the same seven-part structure:
+An interactive world map of radical history told from the bottom up. Each point on the map opens a story with the same ten-part structure:
 
 1. What is the background to this event?
 2. Who were the key people?
 3. What happened? *(every claim footnoted to a numbered source)*
 4. What happened next?
-5. Why does it matter?
-6. What other events are like this?
-7. Where can I find out more?
+5. What do others say? *(views at the time, historians' debates, uncomfortable questions)*
+6. The evidence *(what sources survive, and whose voices are missing)*
+7. How is it remembered?
+8. Why does it matter? *(followed by "Questions to think about")*
+9. What other events are like this?
+10. Where can I find out more?
 
 ## Running it
 
 It is a static site with no build step. Open `index.html` in a browser, or publish with **GitHub Pages**:
 
-1. Push this folder to a GitHub repository.
+1. Upload the **contents** of this folder (so that `index.html` is at the top level of the repository, not inside a subfolder).
 2. Go to **Settings → Pages**, choose *Deploy from a branch*, select `main` and `/ (root)`.
 3. Your site will appear at `https://<username>.github.io/<repo>/`.
 
@@ -22,19 +25,21 @@ Each story has its own link, e.g. `…/#peterloo`, `…/#selma`, `…/#credits`.
 
 ## Adding a new event
 
-Add an object to one of the files in `data/` (or create `data/events-4.js` and add a `<script>` tag for it in `index.html`). Copy an existing event as a template. Fields:
+Add an object to one of the files in `data/` (or create a new `data/events-34.js` and add a `<script>` tag for it in `index.html`). New images go in `data/media-17.js` (or a new media file). Copy an existing event as a template. Fields:
 
 | Field | What it is |
 |---|---|
 | `id` | short unique id, used in the URL (`#id`) |
 | `title`, `place`, `date`, `year`, `teaser` | basics; `year` sets the order |
 | `lat`, `lon` | map position |
-| `theme` | one of `labour`, `vote`, `freedom`, `civil`, `queer`, `earth`, `rights` |
+| `theme` | one of `labour`, `vote`, `freedom`, `civil`, `queer`, `earth`, `rights`, `language`, `thought`, `disability`, `housing`, `peace` |
 | `hero` | key of an image in `data/media.js` |
 | `background`, `happened`, `next`, `why` | HTML (paragraphs, `<ul>` lists, `<blockquote>…<cite>…</cite></blockquote>`) |
 | `people` | list of `{ n: name, r: description, img: optional media key }` |
 | `sources` | list of `[citation HTML, url or ""]`. In `happened`, write `[1]`, `[2]` … to link to them |
 | `gallery`, `video` | lists of media keys shown under *What happened?* |
+| `debates`, `evidence`, `memory` | HTML for sections 5–7 (may use `<h3>` subheadings) |
+| `questions` | list of 3–4 discussion questions |
 | `similar` | `{ id: "other-event-id" }` for events on this site, or `{ name, text, url }` for others |
 | `more` | list of `[type, label, url]` where type is `read`, `online`, `visit`, `watch` or `listen` |
 

@@ -244,3 +244,22 @@ figure.media figcaption a{color:var(--ink-2)}
   .why-box{padding:26px 22px 8px}
   .more li{grid-template-columns:1fr;gap:6px}
 }
+
+/* v3 sections */
+.prose h3{font-family:var(--display);font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:28px 0 10px}
+.prose h3:first-child{margin-top:0}
+.debate-note{font-size:14.5px;line-height:1.5;color:var(--ink-2);border-left:3px solid var(--rule);padding:2px 0 2px 14px;margin:0 0 22px}
+.questions{background:var(--ink);color:#fff;border-radius:18px;padding:30px 34px 22px;margin:-28px 0 56px}
+.questions h3{font-family:var(--display);font-weight:900;font-size:24px;letter-spacing:-.02em;margin:0 0 14px}
+.questions ol{margin:0;padding:0;list-style:none;counter-reset:q}
+.questions li{counter-increment:q;position:relative;padding:12px 0 12px 44px;border-top:1px solid #2C2C2C;font-size:17px;line-height:1.5}
+.questions li::before{content:counter(q);position:absolute;left:0;top:10px;width:28px;height:28px;border-radius:50%;background:var(--red);font-family:var(--display);font-weight:900;font-size:14px;display:grid;place-items:center}
+.toc a{padding:6px 0}
+
+.cluster{cursor:pointer;outline:none}
+.cluster .c-halo{fill:#fff;opacity:.25}
+.cluster .c-dot{fill:var(--ink);stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
+.cluster .c-n{fill:#fff;font-family:var(--display);font-weight:900;text-anchor:middle;pointer-events:none}
+.cluster:hover .c-dot,.cluster:focus .c-dot{fill:#fff;stroke:var(--ink)}
+.cluster:hover .c-n,.cluster:focus .c-n{fill:var(--ink)}
+.tip p{max-height:260px;overflow:hidden}

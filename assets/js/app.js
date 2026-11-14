@@ -9,20 +9,31 @@
     civil:   "Civil rights & anti-racism",
     queer:   "LGBTQ+ liberation",
     earth:   "Land & environment",
-    rights:  "Human rights"
+    rights:  "Human rights",
+    language: "Language & culture",
+    thought: "Thought & expression",
+    disability: "Disability rights",
+    housing: "Housing & community",
+    peace: "Peace & anti-war"
   };
   const SECTIONS = [
     ["background", "What is the background to this event?"],
     ["people", "Who were the key people?"],
     ["happened", "What happened?"],
     ["next", "What happened next?"],
+    ["debates", "What do others say?"],
+    ["evidence", "The evidence"],
+    ["memory", "How is it remembered?"],
     ["why", "Why does it matter?"],
     ["similar", "What other events are like this?"],
     ["more", "Where can I find out more?"]
   ];
   const TYPES = { read: "Read", online: "Online", visit: "Visit", watch: "Watch", listen: "Listen" };
   const MEDIA = window.MEDIA;
+  const EXTRAS = window.EXTRAS || {};
+  window.EVENTS.forEach(e => { if (EXTRAS[e.id]) Object.keys(EXTRAS[e.id]).forEach(k => { if (!e[k]) e[k] = EXTRAS[e.id][k]; }); });
   const EVENTS = window.EVENTS.slice().sort((a, b) => a.year - b.year);
+  const yr = y => y < 0 ? `${-y} BC` : (y < 500 ? `AD ${y}` : `${y}`);
   const byId = Object.fromEntries(EVENTS.map(e => [e.id, e]));
 
   /* ---------- helpers ---------- */
@@ -65,27 +76,49 @@
   pins.append("circle").attr("class", "dot");
 
   let k = 1;
+  const clusterG = g.append("g");
   function layout() {
     const vis = EVENTS.filter(e => active.has(e.theme));
-    EVENTS.forEach(e => { e.dx = e.x; e.dy = e.y; });
-    const used = new Set(), th = 18 / k;
+    EVENTS.forEach(e => { e.dx = e.x; e.dy = e.y; e.inCluster = false; });
+    const used = new Set(), th = 18 / k, clusters = [];
     vis.forEach(e => {
       if (used.has(e.id)) return;
-      const grp = vis.filter(o => !used.has(o.id) && Math.hypot(o.x - e.x, o.y - e.y) < th);
-      grp.forEach(o => used.add(o.id));
-      if (grp.length > 1) {
-        const cx = d3.mean(grp, o => o.x), cy = d3.mean(grp, o => o.y), r = 14 / k;
+      // grow the group transitively so chains of nearby points stay together
+      const grp = [e]; used.add(e.id);
+      for (let i = 0; i < grp.length; i++) vis.forEach(o => { if (!used.has(o.id) && Math.hypot(o.x - grp[i].x, o.y - grp[i].y) < th) { grp.push(o); used.add(o.id); } });
+      if (grp.length > 5) {
+        grp.forEach(o => o.inCluster = true);
+        clusters.push({ id: grp.map(o => o.id).sort().join("|"), items: grp, x: d3.mean(grp, o => o.x), y: d3.mean(grp, o => o.y) });
+      } else if (grp.length > 1) {
+        const cx = d3.mean(grp, o => o.x), cy = d3.mean(grp, o => o.y), r = Math.max(14, grp.length * 4.2) / k;
         grp.forEach((o, i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / grp.length; o.dx = cx + r * Math.cos(a); o.dy = cy + r * Math.sin(a); });
       }
     });
     const rr = 7 / k;
-    pins.attr("transform", d => `translate(${d.dx},${d.dy})`);
+    pins.attr("transform", d => `translate(${d.dx},${d.dy})`).style("display", d => d.inCluster ? "none" : null);
     pins.selectAll("circle").attr("r", rr);
-    const ld = vis.filter(e => Math.abs(e.dx - e.x) + Math.abs(e.dy - e.y) > 1e-6);
+    const ld = vis.filter(e => !e.inCluster && Math.abs(e.dx - e.x) + Math.abs(e.dy - e.y) > 1e-6);
     leaders.selectAll("line").data(ld, d => d.id).join("line").attr("class", "leader")
       .attr("x1", d => d.x).attr("y1", d => d.y).attr("x2", d => d.dx).attr("y2", d => d.dy);
     leaders.selectAll("circle").data(ld, d => d.id).join("circle").attr("class", "anchor")
       .attr("cx", d => d.x).attr("cy", d => d.y).attr("r", 2 / k);
+    const cl = clusterG.selectAll("g.cluster").data(clusters, d => d.id).join(enter => {
+      const c = enter.append("g").attr("class", "cluster").attr("tabindex", 0).attr("role", "button");
+      c.append("circle").attr("class", "c-halo"); c.append("circle").attr("class", "c-dot"); c.append("text").attr("class", "c-n");
+      return c;
+    });
+    cl.attr("transform", d => `translate(${d.x},${d.y})`).attr("aria-label", d => `${d.items.length} stories here — zoom in`);
+    cl.select(".c-halo").attr("r", 22 / k);
+    cl.select(".c-dot").attr("r", 15 / k);
+    cl.select(".c-n").attr("font-size", 13 / k).attr("dy", "0.35em").text(d => d.items.length);
+    cl.on("mouseenter focus", function (ev, d) { showClusterTip(d, this); }).on("mouseleave blur", hideTip)
+      .on("click", (ev, d) => { ev.stopPropagation(); zoomTo(d.items); })
+      .on("keydown", (ev, d) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); zoomTo(d.items); } });
+  }
+  function zoomTo(items) {
+    const x0 = d3.min(items, o => o.x), x1 = d3.max(items, o => o.x), y0 = d3.min(items, o => o.y), y1 = d3.max(items, o => o.y);
+    const sc = Math.min(9, 0.32 / Math.max((x1 - x0) / W, (y1 - y0) / H, 0.02));
+    svg.transition().duration(700).call(zoom.transform, d3.zoomIdentity.translate(W / 2, H / 2).scale(sc).translate(-(x0 + x1) / 2, -(y0 + y1) / 2));
   }
   const zoom = d3.zoom().scaleExtent([1, 14]).translateExtent([[0, 0], [W, H]])
     .on("zoom", ev => { k = ev.transform.k; g.attr("transform", ev.transform); layout(); hideTip(); });
@@ -96,7 +129,7 @@
 
   const tip = document.getElementById("tip"), box = document.getElementById("mapbox");
   function showTip(d, el) {
-    tip.innerHTML = `<div class="tip-img" style="${bg(d.hero, 600)}"></div><div class="tip-body"><div class="t-meta">${d.year} · ${THEMES[d.theme]}</div><h3>${esc(d.title)}</h3><p>${esc(d.teaser)}</p><div class="go">Read the full story →</div></div>`;
+    tip.innerHTML = `<div class="tip-img" style="${bg(d.hero, 600)}"></div><div class="tip-body"><div class="t-meta">${yr(d.year)} · ${THEMES[d.theme]}</div><h3>${esc(d.title)}</h3><p>${esc(d.teaser)}</p><div class="go">Read the full story →</div></div>`;
     const b = box.getBoundingClientRect(), r = el.getBoundingClientRect();
     let x = r.left - b.left + r.width / 2 + 16;
     if (x + 310 > b.width) x = r.left - b.left - 316;
@@ -105,6 +138,15 @@
     const y = Math.max(10, Math.min(r.top - b.top - h / 2, b.height - h - 10));
     tip.style.left = Math.max(10, x) + "px"; tip.style.top = y + "px";
     pins.classed("on", p => p === d);
+  }
+  function showClusterTip(d, el) {
+    tip.innerHTML = `<div class="tip-body"><div class="t-meta">${d.items.length} stories here</div><h3>Click to zoom in</h3><p>${d.items.slice().sort((a, b) => a.year - b.year).map(o => `${yr(o.year)} · ${esc(o.title)}`).join("<br>")}</p></div>`;
+    const b = box.getBoundingClientRect(), r = el.getBoundingClientRect();
+    let x = r.left - b.left + r.width / 2 + 20;
+    if (x + 310 > b.width) x = r.left - b.left - 320;
+    tip.classList.add("show");
+    const h = tip.offsetHeight;
+    tip.style.left = Math.max(10, x) + "px"; tip.style.top = Math.max(10, Math.min(r.top - b.top - h / 2, b.height - h - 10)) + "px";
   }
   function hideTip() { tip.classList.remove("show"); pins.classed("on", false); }
   pins.on("mouseenter focus", function (ev, d) { showTip(d, this); })
@@ -136,7 +178,7 @@
   EVENTS.forEach(e => {
     const c = document.createElement("button");
     c.className = "card"; c.dataset.theme = e.theme;
-    c.innerHTML = `<div class="c-img" style="${bg(e.hero, 600)}"><span class="c-yr">${e.year}</span></div>
+    c.innerHTML = `<div class="c-img" style="${bg(e.hero, 600)}"><span class="c-yr">${yr(e.year)}</span></div>
       <div class="c-body"><span class="c-theme">${THEMES[e.theme]}</span><h3>${esc(e.title)}</h3><span class="c-pl">${esc(e.place)}</span><p>${esc(e.teaser)}</p></div>`;
     c.onclick = () => go(e.id);
     c.onmouseenter = () => pins.classed("on", p => p === e);
@@ -150,7 +192,7 @@
     pins.classed("dim", d => !active.has(d.theme));
     cardsEl.querySelectorAll(".card").forEach(c => c.classList.toggle("hide", !active.has(c.dataset.theme)));
     const n = EVENTS.filter(e => active.has(e.theme)).length;
-    document.getElementById("count").textContent = `${n} of ${EVENTS.length} stories · ${EVENTS[0].year}–${EVENTS[EVENTS.length - 1].year}`;
+    document.getElementById("count").textContent = `${n} of ${EVENTS.length} stories · ${yr(EVENTS[0].year)} – ${yr(EVENTS[EVENTS.length - 1].year)}`;
     layout();
   }
   refresh();
@@ -172,7 +214,7 @@
       ${e.gallery && e.gallery.length ? `<div class="gallery">${e.gallery.map(gk => figure(gk, 800)).join("")}</div>` : ""}
       ${sources}`;
     const similar = `<div class="similar">${e.similar.map(s => s.id && byId[s.id]
-      ? `<button class="sim int" data-go="${s.id}"><small>On this site · ${byId[s.id].year}</small><b>${esc(byId[s.id].title)}</b><span>${esc(byId[s.id].teaser)}</span></button>`
+      ? `<button class="sim int" data-go="${s.id}"><small>On this site · ${yr(byId[s.id].year)}</small><b>${esc(byId[s.id].title)}</b><span>${esc(byId[s.id].teaser)}</span></button>`
       : `<a class="sim" href="${s.url}" target="_blank" rel="noopener"><small>Elsewhere ↗</small><b>${s.name}</b><span>${s.text}</span></a>`).join("")}</div>`;
     const more = `<ul class="more">${e.more.map(([t, l, u]) => `<li><span class="ty">${TYPES[t] || t}</span><span>${u ? `<a href="${u}" target="_blank" rel="noopener">${l}</a>` : l}</span></li>`).join("")}</ul>`;
     const hm = MEDIA[e.hero];
@@ -186,16 +228,20 @@
       <div class="s-body"><div class="wrap">
         <nav class="toc" aria-label="Sections"><ol>${SECTIONS.map(([id, t]) => `<li><a href="#" data-ch="${id}">${t}</a></li>`).join("")}</ol></nav>
         <article>
-          ${chap(1, "background", `<div class="prose">${e.background}</div>`)}
+          ${chap(1, "background", `<div class="prose">${fn(e.background)}</div>`)}
           ${chap(2, "people", people)}
           ${chap(3, "happened", happened)}
-          ${chap(4, "next", `<div class="prose">${e.next}</div>`)}
-          <div class="why-box">${chap(5, "why", `<div class="prose">${e.why}</div>`)}</div>
-          ${chap(6, "similar", similar)}
-          ${chap(7, "more", more)}
+          ${chap(4, "next", `<div class="prose">${fn(e.next)}</div>`)}
+          ${e.debates ? chap(5, "debates", `<div class="debate-note">Different people have understood this event in different ways. This section sets out how it was seen at the time, where historians disagree, and the difficult questions it raises.</div><div class="prose">${fn(e.debates)}</div>`) : ""}
+          ${e.evidence ? chap(6, "evidence", `<div class="prose">${fn(e.evidence)}</div>`) : ""}
+          ${e.memory ? chap(7, "memory", `<div class="prose">${fn(e.memory)}</div>`) : ""}
+          <div class="why-box">${chap(8, "why", `<div class="prose">${fn(e.why)}</div>`)}</div>
+          ${e.questions ? `<aside class="questions" aria-label="Questions to think about"><h3>Questions to think about</h3><ol>${e.questions.map(q => `<li>${q}</li>`).join("")}</ol></aside>` : ""}
+          ${chap(9, "similar", similar)}
+          ${chap(10, "more", more)}
           <div class="pager">
-            <button class="pv" ${prev ? "" : "disabled"}><small>← Earlier · ${prev ? prev.year : ""}</small><b>${prev ? esc(prev.title) : ""}</b></button>
-            <button class="nx" ${next ? "" : "disabled"}><small>Later · ${next ? next.year : ""} →</small><b>${next ? esc(next.title) : ""}</b></button>
+            <button class="pv" ${prev ? "" : "disabled"}><small>← Earlier · ${prev ? yr(prev.year) : ""}</small><b>${prev ? esc(prev.title) : ""}</b></button>
+            <button class="nx" ${next ? "" : "disabled"}><small>Later · ${next ? yr(next.year) : ""} →</small><b>${next ? esc(next.title) : ""}</b></button>
           </div>
         </article>
       </div></div>`;
