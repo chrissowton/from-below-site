@@ -1,0 +1,50 @@
+# From Below — an atlas of radical history
+
+An interactive world map of radical history told from the bottom up. Each point on the map opens a story with the same seven-part structure:
+
+1. What is the background to this event?
+2. Who were the key people?
+3. What happened? *(every claim footnoted to a numbered source)*
+4. What happened next?
+5. Why does it matter?
+6. What other events are like this?
+7. Where can I find out more?
+
+## Running it
+
+It is a static site with no build step. Open `index.html` in a browser, or publish with **GitHub Pages**:
+
+1. Push this folder to a GitHub repository.
+2. Go to **Settings → Pages**, choose *Deploy from a branch*, select `main` and `/ (root)`.
+3. Your site will appear at `https://<username>.github.io/<repo>/`.
+
+Each story has its own link, e.g. `…/#peterloo`, `…/#selma`, `…/#credits`.
+
+## Adding a new event
+
+Add an object to one of the files in `data/` (or create `data/events-4.js` and add a `<script>` tag for it in `index.html`). Copy an existing event as a template. Fields:
+
+| Field | What it is |
+|---|---|
+| `id` | short unique id, used in the URL (`#id`) |
+| `title`, `place`, `date`, `year`, `teaser` | basics; `year` sets the order |
+| `lat`, `lon` | map position |
+| `theme` | one of `labour`, `vote`, `freedom`, `civil`, `queer`, `earth`, `rights` |
+| `hero` | key of an image in `data/media.js` |
+| `background`, `happened`, `next`, `why` | HTML (paragraphs, `<ul>` lists, `<blockquote>…<cite>…</cite></blockquote>`) |
+| `people` | list of `{ n: name, r: description, img: optional media key }` |
+| `sources` | list of `[citation HTML, url or ""]`. In `happened`, write `[1]`, `[2]` … to link to them |
+| `gallery`, `video` | lists of media keys shown under *What happened?* |
+| `similar` | `{ id: "other-event-id" }` for events on this site, or `{ name, text, url }` for others |
+| `more` | list of `[type, label, url]` where type is `read`, `online`, `visit`, `watch` or `listen` |
+
+## Images and video
+
+All media are hotlinked from **Wikimedia Commons** via `Special:FilePath`, and each file's creator and licence are recorded in `data/media.js`. They are credited under every image and listed in full on the `#credits` page. To add an image, find it on Commons, check its licence, and add an entry with the exact file name, caption, creator and licence.
+
+## Licences
+
+* **Text** (event write-ups, page copy): [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Quotations remain the words of the people quoted, reproduced with attribution.
+* **Code** (`index.html`, `assets/css`, `assets/js/app.js`): MIT.
+* **Images/video**: individual licences as listed on the Credits page (public domain or Creative Commons).
+* **Map data**: Natural Earth via [world-atlas](https://github.com/topojson/world-atlas) (public domain). **Libraries**: [D3](https://d3js.org) and [topojson-client](https://github.com/topojson/topojson-client) (ISC), loaded from the jsDelivr CDN.
