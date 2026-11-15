@@ -428,7 +428,7 @@ window.EVENTS.push(
   <li>They organised a "sex strike", refusing sexual relations with their husbands until peace was achieved, which attracted international attention.</li>
   <li>In April 2003 they secured a meeting with Taylor, and pressed him to attend peace talks.</li>
 </ul>
-<p>In June 2003, peace talks between the government and the rebel groups began in Accra, Ghana. A delegation of Liberian women, joined by Liberian refugees in Ghana, went to Accra to keep up the pressure. When the talks stalled in July, around 200 women dressed in white surrounded the building, blocked the doors and windows, and refused to let the delegates leave until they reached an agreement.[1] When security officers threatened to arrest her, Gbowee threatened to strip — an act that in Liberian culture would bring a curse on the men who saw it.[2]</p>
+<p>In June 2003, peace talks between the government and the rebel groups began in Accra, Ghana. A delegation of Liberian women, joined by Liberian refugees in Ghana, went to Accra to keep up the pressure. When the talks stalled in July, women dressed in white surrounded the building, blocked the doors and windows, and refused to let the delegates leave until they reached an agreement.[1] When security officers threatened to arrest her, Gbowee threatened to strip — an act that in Liberian culture would bring a curse on the men who saw it.[2]</p>
 <p>The women's action helped to break the deadlock. Taylor resigned on 11 August 2003 and went into exile in Nigeria, and on 18 August the parties signed the Accra Comprehensive Peace Agreement, ending the war.[1][2]</p>`,
   gallery: [],
   sources: [

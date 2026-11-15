@@ -210,7 +210,7 @@ window.EVENTS.push(
   people: [
     { n: "The market women of Paris", r: "Fishwives, stallholders and working women of the Faubourg Saint-Antoine and the central markets, who began the march." },
     { n: "Stanislas-Marie Maillard", r: "A veteran of the storming of the Bastille, who led the crowd to Versailles and tried to keep order." },
-    { n: "The Marquis de Lafayette", r: "Commander of the National Guard, who followed the women to Versailles with 15,000 guardsmen." },
+    { n: "The Marquis de Lafayette", r: "Commander of the National Guard, who followed the women to Versailles with thousands of National Guardsmen." },
     { n: "Louis XVI and Marie Antoinette", r: "The King and Queen of France, who were forced to move to Paris." }
   ],
   happened: `

@@ -5,12 +5,12 @@ window.EVENTS.push(
   id: "boudica",
   title: "Boudica's Revolt",
   place: "Camulodunum (Colchester), Londinium (London) and Verulamium (St Albans), Roman Britain",
-  date: "AD 60 – 61",
+  date: "60 CE – 61",
   year: 60, lat: 51.89, lon: 0.90, theme: "freedom",
   teaser: "When Roman officials seized the kingdom of the Iceni, flogged its queen and raped her daughters, Boudica led the peoples of eastern Britain in a revolt that burned three Roman towns — before ending in a massacre.",
   hero: "boudicaStatue",
   background: `
-<p>Rome invaded south-eastern Britain in AD 43. Some kingdoms were conquered; others, such as the Iceni of what is now Norfolk, became Roman allies.[1]</p>
+<p>Rome invaded south-eastern Britain in 43 CE. Some kingdoms were conquered; others, such as the Iceni of what is now Norfolk, became Roman allies.[1]</p>
 <ul>
   <li>The Iceni king, Prasutagus, left his kingdom jointly to his daughters and the emperor. When he died, his will was ignored.[1]</li>
   <li>According to Tacitus, Romans seized land and enslaved Iceni; Prasutagus's widow, Boudica, was flogged and their daughters raped.[1]</li>
@@ -25,7 +25,7 @@ window.EVENTS.push(
     { n: "Tacitus and Cassius Dio", r: "The Roman historians whose accounts are our only written sources." }
   ],
   happened: `
-<p>In AD 60 or 61, while the governor was attacking the druid stronghold of Anglesey, the Iceni and the Trinovantes rose under Boudica.[1]</p>
+<p>In 60 CE or 61, while the governor was attacking the druid stronghold of Anglesey, the Iceni and the Trinovantes rose under Boudica.[1]</p>
 <ul>
   <li>They destroyed Camulodunum. The last defenders held out in the temple of Claudius for two days before it fell.[1]</li>
   <li>A Roman legion sent to relieve the town was defeated; only its commander and some cavalry escaped.[1]</li>
@@ -44,7 +44,7 @@ window.EVENTS.push(
 <ul>
   <li><strong>Reprisals:</strong> the Romans laid waste to the lands of the rebel peoples.</li>
   <li><strong>A change of policy:</strong> Suetonius was replaced by a governor who followed a more conciliatory policy.</li>
-  <li><strong>Roman Britain</strong> lasted until about AD 410.[1]</li>
+  <li><strong>Roman Britain</strong> lasted until about 410 CE.[1]</li>
 </ul>`,
   why: `
 <p>Boudica's revolt is one of the most famous anti-colonial risings of the ancient world — and a reminder that its violence fell on civilians on both sides.</p>
@@ -90,15 +90,15 @@ window.EVENTS.push(
   id: "viriathus",
   title: "Viriathus and the Lusitanian War",
   place: "Lusitania (Portugal and western Spain)",
-  date: "147 – 139 BC",
+  date: "147 – 139 BCE",
   year: -147, lat: 40.66, lon: -7.91, theme: "freedom",
   teaser: "After a Roman governor massacred Lusitanians who had laid down their arms, one survivor — a shepherd turned warrior — led eight years of resistance to Rome. Rome could not defeat him in battle, so it paid his own men to kill him.",
   hero: "viriatoViseu",
   background: `
-<p>In the second century BC, Rome was expanding into the Iberian peninsula. The Lusitanians lived in what is now Portugal and western Spain.[1]</p>
+<p>In the second century BCE, Rome was expanding into the Iberian peninsula. The Lusitanians lived in what is now Portugal and western Spain.[1]</p>
 <ul>
-  <li>In 151 BC, the Roman commander Lucullus made peace with a tribe of the Vaccaei, then had its men killed.[1]</li>
-  <li>In 150 BC, the governor Servius Sulpicius Galba offered the Lusitanians land in exchange for their surrender. When they gathered unarmed, his troops massacred them.[1]</li>
+  <li>In 151 BCE, the Roman commander Lucullus made peace with a tribe of the Vaccaei, then had its men killed.[1]</li>
+  <li>In 150 BCE, the governor Servius Sulpicius Galba offered the Lusitanians land in exchange for their surrender. When they gathered unarmed, his troops massacred them.[1]</li>
   <li>Viriathus was one of the few who escaped.[1]</li>
 </ul>`,
   people: [
@@ -108,12 +108,12 @@ window.EVENTS.push(
     { n: "Quintus Servilius Caepio", r: "The Roman commander who arranged the murder." }
   ],
   happened: `
-<p>In 147 BC, the Lusitanians were again surrounded by a Roman army. Viriathus persuaded them not to surrender, and led them to safety.[1]</p>
+<p>In 147 BCE, the Lusitanians were again surrounded by a Roman army. Viriathus persuaded them not to surrender, and led them to safety.[1]</p>
 <ul>
   <li>For eight years he led the Lusitanians and their allies, including Vettones and Celtiberians, in a war of ambushes and raids.[1]</li>
   <li>He defeated several Roman armies and encouraged other peoples to rebel.[1]</li>
-  <li>In about 140 BC, he forced a Roman army to accept a peace treaty, under which he was recognised as a "friend of the Roman people".</li>
-  <li>Rome broke the treaty. In 139 BC, Caepio bribed three of Viriathus's companions, who killed him in his sleep.[1]</li>
+  <li>In about 140 BCE, he forced a Roman army to accept a peace treaty, under which he was recognised as a "friend of the Roman people".</li>
+  <li>Rome broke the treaty. In 139 BCE, Caepio bribed three of Viriathus's companions, who killed him in his sleep.[1]</li>
 </ul>`,
   gallery: ["viriathusGalba"],
   sources: [
@@ -123,7 +123,7 @@ window.EVENTS.push(
   next: `
 <ul>
   <li><strong>The assassins:</strong> according to tradition, when they asked for their reward, Rome replied that it did not pay traitors.</li>
-  <li><strong>Conquest:</strong> resistance continued, notably at Numantia, which fell in 133 BC after a long siege.</li>
+  <li><strong>Conquest:</strong> resistance continued, notably at Numantia, which fell in 133 BCE after a long siege.</li>
 </ul>`,
   why: `
 <p>Viriathus became a symbol of resistance to empire, and of the treachery that empires use.</p>
@@ -165,31 +165,31 @@ window.EVENTS.push(
   id: "gracchi",
   title: "The Gracchi and the Land of Rome",
   place: "Rome",
-  date: "133 – 121 BC",
+  date: "133 – 121 BCE",
   year: -133, lat: 41.893, lon: 12.483, theme: "earth",
   teaser: "Tiberius Gracchus proposed giving public land held by the rich to poor citizens. Senators beat him to death with clubs. Ten years later his brother Gaius tried again — and was killed too.",
   hero: "corneliaGracchi",
   background: `
-<p>By the second century BC, Rome had conquered much of the Mediterranean. Wealthy families had taken over large areas of public land (<em>ager publicus</em>) and worked it with enslaved captives.[1]</p>
+<p>By the second century BCE, Rome had conquered much of the Mediterranean. Wealthy families had taken over large areas of public land (<em>ager publicus</em>) and worked it with enslaved captives.[1]</p>
 <ul>
   <li>Small farmers, who also served as soldiers, were losing their land.[1]</li>
   <li>Tiberius Sempronius Gracchus came from one of Rome's leading families; his mother Cornelia was the daughter of Scipio Africanus.[1]</li>
 </ul>`,
   people: [
-    { n: "Tiberius Gracchus", r: "Tribune of the plebs in 133 BC, who proposed the land law." },
-    { n: "Gaius Gracchus", r: "His younger brother, tribune in 123–122 BC." },
+    { n: "Tiberius Gracchus", r: "Tribune of the plebs in 133 BCE, who proposed the land law." },
+    { n: "Gaius Gracchus", r: "His younger brother, tribune in 123–122 BCE." },
     { n: "Cornelia", r: "Their mother, admired by Romans for educating her sons.", img: "corneliaGracchi" },
     { n: "Marcus Octavius", r: "A tribune who vetoed the land law and was deposed." },
     { n: "Scipio Nasica", r: "The senator who led the attack on Tiberius." }
   ],
   happened: `
-<p>In 133 BC, Tiberius, as tribune of the plebs, proposed a law to limit how much public land one person could hold and to distribute the rest to poor citizens.[1]</p>
+<p>In 133 BCE, Tiberius, as tribune of the plebs, proposed a law to limit how much public land one person could hold and to distribute the rest to poor citizens.[1]</p>
 <ul>
   <li>When another tribune, Octavius, vetoed it, Tiberius had him removed from office — something never done before.[1]</li>
   <li>A commission was set up to distribute the land.[1]</li>
   <li>Tiberius also stood for a second term as tribune, which his enemies said was illegal.[1]</li>
   <li>In a riot started by his enemies, Tiberius and many supporters — about 300, according to ancient writers — were clubbed to death, and their bodies thrown into the Tiber.[1]</li>
-  <li>In 123–122 BC, Gaius Gracchus proposed wider reforms, including subsidised grain and new colonies. In 121 BC he too was killed, with thousands of supporters.</li>
+  <li>In 123–122 BCE, Gaius Gracchus proposed wider reforms, including subsidised grain and new colonies. In 121 BCE he too was killed, with thousands of supporters.</li>
 </ul>`,
   gallery: [],
   sources: [
@@ -243,14 +243,14 @@ window.EVENTS.push(
   id: "athens508",
   title: "The Athenian Revolution",
   place: "The Acropolis, Athens",
-  date: "508 – 507 BC",
+  date: "508 – 507 BCE",
   year: -508, lat: 37.9715, lon: 23.7257, theme: "vote",
   teaser: "When a Spartan king and his Athenian ally tried to dissolve Athens's council and exile hundreds of families, the ordinary people of Athens rose up, besieged them on the Acropolis and drove them out. Democracy followed.",
   hero: "pnyx",
   background: `
-<p>In the sixth century BC, Athens was ruled by aristocrats and, for long periods, by tyrants.[1]</p>
+<p>In the sixth century BCE, Athens was ruled by aristocrats and, for long periods, by tyrants.[1]</p>
 <ul>
-  <li>In 510 BC, King Cleomenes of Sparta helped expel the tyrant Hippias.[1]</li>
+  <li>In 510 BCE, King Cleomenes of Sparta helped expel the tyrant Hippias.[1]</li>
   <li>Two aristocrats competed for power: Isagoras, supported by Sparta, and Cleisthenes, of the Alcmaeonid family, who sought the support of the people.[1]</li>
   <li>Cleisthenes was driven into exile.[1]</li>
 </ul>`,
@@ -322,15 +322,15 @@ window.EVENTS.push(
   id: "helots",
   title: "The Helot Revolt",
   place: "Mount Ithome, Messenia, Greece",
-  date: "c. 464 – 455 BC",
+  date: "c. 464 – 455 BCE",
   year: -464, lat: 37.19, lon: 21.92, theme: "freedom",
   teaser: "Sparta's power rested on the forced labour of the helots, a conquered people. When an earthquake shattered Sparta, the helots of Messenia rose up and held out on a mountain fortress for years.",
   hero: "ithome",
   background: `
 <p>The helots made up the majority of the population of Laconia and Messenia, the lands ruled by Sparta. They worked the land to feed Spartan citizens.[1]</p>
 <ul>
-  <li>The Messenians had been conquered by Sparta in the eighth and seventh centuries BC.[1]</li>
-  <li>According to Herodotus, there were seven helots for every Spartan soldier in 479 BC.[1]</li>
+  <li>The Messenians had been conquered by Sparta in the eighth and seventh centuries BCE.[1]</li>
+  <li>According to Herodotus, there were seven helots for every Spartan soldier in 479 BCE.[1]</li>
   <li>Helots were ritually humiliated. Each year Sparta declared war on them, so that young Spartans of the Crypteia could kill helots without religious penalty.[1]</li>
 </ul>`,
   people: [
@@ -339,7 +339,7 @@ window.EVENTS.push(
     { n: "Cimon", r: "An Athenian general who brought troops to help Sparta, and was sent home." }
   ],
   happened: `
-<p>In about 464 BC, a great earthquake struck Sparta, killing many citizens. The helots, especially in Messenia, rose in revolt.[2]</p>
+<p>In about 464 BCE, a great earthquake struck Sparta, killing many citizens. The helots, especially in Messenia, rose in revolt.[2]</p>
 <ul>
   <li>The rebels fortified Mount Ithome, the ancient stronghold of Messenia.[2]</li>
   <li>Sparta appealed to its allies, including Athens, which sent troops under Cimon. The Spartans, suspicious of the Athenians, sent them home.[2]</li>
@@ -350,12 +350,12 @@ window.EVENTS.push(
   sources: [
     ["Wikipedia, 'Helots', on their status, numbers, treatment, the Crypteia and later revolts.", "https://en.wikipedia.org/wiki/Helots"],
     ["Thucydides, <em>History of the Peloponnesian War</em> 1.101–103.", "https://www.perseus.tufts.edu/hopper/text?doc=Thuc.+1.101"],
-    ["Paul Cartledge, <em>Sparta and Lakonia: A Regional History 1300–362 BC</em> (Routledge, 2nd ed. 2002).", ""]
+    ["Paul Cartledge, <em>Sparta and Lakonia: A Regional History 1300–362 BCE</em> (Routledge, 2nd ed. 2002).", ""]
   ],
   next: `
 <ul>
   <li><strong>Athens and Sparta:</strong> the insult to Cimon helped turn Athens against Sparta, contributing to the Peloponnesian War.</li>
-  <li><strong>Freedom:</strong> in 369 BC, after Thebes defeated Sparta, the Theban general Epaminondas freed Messenia, and the city of Messene was founded at the foot of Ithome.[1]</li>
+  <li><strong>Freedom:</strong> in 369 BCE, after Thebes defeated Sparta, the Theban general Epaminondas freed Messenia, and the city of Messene was founded at the foot of Ithome.[1]</li>
 </ul>`,
   why: `
 <p>The helots' revolt exposes the hidden foundation of Spartan power: a large, unfree population held down by terror.</p>

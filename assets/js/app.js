@@ -33,7 +33,7 @@
   const EXTRAS = window.EXTRAS || {};
   window.EVENTS.forEach(e => { if (EXTRAS[e.id]) Object.keys(EXTRAS[e.id]).forEach(k => { if (!e[k]) e[k] = EXTRAS[e.id][k]; }); });
   const EVENTS = window.EVENTS.slice().sort((a, b) => a.year - b.year);
-  const yr = y => y < 0 ? `${-y} BC` : (y < 500 ? `AD ${y}` : `${y}`);
+  const yr = y => y < 0 ? `${-y} BCE` : (y < 500 ? `${y} CE` : `${y}`);
   const byId = Object.fromEntries(EVENTS.map(e => [e.id, e]));
 
   /* ---------- helpers ---------- */
@@ -373,7 +373,7 @@
     ovSvg.append("rect").attr("class", "tl-band").attr("x", m).attr("y", base).attr("width", iw).attr("height", 1.5);
     const tg = ovSvg.append("g").selectAll("g").data(TICKS).join("g").attr("transform", t => `translate(${tlX(t)},${base})`);
     tg.append("line").attr("class", "tl-tick").attr("y2", 4);
-    tg.append("text").attr("class", "tl-lab").attr("y", 15).text(t => t < 0 ? `${-t} BC` : t)
+    tg.append("text").attr("class", "tl-lab").attr("y", 15).text(t => t < 0 ? `${-t} BCE` : t)
       .style("display", (t, i) => (i > 0 && tlX(t) - tlX(TICKS[i - 1]) < 30) ? "none" : null);
     brushG = ovSvg.append("g").attr("class", "tl-brush");
     const markers = ovSvg.append("g").attr("class", "ov-moments");
@@ -606,6 +606,7 @@
     const banner = H.storyBanner ? H.storyBanner(e) : "";
     const tools = H.storyTools ? H.storyTools(e) : "";
     const lookClose = H.sourceBox ? H.sourceBox(e) : "";
+    const voices = H.voicesBox ? H.voicesBox(e) : "";
     vc.innerHTML = `${banner}
       <header class="s-hero"><div class="wrap">
         <div><div class="tag">${icon(e.theme)}${THEMES[e.theme]}</div><h1 id="s-title">${esc(e.title)}</h1><p class="teaser">${esc(e.teaser)}</p>
@@ -616,7 +617,7 @@
         <nav class="toc" aria-label="Sections"><ol>${SECTIONS.map(([id, t]) => `<li><a href="#" data-ch="${id}">${t}</a></li>`).join("")}</ol></nav>
         <article>
           ${chap(1, "background", `<div class="prose">${fn(e.background)}</div>`)}
-          ${chap(2, "people", people)}
+          ${chap(2, "people", people + voices)}
           ${chap(3, "happened", happened)}
           ${chap(4, "next", `<div class="prose">${fn(e.next)}</div>`)}
           ${e.debates ? chap(5, "debates", `<div class="debate-note">Different people have understood this event in different ways. This section sets out how it was seen at the time, where historians disagree, and the difficult questions it raises.</div><div class="prose">${fn(e.debates)}</div>`) : ""}

@@ -256,7 +256,7 @@ window.EVENTS.push(
   teaser: "The Ogoni people's peaceful campaign against oil pollution forced Shell out of their land. Nigeria's military government responded with violence, and in 1995 hanged the writer Ken Saro-Wiwa and eight others.",
   hero: "ogoniSpill",
   background: `
-<p>Ogoniland is a small area of the Niger Delta, home to roughly 500,000 Ogoni people. Oil was discovered there in the 1950s.[1]</p>
+<p>Ogoniland is a small area of the Niger Delta, home to roughly 500,000 Ogoni people at the time of the campaign (current estimates are much higher, at over 2 million). Oil was discovered there in the 1950s.[1]</p>
 <ul>
   <li>Oil spills and gas flaring polluted farmland, creeks and the air.[1]</li>
   <li>The Ogoni received little of the wealth from the oil, and had few schools, hospitals or roads.[1]</li>

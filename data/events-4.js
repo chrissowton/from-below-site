@@ -146,7 +146,7 @@ window.EVENTS.push(
   ],
   next: `
 <ul>
-  <li><strong>The rebellion continued:</strong> in the south, Túpac Katari and Bartolina Sisa besieged La Paz for months in 1781, and Túpac Amaru's relatives fought on until 1782. The total death toll of the rebellions is uncertain; it is often estimated at around 100,000 people.</li>
+  <li><strong>The rebellion continued:</strong> in the south, Túpac Katari and Bartolina Sisa besieged La Paz for months in 1781, and Túpac Amaru's relatives fought on until 1782. The total death toll of the rebellions is uncertain; it is estimated at around 100,000 Indigenous people and 10,000–40,000 others.</li>
   <li><strong>Repression:</strong> the Spanish authorities banned Inca dress, the use of Inca titles and the display of Inca imagery, and abolished the hereditary office of kuraka in much of the region.</li>
   <li><strong>Reforms:</strong> the system of corregidores and the forced reparto were abolished in the 1780s and replaced by a new system of intendants, though the mita continued.</li>
   <li><strong>Independence:</strong> Peru declared independence in 1821. The rebellion's memory made many creole elites wary of mass Indigenous mobilisation.</li>

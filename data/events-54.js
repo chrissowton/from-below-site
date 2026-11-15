@@ -5,7 +5,7 @@ window.EVENTS.push(
   id: "tacfarinas",
   title: "Tacfarinas and the Musulamii against Rome",
   place: "Thagaste (Souk Ahras) and the Numidian plateau, Algeria and Tunisia",
-  date: "AD 17 – 24",
+  date: "17 CE – 24",
   year: 17, lat: 36.29, lon: 7.95, theme: "freedom",
   teaser: "A Berber deserter from the Roman army led the herders of North Africa in a seven-year war against Rome. He fought to keep the grazing lands that the empire was turning into wheat fields to feed the city of Rome.",
   hero: "romanAfrica",
@@ -16,19 +16,19 @@ window.EVENTS.push(
   <li>Tacfarinas was a Numidian Berber from Thagaste (now Souk Ahras, Algeria) who had served in, and deserted from, the Roman army.[1]</li>
 </ul>`,
   people: [
-    { n: "Tacfarinas", r: "Berber leader of the war against Rome; killed in AD 24." },
+    { n: "Tacfarinas", r: "Berber leader of the war against Rome; killed in 24 CE." },
     { n: "The Musulamii", r: "Berber herders who formed the core of his forces." },
     { n: "Emperor Tiberius", r: "Roman emperor who refused to negotiate with him." },
     { n: "Publius Cornelius Dolabella", r: "Roman proconsul whose forces finally killed him." }
   ],
   happened: `
-<p>From AD 17, Tacfarinas won the support of the Musulamii and a changing coalition of other Berber peoples.[1]</p>
+<p>From 17 CE, Tacfarinas won the support of the Musulamii and a changing coalition of other Berber peoples.[1]</p>
 <ul>
   <li>He trained part of his forces in Roman style, while his mobile horsemen raided across the province.[1]</li>
   <li>The raids disrupted grain production, which threatened unrest in Rome itself.[1]</li>
   <li>He sent envoys to Tiberius asking for land in return for peace. The emperor was furious that a commoner dared to bargain with him.[1]</li>
   <li>Rome sent an extra legion. Three Roman governors were awarded triumphal honours for victories over him, but he kept escaping into the desert.[1]</li>
-  <li>In AD 24, after a lucky break in Roman intelligence, his camp was surprised and he was killed.[1]</li>
+  <li>In 24 CE, after a lucky break in Roman intelligence, his camp was surprised and he was killed.[1]</li>
 </ul>`,
   gallery: [],
   sources: [
@@ -39,7 +39,7 @@ window.EVENTS.push(
 <ul>
   <li><strong>Land:</strong> after the war, Rome registered the whole Tunisian plateau for land tax and turned it mainly to wheat.[1]</li>
   <li><strong>Exclusion:</strong> the Musulamii were probably shut out of their summer pastures for good, and pushed into poorer mountain and desert land.[1]</li>
-  <li><strong>Mauretania:</strong> the neighbouring kingdom was annexed by Rome in AD 44.[1]</li>
+  <li><strong>Mauretania:</strong> the neighbouring kingdom was annexed by Rome in 44 CE.[1]</li>
 </ul>`,
   why: `
 <p>Tacfarinas's war is one of the earliest recorded struggles in Africa against colonial land seizure.</p>
@@ -82,7 +82,7 @@ window.EVENTS.push(
   id: "teutoburg",
   title: "Arminius and the Teutoburg Forest",
   place: "Kalkriese, Lower Saxony, Germany",
-  date: "September AD 9",
+  date: "September 9 CE",
   year: 9, lat: 52.41, lon: 8.13, theme: "freedom",
   teaser: "A Germanic officer trained by Rome led an alliance of peoples that destroyed three Roman legions in a forest ambush. Rome never again tried to conquer the lands beyond the Rhine.",
   hero: "arminiusJanssen",
@@ -95,11 +95,11 @@ window.EVENTS.push(
   people: [
     { n: "Arminius", r: "Cherusci chieftain and Roman officer who led the alliance." },
     { n: "Publius Quinctilius Varus", r: "Roman governor who died in the battle." },
-    { n: "Thusnelda", r: "Arminius's wife, captured by the Romans in AD 15." },
+    { n: "Thusnelda", r: "Arminius's wife, captured by the Romans in 15 CE." },
     { n: "Germanicus", r: "Roman general who led the revenge campaigns." }
   ],
   happened: `
-<p>In September AD 9, Arminius led Varus's army into an ambush by an alliance of Germanic peoples.[1]</p>
+<p>In September 9 CE, Arminius led Varus's army into an ambush by an alliance of Germanic peoples.[1]</p>
 <ul>
   <li>Three legions, about 15,000 soldiers, plus around 4,500 auxiliaries, were attacked over several days in forest and marsh.[1]</li>
   <li>Arminius's knowledge of Roman tactics let him anticipate their responses.[1]</li>
@@ -113,9 +113,9 @@ window.EVENTS.push(
   ],
   next: `
 <ul>
-  <li><strong>Revenge:</strong> Tiberius and Germanicus led campaigns of retaliation; Germanicus captured Thusnelda in AD 15.[1]</li>
+  <li><strong>Revenge:</strong> Tiberius and Germanicus led campaigns of retaliation; Germanicus captured Thusnelda in 15 CE.[1]</li>
   <li><strong>The border:</strong> the Rhine became the empire's frontier, and Rome made no major attempt to conquer Germania for 150 years.[1]</li>
-  <li><strong>Arminius:</strong> according to Tacitus, he was killed by his own relatives in about AD 21.</li>
+  <li><strong>Arminius:</strong> according to Tacitus, he was killed by his own relatives in about 21 CE.</li>
 </ul>`,
   why: `
 <p>The battle stopped Roman expansion in northern Europe, and shows how colonised people could turn an empire's training against it.</p>

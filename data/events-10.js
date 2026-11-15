@@ -5,7 +5,7 @@ window.EVENTS.push(
   id: "deirmedina",
   title: "The Tomb-Builders' Strike at Deir el-Medina",
   place: "Deir el-Medina, Thebes (near Luxor), Egypt",
-  date: "c. 1157 BC (Year 29 of Ramesses III)",
+  date: "c. 1157 BCE (Year 29 of Ramesses III)",
   year: -1157, lat: 25.73, lon: 32.60, theme: "labour",
   teaser: "When the pharaoh's grain rations failed to arrive, the craftsmen who built the royal tombs laid down their tools and marched to the temples — the earliest strike in recorded history.",
   hero: "strikePapyrus",
@@ -22,10 +22,10 @@ window.EVENTS.push(
     { n: "The workmen of the tomb", r: "Stone-cutters, plasterers, draughtsmen and painters — perhaps sixty men with their families — who built and decorated the royal tombs." },
     { n: "Khonsu", r: "A foreman of the workmen named in the records of the strike." },
     { n: "To", r: "The vizier of Upper Egypt, to whom the workers appealed." },
-    { n: "Ramesses III", r: "The pharaoh (reigned c. 1186–1155 BC) whose government failed to deliver the rations." }
+    { n: "Ramesses III", r: "The pharaoh (reigned c. 1186–1155 BCE) whose government failed to deliver the rations." }
   ],
   happened: `
-<p>The strike is recorded in a papyrus written by the scribe Amennakht, now in the Museo Egizio in Turin and known as the "Strike Papyrus".[1][3] It began on the 21st day of the second month of winter in Year 29 of Ramesses III — around 1157 BC. Rations were by then about eighteen days overdue.[1]</p>
+<p>The strike is recorded in a papyrus written by the scribe Amennakht, now in the Museo Egizio in Turin and known as the "Strike Papyrus".[1][3] It began on the 21st day of the second month of winter in Year 29 of Ramesses III — around 1157 BCE. Rations were by then about eighteen days overdue.[1]</p>
 <p>The workmen took collective action several times over the following months, sometimes by day and sometimes at night, carrying torches:[1]</p>
 <ul>
   <li>They downed tools and walked out of the Valley of the Kings, past the guard posts, declaring that they were hungry.</li>
@@ -47,7 +47,7 @@ window.EVENTS.push(
   <li><strong>More strikes:</strong> labour disputes continued at Deir el-Medina through the Twentieth Dynasty, as grain prices rose and the authority of the state weakened.</li>
   <li><strong>A murdered king:</strong> a year or two after the strikes, Ramesses III was the target of the "Harem Conspiracy", a plot by members of his household; scientific study of his mummy suggests that his throat was cut.</li>
   <li><strong>Tomb robbery:</strong> as the state weakened under the later Ramesside kings, tomb robbery increased, and some workmen themselves were later accused of robbing tombs.</li>
-  <li><strong>Abandonment:</strong> the village was abandoned around 1100 BC, under Ramesses XI, the last king to have a tomb cut in the Valley of the Kings.</li>
+  <li><strong>Abandonment:</strong> the village was abandoned around 1100 BCE, under Ramesses XI, the last king to have a tomb cut in the Valley of the Kings.</li>
 </ul>`,
   why: `
 <p>The strike at Deir el-Medina is the earliest recorded collective labour action in history. More than three thousand years ago, a group of workers recognised that their labour gave them power, acted together, and forced the most powerful state of their time to listen to them.</p>
@@ -85,7 +85,7 @@ window.EVENTS.push(
   ],
   similar: [
     { id: "matchwomen" }, { id: "dakarniger" }, { id: "iquique" },
-    { name: "The Secession of the Plebs (494 BC)", text: "Rome's plebeians withdrew from the city to win political rights.", url: "https://en.wikipedia.org/w/index.php?search=Secession+of+the+plebs" }
+    { name: "The Secession of the Plebs (494 BCE)", text: "Rome's plebeians withdrew from the city to win political rights.", url: "https://en.wikipedia.org/w/index.php?search=Secession+of+the+plebs" }
   ],
   more: [
     ["read", "Leonard H. Lesko (ed.) — <em>Pharaoh's Workers: The Villagers of Deir el Medina</em> (Cornell University Press, 1994)", ""],
@@ -99,34 +99,34 @@ window.EVENTS.push(
   id: "spartacus",
   title: "Spartacus and the Slave Revolt",
   place: "Capua and southern Italy",
-  date: "73 – 71 BC",
+  date: "73 – 71 BCE",
   year: -73, lat: 41.08, lon: 14.25, theme: "freedom",
   teaser: "Seventy gladiators broke out of a training school armed with kitchen knives. Within two years, an army of some 120,000 enslaved people had defeated Rome's legions again and again.",
   hero: "velaSpartacus",
   background: `
-<p>By the first century BC, the Roman Republic had conquered most of the Mediterranean world, and its wars had brought hundreds of thousands of captives to Italy as slaves. Enslaved people worked as household servants and craftsmen, but vast numbers laboured in mines and on the great agricultural estates of southern Italy and Sicily, often in brutal conditions.[1]</p>
+<p>By the first century BCE, the Roman Republic had conquered most of the Mediterranean world, and its wars had brought hundreds of thousands of captives to Italy as slaves. Enslaved people worked as household servants and craftsmen, but vast numbers laboured in mines and on the great agricultural estates of southern Italy and Sicily, often in brutal conditions.[1]</p>
 <ul>
-  <li>Enslaved people had already risen in two great revolts in Sicily, in 135 and 104 BC — the First and Second Servile Wars — which had taken years to suppress.[1]</li>
+  <li>Enslaved people had already risen in two great revolts in Sicily, in 135 and 104 BCE — the First and Second Servile Wars — which had taken years to suppress.[1]</li>
   <li>Gladiatorial games were a popular entertainment. In training schools (<em>ludi</em>) across Italy, prisoners of war and condemned criminals were taught to fight, often to the death, for the crowd's pleasure.[1]</li>
-  <li>Rome's best armies were fighting abroad in the 70s BC, against rebels in Spain and against King Mithridates in the east.</li>
+  <li>Rome's best armies were fighting abroad in the 70s BCE, against rebels in Spain and against King Mithridates in the east.</li>
 </ul>`,
   people: [
-    { n: "Spartacus", r: "A Thracian (from what is now Bulgaria) who had served as a soldier with the Romans before being enslaved and sold as a gladiator. He was killed in the final battle in 71 BC; his body was never found." },
+    { n: "Spartacus", r: "A Thracian (from what is now Bulgaria) who had served as a soldier with the Romans before being enslaved and sold as a gladiator. He was killed in the final battle in 71 BCE; his body was never found." },
     { n: "Crixus and Oenomaus", r: "Two Gallic gladiators chosen as leaders alongside Spartacus. Both were killed in battle." },
     { n: "Spartacus's wife", r: "A prophetess of his own Thracian tribe, enslaved with him, who according to Plutarch accompanied him in the revolt. Her name is not recorded." },
-    { n: "Marcus Licinius Crassus", r: "The richest man in Rome, who took command against the rebels in 72 BC." },
+    { n: "Marcus Licinius Crassus", r: "The richest man in Rome, who took command against the rebels in 72 BCE." },
     { n: "The rebels", r: "Escaped gladiators, shepherds, farm workers and other enslaved people — men, women and children — who joined the revolt in tens of thousands." }
   ],
   happened: `
-<p>In 73 BC, around 200 gladiators at the training school of Lentulus Batiatus in Capua plotted to escape. When their plot was betrayed, about 70 of them seized knives and spits from the kitchen, fought their way out and captured wagons carrying gladiators' weapons.[1][2] They chose as their leaders Spartacus and two Gauls, Crixus and Oenomaus. The Greek writer Plutarch described Spartacus as:</p>
+<p>In 73 BCE, around 200 gladiators at the training school of Lentulus Batiatus in Capua plotted to escape. When their plot was betrayed, about 70 of them seized knives and spits from the kitchen, fought their way out and captured wagons carrying gladiators' weapons.[1][2] They chose as their leaders Spartacus and two Gauls, Crixus and Oenomaus. The Greek writer Plutarch described Spartacus as:</p>
 <blockquote>"…a Thracian of nomadic stock, possessed not only of great courage and strength, but also in sagacity and culture superior to his fortune, and more Hellenic than Thracian."<cite>Plutarch, <em>Life of Crassus</em>, trans. Bernadotte Perrin (1916)[3]</cite></blockquote>
 <p>The rebels took refuge on Mount Vesuvius. When a Roman force under the praetor Gaius Claudius Glaber besieged them, they made ropes and ladders from wild vines, climbed down the cliffs on the far side of the mountain, and attacked and destroyed Glaber's army from behind.[1] Enslaved herdsmen and farm workers flocked to join them:[1][2]</p>
 <ul>
-  <li>Over the next two years, the rebels defeated a series of Roman armies, including both consuls of 72 BC.</li>
+  <li>Over the next two years, the rebels defeated a series of Roman armies, including both consuls of 72 BCE.</li>
   <li>The rebel army grew to some 120,000 men, women and children. It raided estates and towns, sometimes in separate bands under different leaders. Crixus and his followers split from the main army and were destroyed.</li>
   <li>The rebels marched north towards the Alps, where they could have left Italy, but then turned back south. The ancient sources disagree about why.</li>
 </ul>
-<p>In 72 BC the Senate gave command to Marcus Licinius Crassus, with eight legions. According to Plutarch, Crassus restored discipline by reviving the ancient punishment of decimation — executing one in every ten men of units that had fled.[2][3] Spartacus tried to cross to Sicily with the help of Cilician pirates, but they took his payment and abandoned him.[2] Trapped in the toe of Italy, the rebels broke through Crassus's lines but were finally defeated in 71 BC, near the river Silarus in Lucania. Spartacus died fighting; his body was never found.[1][2]</p>
+<p>In 72 BCE the Senate gave command to Marcus Licinius Crassus, with eight legions. According to Plutarch, Crassus restored discipline by reviving the ancient punishment of decimation — executing one in every ten men of units that had fled.[2][3] Spartacus tried to cross to Sicily with the help of Cilician pirates, but they took his payment and abandoned him.[2] Trapped in the toe of Italy, the rebels broke through Crassus's lines but were finally defeated in 71 BCE, near the river Silarus in Lucania. Spartacus died fighting; his body was never found.[1][2]</p>
 <p>About 6,000 captured rebels were crucified along the Appian Way, the road from Capua to Rome.[1][2]</p>`,
   gallery: ["foyatier", "vogelDeath"],
   sources: [
@@ -137,7 +137,7 @@ window.EVENTS.push(
   ],
   next: `
 <ul>
-  <li><strong>Political rewards:</strong> Pompey, returning from Spain, destroyed a band of fleeing rebels and claimed credit for ending the war, to Crassus's fury. The two men used their armies and their prestige to win the consulship of 70 BC — a step on the road to the end of the Republic.</li>
+  <li><strong>Political rewards:</strong> Pompey, returning from Spain, destroyed a band of fleeing rebels and claimed credit for ending the war, to Crassus's fury. The two men used their armies and their prestige to win the consulship of 70 BCE — a step on the road to the end of the Republic.</li>
   <li><strong>No more great revolts:</strong> the Third Servile War was the last great slave war in Roman history. Slavery itself continued for centuries.</li>
   <li><strong>Changing slavery?</strong> Some historians suggest that, over the following centuries, Roman landowners relied somewhat less on large gangs of enslaved workers and more on tenant farmers, though the reasons were many.</li>
 </ul>`,
@@ -177,7 +177,7 @@ window.EVENTS.push(
   ],
   similar: [
     { id: "haiti" }, { id: "palmares" }, { id: "zanj" },
-    { name: "The First Servile War (135–132 BC)", text: "A great revolt of enslaved people in Sicily, led by Eunus.", url: "https://en.wikipedia.org/w/index.php?search=First+Servile+War" }
+    { name: "The First Servile War (135–132 BCE)", text: "A great revolt of enslaved people in Sicily, led by Eunus.", url: "https://en.wikipedia.org/w/index.php?search=First+Servile+War" }
   ],
   more: [
     ["read", "Barry Strauss — <em>The Spartacus War</em> (2009)", ""],
@@ -191,12 +191,12 @@ window.EVENTS.push(
   id: "trung",
   title: "The Trưng Sisters' Rebellion",
   place: "Mê Linh, Red River Delta, Vietnam",
-  date: "AD 40 – 43",
+  date: "40 CE – 43",
   year: 40, lat: 21.18, lon: 105.72, theme: "freedom",
   teaser: "Two sisters led the peoples of the Red River Delta in a revolt against Chinese rule, drove out the Han governor and ruled as queens for three years.",
   hero: "dongHoTrung",
   background: `
-<p>In 111 BC the Han dynasty of China conquered the kingdom of Nanyue, which included the Red River Delta in what is now northern Vietnam. The region became the Han commandery of Jiaozhi.[1]</p>
+<p>In 111 BCE the Han dynasty of China conquered the kingdom of Nanyue, which included the Red River Delta in what is now northern Vietnam. The region became the Han commandery of Jiaozhi.[1]</p>
 <ul>
   <li>At first the Han ruled largely through the local Lạc lords, who kept much of their traditional power.</li>
   <li>In the early first century AD, Han governors began to impose Chinese laws, customs and taxes more directly, and Chinese settlers and officials arrived in greater numbers.</li>
@@ -213,7 +213,7 @@ window.EVENTS.push(
   ],
   happened: `
 <p>The Trưng sisters were daughters of a wealthy Lạc lord of Mê Linh, near present-day Hanoi.[1] According to Vietnamese tradition, the governor Su Ding had Trưng Trắc's husband, Thi Sách, executed; the Chinese <em>Book of the Later Han</em> says that Su Ding tried to restrain "her" (or "them") with the law, and that she became furious and rebelled.[1]</p>
-<p>In AD 40, Trưng Trắc and Trưng Nhị led the Lạc peoples in revolt against the Han:[1]</p>
+<p>In 40 CE, Trưng Trắc and Trưng Nhị led the Lạc peoples in revolt against the Han:[1]</p>
 <ul>
   <li>The rising began in the Red River Delta and quickly spread to other peoples across a wide area stretching from Hepu (in present-day Guangxi, China) to Rinan (in central Vietnam).</li>
   <li>Han settlements were overrun, and Su Ding fled.</li>
@@ -221,7 +221,7 @@ window.EVENTS.push(
 </ul>
 <p>The <em>Book of the Later Han</em>, the official history of the dynasty they fought, records the rising briefly:</p>
 <blockquote>"…in all she took sixty-five strongholds and established herself as queen."<cite><em>Book of the Later Han</em>, as translated in Wikipedia[1]</cite></blockquote>
-<p>In AD 42, the Han emperor Guangwu sent the veteran general Ma Yuan with an army and a fleet to crush the rebellion.[1] After a year of fighting, the sisters were defeated in 43. Chinese sources record that Ma Yuan captured and beheaded them and sent their heads to the Han capital at Luoyang. Vietnamese tradition holds that the sisters drowned themselves in the Hát River rather than surrender.[1]</p>`,
+<p>In 42 CE, the Han emperor Guangwu sent the veteran general Ma Yuan with an army and a fleet to crush the rebellion.[1] After a year of fighting, the sisters were defeated in 43. Chinese sources record that Ma Yuan captured and beheaded them and sent their heads to the Han capital at Luoyang. Vietnamese tradition holds that the sisters drowned themselves in the Hát River rather than surrender.[1]</p>`,
   gallery: ["trungTempleHanoi", "meLinhTemple"],
   sources: [
     ["Wikipedia, 'Trưng sisters', on the background, the sisters' family, the course of the rebellion, the passages from the <em>Book of the Later Han</em>, Ma Yuan's campaign and the different accounts of their deaths.", "https://en.wikipedia.org/wiki/Tr%C6%B0ng_sisters"],
@@ -233,7 +233,7 @@ window.EVENTS.push(
 <ul>
   <li><strong>Han rule tightened:</strong> Ma Yuan reorganised the administration, strengthened Han law and weakened the power of the Lạc lords. Legend says he erected bronze pillars to mark the Han frontier.</li>
   <li><strong>Centuries of Chinese rule:</strong> northern Vietnam remained under Chinese control, with interruptions, for almost a thousand years, until independence in 938.</li>
-  <li><strong>Later risings:</strong> other rebels, including the woman leader Bà Triệu in AD 248, followed the sisters' example.</li>
+  <li><strong>Later risings:</strong> other rebels, including the woman leader Bà Triệu in 248 CE, followed the sisters' example.</li>
 </ul>`,
   why: `
 <p>The Trưng sisters are among the most important national heroes of Vietnam. Their rising is remembered as the first great revolt against foreign rule, and as proof that women could lead armies and states.</p>
@@ -272,8 +272,8 @@ window.EVENTS.push(
   ],
   similar: [
     { id: "goldenstool" }, { id: "aba" },
-    { name: "Boudica's revolt (AD 60–61)", text: "The Iceni queen led a revolt against Roman rule in Britain.", url: "https://en.wikipedia.org/w/index.php?search=Boudica" },
-    { name: "Lady Triệu (AD 248)", text: "A Vietnamese woman who led a later revolt against Chinese rule.", url: "https://en.wikipedia.org/w/index.php?search=Lady+Trieu" }
+    { name: "Boudica's revolt (60 CE–61)", text: "The Iceni queen led a revolt against Roman rule in Britain.", url: "https://en.wikipedia.org/w/index.php?search=Boudica" },
+    { name: "Lady Triệu (248 CE)", text: "A Vietnamese woman who led a later revolt against Chinese rule.", url: "https://en.wikipedia.org/w/index.php?search=Lady+Trieu" }
   ],
   more: [
     ["read", "Keith Weller Taylor — <em>The Birth of Vietnam</em> (1983)", ""],
@@ -287,7 +287,7 @@ window.EVENTS.push(
   id: "yellowturban",
   title: "The Yellow Turban Rebellion",
   place: "North China Plain (Julu, Hebei)",
-  date: "AD 184 – 205",
+  date: "184 CE – 205",
   year: 184, lat: 37.22, lon: 115.04, theme: "labour",
   teaser: "Inspired by a Daoist healer who promised a new age of 'Great Peace', hundreds of thousands of peasants rose against the Han dynasty — a revolt that helped to bring the empire down.",
   hero: "threeBrothers",
@@ -308,7 +308,7 @@ window.EVENTS.push(
   ],
   happened: `
 <p>Over more than a decade, Zhang Jue and his brothers sent disciples across eight provinces of northern and eastern China. Their followers were organised into thirty-six regional units, and plans were made for a coordinated rising across the empire, timed for the beginning of a new sixty-year cycle in the Chinese calendar — the <em>jiazi</em> year, 184.[1] The movement spread a sixteen-character prophecy:</p>
-<blockquote>"The Azure Sky is already dead; the Yellow Sky will soon rise. When the year is <em>jiazi</em>, there will be great fortune under heaven."<cite>Slogan of the Yellow Turbans, AD 184[1]</cite></blockquote>
+<blockquote>"The Azure Sky is already dead; the Yellow Sky will soon rise. When the year is <em>jiazi</em>, there will be great fortune under heaven."<cite>Slogan of the Yellow Turbans, 184 CE[1]</cite></blockquote>
 <p>The plan was betrayed by one of the movement's own members, Tang Zhou. Ma Yuanyi, who had been preparing the rising in the capital, Luoyang, was arrested and executed, and hundreds of sympathisers in the city were killed.[1] Forced to act early, in March 184 Zhang Jue launched the rebellion with some 360,000 followers wearing yellow headscarves:[1]</p>
 <ul>
   <li>Government offices were plundered and burned across eastern China, and many officials were killed or fled.</li>

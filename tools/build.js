@@ -22,13 +22,20 @@ const THEMES = { labour: "Workers & unions", vote: "The vote & democracy", freed
 const SECTIONS = ["What is the background to this event?", "Who were the key people?", "What happened?", "What happened next?", "What do others say?", "The evidence", "How is it remembered?", "Why does it matter?", "What other events are like this?", "Where can I find out more?"];
 const TYPES = { read: "Read", online: "Online", visit: "Visit", watch: "Watch", listen: "Listen" };
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const yr = y => y < 0 ? `${-y} BC` : (y < 500 ? `AD ${y}` : `${y}`);
+const yr = y => y < 0 ? `${-y} BCE` : (y < 500 ? `${y} CE` : `${y}`);
 const fileUrl = (f, w) => "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(f.replace(/ /g, "_")) + (w ? "?width=" + w : "");
 const pageUrl = f => "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(f.replace(/ /g, "_"));
 const credit = m => `${esc(m.by)} · ${m.lu ? `<a href="${m.lu}">${esc(m.lic)}</a>` : esc(m.lic)} · <a href="${pageUrl(m.f)}">Wikimedia Commons</a>`;
 const fn = h => String(h || "").replace(/\[(\d+)\]/g, (_, n) => `<sup class="fn"><a href="#s-${n}">${n}</a></sup>`);
 const fig = (k, w = 900) => { const m = MEDIA[k]; return m ? `<figure class="media"><div class="ph"><img loading="lazy" src="${fileUrl(m.f, w)}" alt="${esc(m.cap)}"></div><figcaption>${esc(m.cap)} <span class="credit">${credit(m)}</span></figcaption></figure>` : ""; };
 
+const voicesHtml = e => !(e.voices && e.voices.length) ? "" : `<aside class="voices"><h3>In their own words</h3>${e.voices.map(v => `<figure><blockquote>${esc(v.q)}</blockquote><figcaption><b>${esc(v.who)}</b>${v.when ? ` · ${esc(v.when)}` : ""}${v.src ? ` · <a href="${v.src[1]}">${esc(v.src[0])}</a>` : ""}</figcaption></figure>`).join("")}</aside>`;
+const primaryHtml = e => {
+  const p = e.primary, m = p && MEDIA[p.media]; if (!m) return "";
+  return `<div class="lookclose primary"><h3>Primary source: ${esc(p.kind)}</h3><div class="lc-grid"><figure><img loading="lazy" src="${fileUrl(m.f, 800)}" alt="${esc(m.cap)}"><figcaption>${esc(m.cap)} <span class="credit">${credit(m)}</span></figcaption></figure>
+    <div><dl class="ps-facts"><div><dt>What is it?</dt><dd>${esc(p.kind)}</dd></div><div><dt>Made by, and when</dt><dd>${esc(p.made)}</dd></div></dl><p class="ps-about">${esc(p.about)}</p>
+    <h4>Questions to ask of this source</h4><ol>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></div></div></div>`;
+};
 function head(title, desc, img, canonical) {
   return `<!DOCTYPE html>
 <html lang="en-GB">
@@ -77,17 +84,17 @@ function storyPage(e, i) {
 <main>
 <header class="s-hero"><div class="wrap">
   <div><div class="tag">${esc(THEMES[e.theme] || "")}</div><h1>${esc(e.title)}</h1><p class="teaser">${esc(e.teaser)}</p>
-    <dl class="facts"><div><dt>When</dt><dd>${esc(e.date)}</dd></div><div><dt>Where</dt><dd>${esc(e.place)}</dd></div></dl>
+    <dl class="facts"><div><dt>When</dt><dd>${esc(e.date)}</dd></div><div><dt>Where</dt><dd>${esc(e.place)}</dd></div>${e.checked ? `<div><dt>Facts checked</dt><dd>${esc(e.checked)}</dd></div>` : ""}</dl>
     <p style="margin-top:22px"><a class="btn-play big" href="../index.html#${e.id}" style="text-decoration:none">See it on the map →</a></p></div>
   ${hm ? `<figure class="media"><div class="ph"><img src="${fileUrl(hm.f, 1200)}" alt="${esc(hm.cap)}"></div><figcaption>${esc(hm.cap)} ${credit(hm)}</figcaption></figure>` : ""}
 </div></header>
 <div class="s-body"><div class="wrap"><article>
   ${chap(1, `<div class="prose">${fn(e.background)}</div>`)}
-  ${chap(2, people)}
+  ${chap(2, people + voicesHtml(e))}
   ${chap(3, `<div class="prose">${fn(e.happened)}</div>${(e.gallery || []).length ? `<div class="gallery">${e.gallery.map(k => fig(k, 800)).join("")}</div>` : ""}${sources}`)}
   ${chap(4, `<div class="prose">${fn(e.next)}</div>`)}
   ${chap(5, e.debates ? `<div class="prose">${fn(e.debates)}</div>` : "")}
-  ${chap(6, e.evidence ? `<div class="prose">${fn(e.evidence)}</div>` : "")}
+  ${chap(6, (e.evidence ? `<div class="prose">${fn(e.evidence)}</div>` : "") + primaryHtml(e))}
   ${chap(7, e.memory ? `<div class="prose">${fn(e.memory)}</div>` : "")}
   <div class="why-box">${chap(8, `<div class="prose">${fn(e.why)}</div>`)}</div>
   ${e.questions ? `<aside class="questions"><h3>Questions to think about</h3><ol>${e.questions.map(q => `<li>${q}</li>`).join("")}</ol></aside>` : ""}

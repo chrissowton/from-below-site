@@ -188,7 +188,7 @@ window.EVENTS.push(
     { n: "Mbuya Nehanda (Charwe Nyakasikana)", r: "A Shona spirit medium who inspired resistance. She was hanged in 1898.", img: "nehandaKaguvi" },
     { n: "Sekuru Kaguvi", r: "A Shona spirit medium and leader of the rising, hanged alongside her." },
     { n: "The Mlimo", r: "The Ndebele religious oracle, whose priests helped plan the rising in Matabeleland." },
-    { n: "The settlers", r: "About 4,000 white settlers, of whom around 450 were killed in the rising." }
+    { n: "The settlers", r: "Almost 4,000 white settlers, several hundred of whom were killed in the rising." }
   ],
   happened: `
 <p>In March 1896, the Ndebele rose against the company.[1] The Shona of Mashonaland joined in June, surprising the settlers, who had believed them peaceful.</p>
@@ -305,7 +305,7 @@ window.EVENTS.push(
 <p>The Portuguese authorities presented the event as the restoration of order. Nationalists saw it as a massacre of peaceful people.</p>
 <h3>Historians' debates</h3>
 <ul>
-  <li><strong>The death toll:</strong> figures range from a handful to more than 500; historians such as Paolo Israel have examined how the memory of the massacre grew in songs and official history.</li>
+  <li><strong>The death toll:</strong> the number of dead is disputed, and estimates vary widely; historians such as Paolo Israel have examined how the memory of the massacre grew in songs and official history.</li>
   <li><strong>Independence or prices?</strong> Some historians argue that the crowd's demands were mainly economic; others that independence was central.</li>
   <li><strong>The later war:</strong> the independence war that followed saw violence by both Portuguese forces, including massacres such as Wiriyamu in 1972, and by FRELIMO against those it saw as collaborators.</li>
 </ul>`,

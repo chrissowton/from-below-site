@@ -1,0 +1,49 @@
+# From Below — check the data, build the story pages and publish the site.
+# Runs every time you push to the main branch (and can be run by hand from the Actions tab).
+# One-time setup: on GitHub, go to Settings → Pages and set "Source" to "GitHub Actions".
+name: Check and publish
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check the stories for mistakes
+        run: node tools/check.js
+      - name: Build the story pages and sitemap
+        run: node tools/build.js
+      - name: Package the site
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

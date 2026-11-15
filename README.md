@@ -28,6 +28,12 @@ An interactive world map of radical history told from the bottom up. Each point 
 - **On every story**: Quick read (key sections only, larger text), Listen (reads the story aloud using the browser's voice), Print (a clean printable copy), Share, "Look closely at a source" questions, a "Facts last checked" date where one has been recorded, and "Report an error" (once `repo` or `email` is set in `data/site.js`).
 - **Story pages**: `node tools/build.js` writes a separate page for every story in `stories/`, which search engines and social media can read.
 - **Language menu**: uses the Google Translate website widget. It works on an ordinary web host such as GitHub Pages; where a host blocks Google's script, the menu offers a link to Google Translate instead. Machine translation can be inaccurate.
+- **Primary sources** (`data/primary-1.js`): on many stories, "The evidence" shows a source made at the time — a poster, petition, photograph, pamphlet or print — with what it is, who made it, and questions to ask of it. Stories without one show general "Look closely at a source" questions.
+- **In their own words**: short, sourced quotations from people who were there, under "Who were the key people?".
+- **Sources and voices** (`#sources`): every primary source and quotation on one page.
+- **Fact-checking** (`data/reviews.js`): checked stories show "Facts last checked" with the date. See *Fact-checking* below.
+- **Dates** use BCE and CE.
+- **Support** button (top bar, Explore section and footer), shown once you add your Ko-fi or other page in `data/site.js`.
 - **Back to top** button.
 
 ## Settings
@@ -37,6 +43,7 @@ Open `data/site.js` and fill in:
 - `url` — the address of the published site, e.g. `https://yourname.github.io/from-below`. Used for share links, social previews and the sitemap.
 - `repo` — your GitHub repository, e.g. `https://github.com/yourname/from-below`. "Suggest a story" and "Report an error" then open a ready-filled GitHub issue.
 - `email` — used instead, if you don't want to use GitHub issues.
+- `support` — your Ko-fi (or other) page, e.g. `url: "https://ko-fi.com/frombelow"`. The Support buttons stay hidden until this is set.
 
 ## Tools (need Node.js)
 
@@ -45,15 +52,52 @@ Run these from the site folder:
 - `node tools/check.js` — checks the data for mistakes: duplicate stories, missing images, broken "similar" links, footnotes without a source, and Moments, Threads or Pathways that point to stories that don't exist. **Run it after every change.**
 - `node tools/build.js` — rebuilds the separate story pages in `stories/` (and `sitemap.xml` and `robots.txt` once `url` is set). **Run it after adding or changing stories.**
 - `node tools/linkcheck.js` — visits every source link and lists any that fail (needs Node 18 or later and an internet connection).
+- `node tools/review.js` — writes `REVIEW-NEXT.md`, a checklist of the next 10 stories to fact-check (`node tools/review.js 20` for 20, or `node tools/review.js peterloo` for one story).
+
+You don't need to run `check.js` or `build.js` yourself if you use automatic publishing (below) — GitHub runs them for you every time you push.
+
+## Automatic checks and publishing
+
+The file `.github/workflows/publish.yml` tells GitHub to check the stories, rebuild the story pages and sitemap, and publish the site every time you push. If the check finds an error, the site is **not** updated, and you get an email and a red ✗ on the Actions tab saying what is wrong — so a mistake can never break the live site.
+
+**One-time setup:** on GitHub, open the repository, go to **Settings → Pages**, and under *Build and deployment* change **Source** to **GitHub Actions**. That's all.
+
+To see what happened after a push, open the **Actions** tab: a green ✓ means the site is live; a red ✗ means there's a mistake — click it, then click *build*, to see the message from `check.js`.
+
+The `.github` folder starts with a dot, so a Mac hides it in Finder (press **Cmd + Shift + .** to show hidden files). Make sure it is copied into your repository folder.
+
+## Fact-checking
+
+Aim to check a batch of stories each week, starting with those used in Pathways, Moments and Threads, which are read most.
+
+1. Run `node tools/review.js` (or ask Claude for the next batch). It writes `REVIEW-NEXT.md`, listing each story's sources and every sentence with a date or number.
+2. For each story, open the sources and check each claim, the names and roles of the key people, every quotation, and who killed whom (with the range of estimates). Correct or remove anything the sources don't support.
+3. Add the story to `data/reviews.js` with the date and a short note, e.g. `peterloo: { date: "2026-11-20", note: "Dates and figures checked against the cited sources." },`
+4. Push. The story now shows "Facts last checked" with the date.
+
+## Adding a primary source or a quotation
+
+In `data/primary-1.js` (or a new `data/primary-2.js`, added to `index.html` after `primary-1.js`), add an entry under the story's id:
+
+```js
+peterloo: {
+  primary: { media: "peterlooPoster", kind: "Official notice", made: "Manchester magistrates, 17 August 1819",
+    about: "What the source is, who made it and why.",
+    questions: ["A question about this source", "Another question"] },
+  voices: [{ q: "The exact words.", who: "Who said or wrote them", when: "When and where", src: ["Where the words come from", "https://…"] }]
+}
+```
+
+`media` must be an image key from a `data/media-*.js` file. Use only images made at the time, and only words you have checked against a source; keep quotations short, and prefer words from before 1929, which are out of copyright.
 
 ## Running it
 
 It is a static site with no build step needed to view it. Open `index.html` in a browser, or publish with **GitHub Pages**:
 
 1. Upload the **contents** of this folder (so that `index.html` is at the top level of the repository, not inside a subfolder).
-2. Go to **Settings → Pages**, choose *Deploy from a branch*, select `main` and `/ (root)`.
+2. Go to **Settings → Pages** and set **Source** to **GitHub Actions** (see *Automatic checks and publishing* above). If you prefer, *Deploy from a branch* (`main`, `/ (root)`) also works, but then you must run `node tools/build.js` yourself after changing stories.
 3. Your site will appear at `https://<username>.github.io/<repo>/`.
-4. Put that address in `data/site.js`, run `node tools/build.js`, and upload again.
+4. Put that address in `data/site.js` and push again.
 
 Each story has its own link, e.g. `…/#peterloo`, and its own page, e.g. `…/stories/peterloo.html`. Moments, Threads and Pathways have links such as `…/#moment/1848`.
 

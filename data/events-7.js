@@ -300,7 +300,7 @@ window.EVENTS.push(
 <p>Ferdinand Marcos was elected President of the Philippines in 1965 and re-elected in 1969 amid allegations of fraud. Barred from a third term, he declared martial law in September 1972. He closed Congress, shut down critical media and ruled by decree.</p>
 <p>Under martial law, which formally lasted until 1981, and the rule that followed:</p>
 <ul>
-  <li>Thousands of opponents were imprisoned, tortured or killed. Historians commonly cite figures of around 70,000 imprisoned, 34,000 tortured and over 3,000 killed.</li>
+  <li>Thousands of opponents were imprisoned, tortured or killed. Historians commonly cite figures of around 70,000 imprisoned, 35,000 tortured and over 3,000 killed.</li>
   <li>Marcos, his wife Imelda and their associates amassed enormous wealth.</li>
   <li>By 1984–85 the economy was in deep crisis, contracting sharply for two years.</li>
 </ul>

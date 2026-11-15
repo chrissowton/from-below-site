@@ -35,7 +35,8 @@ window.EVENTS.push(
   gallery: ["may68sorbonne", "may68workers"],
   sources: [
     ["Wikipedia, 'May 68', on the causes, the student protests, the general strike, de Gaulle's departure, the Grenelle agreements, the elections and the legacy.", "https://en.wikipedia.org/wiki/May_68"],
-    ["Wikipedia, 'May 68', section on the Grenelle agreements and the deaths of 24 May.", "https://en.wikipedia.org/wiki/May_68#Grenelle_agreements"]
+    ["Wikipedia, 'May 68', section on the Grenelle agreements and the deaths of 24 May.", "https://en.wikipedia.org/wiki/May_68#Grenelle_agreements"],
+    ["Wikipédia (French), 'Mai 68', on the deaths at Flins and Sochaux in June 1968.", "https://fr.wikipedia.org/wiki/Mai_68"]
   ],
   next: `
 <ul>
@@ -56,7 +57,7 @@ window.EVENTS.push(
 <h3>Debates since</h3>
 <ul>
   <li><strong>Revolution or reform?</strong> Some see a failed revolution; others see lasting cultural and social change.[1]</li>
-  <li><strong>Violence on both sides:</strong> police used batons and tear gas against students; protesters fought police on the barricades. On 24 May, a police inspector in Lyon was killed by a lorry sent into police lines, and a man was stabbed to death in Paris.[2] In June, a school student, Gilles Tautin, drowned while fleeing police at Flins, and two workers died when riot police broke up the strike at the Peugeot factory in Sochaux, one of them shot.</li>
+  <li><strong>Violence on both sides:</strong> police used batons and tear gas against students; protesters fought police on the barricades. On 24 May, a police inspector in Lyon was killed by a lorry sent into police lines, and a man was stabbed to death in Paris.[2] In June, a school student, Gilles Tautin, drowned while fleeing a charge by gendarmes at Flins, and two workers died when riot police broke up the strike at the Peugeot factory in Sochaux — one shot, one falling from a wall after a grenade blast.[3]</li>
 </ul>`,
   evidence: `
 <ul>

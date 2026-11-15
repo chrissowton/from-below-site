@@ -88,7 +88,7 @@ window.EVENTS.push(
   teaser: "After a Roman governor looted the Temple treasury, the people of Judaea rose against the greatest empire of the age. The revolt ended with the destruction of Jerusalem's Temple and the siege of Masada.",
   hero: "archTitus",
   background: `
-<p>Judaea had been under Roman rule since 63 BC, and became a Roman province in AD 6.[1]</p>
+<p>Judaea had been under Roman rule since 63 BCE, and became a Roman province in 6 CE.[1]</p>
 <ul>
   <li>Heavy taxes, corrupt governors and Roman disregard for Jewish religion caused growing anger.[1]</li>
   <li>In 66, the governor Gessius Florus took money from the Temple treasury.[1]</li>

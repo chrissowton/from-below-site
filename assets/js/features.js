@@ -88,9 +88,17 @@
     </article>`).join("");
   if (exMore) {
     const sugg = contactUrl("suggestion", "Story suggestion: ", "Event:\nPlace and date:\nWhy it matters:\nGood sources (with links):\n");
-    exMore.innerHTML = `<button type="button" class="ex-link" data-go="people"><b>People A–Z</b><span>Everyone named in the stories</span></button>
+    exMore.innerHTML = `<button type="button" class="ex-link" data-go="sources"><b>Sources and voices</b><span>Posters, petitions and photographs from the time — with questions to ask</span></button>
+      <button type="button" class="ex-link" data-go="people"><b>People A–Z</b><span>Everyone named in the stories</span></button>
       <button type="button" class="ex-link" data-go="coverage"><b>Whose history is here?</b><span>What the atlas covers — and what it is missing</span></button>
       ${sugg ? `<a class="ex-link" href="${sugg}" target="_blank" rel="noopener"><b>Suggest a story ↗</b><span>Tell us what is missing</span></a>` : ""}`;
+  }
+  if (SITE.support && SITE.support.url) {
+    const lbl = SITE.support.label || "Support From Below";
+    const ns = document.getElementById("nav-support"); if (ns) { ns.href = SITE.support.url; ns.hidden = false; }
+    const sf = document.getElementById("support-foot");
+    if (sf) { sf.hidden = false; sf.innerHTML = `${esc(SITE.support.text || "From Below is free, has no adverts and is openly licensed. If you find it useful, you can help keep it going.")}<br><a class="btn-support" href="${SITE.support.url}" target="_blank" rel="noopener">♥ ${esc(lbl)}</a>`; }
+    if (exMore) exMore.insertAdjacentHTML("beforeend", `<a class="ex-link ex-support" href="${SITE.support.url}" target="_blank" rel="noopener"><b>♥ ${esc(lbl)} ↗</b><span>Free, no adverts, openly licensed — help keep it going</span></a>`);
   }
   FB.vc.addEventListener("click", ev => { const b = ev.target.closest("[data-go]"); if (b && !b.onclick) { ev.preventDefault(); go(b.dataset.go); } });
   document.querySelectorAll(".explore [data-go]").forEach(b => b.onclick = () => go(b.dataset.go));
@@ -210,6 +218,17 @@
     }));
     return [...map.values()];
   }
+  FB.routes.sources = () => {
+    const withP = EVENTS.filter(e => e.primary && MEDIA[e.primary.media]), withV = EVENTS.filter(e => e.voices && e.voices.length);
+    FB.showPage(`${pageHero("Primary sources", "Sources and voices", `Sources made at the time — posters, petitions, photographs, pamphlets and prints — with questions to ask of each, and the words of people who were there. ${withP.length} stories so far, with more being added.`, null)}
+      <div class="pg-body"><div class="wrap">
+        <p class="pg-note">A primary source was made at the time, by people involved or watching. It is evidence — but every source was made by someone, for a reason. Ask who made it, why, and who is missing.</p>
+        <div class="ps-grid">${withP.map(e => { const m = MEDIA[e.primary.media]; return `<button type="button" class="ps-card t-${e.theme}" data-go="${e.id}"><span class="ps-img" style="${bg(e.primary.media, 500)}"></span><span class="ps-body"><small>${esc(e.primary.kind)} · ${esc(e.primary.made)}</small><b>${esc(e.title)}</b></span></button>`; }).join("")}</div>
+        <section class="pg-sec"><h2>In their own words</h2>
+          <div class="voices">${withV.map(e => e.voices.map(v => `<figure><blockquote>${esc(v.q)}</blockquote><figcaption><b>${esc(v.who)}</b> · ${esc(v.when || "")} · <button type="button" class="linkish" data-go="${e.id}">${esc(e.title)} →</button></figcaption></figure>`).join("")).join("")}</div></section>
+      </div></div>`, "Sources and voices");
+    return true;
+  };
   FB.routes.people = () => {
     const sk = x => x.name.replace(/^[\s'"‘’“”«»(]+/, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const byName = (a, b) => sk(a).localeCompare(sk(b), "en", { sensitivity: "base" });
@@ -304,10 +323,21 @@
         <button type="button" class="st-btn st-print">🖨 Print</button>
         <button type="button" class="st-btn st-share">🔗 Share</button>
       </div>
-      <div class="st-right">${e.checked ? `<span class="st-checked">✓ Facts last checked ${esc(fmtDate(e.checked))}</span>` : ""}${report ? `<a class="st-report" href="${report}" target="_blank" rel="noopener">Report an error ↗</a>` : ""}</div>
+      <div class="st-right">${e.checked ? `<span class="st-checked" title="${esc(e.checkNote || "")}">✓ Facts last checked ${esc(fmtDate(e.checked))}</span>` : ""}${report ? `<a class="st-report" href="${report}" target="_blank" rel="noopener">Report an error ↗</a>` : ""}</div>
     </div></div>`;
   };
+  FB.hooks.voicesBox = e => !(e.voices && e.voices.length) ? "" : `<aside class="voices" aria-label="In their own words"><h3>In their own words</h3>${e.voices.map(v => `<figure><blockquote>${esc(v.q)}</blockquote><figcaption><b>${esc(v.who)}</b>${v.when ? ` · ${esc(v.when)}` : ""}${v.src ? ` · <a href="${v.src[1]}" target="_blank" rel="noopener">${esc(v.src[0])} ↗</a>` : ""}</figcaption></figure>`).join("")}</aside>`;
   FB.hooks.sourceBox = e => {
+    const p = e.primary;
+    if (p && MEDIA[p.media]) {
+      const m = MEDIA[p.media];
+      return `<div class="lookclose primary"><h3>Primary source: ${esc(p.kind)}</h3>
+      <div class="lc-grid"><figure><a href="${fileUrl(m.f)}" target="_blank" rel="noopener"><img loading="lazy" src="${fileUrl(m.f, 800)}" alt="${esc(m.cap)}" onerror="this.closest('figure').classList.add('noimg')"></a><figcaption>${esc(m.cap)} <span class="credit">${credit(m)}</span></figcaption></figure>
+      <div><dl class="ps-facts"><div><dt>What is it?</dt><dd>${esc(p.kind)}</dd></div><div><dt>Made by, and when</dt><dd>${esc(p.made)}</dd></div></dl>
+        <p class="ps-about">${esc(p.about)}</p>
+        <h4>Questions to ask of this source</h4>
+        <ol>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}<li>Does it support the account in "What happened?", or raise new questions?</li></ol></div></div></div>`;
+    }
     const key = e.hero && MEDIA[e.hero] ? e.hero : (e.gallery || []).find(k => MEDIA[k]);
     if (!key) return "";
     const m = MEDIA[key];

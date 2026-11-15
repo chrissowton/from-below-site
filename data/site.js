@@ -11,6 +11,10 @@ window.SITE = {
   /* An email address for suggestions and corrections, used if no repository is set. */
   email: "",
 
+  /* A "Support" button in the top bar, the Explore section and the footer — for example your Ko-fi page,
+     e.g. url: "https://ko-fi.com/frombelow". Leave url "" to hide it. */
+  support: { url: "", label: "Support From Below", text: "From Below is free, has no adverts and is openly licensed. If you find it useful, you can help keep it going." },
+
   /* Set to true once you have run "node tools/build.js", so the site links to the separate story pages. */
   storyPages: true
 };

@@ -141,7 +141,7 @@ window.EVENTS.push(
 <ul>
   <li><strong>A new law:</strong> in 1976 the Althing passed a law guaranteeing equal rights for women and men, and establishing an Equality Council.</li>
   <li><strong>A woman president:</strong> in 1980 Vigdís Finnbogadóttir was elected President of Iceland, the first woman in the world to be democratically elected as a head of state. She served for sixteen years.</li>
-  <li><strong>Repeated actions:</strong> women walked out again in 1985, 2005, 2010, 2016, 2018 and 2023, each time leaving work at the minute of the working day after which, given the pay gap, they were in effect working for free — 2:08 p.m. in 2005, 2:38 p.m. in 2016.</li>
+  <li><strong>Repeated actions:</strong> women took action again in 1985, 2005, 2010, 2016 and 2018 — in recent years by leaving work at the minute of the working day after which, given the pay gap, they were in effect working for free: 2:08 p.m. in 2005, 2:25 p.m. in 2010, 2:38 p.m. in 2016. In 2023, women held a full-day strike, the first since 1975, joined by the prime minister.</li>
   <li><strong>Equal pay law:</strong> in 2018 Iceland became one of the first countries to require employers to prove that they pay men and women equally.</li>
 </ul>`,
   why: `

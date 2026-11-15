@@ -133,7 +133,7 @@ window.EVENTS.push(
 <h3>Debates since</h3>
 <ul>
   <li><strong>Strike or revolt?</strong> Historians such as Mary Turner stress the rebels' demand for wages and the role of their own religious leaders.[2]</li>
-  <li><strong>Violence on both sides:</strong> fourteen white people were killed and much property burned; over 300 rebels were killed in the fighting or executed.[1]</li>
+  <li><strong>Violence on both sides:</strong> fourteen white people were killed and much property burned; over 300 rebels were killed in the fighting, and many more were executed afterwards by courts martial.[1]</li>
 </ul>`,
   evidence: `
 <ul>

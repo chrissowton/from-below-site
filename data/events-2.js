@@ -171,7 +171,7 @@ window.EVENTS.push(
 <p>The march was followed closely by the Indian and international press. Gandhi spoke repeatedly of the struggle's moral stakes: "I want world sympathy in this battle of right against might."[1] On the morning of 6 April, after prayers, he picked up a lump of salty mud from the shore and declared:</p>
 <blockquote>"With this, I am shaking the foundations of the British Empire."<cite>M.K. Gandhi at Dandi, 6 April 1930[1]</cite></blockquote>
 <p>The act was symbolic, but what followed was not. Across India, people began to make and sell salt illegally, boycott British cloth and liquor, and resign from government posts. Jawaharlal Nehru remarked that "it seemed as though a spring had been suddenly released."[1] Women took part on a scale the authorities had not anticipated; a government report noted that "thousands of them emerged ... from the seclusion of their homes" to join demonstrations and picketing.[1]</p>
-<p>Gandhi was arrested on the night of 4–5 May 1930. On 21 May, Sarojini Naidu led around 2,500 volunteers to the Dharasana Salt Works. Column after column advanced towards the police cordon without resisting and were beaten down with steel-tipped lathis.[2] The American journalist Webb Miller, whose report was initially censored, wrote that at the makeshift hospital he:</p>
+<p>Gandhi was arrested on the night of 4–5 May 1930. On 21 May, Sarojini Naidu led hundreds of volunteers to the Dharasana Salt Works. Column after column advanced towards the police cordon without resisting and were beaten down with steel-tipped lathis.[2] The American journalist Webb Miller, whose report was initially censored, wrote that at the makeshift hospital he:</p>
 <blockquote>"counted 320 injured, many still insensible with fractured skulls ... Scores of the injured had received no treatment for hours and two had died."<cite>Webb Miller, United Press report, May 1930[3]</cite></blockquote>
 <p>The former Speaker of the Legislative Assembly, Vithalbhai Patel, who watched the beatings, said: "All hope of reconciling India with the British Empire is lost forever."[1] By the end of 1930, around 60,000 people had been jailed.[2]</p>`,
   gallery: ["dandi", "naiduMarch", "vedaranyam"],
@@ -188,7 +188,7 @@ window.EVENTS.push(
   <li><strong>International attention:</strong> <em>Time</em> magazine named Gandhi its "Man of the Year" for 1930, comparing the march to the American colonists' defiance of the British tea tax.</li>
   <li><strong>Negotiation:</strong> in March 1931 the Gandhi–Irwin Pact released political prisoners and allowed coastal villagers to make salt for their own use; Gandhi attended the Second Round Table Conference in London later that year.</li>
 </ul>
-<p>Independence did not come until 1947, accompanied by the partition of British India and terrible communal violence. The salt tax itself was finally abolished in 1946.</p>`,
+<p>Independence did not come until 1947, accompanied by the partition of British India and terrible communal violence. The salt tax itself was finally abolished on the eve of independence.</p>`,
   why: `
 <p>The Salt March showed how a carefully chosen, simple, symbolic act could unite millions of people across deep divisions. It made non-violent mass civil disobedience a recognised political strategy on the world stage, and directly influenced Martin Luther King Jr. and the American civil rights movement.</p>
 <ul>

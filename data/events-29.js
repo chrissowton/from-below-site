@@ -368,7 +368,7 @@ window.EVENTS.push(
   happened: `
 <p>In 1781, Túpac Katari raised an army of some 40,000 and on 13 March laid siege to the Spanish city of La Paz.[1]</p>
 <ul>
-  <li>Katari and Bartolina Sisa set up their court in El Alto, on the plateau above the city, and maintained the siege for 109 days, from March to June.[1]</li>
+  <li>Katari and Bartolina Sisa set up their court in El Alto, on the plateau above the city, and besieged the city for about six months in all, in two sieges between March and October 1781.[1]</li>
   <li>Bartolina Sisa was a commander of the siege, and Gregoria Apaza also led forces.[1]</li>
   <li>The siege was lifted in June by troops from Buenos Aires. The rebels returned in August, joined by Andrés Túpac Amaru, a nephew of Túpac Amaru II.[1]</li>
 </ul>

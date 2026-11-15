@@ -5,7 +5,7 @@ window.EVENTS.push(
   id: "eunus",
   title: "Eunus and the First Sicilian Slave War",
   place: "Enna and eastern Sicily",
-  date: "135 – 132 BC",
+  date: "135 – 132 BCE",
   year: -135, lat: 37.567, lon: 14.279, theme: "freedom",
   teaser: "Enslaved workers on Sicily's great estates rose up under a Syrian slave and prophet named Eunus. They took cities, crowned him king, and held off Roman armies for three years.",
   hero: "enna",
@@ -23,24 +23,24 @@ window.EVENTS.push(
     { n: "Publius Rupilius", r: "The Roman consul who crushed the revolt." }
   ],
   happened: `
-<p>In 135 BC, Eunus and 400 enslaved people seized the city of Enna in the centre of the island.[1]</p>
+<p>In 135 BCE, Eunus and 400 enslaved people seized the city of Enna in the centre of the island.[1]</p>
 <ul>
   <li>Soon afterwards, Cleon, another slave, led a rising near Agrigentum on the south coast, whose inhabitants were massacred. He joined Eunus as his military commander.[1]</li>
   <li>Eunus was proclaimed king under the name Antiochus, after the kings of his native Syria.[1]</li>
   <li>The rebels took the eastern cities of Catana and Tauromenium (Taormina), and defeated several Roman forces.[1]</li>
   <li>The revolt inspired smaller risings in Italy and as far away as Delos in the Aegean.[1]</li>
-  <li>In 134–132 BC, the consul Rupilius besieged the rebel cities. Tauromenium and Enna fell, and the revolt ended.[1]</li>
+  <li>In 134–132 BCE, the consul Rupilius besieged the rebel cities. Tauromenium and Enna fell, and the revolt ended.[1]</li>
 </ul>`,
   gallery: [],
   sources: [
     ["Wikipedia, 'First Servile War', on the causes, Eunus and Cleon, the cities taken, the spread of revolts and the Roman suppression.", "https://en.wikipedia.org/wiki/First_Servile_War"],
     ["Diodorus Siculus, <em>Library of History</em> 34/35.2.", ""],
-    ["Keith Bradley, <em>Slavery and Rebellion in the Roman World, 140 BC–70 BC</em> (Indiana University Press, 1989).", ""]
+    ["Keith Bradley, <em>Slavery and Rebellion in the Roman World, 140 BCE–70 BCE</em> (Indiana University Press, 1989).", ""]
   ],
   next: `
 <ul>
   <li><strong>Punishment:</strong> ancient writers say thousands of captured rebels were crucified or killed. Eunus was taken prisoner and died in captivity.</li>
-  <li><strong>More revolts:</strong> a second slave war broke out in Sicily in 104 BC, and the revolt of Spartacus in Italy in 73 BC.</li>
+  <li><strong>More revolts:</strong> a second slave war broke out in Sicily in 104 BCE, and the revolt of Spartacus in Italy in 73 BCE.</li>
 </ul>`,
   why: `
 <p>The first Sicilian slave war showed that enslaved people from many lands could unite against Rome — and that Roman wealth rested on slavery.</p>
@@ -83,31 +83,31 @@ window.EVENTS.push(
   id: "thebanrevolt",
   title: "The Great Theban Revolt",
   place: "Thebes (Luxor) and Upper Egypt",
-  date: "206 – 186 BC",
+  date: "206 – 186 BCE",
   year: -206, lat: 25.70, lon: 32.64, theme: "freedom",
   teaser: "Egyptians rose against the Greek-speaking Ptolemaic kings who ruled from Alexandria. For twenty years, two native pharaohs ruled from Thebes — the longest revolt against foreign rule in ancient Egypt.",
   hero: "edfu",
   background: `
-<p>After Alexander the Great's death in 323 BC, his general Ptolemy took Egypt. The Ptolemaic dynasty ruled from Alexandria, with a Greek-speaking elite.[1]</p>
+<p>After Alexander the Great's death in 323 BCE, his general Ptolemy took Egypt. The Ptolemaic dynasty ruled from Alexandria, with a Greek-speaking elite.[1]</p>
 <ul>
   <li>Native Egyptians paid heavy taxes, and the state was in financial crisis after the Fourth Syrian War.[1]</li>
   <li>Thebes, the old capital and centre of the god Amun, had a long tradition of independence.[1]</li>
   <li>Ptolemy IV's attempts to tighten control over the Theban region provoked resistance.[1]</li>
 </ul>`,
   people: [
-    { n: "Haronnophris (Hugronaphor)", r: "Crowned pharaoh at Thebes in 205 BC." },
-    { n: "Ankhmakis (Chaonnophris)", r: "His successor as rebel pharaoh, defeated in 186 BC." },
+    { n: "Haronnophris (Hugronaphor)", r: "Crowned pharaoh at Thebes in 205 BCE." },
+    { n: "Ankhmakis (Chaonnophris)", r: "His successor as rebel pharaoh, defeated in 186 BCE." },
     { n: "The people of Upper Egypt", r: "Farmers, priests and soldiers who supported the revolt." },
     { n: "Ptolemy IV and Ptolemy V", r: "The Greek kings of Egypt." }
   ],
   happened: `
-<p>Unrest broke out in Upper Egypt in 207–206 BC. In autumn 206 BC, rebels seized the great temple of Edfu, a symbol of Ptolemaic power.[1]</p>
+<p>Unrest broke out in Upper Egypt in 207–206 BCE. In autumn 206 BCE, rebels seized the great temple of Edfu, a symbol of Ptolemaic power.[1]</p>
 <ul>
   <li>They marched on Thebes, took the city and drove out the Greeks.[1]</li>
-  <li>In 205 BC, the rebel leader was crowned pharaoh at Thebes as Haronnophris, beloved of Isis and Amun-Ra.[1]</li>
+  <li>In 205 BCE, the rebel leader was crowned pharaoh at Thebes as Haronnophris, beloved of Isis and Amun-Ra.[1]</li>
   <li>The revolt spread across much of Upper Egypt, and was not quickly crushed.[1]</li>
-  <li>Revolts also broke out in the Nile Delta; the Rosetta Stone (196 BC) records Ptolemy V's siege of rebels at Lycopolis.</li>
-  <li>In 186 BC, the second rebel pharaoh, Ankhmakis, was defeated, and Ptolemaic rule was restored.</li>
+  <li>Revolts also broke out in the Nile Delta; the Rosetta Stone (196 BCE) records Ptolemy V's siege of rebels at Lycopolis.</li>
+  <li>In 186 BCE, the second rebel pharaoh, Ankhmakis, was defeated, and Ptolemaic rule was restored.</li>
 </ul>`,
   gallery: ["rosetta"],
   sources: [
@@ -116,9 +116,9 @@ window.EVENTS.push(
   ],
   next: `
 <ul>
-  <li><strong>Amnesty:</strong> after the defeat of the rebels, a royal decree of 186 BC offered an amnesty, while the defeated leader was executed.</li>
-  <li><strong>Unrest continued:</strong> further revolts broke out in Upper Egypt in the second century BC.</li>
-  <li><strong>Rome:</strong> Egypt became a Roman province in 30 BC.</li>
+  <li><strong>Amnesty:</strong> after the defeat of the rebels, a royal decree of 186 BCE offered an amnesty, while the defeated leader was executed.</li>
+  <li><strong>Unrest continued:</strong> further revolts broke out in Upper Egypt in the second century BCE.</li>
+  <li><strong>Rome:</strong> Egypt became a Roman province in 30 BCE.</li>
 </ul>`,
   why: `
 <p>The Great Theban Revolt was a long struggle by Egyptians against foreign rulers, centuries before modern anti-colonial movements.</p>
@@ -162,14 +162,14 @@ window.EVENTS.push(
   id: "chensheng",
   title: "The Dazexiang Uprising",
   place: "Dazexiang (Big Swamp Village), Anhui, China",
-  date: "209 – 208 BC",
+  date: "209 – 208 BCE",
   year: -209, lat: 33.63, lon: 117.07, theme: "labour",
   teaser: "Nine hundred conscripts held up by floods faced execution for being late. Their leaders asked: 'Are kings, generals and ministers born to their station?' The first great peasant revolt in Chinese history helped bring down the Qin empire.",
   hero: "qinUprisings",
   background: `
-<p>The Qin dynasty united China in 221 BC under its first emperor, Qin Shi Huang. It ruled through harsh laws, heavy taxes and forced labour on huge projects.[1]</p>
+<p>The Qin dynasty united China in 221 BCE under its first emperor, Qin Shi Huang. It ruled through harsh laws, heavy taxes and forced labour on huge projects.[1]</p>
 <ul>
-  <li>After the first emperor died in 210 BC, his son Huhai took the throne, having had his elder brother Fusu killed.[1]</li>
+  <li>After the first emperor died in 210 BCE, his son Huhai took the throne, having had his elder brother Fusu killed.[1]</li>
   <li>Qin law ordered execution for those who arrived late for government service, whatever the reason.[1]</li>
 </ul>`,
   people: [
@@ -179,7 +179,7 @@ window.EVENTS.push(
     { n: "Liu Bang", r: "A later rebel leader who founded the Han dynasty." }
   ],
   happened: `
-<p>In 209 BC, Chen Sheng and Wu Guang were leading about 900 conscripts north to Yuyang when floods stopped them at Dazexiang.[1]</p>
+<p>In 209 BCE, Chen Sheng and Wu Guang were leading about 900 conscripts north to Yuyang when floods stopped them at Dazexiang.[1]</p>
 <ul>
   <li>Facing execution for being late, they decided to rebel.[1]</li>
   <li>To win support, they placed a silk message saying "Chen Sheng will be king" inside a fish, and imitated fox cries at night.[1]</li>
@@ -194,8 +194,8 @@ window.EVENTS.push(
   ],
   next: `
 <ul>
-  <li><strong>The fall of Qin:</strong> other rebels, including Liu Bang and Xiang Yu, followed their example. The Qin dynasty fell in 206 BC.[1]</li>
-  <li><strong>The Han:</strong> Liu Bang, himself of humble origins, founded the Han dynasty in 202 BC.</li>
+  <li><strong>The fall of Qin:</strong> other rebels, including Liu Bang and Xiang Yu, followed their example. The Qin dynasty fell in 206 BCE.[1]</li>
+  <li><strong>The Han:</strong> Liu Bang, himself of humble origins, founded the Han dynasty in 202 BCE.</li>
 </ul>`,
   why: `
 <p>The Dazexiang uprising was the first great peasant revolt in Chinese history, and showed that the people could overthrow an empire.</p>
@@ -237,31 +237,31 @@ window.EVENTS.push(
   id: "redeyebrows",
   title: "The Red Eyebrows",
   place: "Shandong and northern Jiangsu, China",
-  date: "AD 17 – 27",
+  date: "17 CE – 27",
   year: 18, lat: 35.42, lon: 119.46, theme: "earth",
   teaser: "When the Yellow River flooded and Wang Mang's land reforms failed, starving farmers painted their eyebrows red to tell friend from foe. Their rebellion helped bring down an emperor — and was joined by a mother avenging her son.",
   hero: "xinTomb",
   background: `
-<p>In AD 9, the official Wang Mang seized the throne of the Han dynasty and founded his own Xin dynasty.[1]</p>
+<p>In 9 CE, the official Wang Mang seized the throne of the Han dynasty and founded his own Xin dynasty.[1]</p>
 <ul>
   <li>His attempts at land reform and currency changes failed and caused chaos.[1]</li>
-  <li>Around AD 11, the Yellow River changed its course in a catastrophic flood, devastating Shandong and northern Jiangsu.[1]</li>
+  <li>Around 11 CE, the Yellow River changed its course in a catastrophic flood, devastating Shandong and northern Jiangsu.[1]</li>
   <li>People who could no longer survive by farming were driven to rebel.[1]</li>
 </ul>`,
   people: [
-    { n: "Fan Chong", r: "A rebel leader who began his rising in AD 18 and became a leader of the Red Eyebrows." },
+    { n: "Fan Chong", r: "A rebel leader who began his rising in 18 CE and became a leader of the Red Eyebrows." },
     { n: "Mother Lü", r: "A landowner whose son, a minor official, was executed; she sold her property, recruited young men and stormed the county seat to avenge him." },
-    { n: "Wang Mang", r: "Emperor of the Xin dynasty, AD 9–23." },
+    { n: "Wang Mang", r: "Emperor of the Xin dynasty, 9 CE–23." },
     { n: "Liu Xiu (Emperor Guangwu)", r: "Who restored the Han dynasty and accepted the Red Eyebrows' surrender." }
   ],
   happened: `
-<p>In AD 18, Fan Chong began a rising near Mount Tai, gathering about 10,000 men, and allied with other rebel leaders.[1]</p>
+<p>In 18 CE, Fan Chong began a rising near Mount Tai, gathering about 10,000 men, and allied with other rebel leaders.[1]</p>
 <ul>
   <li>Mother Lü, whose son had been executed for a minor offence, raised thousands of poor young men and killed the county magistrate.[1]</li>
   <li>The rebels painted their eyebrows red to distinguish themselves from government troops.[1]</li>
-  <li>Their rebellion, along with others, drained Wang Mang's resources. In AD 23, he was overthrown and killed.[1]</li>
+  <li>Their rebellion, along with others, drained Wang Mang's resources. In 23 CE, he was overthrown and killed.[1]</li>
   <li>The Red Eyebrows later overthrew a new emperor and placed their own teenage Han prince, Liu Penzi, on the throne.[1]</li>
-  <li>Their rule failed, and in AD 27 they surrendered to Liu Xiu, who had founded the Eastern Han dynasty.[1]</li>
+  <li>Their rule failed, and in 27 CE they surrendered to Liu Xiu, who had founded the Eastern Han dynasty.[1]</li>
 </ul>`,
   gallery: [],
   sources: [
@@ -270,8 +270,8 @@ window.EVENTS.push(
   ],
   next: `
 <ul>
-  <li><strong>The Eastern Han:</strong> Liu Xiu ruled as Emperor Guangwu, and the Han dynasty lasted until AD 220.[1]</li>
-  <li><strong>Later revolts:</strong> peasant risings, including the Yellow Turbans of AD 184, continued to shape Chinese history.</li>
+  <li><strong>The Eastern Han:</strong> Liu Xiu ruled as Emperor Guangwu, and the Han dynasty lasted until 220 CE.[1]</li>
+  <li><strong>Later revolts:</strong> peasant risings, including the Yellow Turbans of 184 CE, continued to shape Chinese history.</li>
 </ul>`,
   why: `
 <p>The Red Eyebrows show how environmental disaster and failed reforms could drive ordinary people to rebellion.</p>

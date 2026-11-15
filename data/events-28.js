@@ -281,7 +281,7 @@ window.EVENTS.push(
   <li>By 1919, the Makhnovists controlled much of Katerynoslav province. They held congresses of peasants, workers and insurgents and tried to create "free soviets" — councils without political parties.[1]</li>
   <li>Their army helped defeat the White Army of General Denikin at the Battle of Peregonovka in September 1919, and controlled much of southern and eastern Ukraine.[1]</li>
 </ul>
-<p>The war was brutal. The Makhnovists fought against antisemitic pogroms and executed the warlord Nykyfor Hryhoriv after his troops carried out pogroms. But insurgent units also committed atrocities, including the massacre of Mennonite colonists at Eichenfeld in late 1919, where more than 80 men were killed.</p>
+<p>The war was brutal. The Makhnovists fought against antisemitic pogroms and executed the warlord Nykyfor Hryhoriv after his troops carried out pogroms. But insurgent units also committed atrocities, including the massacre of Mennonite colonists at Eichenfeld in October 1919, where insurgents executed the village's landowners and their adult sons.</p>
 <p>In 1920, the Red Army turned on the Makhnovists. After a brief alliance against the Whites, the Bolsheviks attacked them again and defeated them by August 1921. Makhno fled abroad; many of his followers were killed.[1]</p>`,
   gallery: ["huliaipole"],
   sources: [
@@ -425,12 +425,12 @@ window.EVENTS.push(
   id: "secessio",
   title: "The First Secession of the Plebs",
   place: "The Sacred Mount (Mons Sacer), near Rome",
-  date: "c. 494 BC",
+  date: "c. 494 BCE",
   year: -494, lat: 41.93, lon: 12.53, theme: "vote",
   teaser: "Crushed by debt and denied any say in government, the common people of Rome — who made up most of its army — simply walked out of the city. It was perhaps the world's first general strike.",
   hero: "secessio",
   background: `
-<p>The last king of Rome was expelled around 509 BC, and Rome became a republic.[1]</p>
+<p>The last king of Rome was expelled around 509 BCE, and Rome became a republic.[1]</p>
 <ul>
   <li>Power lay with the patricians, an aristocratic class. Only patricians could be consuls or members of the Senate.[1]</li>
   <li>The plebeians — the common people — were the majority of the population and most of the soldiers in Rome's army.[1]</li>
@@ -445,7 +445,7 @@ window.EVENTS.push(
   happened: `
 <p>The plebeians demanded reform of the debt laws, but the Senate refused.[1] The dispute grew into a wider struggle over plebeian rights.[1]</p>
 <ul>
-  <li>Around 494 BC, the plebeians — including soldiers — left Rome and gathered on the Sacred Mount, a hill outside the city.[1]</li>
+  <li>Around 494 BCE, the plebeians — including soldiers — left Rome and gathered on the Sacred Mount, a hill outside the city.[1]</li>
   <li>Without them, Rome had no army and no workforce.</li>
   <li>According to Livy, the senator Menenius Agrippa persuaded them to return by telling a fable: the parts of the body rebelled against the stomach, which they thought did nothing — but the whole body began to waste away.</li>
 </ul>
@@ -453,12 +453,12 @@ window.EVENTS.push(
   gallery: [],
   sources: [
     ["Wikipedia, 'First secessio plebis', on the background, the debt crisis, Livy's account, the secession and the creation of the tribunes.", "https://en.wikipedia.org/wiki/First_secessio_plebis"],
-    ["Livy, <em>History of Rome</em>, Book 2 (written around 25 BC).", ""],
+    ["Livy, <em>History of Rome</em>, Book 2 (written around 25 BCE).", ""],
     ["T. J. Cornell, <em>The Beginnings of Rome</em> (Routledge, 1995).", ""]
   ],
   next: `
 <ul>
-  <li><strong>The Conflict of the Orders:</strong> the plebeians seceded several more times over the next two centuries, winning written laws (the Twelve Tables), the right to hold the consulship, and in 287 BC the rule that decisions of the plebeian assembly bound all Romans.</li>
+  <li><strong>The Conflict of the Orders:</strong> the plebeians seceded several more times over the next two centuries, winning written laws (the Twelve Tables), the right to hold the consulship, and in 287 BCE the rule that decisions of the plebeian assembly bound all Romans.</li>
   <li><strong>The tribunes:</strong> the office of tribune became a powerful part of the Roman constitution — and was later used by reformers such as the Gracchi brothers.</li>
 </ul>`,
   why: `

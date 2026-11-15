@@ -54,6 +54,16 @@ E.forEach(e => {
   if (e.questions && e.questions.length !== 4) warn(e.id, `has ${e.questions.length} questions (usually 4)`);
   (e.sources || []).forEach(([t, u], i) => { if (u && !/^https?:\/\//.test(u)) err(e.id, `source ${i + 1} has a bad URL`); });
   if (e.checked && !/^\d{4}-\d{2}(-\d{2})?$/.test(e.checked)) warn(e.id, `checked date "${e.checked}" should look like 2026-11-15`);
+  if (e.primary) {
+    const p = e.primary;
+    if (!M[p.media]) err(e.id, `primary source image "${p.media}" is not in any media file`); else usedMedia.add(p.media);
+    ["kind", "made", "about"].forEach(k => { if (!p[k]) err(e.id, `primary source is missing "${k}"`); });
+    if (!Array.isArray(p.questions) || !p.questions.length) err(e.id, "primary source has no questions");
+  }
+  (e.voices || []).forEach((v, i) => {
+    if (!v.q || !v.who) err(e.id, `voice ${i + 1} needs both "q" (the words) and "who"`);
+    if (!v.src || !v.src[0]) warn(e.id, `voice ${i + 1} has no source — say where the words come from`);
+  });
 });
 Object.keys(M).forEach(k => { if (!usedMedia.has(k)) warn("media", `"${k}" is never used`); });
 
@@ -63,7 +73,8 @@ refCheck("moment", W.MOMENTS, m => m.stories.map(s => s.id));
 refCheck("thread", W.THREADS, t => t.steps.map(s => s.id));
 refCheck("pathway", W.PATHWAYS, p => p.steps.map(s => s.id));
 
-console.log(`${E.length} stories, ${Object.keys(M).length} images, ${(W.MOMENTS || []).length} moments, ${(W.THREADS || []).length} threads, ${(W.PATHWAYS || []).length} pathways.`);
+const nP = E.filter(e => e.primary).length, nV = E.filter(e => (e.voices || []).length).length, nC = E.filter(e => e.checked).length;
+console.log(`${E.length} stories (${nP} with a primary source, ${nV} with first-hand voices, ${nC} fact-checked), ${Object.keys(M).length} images, ${(W.MOMENTS || []).length} moments, ${(W.THREADS || []).length} threads, ${(W.PATHWAYS || []).length} pathways.`);
 if (warnings.length) { console.log(`\n${warnings.length} warning(s):`); warnings.forEach(w => console.log("  · " + w)); }
 if (errors.length) { console.log(`\n${errors.length} error(s):`); errors.forEach(w => console.log("  ✗ " + w)); process.exit(1); }
 console.log("\nNo errors.");
