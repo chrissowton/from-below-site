@@ -1,0 +1,21 @@
+/* Media for batch 23: more countries with no stories yet. Wikimedia Commons. */
+Object.assign(window.MEDIA, {
+  finlandMPs1907: { f: "Finland female MPs 1907.jpg", cap: "The nineteen women elected to Finland's parliament in 1907 — the first women MPs in the world.", by: "Unknown photographer", lic: "CC BY 4.0", lu: "https://creativecommons.org/licenses/by/4.0" },
+  miinaSillanpaa: { f: "Miina sillanpaa.jpg", cap: "Miina Sillanpää, a former domestic servant elected in 1907, later Finland's first woman minister.", by: "Unknown photographer", lic: "Public domain" },
+  lucinaHagman: { f: "Lucina Hagman.jpg", cap: "Lucina Hagman, teacher and suffrage campaigner, elected in 1907.", by: "Unknown photographer", lic: "Public domain" },
+  christianiaGate: { f: "Freetown Christiania - main entrance.jpg", cap: "The main entrance to Freetown Christiania, Copenhagen.", by: "Franklin Heijnen", lic: "CC BY-SA 2.0", lu: "https://creativecommons.org/licenses/by-sa/2.0" },
+  christianiaStupa: { f: "Christiania Stupa.jpg", cap: "A stupa built by residents in Christiania.", by: "Till Niermann", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  karlMarxHof: { f: "A Karl-Marx-Hof 72-es lépcsőháza (2022).jpg", cap: "A staircase of the Karl-Marx-Hof, Vienna, one of the council estates defended in February 1934.", by: "Déry-csapat", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  reumannhofPlaque: { f: "Wien05 Margaretengürtel100-110 Reumannhof 2018-11-20 GuentherZ GD 1934 2953.jpg", cap: "A memorial plaque to the February fighting of 1934 at the Reumannhof council estate, Vienna.", by: "GuentherZ", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  timisoaraMemorial: { f: "Memorial to the Romanian Revolution of 1989 in Timișoara.jpg", cap: "The memorial to the revolution of 1989 in Timișoara.", by: "FromMorningToMidnight", lic: "CC0", lu: "https://creativecommons.org/publicdomain/zero/1.0" },
+  bucharestTank: { f: "TAB-71 during Romanian Revolution of 1989.jpg", cap: "An armoured vehicle during the revolution, December 1989.", by: "Oliver M. Gruer-Lavin", lic: "CC BY-SA 2.0", lu: "https://creativecommons.org/licenses/by-sa/2.0" },
+  peshev: { f: "Dimitar Peshev 2.jpg", cap: "Dimitar Peshev in 1937.", by: "Unknown photographer", lic: "Public domain" },
+  peshevMemorial: { f: "Dimitar Peshev Memorial.jpg", cap: "The monument to Dimitar Peshev in his home town of Kyustendil.", by: "Wikimedia user", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  yerevan2018: { f: "Republic Square During the 2018 Armenian protests 02.jpg", cap: "Republic Square, Yerevan, during the protests of April 2018.", by: "Narek75", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  pashinyanMarch: { f: "Nikol Pashinyan-marching on Mashtots.jpg", cap: "Nikol Pashinyan marching on Mashtots Avenue, Yerevan, 2018.", by: "RaffiKojian", lic: "CC0", lu: "https://creativecommons.org/publicdomain/zero/1.0" },
+  limonBananas: { f: "A great banana plantation near Port Limon, Costa Rica, photo from The Encyclopedia of Food by Artemas Ward.jpg", cap: "A banana plantation near Puerto Limón in the early twentieth century.", by: "Artemas Ward", lic: "Public domain" },
+  mamitaYunai: { f: "Fallas -Mamita Yunai -Trabajo, 1941.jpg", cap: "An advertisement for Carlos Luis Fallas's novel Mamita Yunai, in the newspaper Trabajo, 1941.", by: "Unknown artist", lic: "Public domain" },
+  kuwaitAssembly1963: { f: "Kuwait National Assembly in 1963.jpg", cap: "Kuwait's National Assembly in 1963, when only men could vote or stand.", by: "Hassan Hamdy Wahidy", lic: "Public domain" },
+  battlefieldPark: { f: "Battlefield Park - October 2023 - Sarah Stierch 05.jpg", cap: "Battlefield Park, Belize City, where Antonio Soberanis held his mass meetings.", by: "Sarah Stierch", lic: "CC BY 4.0", lu: "https://creativecommons.org/licenses/by/4.0" },
+  andreRenard: { f: "Kop van Andre Renard , leider socialisten in Luik, Bestanddeelnr 911-9624.jpg", cap: "André Renard, the Liège trade union leader who led the strike in Wallonia.", by: "Anefo", lic: "CC0", lu: "https://creativecommons.org/publicdomain/zero/1.0" }
+});

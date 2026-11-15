@@ -1,0 +1,26 @@
+/* Media for batch 22: more countries with no stories yet. Wikimedia Commons. */
+Object.assign(window.MEDIA, {
+  kampalaCentre: { f: "Kampala City Centre.jpg", cap: "Central Kampala, where the Walk to Work protests began in April 2011.", by: "Shakkimatti", lic: "CC0", lu: "https://creativecommons.org/publicdomain/zero/1.0" },
+  besigye: { f: "Besigye cropped.jpg", cap: "A campaign poster for Kizza Besigye.", by: "dispatch_ug", lic: "CC BY 2.0", lu: "https://creativecommons.org/licenses/by/2.0" },
+  dhagaxtuur: { f: "DHAGAXTUUR MONUMENT MOGADISHU SOMALIA.jpg", cap: "The Dhagaxtuur ('stone thrower') monument in Mogadishu, honouring those who rose against colonial rule in 1948.", by: "Naimaisse", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  sylFounders: { f: "SYL.jpg", cap: "The flag and founders of the Somali Youth League.", by: "Rev. Filsan", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  lomeMarket: { f: "Grand marché de Lomé.jpg", cap: "The Grand Marché of Lomé, still run largely by women traders.", by: "twohundred", lic: "CC BY-SA 2.0", lu: "https://creativecommons.org/licenses/by-sa/2.0" },
+  pidjiguitiMemorial: { f: "Memorial do Massacre de Pidjiguiti, Bissau.jpg", cap: "The memorial to the victims of the Pidjiguiti massacre, Bissau.", by: "Jcornelius", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  pidjiguitiQuay: { f: "DC - CP - Bissau - Caes do Pigiguiti.jpg", cap: "The Pidjiguiti quay at Bissau on a colonial-era postcard.", by: "Unknown photographer", lic: "Public domain" },
+  amman2018: { f: "Jordan Protests, June 2018 - 17.jpg", cap: "Protesters in Amman, June 2018.", by: "Ali Saadi", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  minskStela: { f: "Protest actions in Minsk (Belarus) near Stella, August 16.jpg", cap: "The huge demonstration at the Minsk Hero City obelisk, 16 August 2020.", by: "Максим Шикунец", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  minskProtest: { f: "Protests in Minsk, Belarus (50391832532).jpg", cap: "Protesters in Minsk with the white-red-white flag, 2020.", by: "Jana Shnipelson", lic: "CC0", lu: "https://creativecommons.org/publicdomain/zero/1.0" },
+  kalesnikava: { f: "Maria Kalesnikava cropped.jpg", cap: "Maria Kalesnikava.", by: "RedRoseEquality", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  dokwerker: { f: "De Dokwerker.jpg", cap: "De Dokwerker (The Dock Worker), the memorial to the February Strike on Jonas Daniël Meijerplein, Amsterdam.", by: "S Sepp", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  febStrikePhoto: { f: "Februaristaking Raamplein Amsterdam 25 februari 1941.jpg", cap: "Strikers gather at the Raamplein, Amsterdam, 25 February 1941 — one of very few photographs of the strike.", by: "Keimpe Sikkema", lic: "Public domain" },
+  febStrikePamphlet: { f: "Pamflet Februaristaking 1941.jpg", cap: "The pamphlet calling the strike: 'Strike! Strike! Strike!'", by: "Lou Jansen", lic: "Public domain" },
+  adalenMarch: { f: "1led0513adalen.jpg", cap: "The march at Lunde, Ådalen, 14 May 1931, photographed moments before the troops opened fire.", by: "Sten Sjöberg / IBL", lic: "Public domain" },
+  adalenStockholm: { f: "Adalen-demo-stockholm.jpg", cap: "A demonstration in Stockholm after the Ådalen shootings, 1931.", by: "Unknown photographer", lic: "Public domain" },
+  mirabalSisters: { f: "Hermanas Mirabal.jpg", cap: "Patria, Minerva and María Teresa Mirabal.", by: "Unknown photographer", lic: "Public domain" },
+  mirabalBusts: { f: "Casa Museo Hermanas Mirabal bustos.jpg", cap: "Busts of the Mirabal sisters and Manolo Tavárez Justo at the Mirabal Sisters House-Museum.", by: "Ernesto Rodgar", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  mirabalMausoleum: { f: "Mirabal mausoleum.jpg", cap: "The mausoleum of the Mirabal sisters at the House-Museum near Salcedo.", by: "The Singularity", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  monument1763: { f: "1763 Monument, Georgetown, Guyana. 2014.jpg", cap: "The 1763 Monument to Cuffy (Kofi) in Georgetown, Guyana.", by: "David Stanley", lic: "CC BY 2.0", lu: "https://creativecommons.org/licenses/by/2.0" },
+  malaita: { f: "Paysage de Malaita 19-d.lau-F0364.D0325.jpg", cap: "The west coast of Malaita, Solomon Islands, heartland of Maasina Ruru.", by: "Pierre Maranda", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  frauenstreikZurich: { f: "Frauenstreik Zurich 2019 01.jpg", cap: "The second Swiss women's strike in Zürich, 14 June 2019 — on the anniversary of the 1991 strike.", by: "Fael041", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  greveFemmes: { f: "Grève des femmes - 14 juin 2019.jpg", cap: "Crowds and placards at the women's strike, 14 June 2019.", by: "Gustave Deghilage", lic: "CC BY-SA 2.0", lu: "https://creativecommons.org/licenses/by-sa/2.0" }
+});
