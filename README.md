@@ -25,7 +25,7 @@ Each story has its own link, e.g. `…/#peterloo`, `…/#selma`, `…/#credits`.
 
 ## Adding a new event
 
-Add an object to one of the files in `data/` (or create a new `data/events-34.js` and add a `<script>` tag for it in `index.html`). New images go in `data/media-17.js` (or a new media file). Copy an existing event as a template. Fields:
+Add an object to one of the files in `data/` (or create a new `data/events-38.js` and add a `<script>` tag for it in `index.html`). New images go in `data/media-19.js` (or a new media file). Copy an existing event as a template. Fields:
 
 | Field | What it is |
 |---|---|
