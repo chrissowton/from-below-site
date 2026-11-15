@@ -72,13 +72,29 @@
     housing: '<path d="M3 11.5L12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5.5h4V20"/>',
     peace: '<circle cx="12" cy="12" r="9"/><path d="M12 3v18M12 12l-6.4 6.4M12 12l6.4 6.4"/>'
   };
+  /* one colour per theme: background (bg) and icon (fg) */
+  const COLOURS = {
+    labour: ["#D32F2F", "#fff"], vote: ["#7B1FA2", "#fff"], freedom: ["#EF6C00", "#fff"], civil: ["#212121", "#fff"],
+    queer: ["rainbow", "#111"], earth: ["#2E7D32", "#fff"], rights: ["#00838F", "#fff"], language: ["#D81B60", "#fff"],
+    thought: ["#F9A825", "#111"], disability: ["#1565C0", "#fff"], housing: ["#795548", "#fff"], peace: ["#81D4FA", "#0D2B45"]
+  };
+  const RAINBOW = ["#E40303", "#FF8C00", "#FFED00", "#008026", "#24408E", "#732982"];
+  const rainbowCss = `linear-gradient(180deg,${RAINBOW.map((c, i) => `${c} ${(i * 100 / 6).toFixed(2)}% ${((i + 1) * 100 / 6).toFixed(2)}%`).join(",")})`;
+  (function themeCss() {
+    const st = document.createElement("style");
+    st.textContent = Object.entries(COLOURS).map(([t, [bgc, fg]]) => bgc === "rainbow"
+      ? `.t-${t}{--tc:url(#rainbow);--tbg:${rainbowCss};--tsolid:#732982;--tg:${fg}}`
+      : `.t-${t}{--tc:${bgc};--tbg:${bgc};--tsolid:${bgc};--tg:${fg}}`).join("\n");
+    document.head.appendChild(st);
+  })();
   (function sprite() {
     const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     s.setAttribute("aria-hidden", "true"); s.style.cssText = "position:absolute;width:0;height:0;overflow:hidden";
-    s.innerHTML = Object.entries(ICONS).map(([k, p]) => `<symbol id="ic-${k}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</symbol>`).join("");
+    s.innerHTML = `<defs><linearGradient id="rainbow" x1="0" y1="0" x2="0" y2="1">${RAINBOW.map((c, i) => `<stop offset="${i / 6}" stop-color="${c}"/><stop offset="${(i + 1) / 6}" stop-color="${c}"/>`).join("")}</linearGradient></defs>` + Object.entries(ICONS).map(([k, p]) => `<symbol id="ic-${k}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</symbol>`).join("");
     document.body.prepend(s);
   })();
   const icon = (t, cls = "ic") => `<svg class="${cls}" aria-hidden="true"><use href="#ic-${t}"/></svg>`;
+  const badge = t => `<span class="badge t-${t}">${icon(t)}</span>`;
 
   /* ---------- countries (point-in-polygon, with fallback to the place name) ---------- */
   const W = 960, H = 470;
@@ -105,8 +121,34 @@
 
   /* ---------- filter state ---------- */
   const active = new Set(Object.keys(THEMES));
-  const state = { y0: -Infinity, y1: Infinity, country: null };
-  const visible = e => active.has(e.theme) && e.year >= state.y0 && e.year <= state.y1 && (!state.country || e.country === state.country);
+  const state = { y0: -Infinity, y1: Infinity, country: null, hits: null };
+  const visible = e => active.has(e.theme) && e.year >= state.y0 && e.year <= state.y1 && (!state.country || e.country === state.country) && (!state.hits || state.hits.has(e.id));
+
+  /* ---------- search: key content words only ---------- */
+  const STOP = new Set(("a an and the of in on at to for from by with without is are was were be been as it its this that these those or nor but not no into onto over under about after before during " +
+    "their his her hers they them he she we our you your i me my who whom what when where why how which there here than then so such also very can could would should will did do does done has have had " +
+    "all any some more most other one two story stories history about against between").split(" "));
+  const norm = s => String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const strip = h => String(h || "").replace(/<[^>]+>/g, " ").replace(/&[a-z]+;/g, " ");
+  const words = s => norm(s).match(/[a-z0-9]+/g) || [];
+  EVENTS.forEach(e => {
+    e._key = words([e.title, e.place, e.country, e.date, THEMES[e.theme], e.teaser, (e.people || []).map(p => p.n).join(" ")].join(" "));
+    e._body = null;                                   // full text, built only if needed
+  });
+  const bodyWords = e => e._body || (e._body = words(strip([e.background, e.happened, e.next, e.debates, e.memory, (e.people || []).map(p => p.r).join(" ")].join(" "))));
+  const terms = q => words(q).filter(t => !STOP.has(t) && (t.length > 1 || /\d/.test(t)));
+  const hasTerm = (list, t) => /^\d{3,4}$/.test(t) ? list.includes(t) : list.some(w => w.startsWith(t) || (t.length > 4 && w.startsWith(t.replace(/(es|s)$/, ""))));
+  let searchMode = "";
+  function runSearch(q) {
+    const ts = terms(q);
+    if (!ts.length) { state.hits = null; searchMode = ""; return ts; }
+    const yearHit = (e, t) => /^\d{3,4}$/.test(t) && String(e.year) === t;
+    let hits = EVENTS.filter(e => ts.every(t => yearHit(e, t) || hasTerm(e._key, t)));
+    searchMode = "key";
+    if (!hits.length) { hits = EVENTS.filter(e => ts.every(t => yearHit(e, t) || hasTerm(e._key, t) || hasTerm(bodyWords(e), t))); searchMode = "body"; }
+    state.hits = new Set(hits.map(e => e.id));
+    return ts;
+  }
 
   /* ---------- map ---------- */
   const svg = d3.select("#map");
@@ -121,7 +163,7 @@
   const pins = g.append("g").selectAll("g").data(EVENTS).join("g")
     .attr("class", d => "pin t-" + d.theme).attr("tabindex", 0).attr("role", "link")
     .attr("aria-label", d => `${d.title}, ${d.place}, ${d.date}`);
-  pins.append("circle").attr("class", "ring").attr("r", 15);
+  pins.append("circle").attr("class", "ring").attr("r", 15.5);
   pins.append("circle").attr("class", "dot").attr("r", 11);
   pins.append("use").attr("href", d => "#ic-" + d.theme).attr("x", -7).attr("y", -7).attr("width", 14).attr("height", 14).attr("class", "glyph");
 
@@ -189,18 +231,18 @@
   d3.select("#zreset").on("click", () => svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity));
 
   const tip = document.getElementById("tip"), box = document.getElementById("mapbox");
-  const tipHtml = d => `<div class="tip-img" style="${bg(d.hero, 600)}"></div><div class="tip-body"><div class="t-meta">${icon(d.theme)}${yr(d.year)} · ${THEMES[d.theme]}</div><h3>${esc(d.title)}</h3><p>${esc(d.teaser)}</p><div class="go">Read the full story →</div></div>`;
+  const tipHtml = d => `<div class="tip-img" style="${bg(d.hero, 600)}"></div><div class="tip-body"><div class="t-meta">${badge(d.theme)}${yr(d.year)} · ${THEMES[d.theme]}</div><h3>${esc(d.title)}</h3><p>${esc(d.teaser)}</p><div class="go">Read the full story →</div></div>`;
   function placeTip(t, host, el) {
     const b = host.getBoundingClientRect(), r = el.getBoundingClientRect();
-    let x = r.left - b.left + r.width / 2 + 18;
-    if (x + 310 > b.width) x = r.left - b.left - 318;
+    let x = r.right - b.left + 22;                       // keep a clear gap from the icon
+    if (x + 310 > b.width) x = r.left - b.left - 322;
     t.classList.add("show");
     const h = t.offsetHeight;
     t.style.left = Math.max(10, x) + "px"; t.style.top = Math.max(10, Math.min(r.top - b.top - h / 2, b.height - h - 10)) + "px";
   }
   function showTip(d, el) { tip.innerHTML = tipHtml(d); placeTip(tip, box, el); pins.classed("on", p => p === d); }
   function showClusterTip(d, el) {
-    tip.innerHTML = `<div class="tip-body"><div class="t-meta">${d.items.length} stories here</div><h3>Click to zoom in</h3><p class="list">${d.items.slice().sort((a, b) => a.year - b.year).map(o => `${icon(o.theme)}${yr(o.year)} · ${esc(o.title)}`).join("<br>")}</p></div>`;
+    tip.innerHTML = `<div class="tip-body"><div class="t-meta">${d.items.length} stories here</div><h3>Click to zoom in</h3><p class="list">${d.items.slice().sort((a, b) => a.year - b.year).map(o => `${badge(o.theme)}${yr(o.year)} · ${esc(o.title)}`).join("<br>")}</p></div>`;
     placeTip(tip, box, el);
   }
   function hideTip() { tip.classList.remove("show"); pins.classed("on", false); }
@@ -217,7 +259,7 @@
   Object.entries(THEMES).forEach(([key, label]) => {
     const n = EVENTS.filter(e => e.theme === key).length;
     const b = document.createElement("button");
-    b.className = "chip"; b.innerHTML = `${icon(key)}${label}<span class="n">${n}</span>`;
+    b.className = "chip"; b.innerHTML = `${badge(key)}${label}<span class="n">${n}</span>`;
     b.onclick = () => {
       const all = active.size === Object.keys(THEMES).length;
       if (all) { active.clear(); active.add(key); }
@@ -276,45 +318,41 @@
   EVENTS.forEach(e => {
     const c = document.createElement("button");
     c.className = "card"; c.dataset.id = e.id;
-    c.innerHTML = `<div class="c-img" style="${bg(e.hero, 600)}"><span class="c-yr">${yr(e.year)}</span><span class="c-ic">${icon(e.theme)}</span></div>
-      <div class="c-body"><span class="c-theme">${THEMES[e.theme]}</span><h3>${esc(e.title)}</h3><span class="c-pl">${esc(e.place)}</span><p>${esc(e.teaser)}</p></div>`;
+    c.innerHTML = `<div class="c-img" style="${bg(e.hero, 600)}"><span class="c-yr">${yr(e.year)}</span><span class="c-ic t-${e.theme}">${icon(e.theme)}</span></div>
+      <div class="c-body"><span class="c-theme t-${e.theme}">${THEMES[e.theme]}</span><h3>${esc(e.title)}</h3><span class="c-pl">${esc(e.place)}</span><p>${esc(e.teaser)}</p></div>`;
     c.onclick = () => go(e.id);
     c.onmouseenter = () => pins.classed("on", p => p === e);
     c.onmouseleave = () => pins.classed("on", false);
     cardsEl.appendChild(c);
   });
 
-  /* ---------- timeline ---------- */
-  const tl = document.getElementById("timeline"), tlTip = document.getElementById("tl-tip");
+  /* ---------- timeline: a period overview you can drag across, plus a vertical list ---------- */
+  const ov = document.getElementById("tl-overview"), vtl = document.getElementById("vtl");
   const BRK = [-1200, 0, 1500, 1800, 1900, 1950, 2000, 2027], FR = [0, .06, .13, .2, .34, .56, .87, 1];
-  const TICKS = [-1000, 0, 1000, 1500, 1700, 1800, 1850, 1900, 1920, 1940, 1960, 1980, 2000, 2020];
-  let tlX = null, brush = null, brushG = null, tlSvg = null;
-  function drawTimeline() {
-    const cw = tl.clientWidth; if (!cw) return;
-    const w = Math.max(cw, 980);           // on small screens the timeline scrolls sideways
-    const m = { l: 14, r: 14 }, iw = w - m.l - m.r, R = 8, gap = R * 2 + 2;
-    tlX = d3.scaleLinear().domain(BRK).range(FR.map(f => m.l + f * iw)).clamp(true);
-    // stack icons into rows so none overlap
-    const rows = [];
-    EVENTS.forEach(e => {
-      const x = tlX(e.year); let r = 0;
-      while (rows[r] !== undefined && rows[r] > x - gap) r++;
-      rows[r] = x; e.tx = x; e.trow = r;
-    });
-    const nRows = rows.length, axisY = 18 + nRows * gap + 6, h = axisY + 34;
-    tl.innerHTML = "";
-    tlSvg = d3.select(tl).append("svg").attr("width", w).attr("height", h).attr("role", "group").attr("aria-label", "Timeline of stories");
-    tlSvg.append("rect").attr("class", "tl-band").attr("x", m.l).attr("y", axisY - 1).attr("width", iw).attr("height", 2);
-    const ticks = TICKS.filter(t => t >= BRK[0]);
-    const tg = tlSvg.append("g").selectAll("g").data(ticks).join("g").attr("transform", t => `translate(${tlX(t)},${axisY})`);
-    tg.append("line").attr("class", "tl-tick").attr("y1", -4).attr("y2", 5);
-    tg.append("text").attr("class", "tl-lab").attr("y", 19).text(t => t < 0 ? `${-t} BC` : t === 0 ? "AD 1" : t)
-      .style("display", (t, i) => (i > 0 && tlX(t) - tlX(ticks[i - 1]) < 34) ? "none" : null);
-    // breaks in scale
-    tlSvg.append("g").selectAll("path").data([0, 1500, 1800]).join("path").attr("class", "tl-brk")
-      .attr("d", t => { const x = tlX(t) + 6; return `M${x - 3},${axisY + 4}l3,-8M${x + 1},${axisY + 4}l3,-8`; });
-    brushG = tlSvg.append("g").attr("class", "tl-brush");
-    brush = d3.brushX().extent([[m.l, 4], [m.l + iw, axisY + 30]])
+  const TICKS = [1500, 1800, 1900, 1950, 2000];
+  let tlX = null, brush = null, brushG = null, ovSvg = null;
+  function drawOverview() {
+    const w = ov.clientWidth; if (!w) return;
+    const m = 4, iw = w - 2 * m, H0 = 64, base = H0 - 18;
+    tlX = d3.scaleLinear().domain(BRK).range(FR.map(f => m + f * iw)).clamp(true);
+    const nb = Math.max(30, Math.floor(iw / 6)), bw = iw / nb;
+    ov.innerHTML = "";
+    ovSvg = d3.select(ov).append("svg").attr("width", w).attr("height", H0).attr("role", "img").attr("aria-label", "Number of stories over time — drag across to choose a period");
+    // stacked, coloured columns: one small square per story, by theme
+    const bins = Array.from({ length: nb }, () => []);
+    EVENTS.forEach(e => { const i = Math.min(nb - 1, Math.max(0, Math.floor((tlX(e.year) - m) / bw))); bins[i].push(e); });
+    const maxN = d3.max(bins, b => b.length) || 1, unit = Math.min(4, (base - 4) / maxN);
+    const order = Object.keys(THEMES);
+    bins.forEach((b, i) => b.sort((p, q) => order.indexOf(p.theme) - order.indexOf(q.theme)).forEach((e, j) => { e.bx = m + i * bw; e.by = base - (j + 1) * unit; }));
+    ovSvg.append("g").selectAll("rect").data(EVENTS).join("rect")
+      .attr("class", d => "ov-sq t-" + d.theme).attr("x", d => d.bx + .5).attr("y", d => d.by).attr("width", Math.max(1, bw - 1)).attr("height", Math.max(.6, unit - .3));
+    ovSvg.append("rect").attr("class", "tl-band").attr("x", m).attr("y", base).attr("width", iw).attr("height", 1.5);
+    const tg = ovSvg.append("g").selectAll("g").data(TICKS).join("g").attr("transform", t => `translate(${tlX(t)},${base})`);
+    tg.append("line").attr("class", "tl-tick").attr("y2", 4);
+    tg.append("text").attr("class", "tl-lab").attr("y", 15).text(t => t < 0 ? `${-t} BC` : t)
+      .style("display", (t, i) => (i > 0 && tlX(t) - tlX(TICKS[i - 1]) < 30) ? "none" : null);
+    brushG = ovSvg.append("g").attr("class", "tl-brush");
+    brush = d3.brushX().extent([[m, 0], [m + iw, H0]])
       .on("brush end", ev => {
         if (!ev.sourceEvent) return;
         if (!ev.selection) { state.y0 = -Infinity; state.y1 = Infinity; }
@@ -323,27 +361,110 @@
       });
     brushG.call(brush);
     if (isFinite(state.y0)) brushG.call(brush.move, [tlX(state.y0), tlX(state.y1)]);
-    const ig = tlSvg.append("g").selectAll("g").data(EVENTS).join("g")
-      .attr("class", d => "tl-ev t-" + d.theme).attr("tabindex", 0).attr("role", "link")
-      .attr("aria-label", d => `${yr(d.year)}: ${d.title}`)
-      .attr("transform", d => `translate(${d.tx},${axisY - 10 - d.trow * gap - R})`);
-    ig.append("circle").attr("r", R);
-    ig.append("use").attr("href", d => "#ic-" + d.theme).attr("x", -R * .62).attr("y", -R * .62).attr("width", R * 1.24).attr("height", R * 1.24);
-    ig.on("mouseenter focus", function (ev, d) {
-      tlTip.innerHTML = tipHtml(d); placeTip(tlTip, tl.parentNode, this); pins.classed("on", p => p === d);
-    }).on("mouseleave blur", () => { tlTip.classList.remove("show"); pins.classed("on", false); })
-      .on("click", (ev, d) => go(d.id))
-      .on("keydown", (ev, d) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); go(d.id); } });
-    paintTimeline();
-    if (w > cw && !tl.dataset.scrolled) { tl.scrollLeft = w - cw; tl.dataset.scrolled = 1; }
+    paintOverview();
   }
-  function paintTimeline() { if (tlSvg) tlSvg.selectAll(".tl-ev").classed("off", d => !visible(d)); }
-  document.getElementById("tl-reset").onclick = () => { state.y0 = -Infinity; state.y1 = Infinity; if (brushG) brushG.call(brush.move, null); refresh(); };
+  function paintOverview() { if (ovSvg) ovSvg.selectAll(".ov-sq").classed("off", d => !visible(d)); }
+
+  // vertical list, grouped by period
+  const ERAS = [[-9999, 999, "Before 1000"], [1000, 1499, "1000–1499"], [1500, 1699, "1500–1699"], [1700, 1799, "1700s"], [1800, 1849, "1800–1849"], [1850, 1899, "1850–1899"],
+    [1900, 1919, "1900–1919"], [1920, 1945, "1920–1945"], [1946, 1969, "1946–1969"], [1970, 1989, "1970–1989"], [1990, 2009, "1990–2009"], [2010, 9999, "Since 2010"]];
+  const eraEls = [];
+  ERAS.forEach(([a, z, label]) => {
+    const evs = EVENTS.filter(e => e.year >= a && e.year <= z); if (!evs.length) return;
+    const li = document.createElement("li"); li.className = "vt-era";
+    li.innerHTML = `<h3><span>${label}</span><small></small></h3><ol>${evs.map(e => `<li class="vt-ev t-${e.theme}" data-id="${e.id}"><button type="button"><span class="vt-yr notranslate">${yr(e.year)}</span><span class="vt-dot">${icon(e.theme)}</span><span class="vt-tt"><b>${esc(e.title)}</b><small>${esc(e.country)}</small></span></button></li>`).join("")}</ol>`;
+    vtl.appendChild(li); eraEls.push(li);
+  });
+  vtl.querySelectorAll(".vt-ev").forEach(li => {
+    const e = byId[li.dataset.id], btn = li.firstElementChild;
+    btn.onclick = () => go(e.id);
+    btn.onmouseenter = btn.onfocus = () => pins.classed("on", p => p === e);
+    btn.onmouseleave = btn.onblur = () => pins.classed("on", false);
+    btn.title = e.teaser;
+  });
+  function paintTimeline() {
+    paintOverview();
+    eraEls.forEach(era => {
+      let n = 0;
+      era.querySelectorAll(".vt-ev").forEach(li => { const v = visible(byId[li.dataset.id]); li.hidden = !v; if (v) n++; });
+      era.hidden = !n; era.querySelector("small").textContent = n === 1 ? "1 story" : `${n} stories`;
+    });
+  }
+  function clearPeriod() { state.y0 = -Infinity; state.y1 = Infinity; if (brushG) brushG.call(brush.move, null); }
+  document.getElementById("tl-reset").onclick = () => { clearPeriod(); refresh(); };
   document.querySelectorAll("[data-era]").forEach(b => b.onclick = () => {
     const [a, z] = b.dataset.era.split(",").map(Number); state.y0 = a; state.y1 = z;
-    if (brushG) brushG.call(brush.move, [tlX(a), tlX(z)]); refresh(true);
+    if (brushG) brushG.call(brush.move, [tlX(a), tlX(z)]); refresh(true); vtl.scrollTop = 0;
   });
-  let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(drawTimeline, 150); });
+  let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(drawOverview, 150); });
+
+  /* ---------- search box and reset ---------- */
+  const qIn = document.getElementById("q"), qInfo = document.getElementById("searchinfo");
+  let qt;
+  function doSearch() {
+    const ts = runSearch(qIn.value);
+    refresh();
+    if (!qIn.value.trim()) { qInfo.hidden = true; return; }
+    const n = state.hits ? state.hits.size : 0;
+    qInfo.hidden = false;
+    qInfo.innerHTML = !ts.length ? `Type a key word — such as a place, a person, a cause or a year.`
+      : !n ? `No stories found for <b>${esc(ts.join(" "))}</b>. Try a shorter or different word.`
+      : `${n} ${n === 1 ? "story matches" : "stories match"} <b>${esc(ts.join(" "))}</b>${searchMode === "body" ? " (mentioned in the full text)" : ""}. <button type="button" class="linkbtn" id="q-clear">Clear search</button>`;
+    const c = document.getElementById("q-clear"); if (c) c.onclick = () => { qIn.value = ""; doSearch(); qIn.focus(); };
+  }
+  qIn.addEventListener("input", () => { clearTimeout(qt); qt = setTimeout(doSearch, 180); });
+  qIn.addEventListener("keydown", ev => { if (ev.key === "Enter") { clearTimeout(qt); doSearch(); document.getElementById("stories").scrollIntoView({ behavior: "smooth" }); } });
+  document.getElementById("resetall").onclick = () => {
+    qIn.value = ""; runSearch(""); qInfo.hidden = true;
+    Object.keys(THEMES).forEach(t => active.add(t));
+    clearPeriod();
+    vtl.scrollTop = 0;
+    setCountry("");                                    // also zooms the map back out and refreshes
+  };
+
+  /* ---------- back to top ---------- */
+  const toTop = document.getElementById("totop");
+  function topCheck() { const y = view.classList.contains("open") ? view.scrollTop : window.scrollY; toTop.hidden = y < 600; }
+  window.addEventListener("scroll", topCheck, { passive: true });
+  toTop.onclick = () => { if (view.classList.contains("open")) view.scrollTo({ top: 0, behavior: "smooth" }); else window.scrollTo({ top: 0, behavior: "smooth" }); };
+
+  /* ---------- Google Translate ---------- */
+  const LANGS = [["en", "English"], ["ar", "العربية (Arabic)"], ["bn", "বাংলা (Bengali)"], ["zh-CN", "中文 (Chinese)"], ["cy", "Cymraeg (Welsh)"], ["de", "Deutsch (German)"], ["es", "Español (Spanish)"],
+    ["fa", "فارسی (Persian)"], ["fr", "Français (French)"], ["ga", "Gaeilge (Irish)"], ["hi", "हिन्दी (Hindi)"], ["id", "Bahasa Indonesia"], ["it", "Italiano (Italian)"], ["ja", "日本語 (Japanese)"],
+    ["ko", "한국어 (Korean)"], ["nl", "Nederlands (Dutch)"], ["pa", "ਪੰਜਾਬੀ (Punjabi)"], ["pl", "Polski (Polish)"], ["pt", "Português (Portuguese)"], ["ro", "Română (Romanian)"],
+    ["ru", "Русский (Russian)"], ["so", "Soomaali (Somali)"], ["sw", "Kiswahili (Swahili)"], ["ta", "தமிழ் (Tamil)"], ["tl", "Filipino"], ["tr", "Türkçe (Turkish)"], ["uk", "Українська (Ukrainian)"],
+    ["ur", "اردو (Urdu)"], ["vi", "Tiếng Việt (Vietnamese)"], ["yo", "Yorùbá (Yoruba)"], ["zu", "isiZulu (Zulu)"]];
+  const langSel = document.getElementById("lang");
+  langSel.innerHTML = LANGS.map(([c, n]) => `<option value="${c}">${n}</option>`).join("");
+  const curLang = (document.cookie.match(/googtrans=\/[^/]*\/([^;]+)/) || [])[1];
+  if (curLang) langSel.value = curLang;
+  function setCookie(v) {
+    const exp = v ? "" : ";expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = `googtrans=${v}${exp};path=/`;
+    const host = location.hostname; if (host.includes(".")) document.cookie = `googtrans=${v}${exp};path=/;domain=.${host.split(".").slice(-2).join(".")}`;
+  }
+  langSel.onchange = () => {
+    const code = langSel.value;
+    if (code === "en") { setCookie(""); location.reload(); return; }
+    setCookie(`/en/${code}`);
+    const combo = document.querySelector("#gt select.goog-te-combo");
+    if (combo) { combo.value = code; combo.dispatchEvent(new Event("change")); document.documentElement.dir = ["ar", "fa", "ur"].includes(code) ? "rtl" : "ltr"; return; }
+    if (window.google && google.translate) { location.reload(); return; }   // loaded but not ready: the cookie applies it on reload
+    // the translator could not load (e.g. blocked by the page host): offer Google Translate's own page instead
+    setCookie("");
+    const name = langSel.options[langSel.selectedIndex].text;
+    const url = `https://translate.google.com/translate?sl=en&tl=${encodeURIComponent(code)}&u=${encodeURIComponent(location.href.split("#")[0])}`;
+    toast(`Google Translate could not load on this page. <a href="${url}" target="_blank" rel="noopener">Open the site in ${esc(name)} with Google Translate ↗</a>`);
+    langSel.value = "en";
+  };
+  function toast(html) {
+    let t = document.getElementById("toast");
+    if (!t) { t = document.createElement("div"); t.id = "toast"; t.className = "toast notranslate"; t.setAttribute("role", "status"); document.body.appendChild(t); }
+    t.innerHTML = html + ` <button type="button" aria-label="Close">✕</button>`;
+    t.querySelector("button").onclick = () => t.classList.remove("show");
+    t.classList.add("show");
+  }
+  if (curLang && ["ar", "fa", "ur"].includes(curLang)) document.documentElement.dir = "rtl";
 
   /* ---------- refresh everything ---------- */
   function refresh(final = true) {
@@ -354,13 +475,15 @@
     const vis = EVENTS.filter(visible), n = vis.length;
     const range = isFinite(state.y0) ? `${yr(Math.max(state.y0, EVENTS[0].year))} – ${yr(Math.min(state.y1, EVENTS[EVENTS.length - 1].year))}` : `${yr(EVENTS[0].year)} – ${yr(EVENTS[EVENTS.length - 1].year)}`;
     document.getElementById("count").textContent = `${n} of ${EVENTS.length} stories · ${range}${state.country ? " · " + state.country : ""}`;
-    document.getElementById("tl-range").textContent = isFinite(state.y0) ? `Showing ${range}` : "Drag across the timeline to choose a period";
+    document.getElementById("tl-range").textContent = isFinite(state.y0) ? `Showing ${range}` : "Drag across the bars to choose a period";
     document.getElementById("tl-reset").hidden = !isFinite(state.y0);
     const empty = document.getElementById("empty"); if (empty) empty.hidden = n > 0;
+    const filtered = !all || isFinite(state.y0) || state.country || state.hits;
+    document.getElementById("resetall").classList.toggle("lit", !!filtered);
     paintTimeline();
     layout();
   }
-  drawTimeline();
+  drawOverview();
   refresh();
 
   /* ---------- story view ---------- */
@@ -431,7 +554,7 @@
     vc.querySelectorAll(".chapter").forEach(s => { if (s.getBoundingClientRect().top < 200) cur = s.id.slice(3); });
     vc.querySelectorAll(".toc a").forEach(a => a.classList.toggle("cur", a.dataset.ch === cur));
   }
-  view.addEventListener("scroll", spy, { passive: true });
+  view.addEventListener("scroll", () => { spy(); topCheck(); }, { passive: true });
 
   function renderCredits() {
     const used = {};
@@ -465,12 +588,12 @@
     if (byId[id]) { renderStory(byId[id]); open(); }
     else if (id === "credits") { renderCredits(); open(); }
     else {
-      view.classList.remove("open"); document.body.style.overflow = ""; current = null;
+      view.classList.remove("open"); document.body.style.overflow = ""; current = null; topCheck();
       document.title = "From Below — an atlas of radical history";
       if (id === "about" || id === "stories") { const el = document.getElementById(id); if (el) el.scrollIntoView(); }
     }
   }
-  function open() { view.classList.add("open"); document.body.style.overflow = "hidden"; hideTip(); setTimeout(() => document.getElementById("v-close").focus({ preventScroll: true }), 60); }
+  function open() { toTop.hidden = true; view.classList.add("open"); document.body.style.overflow = "hidden"; hideTip(); setTimeout(() => document.getElementById("v-close").focus({ preventScroll: true }), 60); }
   window.addEventListener("hashchange", route);
   document.getElementById("v-close").onclick = home;
   document.getElementById("v-home").onclick = home;

@@ -15,6 +15,11 @@
 <header class="topbar"><div class="wrap">
   <a class="logo" href="#"><i></i>From Below</a>
   <nav><a href="#stories">Stories</a><a href="#about">About</a><a href="#credits">Credits</a></nav>
+  <label class="lang notranslate" title="Translate this site with Google Translate">
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+    <span class="sr">Language</span>
+    <select id="lang" aria-label="Translate this site"></select>
+  </label>
 </div></header>
 
 <section class="hero"><div class="wrap">
@@ -22,15 +27,21 @@
   <h1>History,<span>from below.</span></h1>
   <div class="hero-grid">
     <p class="lede">The great changes in history are usually credited to kings, presidents and parliaments. This atlas tells the stories of the weavers, strikers, mothers, students and farm labourers who actually made them happen — and of what it cost them.</p>
-    <p class="howto">Each symbol on the map stands for a theme. Hover over one for a summary, or click to read the full story. Filter by theme, country or period. Every story follows the same structure: every account of what happened is fully referenced, and every story sets out the debates and other points of view.</p>
+    <p class="howto">Each coloured symbol on the map stands for a theme. Hover over one for a summary, or click to read the full story. Search for a word, or filter by theme, country or period — and press <b>Reset all</b> to start again. Use the language menu at the top to read the site in another language. Every story follows the same structure: every account of what happened is fully referenced, and every story sets out the debates and other points of view.</p>
   </div>
 </div></section>
 
 <section class="map-sec" aria-label="Map"><div class="wrap">
   <div class="filterbar">
+    <div class="searchbox" role="search">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+      <input id="q" type="search" placeholder="Search — e.g. strike, Chile, women, 1968" aria-label="Search stories" autocomplete="off">
+    </div>
     <div class="countrypick" id="countrypick"></div>
-    <div class="filters" id="filters" role="group" aria-label="Filter by theme"></div>
+    <button class="resetall" id="resetall" type="button" title="Clear the search, themes, country and period, and show the whole world">↺ Reset all</button>
   </div>
+  <div class="filters" id="filters" role="group" aria-label="Filter by theme"></div>
+  <p class="searchinfo" id="searchinfo" aria-live="polite" hidden></p>
   <div class="mapbox" id="mapbox">
     <svg id="map" viewBox="0 0 960 470" role="img" aria-label="World map of events in radical history"></svg>
     <div class="zoomctl">
@@ -45,20 +56,24 @@
 
 <section class="list-sec" id="stories"><div class="wrap">
   <div class="sec-head"><h2>The stories</h2><span id="count"></span></div>
-  <div class="tl-wrap">
-    <div class="tl-head">
-      <span class="tl-title">Timeline</span>
-      <span class="tl-eras" role="group" aria-label="Jump to a period">
+  <div class="stories-grid">
+    <aside class="tl-wrap" aria-label="Timeline">
+      <div class="tl-head">
+        <span class="tl-title">Timeline</span>
+        <button class="tl-reset" id="tl-reset" hidden>All years ✕</button>
+      </div>
+      <div class="tl-eras" role="group" aria-label="Jump to a period">
         <button data-era="-1200,1499">Before 1500</button><button data-era="1500,1799">1500–1799</button><button data-era="1800,1899">1800s</button><button data-era="1900,1945">1900–1945</button><button data-era="1946,1989">1946–1989</button><button data-era="1990,2030">Since 1990</button>
-      </span>
-      <span class="tl-range" id="tl-range"></span>
-      <button class="tl-reset" id="tl-reset" hidden>Show all years ✕</button>
+      </div>
+      <div class="tl-overview notranslate" id="tl-overview"></div>
+      <div class="tl-range" id="tl-range"></div>
+      <ol class="vtl" id="vtl"></ol>
+    </aside>
+    <div class="stories-main">
+      <p class="empty" id="empty" hidden>No stories match these filters. Try another search word, widen the period, choose more themes or another country — or press <b>Reset all</b>.</p>
+      <div class="cards" id="cards"></div>
     </div>
-    <div class="timeline" id="timeline"></div>
-    <div class="tip" id="tl-tip" aria-hidden="true"></div>
   </div>
-  <p class="empty" id="empty" hidden>No stories match these filters. Try widening the period, choosing more themes or another country.</p>
-  <div class="cards" id="cards"></div>
 </div></section>
 
 <section class="about" id="about"><div class="wrap"><div class="about-grid">
@@ -100,6 +115,9 @@
   <div><strong>From Below</strong> · an atlas of radical history.<br>Text licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Images from Wikimedia Commons — see <a href="#credits">credits</a>.</div>
   <div>Figures such as crowd sizes and casualty numbers are often disputed.<br>Where sources differ, we give a range and cite them.</div>
 </div></footer>
+
+<button class="totop" id="totop" type="button" aria-label="Back to top" hidden>↑ Top</button>
+<div id="gt" hidden></div>
 
 <div class="view" id="view" role="dialog" aria-modal="true" aria-labelledby="s-title">
   <div class="v-top"><div class="wrap">
@@ -149,6 +167,7 @@
 <script src="data/media-33.js"></script>
 <script src="data/media-34.js"></script>
 <script src="data/media-35.js"></script>
+<script src="data/media-36.js"></script>
 <script src="data/events-1.js"></script>
 <script src="data/events-2.js"></script>
 <script src="data/events-3.js"></script>
@@ -220,7 +239,11 @@
 <script src="data/events-69.js"></script>
 <script src="data/events-70.js"></script>
 <script src="data/events-71.js"></script>
+<script src="data/events-72.js"></script>
+<script src="data/events-73.js"></script>
 <script src="data/extras-1.js"></script>
 <script src="assets/js/app.js"></script>
+<script>function gtInit(){try{new google.translate.TranslateElement({pageLanguage:"en",autoDisplay:false},"gt");}catch(e){}}</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=gtInit" async></script>
 </body>
 </html>
