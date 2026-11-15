@@ -1,0 +1,17 @@
+/* Media for batch 36: Wikimedia Commons. */
+Object.assign(window.MEDIA, {
+  danishBoat: { f: "Båd med jøder på vej fra Falster til Ystad i Sverige (5709133933) (2).jpg", cap: "A boat carrying Jewish refugees from Falster to Ystad in Sweden, October 1943, photographed by one of the refugees.", by: "National Museum of Denmark", lic: "CC BY-SA 2.0", lu: "https://creativecommons.org/licenses/by-sa/2.0" },
+  elisabethBoat: { f: "The fishing boat \"Elisabeth\" took part in the rescue of Danish Jews in 1943. Around 700 Jews fled trough Dragør harbour to neutral Sweden. - Flickr - Cederskjold Photo.jpg", cap: "The fishing boat Elisabeth, which carried Jews from Dragør harbour to Sweden in 1943.", by: "Jens Cederskjold", lic: "CC BY 4.0", lu: "https://creativecommons.org/licenses/by/4.0" },
+  menstadBallad: { f: "Slaget paa Menstad.jpg", cap: "'The Battle of Menstad', a workers' broadside ballad printed in 1931.", by: "Ferdinand Iversen", lic: "Public domain" },
+  frauenstreik1991: { f: "Frauenstreik Schweiz - ETH-Bibliothek Com LC0479-002-002.tif", cap: "A women's strike rally in Zürich, 14 June 1991.", by: "Comet Photo AG / ETH Library", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  laermansStrike: { f: "Bruxelles Laermans greve.JPG", cap: "Eugène Laermans's painting of the Belgian general strike of 1893.", by: "Eugène Laermans", lic: "Public domain" },
+  bougie1893: { f: "SchietpartijDenBougie1893.jpg", cap: "Soldiers fire on strikers in 1893, from Le Globe illustré.", by: "Le Globe illustré", lic: "Public domain" },
+  gbowee: { f: "Leymah Gbowee (October 2011).jpg", cap: "Leymah Gbowee, a leader of Women of Liberia Mass Action for Peace and winner of the 2011 Nobel Peace Prize.", by: "Jon Styer / Eastern Mennonite University", lic: "CC BY 3.0", lu: "https://creativecommons.org/licenses/by/3.0" },
+  memoriaVerdad: { f: "Monumento memoria y verdad.JPG", cap: "The Monument to Memory and Truth in San Salvador, listing civilian victims of the civil war.", by: "Jorge Montenegro", lic: "Public domain" },
+  woodfordPolice: { f: "Black Power Revolution - Riot police, armed with wicker shields and teargas bombs in satchels, march into Woodford Square.jpg", cap: "Riot police march into Woodford Square, Port of Spain, during the Black Power Revolution, 1970.", by: "Associated Press", lic: "Public domain" },
+  woodfordDemo: { f: "Black Power Revolution - Demonstrator attempts to elude police.jpg", cap: "A demonstrator tries to evade police in Port of Spain, 1970.", by: "Associated Press", lic: "Public domain" },
+  tsumebShaft: { f: "Shaft tower of disused mine in Tsumeb, Namibia (2014).jpg", cap: "A shaft tower at Tsumeb, the US-owned mine where the strike spread in December 1971.", by: "Olga Ernst", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  arpilleras: { f: "Arpilleras.jpg", cap: "Chilean arpilleras on display at an exhibition in 2025.", by: "Ministry of Foreign Affairs of Chile", lic: "CC BY 3.0", lu: "https://creativecommons.org/licenses/by/3.0" },
+  hillCrosses: { f: "Hill of Crosses 1, Siauliai, Lithuania.JPG", cap: "The Hill of Crosses near Šiauliai, Lithuania.", by: "Diliff", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  hillCrucifix: { f: "Wooden crucifix on the Hill of Crosses, Lithuania.jpg", cap: "A carved wooden crucifix on the Hill of Crosses.", by: "Dudva", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" }
+});

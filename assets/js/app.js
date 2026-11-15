@@ -100,7 +100,7 @@
     return best ? cname(best) : "Other";
   }
   // present-day country or territory; a few places need setting by hand
-  const OVERRIDE = { kahoolawe: "United States", punanaleo: "United States", hocklee: "Singapore", curacao1969: "Curaçao", guadeloupe1967: "Guadeloupe", moruroa: "French Polynesia", palestine1936: "Palestine", blackpanthers: "Israel", gdeimizik: "Western Sahara" };
+  const OVERRIDE = { kahoolawe: "United States", punanaleo: "United States", hocklee: "Singapore", curacao1969: "Curaçao", guadeloupe1967: "Guadeloupe", moruroa: "French Polynesia", palestine1936: "Palestine", blackpanthers: "Israel", gdeimizik: "Western Sahara", congo1963: "Congo", bhutan1990: "Bhutan" };
   EVENTS.forEach(e => { e.country = e.countryOverride || OVERRIDE[e.id] || countryOf(e); });
 
   /* ---------- filter state ---------- */

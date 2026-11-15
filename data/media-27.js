@@ -1,0 +1,20 @@
+/* Media for batch 28: risings against empires and lords. Wikimedia Commons. */
+Object.assign(window.MEDIA, {
+  romanAfrica: { f: "Roman Africa.JPG", cap: "Heinrich Kiepert's map of Roman North Africa, where Tacfarinas fought.", by: "Heinrich Kiepert", lic: "Public domain" },
+  arminiusJanssen: { f: "Hermann (Arminius) at the battle of the Teutoburg Forest in 9 CE by Peter Jannsen, 1873, with painting creases and damage removed.jpg", cap: "Arminius at the Teutoburg Forest, as imagined by Peter Janssen in 1873 — a picture shaped by German nationalism.", by: "Peter Janssen", lic: "Public domain" },
+  kalkrieseSandals: { f: "Remains of military sandals found on the site of the Battle of Teutoburg Forest, Museum und Park Kalkriese, Germany (9699710175).jpg", cap: "Hobnails from Roman soldiers' sandals found at Kalkriese, the probable battle site.", by: "Carole Raddato", lic: "CC BY-SA 2.0", lu: "https://creativecommons.org/licenses/by-sa/2.0" },
+  hermannsdenkmal: { f: "Hermannsdenkmal statue.jpg", cap: "The Hermannsdenkmal near Detmold, completed in 1875 as a symbol of German nationalism.", by: "Daniel Schwen", lic: "Public domain" },
+  burullus: { f: "Fishers and small island in Lake Burullus - Egypt.jpg", cap: "Fishers on Lake Burullus in the northern Nile Delta, near the marshlands of the Bashmurians.", by: "Myousry6666", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  baTrieuDongHo: { f: "Ba trieu cuoi voi.jpg", cap: "Lady Triệu riding an elephant into battle, in a Đông Hồ folk woodblock print.", by: "Đông Hồ artisans", lic: "Public domain" },
+  baTrieuTemple: { f: "Đền Bà Triệu 2, Triệu Lộc, Hậu Lộc, Thanh Hóa.jpeg", cap: "The temple of Lady Triệu at Hậu Lộc, Thanh Hóa province, Vietnam.", by: "Linhcandng", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  babakFort: { f: "The Babak Fort 0 .SHE.jpg", cap: "The mountain fortress near Kaleybar, Iran, known as Babak Fort.", by: "Shabnam Erfani", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  jacquerieMeaux: { f: "Jacquerie meaux.jpg", cap: "Nobles attack the Jacques and the Parisians at Meaux in 1358, in a fifteenth-century manuscript of Froissart's Chronicles.", by: "Loyset Liédet", lic: "Public domain" },
+  vespriHayez: { f: "I vespri siciliani by Francesco Hayez.jpg", cap: "Francesco Hayez's The Sicilian Vespers (1846), painted when the rising was a symbol of Italian freedom.", by: "Francesco Hayez", lic: "Public domain" },
+  dozsaBattle: { f: "Final battle of György Dózsa, 1514.jpg", cap: "An early image of the final battle of György Dózsa's peasant army at Temesvár, 1514.", by: "Unknown artist", lic: "Public domain" },
+  dozsaCegled: { f: "Statue of György Dózsa by József Somogyi. - Cegléd, Hungary.JPG", cap: "Statue of György Dózsa by József Somogyi in Cegléd, Hungary, where the crusaders gathered.", by: "Globetrotter19", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  comunerosGisbert: { f: "Los Comuneros de Castilla en el Patíbulo.jpg", cap: "Antonio Gisbert's The Execution of the Comuneros of Castile (1860), painted for the Spanish parliament.", by: "Antonio Gisbert", lic: "Public domain" },
+  villalarMonument: { f: "Villalar de los Comuneros Monumento a los comuneros.JPG", cap: "The monument to the comuneros at Villalar, where they were defeated in 1521.", by: "Txo", lic: "Public domain" },
+  haraSiege: { f: "Siege of Hara castle.jpg", cap: "The siege of Hara Castle, in a seventeenth-century Japanese painting.", by: "Unknown artist", lic: "Public domain" },
+  amakusaFlag: { f: "Amakusa Shiro Battle Flag in Shimabara Rebellion.png", cap: "The rebel banner associated with Amakusa Shirō, showing a chalice and angels.", by: "Yamada Emosaku (attributed)", lic: "Public domain" },
+  haraRemains: { f: "Remains of Hara castle.jpg", cap: "The remains of Hara Castle today.", by: "Chris 73", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" }
+});

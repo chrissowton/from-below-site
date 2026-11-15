@@ -1,0 +1,20 @@
+/* Media for batch 24. Wikimedia Commons. */
+Object.assign(window.MEDIA, {
+  vilniusTank: { f: "Unarmed Lithuanian citizen standing against Soviet tank, Vilnius, January 13, 1991 (cropped).jpg", cap: "An unarmed Lithuanian stands in front of a Soviet tank, Vilnius, 13 January 1991.", by: "Andrius Petrulevičius", lic: "CC BY 4.0", lu: "https://creativecommons.org/licenses/by/4.0" },
+  vilniusPressHouse: { f: "Unarmed civilians defend the Lithuanian Press House from Soviet army paratroopers, January 1991, Vilnius, Lithuania.jpg", cap: "Unarmed civilians try to defend the Press House in Vilnius from Soviet paratroopers, January 1991.", by: "Paulius Lileikis", lic: "CC BY 4.0", lu: "https://creativecommons.org/licenses/by/4.0" },
+  vilniusCrosses: { f: "Vilnius crosses near tv tower.jpg", cap: "Crosses near the Vilnius TV Tower in memory of those killed in January 1991.", by: "sfu", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  tallinnSongGrounds: { f: "Tallinn Song Festival Grounds, Tallinn, Estonia, 2012-08-12, DD 09.JPG", cap: "The Tallinn Song Festival Grounds, where the night singing of 1988 took place.", by: "Diego Delso", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  albaniaStampHoxha: { f: "Stamp of Albania - 2011 - Colnect 375375 - Toppling of Enver Hoxha statue.jpeg", cap: "An Albanian stamp of 2011 marking the toppling of Enver Hoxha's statue in Tirana, 20 February 1991.", by: "Post of Albania", lic: "Public domain" },
+  albaniaStampStudents: { f: "Stamp of Albania - 2011 - Colnect 375376 - 20th anniversary of the Student s Protest Movement.jpeg", cap: "Stamps marking the 20th anniversary of the student protest movement of December 1990.", by: "Post of Albania", lic: "Public domain" },
+  kongresniTrg: { f: "Ljubljana-Kongresni trg.JPG", cap: "Congress Square, Ljubljana, where at least 40,000 people rallied for the 'Four' in June 1988.", by: "Žiga", lic: "Public domain" },
+  vecernjiList1971: { f: "Večernji list 13DEC1971 SKH resignations.jpg", cap: "Večernji list, 13 December 1971, reporting the resignation of Croatia's reformist leaders.", by: "Večernji list", lic: "Public domain" },
+  savka: { f: "Savka Dabcevic Kucar.jpg", cap: "Savka Dabčević-Kučar, leader of the Croatian League of Communists until 1971.", by: "Wikimedia user", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  brazzaville: { f: "Brazzaville la verte depuis 45km.jpg", cap: "Brazzaville, capital of the Republic of the Congo.", by: "Beauté verte", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  massambaDebat: { f: "Alphonse Massamba-Débat (cropped).jpg", cap: "Alphonse Massamba-Débat, who became president after the Trois Glorieuses.", by: "People's Pictorial", lic: "Public domain" },
+  chisinau2009: { f: "Chisinau riot 2009-04-07 20.jpg", cap: "Protesters in Chișinău, 7 April 2009.", by: "VargaA", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  chisinauRiot: { f: "Chisinau riot 2009-04-07 02.jpg", cap: "Rioting outside the parliament in Chișinău, 7 April 2009.", by: "VargaA", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  walterLini: { f: "Walter Lini profile 1983 (cropped).jpg", cap: "Walter Lini, first prime minister of Vanuatu, 1983.", by: "Archives New Zealand", lic: "CC BY 2.0", lu: "https://creativecommons.org/licenses/by/2.0" },
+  portVilaPark: { f: "Port Vila - Independence Park - panoramio.jpg", cap: "Independence Park, Port Vila.", by: "Jean Van Jean", lic: "CC BY 3.0", lu: "https://creativecommons.org/licenses/by/3.0" },
+  stanTerg: { f: "Stantërgu, Stan Terg, Trepça 01.jpg", cap: "Stari Trg (Stan Tërg), the Trepča mining village where miners began their underground hunger strike in 1989.", by: "KushtrimHoti7", lic: "CC BY 4.0", lu: "https://creativecommons.org/licenses/by/4.0" },
+  suvaPostcard: { f: "Suva postcard.jpg", cap: "Suva, Fiji, on a postcard from the late 1940s or early 1950s.", by: "Mike Roberts", lic: "Public domain" }
+});
