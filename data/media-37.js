@@ -1,0 +1,27 @@
+/* Media for v39: the 1848 stories and other turning points. Wikimedia Commons. */
+Object.assign(window.MEDIA, {
+  palermo1848: { f: "Sanesi - La rivoluzione di Palermo-12 gennaio 1848 - ca. 1850.jpg", cap: "The revolution in Palermo, 12 January 1848, in a print of about 1850.", by: "Sanesi", lic: "Public domain" },
+  palermo1848b: { f: "Rivolta di Palermo 1848.jpg", cap: "Fighting in Palermo during the Sicilian revolution of 1848.", by: "Unknown artist", lic: "Public domain" },
+  paris1848: { f: "Horace Vernet-Barricade rue Soufflot.jpg", cap: "The barricade on the Rue Soufflot, Paris, during the June Days of 1848, painted by Horace Vernet.", by: "Horace Vernet", lic: "Public domain" },
+  paris1848decree: { f: "AU NOM DU PEUPLE FRANCAIS. LE GOUVERNEMENT PROVISOIRE DE LA REPUBLIQUE FRANCAISE DECLARE, AFF5002.jpg", cap: "A proclamation of the Provisional Government of the French Republic, 1848.", by: "Imprimerie de la République / Paris Musées", lic: "CC0" },
+  lamartine1848: { f: "Lamartine in front of the Town Hall of Paris rejects the red flag on 25 February 1848.jpg", cap: "Alphonse de Lamartine at the Hôtel de Ville, 25 February 1848, rejecting the workers' demand for a red flag — painted by Henri Philippoteaux.", by: "Henri Félix Emmanuel Philippoteaux", lic: "Public domain" },
+  cap110: { f: "CAP 110.jpg", cap: "The Cap 110 memorial at Anse Caffard, Martinique, to Africans who died in the slave trade.", by: "Rehcral", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  schoelcher2020: { f: "22 Mai 2020.jpg", cap: "The statue of Victor Schœlcher in Fort-de-France, pulled down by activists on 22 May 2020.", by: "Toto @ Matinino", lic: "CC BY 2.0", lu: "https://creativecommons.org/licenses/by/2.0" },
+  berlin1848: { f: "Barrikadenkampf Alexanderplatz 1848.jpg", cap: "Barricade fighting at Alexanderplatz, Berlin, on the night of 18 March 1848.", by: "A. Klaus", lic: "Public domain" },
+  berlin1848b: { f: "Alexanderplatz Berlin 1848.jpg", cap: "Street fighting at Alexanderplatz, Berlin, 1848.", by: "Unknown artist", lic: "Public domain" },
+  pest1848: { f: "1848 marcius 15 szabad sajto rajz 1850.jpg", cap: "Students in Pest print the Twelve Points at Landerer's press on 15 March 1848, by Vinzenz Katzler.", by: "Vinzenz Katzler", lic: "Public domain" },
+  petofi1848: { f: "Petofi 1848 marcius 15.jpg", cap: "Sándor Petőfi on 15 March 1848, in a contemporary drawing.", by: "Unknown artist", lic: "Public domain" },
+  nemzetiDal: { f: "Nemzeti dal Petőfitől 1848.jpg", cap: "A printed copy of Petőfi's 'National Song', 1848.", by: "Unknown printer", lic: "Public domain" },
+  kennington1848: { f: "Chartist meeting, Kennington Common.jpg", cap: "The Chartist meeting on Kennington Common, 10 April 1848 — one of the first photographs ever taken of a crowd.", by: "William Edward Kilburn", lic: "Public domain" },
+  senecaChapel: { f: "Wesleyan Chapel, Seneca Falls, exterior.jpg", cap: "The Wesleyan Chapel at Seneca Falls, where the convention met in July 1848.", by: "Jane023", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  senecaSignatures: { f: "Declaration sentiments foote lrg.jpg", cap: "A signature page of the Declaration of Sentiments, 1848.", by: "Library of Congress", lic: "Public domain" },
+  may68poster: { f: "Mai 1968. Notre lutte continue, Atelier populaire affiche, non identifié.jpg", cap: "'Our struggle continues' — a poster from the Atelier Populaire, the occupied art school in Paris, 1968.", by: "Atelier Populaire / Bibliothèque nationale de France", lic: "CC0" },
+  may68sorbonne: { f: "Photographie d'étudiants à la Sorbonne- Archives nationales - SCAN001698.jpg", cap: "Students at the Sorbonne, 3 May 1968.", by: "Archives nationales (France)", lic: "Public domain" },
+  may68workers: { f: "REFORME LA SOCIETE OUVRIERS ETUDIANTS Participez Mouvement soutien, AFF2825.jpg", cap: "A 1968 poster calling on workers and students to change society together.", by: "Anonymous / Paris Musées", lic: "CC0" },
+  tahrir2011: { f: "Tahrir Square - February 10, 2011.png", cap: "Tahrir Square, Cairo, on the night of 10 February 2011, the day before Hosni Mubarak resigned.", by: "Jonathan Rashad", lic: "CC BY 2.0", lu: "https://creativecommons.org/licenses/by/2.0" },
+  tahrir2011b: { f: "Protest on Tahrir (2011-01-30) by Floris Van Cauwelaert (6).jpg", cap: "Protesters in Tahrir Square, 30 January 2011.", by: "Floris Van Cauwelaert", lic: "CC BY-SA 2.0", lu: "https://creativecommons.org/licenses/by-sa/2.0" },
+  leipzig1989: { f: "Bundesarchiv Bild 183-1989-1023-022, Leipzig, Montagsdemonstration.jpg", cap: "A Monday demonstration in Leipzig, 23 October 1989.", by: "Friedrich Gahlbeck / Bundesarchiv", lic: "CC BY-SA 3.0 DE", lu: "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en" },
+  wall1989: { f: "West and East Germans at the Brandenburg Gate in 1989.jpg", cap: "East and West Germans at the Brandenburg Gate after the Berlin Wall opened, 1989.", by: "Unknown photographer", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  velvet1989: { f: "Prague November 1989 - Wenceslas Square 3.jpg", cap: "Protesters on Wenceslas Square, Prague, November 1989.", by: "Piercetp", lic: "CC BY 2.5", lu: "https://creativecommons.org/licenses/by/2.5" },
+  velvet1989b: { f: "1989 sametova revoluce 12.jpg", cap: "A street in Prague during the Velvet Revolution, December 1989.", by: "Josef Šrámek ml.", lic: "CC BY 4.0", lu: "https://creativecommons.org/licenses/by/4.0" }
+});

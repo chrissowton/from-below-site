@@ -366,7 +366,7 @@ window.EVENTS.push(
   gallery: [],
   sources: [
     ["Wikipedia, '2014 Burkinabé uprising', on Article 37, the protests, the burning of the National Assembly, the deaths, Compaoré's flight and the transition.", "https://en.wikipedia.org/wiki/2014_Burkinab%C3%A9_uprising"],
-    ["Wikipédia (French), 'Balai citoyen'.", "https://fr.wikipedia.org/wiki/Balai_citoyen"],
+    ["Wikipédia (French), 'Balai citoyen'.", "https://fr.wikipedia.org/wiki/Le_Balai_citoyen"],
     ["Amnesty International, reports on the deaths during the October 2014 uprising (2015).", "https://www.amnesty.org"]
   ],
   next: `
@@ -412,7 +412,7 @@ window.EVENTS.push(
   ],
   more: [
     ["online", "Wikipedia: 2014 Burkinabé uprising", "https://en.wikipedia.org/wiki/2014_Burkinab%C3%A9_uprising"],
-    ["online", "Wikipédia: Balai citoyen", "https://fr.wikipedia.org/wiki/Balai_citoyen"]
+    ["online", "Wikipédia: Balai citoyen", "https://fr.wikipedia.org/wiki/Le_Balai_citoyen"]
   ]
 }
 );

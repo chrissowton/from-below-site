@@ -191,7 +191,7 @@ window.EVENTS.push(
   <li>Because strikes were rare and legally risky in Switzerland, many women took long breaks, hung out brooms and banners, wore purple, or gathered in town squares.</li>
   <li>It was the largest public mobilisation in Switzerland since the general strike of 1918.[1]</li>
 </ul>`,
-  gallery: ["greveFemmes"],
+  gallery: ["greveFemmes", "frauenstreik1991"],
   sources: [
     ["Wikipedia (German), 'Frauenstreik (1991)', on the 1981 article, the watchmakers, Christiane Brunner, the union decisions, the opposition, the numbers and the motto.", "https://de.wikipedia.org/wiki/Frauenstreik_(1991)"],
     ["Historical Dictionary of Switzerland, 'Frauenstreik'.", "https://hls-dhs-dss.ch"]

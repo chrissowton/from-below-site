@@ -301,7 +301,7 @@ window.EVENTS.push(
   sources: [
     ["Wikipedia, 'Tenants' strike of 1907', on conditions in the conventillos, rents, the start of the strike, its spread, the role of women, the March of the Brooms, the death of Miguel Pepe, the evictions and deportations.", "https://en.wikipedia.org/wiki/Tenants%27_strike_of_1907"],
     ["Juan Suriano, <em>La huelga de inquilinos de 1907</em> (CEAL, 1983).", ""],
-    ["Wikipedia, 'Ramón L. Falcón', on the police chief and his assassination in 1909.", "https://en.wikipedia.org/wiki/Ram%C3%B3n_L._Falc%C3%B3n"]
+    ["Wikipedia, 'Ramón L. Falcón', on the police chief and his assassination in 1909.", "https://en.wikipedia.org/wiki/Ram%C3%B3n_Lorenzo_Falc%C3%B3n"]
   ],
   next: `
 <ul>

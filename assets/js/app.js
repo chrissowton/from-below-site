@@ -116,13 +116,15 @@
     return best ? cname(best) : "Other";
   }
   // present-day country or territory; a few places need setting by hand
-  const OVERRIDE = { kahoolawe: "United States", punanaleo: "United States", hocklee: "Singapore", curacao1969: "Curaçao", guadeloupe1967: "Guadeloupe", moruroa: "French Polynesia", palestine1936: "Palestine", blackpanthers: "Israel", gdeimizik: "Western Sahara", congo1963: "Congo", bhutan1990: "Bhutan" };
+  const OVERRIDE = { kahoolawe: "United States", punanaleo: "United States", hocklee: "Singapore", curacao1969: "Curaçao", guadeloupe1967: "Guadeloupe", martinique1848: "Martinique", moruroa: "French Polynesia", palestine1936: "Palestine", blackpanthers: "Israel", gdeimizik: "Western Sahara", congo1963: "Congo", bhutan1990: "Bhutan" };
   EVENTS.forEach(e => { e.country = e.countryOverride || OVERRIDE[e.id] || countryOf(e); });
 
   /* ---------- filter state ---------- */
   const active = new Set(Object.keys(THEMES));
-  const state = { y0: -Infinity, y1: Infinity, country: null, hits: null };
-  const visible = e => active.has(e.theme) && e.year >= state.y0 && e.year <= state.y1 && (!state.country || e.country === state.country) && (!state.hits || state.hits.has(e.id));
+  const state = { y0: -Infinity, y1: Infinity, country: null, hits: null, focus: null };
+  // focus mode (a Moment, Thread or Pathway shown on the map) overrides the other filters
+  const inFocus = e => state.focus.ids.has(e.id) && (state.focus.n == null || state.focus.order.get(e.id) < state.focus.n);
+  const visible = e => state.focus ? inFocus(e) : active.has(e.theme) && e.year >= state.y0 && e.year <= state.y1 && (!state.country || e.country === state.country) && (!state.hits || state.hits.has(e.id));
 
   /* ---------- search: key content words only ---------- */
   const STOP = new Set(("a an and the of in on at to for from by with without is are was were be been as it its this that these those or nor but not no into onto over under about after before during " +
@@ -160,6 +162,7 @@
   const landSel = g.append("g").selectAll("path").data(countries).join("path").attr("class", "country").attr("d", path);
   EVENTS.forEach(e => { const p = proj([e.lon, e.lat]); e.x = p[0]; e.y = p[1]; });
   const leaders = g.append("g");
+  const arcsG = g.append("g").attr("class", "f-arcs");
   const pins = g.append("g").selectAll("g").data(EVENTS).join("g")
     .attr("class", d => "pin t-" + d.theme).attr("tabindex", 0).attr("role", "link")
     .attr("aria-label", d => `${d.title}, ${d.place}, ${d.date}`);
@@ -169,6 +172,7 @@
 
   let k = 1;
   const clusterG = g.append("g");
+  const numsG = g.append("g").attr("class", "f-nums");
   function layout() {
     const vis = EVENTS.filter(visible);
     EVENTS.forEach(e => { e.dx = e.x; e.dy = e.y; e.inCluster = false; });
@@ -210,6 +214,26 @@
     cl.on("mouseenter focus", function (ev, d) { showClusterTip(d, this); }).on("mouseleave blur", hideTip)
       .on("click", (ev, d) => { ev.stopPropagation(); zoomTo(d.items); })
       .on("keydown", (ev, d) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); zoomTo(d.items); } });
+    drawFocus();
+  }
+  function drawFocus() {
+    const fo = state.focus;
+    const seq = fo ? fo.seq.map(id => byId[id]).filter(e => e && visible(e) && !e.inCluster) : [];
+    const pairs = fo && fo.arcs ? seq.slice(1).map((b, i) => [seq[i], b]) : [];
+    arcsG.selectAll("path").data(pairs, d => d[0].id + ">" + d[1].id).join(
+      enter => enter.append("path").attr("class", "f-arc").style("opacity", 0).call(p => p.transition().duration(500).style("opacity", 1)))
+      .attr("d", ([a, b]) => {
+        const mx = (a.dx + b.dx) / 2, my = (a.dy + b.dy) / 2, dx = b.dx - a.dx, dy = b.dy - a.dy, L = Math.hypot(dx, dy) || 1;
+        const off = Math.min(L * 0.28, 60 / k);
+        return `M${a.dx},${a.dy} Q${mx - dy / L * off},${my + dx / L * off} ${b.dx},${b.dy}`;
+      });
+    const nums = fo && fo.numbered ? seq : [];
+    const ng = numsG.selectAll("g").data(nums, d => d.id).join(enter => {
+      const n = enter.append("g").attr("class", "f-num");
+      n.append("circle").attr("r", 8).attr("cx", 12).attr("cy", -12); n.append("text").attr("x", 12).attr("y", -12).attr("dy", "0.35em");
+      return n;
+    });
+    ng.attr("transform", d => `translate(${d.dx},${d.dy}) scale(${1 / k})`).select("text").text(d => fo.seq.indexOf(d.id) + 1);
   }
   function zoomBox(x0, y0, x1, y1, fill = 0.5) {
     const sc = Math.max(1, Math.min(KMAX, fill / Math.max((x1 - x0) / W, (y1 - y0) / H, 1e-4)));
@@ -333,7 +357,7 @@
   let tlX = null, brush = null, brushG = null, ovSvg = null;
   function drawOverview() {
     const w = ov.clientWidth; if (!w) return;
-    const m = 4, iw = w - 2 * m, H0 = 64, base = H0 - 18;
+    const m = 4, iw = w - 2 * m, H0 = 74, base = H0 - 18, top = 12;
     tlX = d3.scaleLinear().domain(BRK).range(FR.map(f => m + f * iw)).clamp(true);
     const nb = Math.max(30, Math.floor(iw / 6)), bw = iw / nb;
     ov.innerHTML = "";
@@ -341,7 +365,7 @@
     // stacked, coloured columns: one small square per story, by theme
     const bins = Array.from({ length: nb }, () => []);
     EVENTS.forEach(e => { const i = Math.min(nb - 1, Math.max(0, Math.floor((tlX(e.year) - m) / bw))); bins[i].push(e); });
-    const maxN = d3.max(bins, b => b.length) || 1, unit = Math.min(4, (base - 4) / maxN);
+    const maxN = d3.max(bins, b => b.length) || 1, unit = Math.min(4, (base - top - 2) / maxN);
     const order = Object.keys(THEMES);
     bins.forEach((b, i) => b.sort((p, q) => order.indexOf(p.theme) - order.indexOf(q.theme)).forEach((e, j) => { e.bx = m + i * bw; e.by = base - (j + 1) * unit; }));
     ovSvg.append("g").selectAll("rect").data(EVENTS).join("rect")
@@ -352,6 +376,7 @@
     tg.append("text").attr("class", "tl-lab").attr("y", 15).text(t => t < 0 ? `${-t} BC` : t)
       .style("display", (t, i) => (i > 0 && tlX(t) - tlX(TICKS[i - 1]) < 30) ? "none" : null);
     brushG = ovSvg.append("g").attr("class", "tl-brush");
+    const markers = ovSvg.append("g").attr("class", "ov-moments");
     brush = d3.brushX().extent([[m, 0], [m + iw, H0]])
       .on("brush end", ev => {
         if (!ev.sourceEvent) return;
@@ -361,6 +386,13 @@
       });
     brushG.call(brush);
     if (isFinite(state.y0)) brushG.call(brush.move, [tlX(state.y0), tlX(state.y1)]);
+    // moments: small flags above the bars (drawn after the brush so they stay clickable)
+    const mk = markers.raise().selectAll("g").data(window.MOMENTS || []).join("g").attr("class", "ov-mk").attr("tabindex", 0).attr("role", "link")
+      .attr("aria-label", d => `Moment: ${d.title}`)
+      .attr("transform", d => `translate(${tlX(parseInt(d.years))},0)`);
+    mk.append("path").attr("d", "M-5,1 h10 l-5,7 z");
+    mk.append("title").text(d => d.title);
+    mk.on("click", (ev, d) => go("moment/" + d.id)).on("keydown", (ev, d) => { if (ev.key === "Enter") go("moment/" + d.id); });
     paintOverview();
   }
   function paintOverview() { if (ovSvg) ovSvg.selectAll(".ov-sq").classed("off", d => !visible(d)); }
@@ -419,6 +451,7 @@
     Object.keys(THEMES).forEach(t => active.add(t));
     clearPeriod();
     vtl.scrollTop = 0;
+    if (state.focus) { stopPlay(); state.focus = null; fbar.hidden = true; }
     setCountry("");                                    // also zooms the map back out and refreshes
   };
 
@@ -474,17 +507,78 @@
     cardsEl.querySelectorAll(".card").forEach(c => c.classList.toggle("hide", !visible(byId[c.dataset.id])));
     const vis = EVENTS.filter(visible), n = vis.length;
     const range = isFinite(state.y0) ? `${yr(Math.max(state.y0, EVENTS[0].year))} – ${yr(Math.min(state.y1, EVENTS[EVENTS.length - 1].year))}` : `${yr(EVENTS[0].year)} – ${yr(EVENTS[EVENTS.length - 1].year)}`;
-    document.getElementById("count").textContent = `${n} of ${EVENTS.length} stories · ${range}${state.country ? " · " + state.country : ""}`;
+    document.getElementById("count").textContent = state.focus ? `${n} of ${EVENTS.length} stories · ${state.focus.title}` : `${n} of ${EVENTS.length} stories · ${range}${state.country ? " · " + state.country : ""}`;
     document.getElementById("tl-range").textContent = isFinite(state.y0) ? `Showing ${range}` : "Drag across the bars to choose a period";
     document.getElementById("tl-reset").hidden = !isFinite(state.y0);
     const empty = document.getElementById("empty"); if (empty) empty.hidden = n > 0;
-    const filtered = !all || isFinite(state.y0) || state.country || state.hits;
+    const filtered = !all || isFinite(state.y0) || state.country || state.hits || state.focus;
     document.getElementById("resetall").classList.toggle("lit", !!filtered);
     paintTimeline();
     layout();
+    if (final) writeUrl();
   }
+
+  /* ---------- shareable links: the current filters live in the address (?t=…&from=…&to=…&c=…&q=…&show=…) ---------- */
+  function writeUrl() {
+    const p = new URLSearchParams();
+    if (active.size !== Object.keys(THEMES).length) p.set("t", [...active].join(","));
+    if (isFinite(state.y0)) { p.set("from", state.y0); p.set("to", state.y1); }
+    if (state.country) p.set("c", state.country);
+    if (qIn.value.trim()) p.set("q", qIn.value.trim());
+    if (state.focus && state.focus.key) p.set("show", state.focus.key);
+    const qs = p.toString().replace(/%2C/g, ",").replace(/%3A/g, ":");
+    try { history.replaceState(history.state, "", location.pathname + (qs ? "?" + qs : "") + location.hash); } catch (_) { }
+  }
+  function readUrl() {
+    const p = new URLSearchParams(location.search);
+    if (p.get("t")) { const ts = p.get("t").split(",").filter(t => THEMES[t]); if (ts.length) { active.clear(); ts.forEach(t => active.add(t)); } }
+    if (p.get("from") && p.get("to")) { state.y0 = +p.get("from"); state.y1 = +p.get("to"); }
+    if (p.get("q")) { qIn.value = p.get("q"); runSearch(qIn.value); }
+    return { country: p.get("c"), show: p.get("show") };
+  }
+  const startUrl = readUrl();
   drawOverview();
-  refresh();
+  refresh(false);
+  if (startUrl.country && counts.some(([c]) => c === startUrl.country)) setCountry(startUrl.country);
+  if (state.hits) doSearch();
+
+  /* ---------- focus mode: show a Moment, Thread or Pathway on the map ---------- */
+  const fbar = document.getElementById("focusbar");
+  let playTimer = null;
+  function setFocus(f) {
+    stopPlay();
+    if (!f) { state.focus = null; fbar.hidden = true; refresh(); svg.transition().duration(600).call(zoom.transform, d3.zoomIdentity); return; }
+    state.focus = { ...f, ids: new Set(f.seq), order: new Map(f.seq.map((id, i) => [id, i])), n: null };
+    fbar.hidden = false;
+    fbar.innerHTML = `<div class="fb-txt"><small>${esc(f.kind)}</small><b>${esc(f.title)}</b><span class="fb-cap" aria-live="polite">${f.seq.length} stories${f.arcs ? " · the lines show the order" : ""}</span></div>
+      <div class="fb-btns"><button type="button" class="fb-play">▶ Play</button>${f.link ? `<button type="button" class="fb-read">Read about it</button>` : ""}<button type="button" class="fb-x" aria-label="Show all stories">✕ All stories</button></div>`;
+    fbar.querySelector(".fb-play").onclick = () => playTimer ? stopPlay(true) : play();
+    if (f.link) fbar.querySelector(".fb-read").onclick = () => go(f.link);
+    fbar.querySelector(".fb-x").onclick = () => setFocus(null);
+    refresh();
+    const items = f.seq.map(id => byId[id]).filter(Boolean);
+    if (items.length) { const x0 = d3.min(items, o => o.x), x1 = d3.max(items, o => o.x), y0 = d3.min(items, o => o.y), y1 = d3.max(items, o => o.y); const hgt = Math.max(y1 - y0, 20); zoomBox(x0 - 20, y0 - hgt * 0.45 - 30, x1 + 20, y1 + 20, 0.82); }
+  }
+  function play() {
+    const f = state.focus; if (!f) return;
+    const btn = fbar.querySelector(".fb-play"), cap = fbar.querySelector(".fb-cap");
+    btn.textContent = "❚❚ Pause";
+    f.n = 0; refresh(false);
+    const step = () => {
+      if (!state.focus) return stopPlay();
+      f.n++; refresh(false);
+      const e = byId[f.seq[f.n - 1]];
+      if (e) { cap.textContent = `${f.dates && f.dates[e.id] ? f.dates[e.id] + " · " : ""}${e.title}`; pins.classed("on", p => p === e); }
+      if (f.n >= f.seq.length) { stopPlay(); setTimeout(() => { if (state.focus === f) { pins.classed("on", false); } }, 2500); }
+    };
+    step(); playTimer = setInterval(step, 1600);
+  }
+  function stopPlay(keepPartial) {
+    if (playTimer) { clearInterval(playTimer); playTimer = null; }
+    const btn = fbar && fbar.querySelector(".fb-play"); if (btn) btn.textContent = "▶ Play";
+    if (state.focus && !keepPartial) { state.focus.n = null; }
+    if (state.focus) refresh(false);
+  }
 
   /* ---------- story view ---------- */
   const view = document.getElementById("view"), vc = document.getElementById("v-content");
@@ -508,12 +602,16 @@
     const more = `<ul class="more">${e.more.map(([t, l, u]) => `<li><span class="ty">${TYPES[t] || t}</span><span>${u ? `<a href="${u}" target="_blank" rel="noopener">${l}</a>` : l}</span></li>`).join("")}</ul>`;
     const hm = MEDIA[e.hero];
 
-    vc.innerHTML = `
+    const H = window.FB && FB.hooks ? FB.hooks : {};
+    const banner = H.storyBanner ? H.storyBanner(e) : "";
+    const tools = H.storyTools ? H.storyTools(e) : "";
+    const lookClose = H.sourceBox ? H.sourceBox(e) : "";
+    vc.innerHTML = `${banner}
       <header class="s-hero"><div class="wrap">
         <div><div class="tag">${icon(e.theme)}${THEMES[e.theme]}</div><h1 id="s-title">${esc(e.title)}</h1><p class="teaser">${esc(e.teaser)}</p>
           <dl class="facts"><div><dt>When</dt><dd>${esc(e.date)}</dd></div><div><dt>Where</dt><dd>${esc(e.place)}</dd></div></dl></div>
         ${hm ? `<figure class="media"><div class="ph"><img src="${fileUrl(hm.f, 1200)}" alt="${esc(hm.cap)}" onerror="this.closest('figure').classList.add('noimg')"></div><figcaption>${esc(hm.cap)} ${credit(hm)}</figcaption></figure>` : ""}
-      </div></header>
+      </div></header>${tools}
       <div class="s-body"><div class="wrap">
         <nav class="toc" aria-label="Sections"><ol>${SECTIONS.map(([id, t]) => `<li><a href="#" data-ch="${id}">${t}</a></li>`).join("")}</ol></nav>
         <article>
@@ -522,7 +620,7 @@
           ${chap(3, "happened", happened)}
           ${chap(4, "next", `<div class="prose">${fn(e.next)}</div>`)}
           ${e.debates ? chap(5, "debates", `<div class="debate-note">Different people have understood this event in different ways. This section sets out how it was seen at the time, where historians disagree, and the difficult questions it raises.</div><div class="prose">${fn(e.debates)}</div>`) : ""}
-          ${e.evidence ? chap(6, "evidence", `<div class="prose">${fn(e.evidence)}</div>`) : ""}
+          ${e.evidence || lookClose ? chap(6, "evidence", `${e.evidence ? `<div class="prose">${fn(e.evidence)}</div>` : ""}${lookClose}`) : ""}
           ${e.memory ? chap(7, "memory", `<div class="prose">${fn(e.memory)}</div>`) : ""}
           <div class="why-box">${chap(8, "why", `<div class="prose">${fn(e.why)}</div>`)}</div>
           ${e.questions ? `<aside class="questions" aria-label="Questions to think about"><h3>Questions to think about</h3><ol>${e.questions.map(q => `<li>${q}</li>`).join("")}</ol></aside>` : ""}
@@ -546,6 +644,7 @@
     document.getElementById("v-next").style.visibility = next ? "visible" : "hidden";
     document.title = `${e.title} — From Below`;
     current = e; view.scrollTop = 0; spy();
+    if (H.afterStory) H.afterStory(e, vc);
   }
   function scrollToEl(el, off = 70) { view.scrollTo({ top: el.getBoundingClientRect().top + view.scrollTop - off, behavior: "smooth" }); }
   function spy() {
@@ -585,12 +684,15 @@
   }
   function route() {
     const id = location.hash.slice(1);
+    const [kind, arg] = id.split("/");
+    if (window.FB && FB.hooks.leaveView) FB.hooks.leaveView();
     if (byId[id]) { renderStory(byId[id]); open(); }
     else if (id === "credits") { renderCredits(); open(); }
+    else if (window.FB && FB.routes[kind] && FB.routes[kind](arg ? decodeURIComponent(arg) : "")) { current = null; view.scrollTop = 0; open(); }
     else {
       view.classList.remove("open"); document.body.style.overflow = ""; current = null; topCheck();
       document.title = "From Below — an atlas of radical history";
-      if (id === "about" || id === "stories") { const el = document.getElementById(id); if (el) el.scrollIntoView(); }
+      if (["about", "stories", "explore"].includes(id)) { const el = document.getElementById(id); if (el) el.scrollIntoView(); }
     }
   }
   function open() { toTop.hidden = true; view.classList.add("open"); document.body.style.overflow = "hidden"; hideTip(); setTimeout(() => document.getElementById("v-close").focus({ preventScroll: true }), 60); }
@@ -600,5 +702,26 @@
   document.getElementById("v-prev").onclick = () => { const i = EVENTS.indexOf(current); if (i > 0) go(EVENTS[i - 1].id); };
   document.getElementById("v-next").onclick = () => { const i = EVENTS.indexOf(current); if (i > -1 && i < EVENTS.length - 1) go(EVENTS[i + 1].id); };
   document.addEventListener("keydown", ev => { if (ev.key === "Escape" && view.classList.contains("open")) home(); });
-  route();
+
+  /* ---------- shared toolkit for assets/js/features.js ---------- */
+  function showPage(html, title) {
+    vc.innerHTML = html;
+    document.getElementById("v-prev").style.visibility = "hidden";
+    document.getElementById("v-next").style.visibility = "hidden";
+    document.title = `${title} — From Below`;
+    vc.querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(b.dataset.go));
+  }
+  window.FB = {
+    EVENTS, byId, THEMES, MEDIA, ICONS, COLOURS, SECTIONS, state, active,
+    icon, badge, yr, esc, bg, figure, credit, fileUrl, pageUrl,
+    go, home, refresh, setFocus, play, showPage, toast, scrollToEl, view, vc, countries, cname,
+    get current() { return current; },
+    showOnMap(f) { home(); setTimeout(() => { setFocus(f); document.getElementById("mapbox").scrollIntoView({ behavior: "smooth", block: "center" }); if (f.autoplay) setTimeout(play, 900); }, 60); },
+    routes: {}, hooks: {}
+  };
+  function init() {                                    // runs once every script (including features.js) has loaded
+    route();
+    if (startUrl.show && FB.hooks.applyShow) FB.hooks.applyShow(startUrl.show);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else setTimeout(init, 0);
 })();
