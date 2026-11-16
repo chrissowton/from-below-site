@@ -40,7 +40,7 @@ window.EVENTS.push(
   next: `
 <ul>
   <li><strong>Defeat:</strong> the resistance collapsed after al-Mukhtar's execution, and Italy declared Libya "pacified" in 1932.</li>
-  <li><strong>The toll:</strong> about a quarter of the people of Cyrenaica — around 56,000 of 225,000 — died during the war and in the camps.[1]</li>
+  <li><strong>The toll:</strong> about a quarter of Cyrenaica's population of 225,000 died during the war and in the camps.[1]</li>
   <li><strong>Independence:</strong> Libya became independent in 1951, after Italy's defeat in the Second World War.</li>
   <li><strong>Apology:</strong> in 2008, Italy signed a treaty with Libya apologising for colonial rule and promising $5 billion in investment.</li>
 </ul>`,
@@ -357,7 +357,7 @@ window.EVENTS.push(
     { n: "General Lothar von Trotha", r: "The German commander who issued the extermination order." }
   ],
   happened: `
-<p>On 12 January 1904, Samuel Maharero launched a surprise uprising.[1] Herero fighters attacked farms and settlements, killing around 120 Germans, mostly men; according to many accounts, Maharero ordered that women, children, missionaries and other Europeans be spared. The uprising was initially a success.[1]</p>
+<p>On 12 January 1904, Samuel Maharero launched a surprise uprising.[1] Herero fighters attacked farms and settlements, killing 123 or as many as 160 Germans, most of them farmers and traders; according to many accounts, Maharero ordered that women, children, missionaries and other Europeans be spared. The uprising was initially a success.[1]</p>
 <p>After reinforcements arrived from Germany, the Herero — around 60,000 people with their cattle — were surrounded at the Waterberg in August 1904 and routed.[1]</p>
 <ul>
   <li>The survivors fled into the Omaheke desert, where most died of thirst and starvation, or in German massacres.[1]</li>

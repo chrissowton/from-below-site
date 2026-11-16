@@ -1,0 +1,32 @@
+/* Primary sources — batch 6. Same format as primary-1.js. */
+window.EXTRAS = window.EXTRAS || {};
+(function (X) { Object.entries(X).forEach(([id, v]) => { window.EXTRAS[id] = Object.assign(window.EXTRAS[id] || {}, v); }); })({
+
+maumau: { primary: { media: "maumauCounterGang", kind: "Official photograph", made: "British official photographer, Kenya, 1952–56",
+  about: "Kikuyu men working for the British in a 'counter-gang', which hunted Mau Mau fighters, sometimes by pretending to be Mau Mau. It was taken for the British army's own record.",
+  questions: ["What does this photograph show about who fought on each side?", "Why might the army want to record the counter-gangs?", "Why is the war sometimes described as a Kikuyu civil war as well as an anti-colonial one?"] } },
+belgium1960: { primary: { media: "belgiumPamphlets", kind: "Press photograph", made: "Harry Pot, Anefo (Dutch press agency), 5 January 1961",
+  about: "Strikers' leaflets posted next to official notices in Wallonia. The photograph shows a battle of words on the walls, alongside the strike itself.",
+  questions: ["Why might strikers put their leaflets beside official notices?", "Why did a Dutch press agency cover the strike?", "What can walls and posters tell us about a strike?"] } },
+christiania: { primary: { media: "christianiaSign", kind: "Painted sign", made: "Paul Tempels, October 1971",
+  about: "The sign painted in Christiania's first weeks, which became the basis of its flag.",
+  questions: ["Why might a new community want its own sign and flag?", "What does the design suggest about the people who made it?", "How do symbols help a community last?"] } },
+mokrani: { primary: { media: "mokraniSequestre", kind: "Official poster", made: "French colonial administration, 25 March 1871",
+  about: "A poster ordering the seizure of el-Mokrani's property, nine days after the rising began. It is printed in French and Arabic, so that it could be read by both colonists and Algerians.",
+  questions: ["Why did the French authorities seize el-Mokrani's property?", "Why print the poster in two languages?", "How did land seizures after 1871 affect Kabylia?"] } },
+javawar: { primary: { media: "dipoPieneman", kind: "Painting", made: "Nicolaas Pieneman, about 1835",
+  about: "A Dutch painting of Prince Diponegoro's capture in 1830, showing it as a calm 'submission'. In fact Diponegoro had come to negotiate with General de Kock and was arrested. In 1857 the Javanese painter Raden Saleh painted his own version of the scene, which presents it very differently.",
+  questions: ["How does Pieneman show the Dutch and the Javanese?", "Why call the event a 'submission' rather than an arrest?", "Why might Raden Saleh have painted his own version?"] } },
+katipunan: { primary: { media: "kalayaanPage", kind: "Secret newspaper", made: "The Katipunan, dated January 1896",
+  about: "The first page of Kalayaan ('Freedom'), the Katipunan's only newspaper. It was printed in secret to spread the society's ideas.",
+  questions: ["Why would a secret society print a newspaper?", "What risks did the printers and readers take?", "Why did the paper choose the name 'Freedom'?"] } },
+tobacco: { primary: { media: "tobaccoFatwa", kind: "Religious ruling (fatwa)", made: "Attributed to Mirza Hassan Shirazi, early 1890s",
+  about: "The ruling that declared the use of tobacco forbidden while the concession lasted. It is attributed to Shirazi, and it was obeyed so widely that the Shah cancelled the concession.",
+  questions: ["Why might a religious ruling be more powerful than a political protest?", "Why does it matter whether Shirazi wrote it himself?", "Who gained and who lost when the concession was cancelled?"] } },
+qissakhwani: { primary: { media: "qissaKhwani1930", kind: "Photograph", made: "Peshawar, 23 April 1930",
+  about: "Protesters in the Qissa Khwani Bazaar on the day British troops opened fire on unarmed followers of the Khudai Khidmatgar movement.",
+  questions: ["What does the photograph show about the crowd?", "Who might have taken it, and how did it survive?", "Why did the killings strengthen the non-violent movement?"] } },
+geoktepe: { primary: { media: "geokTepeEngraving", kind: "Engraving", made: "Russia, about 1881",
+  about: "A Russian picture of the storming of the Teke fortress. It presents the conquest as a heroic victory and shows nothing of the killing of people who fled.",
+  questions: ["How does the engraving present the Russian soldiers?", "What does it leave out?", "Where could you find a Turkmen view of the battle?"] } },
+});

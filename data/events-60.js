@@ -39,7 +39,7 @@ window.EVENTS.push(
   ],
   next: `
 <ul>
-  <li><strong>Death toll:</strong> estimates range from 20–30 million to as many as 70 million or more; some 30 million people fled their homes.[1]</li>
+  <li><strong>Death toll:</strong> estimates range from 20–30 million to as many as 73–100 million; some 30 million people fled their homes.[1]</li>
   <li><strong>The Qing:</strong> the dynasty survived, but was weakened and relied on provincial armies.[1]</li>
   <li><strong>Influence:</strong> the Taiping mix of radical equality and Christianity influenced Sun Yat-sen and later revolutionaries.[1]</li>
 </ul>`,

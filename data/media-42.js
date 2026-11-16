@@ -1,0 +1,19 @@
+/* Media for primary sources batch 7: Wikimedia Commons. */
+Object.assign(window.MEDIA, {
+  accraLooting: { f: "A scene of Looting in Accra during the gold coast riot.png", cap: "Looting in Accra during the riots of February 1948, as published in the Daily Service newspaper.", by: "Daily Service newspaper", lic: "Public domain" },
+  kunPamphlet: { f: "Béla Kun - Die Februarkämpfe in Österreich und ihre Lehren, Moskau 1934.jpg", cap: "Béla Kun, 'The February Struggles in Austria and Their Lessons', published in Moscow, 1934.", by: "Verlagsgenossenschaft ausländischer Arbeiter in der UdSSR", lic: "Public domain" },
+  pantherAshdod: { f: "The Black Panthers demonstrating in Ashdod (FL61886129).jpg", cap: "The Israeli Black Panthers demonstrate in Ashdod, 1973.", by: "IPPA photographer (National Library of Israel)", lic: "CC BY 4.0" },
+  burkinaProtest: { f: "Burkina Faso Protests.png", cap: "Protesters in Ouagadougou, 31 October 2014.", by: "Voice of America", lic: "Public domain" },
+  conzeHanneken: { f: "Jean-Baptise Conzé and Herman H. Hannekin, circa 1919.png", cap: "Jean-Baptiste Conzé and Sergeant Herman Hanneken of the US Marines, photographed at the Citadelle Laferrière after the killing of Charlemagne Péralte, about 1919.", by: "Unknown photographer", lic: "Public domain" },
+  eplfAfabet: { f: "EPLF fighters playing music and performing dances in Afabet, Eritrea, 1980.jpg", cap: "EPLF fighters play music and dance in Afabet, December 1980.", by: "Unknown photographer", lic: "Public domain" },
+  machoroGraffiti: { f: "Machoro.jpg", cap: "A graffiti portrait of Éloi Machoro in Thio, painted in 1985, the year he was killed.", by: "Tux-Man (photograph)", lic: "CC0" },
+  martiniqueLibertyTree: { f: "Plantation d’un arbre de la liberté en Martinique en 1848 afin de célébrer l’abolition de l’esclavage dans les colonies françaises.jpg", cap: "Planting a 'tree of liberty' in Martinique to celebrate the abolition of slavery, 1848. Daguerreotype by an unknown photographer.", by: "Unknown photographer", lic: "Public domain" },
+  kenLetter: { f: "Ken-letter (2).jpg", cap: "A letter Ken Saro-Wiwa smuggled out of military detention to the solidarity worker Majella McCarron, 1 October 1994.", by: "Ken Saro-Wiwa", lic: "CC BY-SA 3.0" },
+  panamaStudentsFlag: { f: "Photograph of Students holding a Panamanian Flag.png", cap: "Six students from the Instituto Nacional carry the Panamanian flag towards Balboa High School, 9 January 1964.", by: "US Department of State", lic: "Public domain" },
+  sanrizukaPolice: { f: "Sanrizuka-Struggle.png", cap: "Clashes near Sanrizuka, 20 October 1985. Photograph from the National Police Agency.", by: "National Police Agency of Japan", lic: "CC BY 4.0" },
+  latuffWomen2drive: { f: "Women2drive by Latuff.gif", cap: "A cartoon by Carlos Latuff for the #women2drive campaign, June 2011.", by: "Carlos Latuff", lic: "Public domain" },
+  kyrgyzRefugees: { f: "Kyrgyz fleeing to China after the 1916 Central Asian revolt.jpg", cap: "Kyrgyz refugees fleeing to China after the defeat of the 1916 revolt.", by: "Unknown photographer", lic: "Public domain" },
+  boeungKakTepVanny: { f: "Group photo at Boeung Kak - holding a poster of their imprisoned fellow activist Tep Vanny.jpg", cap: "Boeung Kak residents hold a poster of their imprisoned fellow activist Tep Vanny, December 2016.", by: "Maina Kiai", lic: "CC BY 2.0" },
+  macedoniaDeportation: { f: "Bulgaria deporting the Macedonian Jews.jpg", cap: "Jews from Bulgarian-occupied Macedonia being deported to Treblinka, March 1943.", by: "Unknown photographer", lic: "Public domain" },
+  tunisiaDialogue2012: { f: "Tunisian national dialogue (October 2012).jpg", cap: "President Moncef Marzouki and Prime Minister Hamadi Jebali at the National Dialogue Congress called by the UGTT, 16 October 2012. UGTT leader Houcine Abassi is beside them.", by: "Magharebia", lic: "CC BY 2.0" }
+});

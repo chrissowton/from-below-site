@@ -196,12 +196,13 @@ window.EVENTS.push(
   <li>On 23 November, Saleh signed a deal brokered by the Gulf Cooperation Council, handing power to his deputy in return for immunity from prosecution.[1]</li>
   <li>Many protesters rejected the immunity deal.[1]</li>
 </ul>
-<p>Estimates of the number of people killed during the uprising range from several hundred to about 2,000, including protesters, soldiers and armed tribesmen.[1][2]</p>`,
+<p>Estimates of the number of people killed vary widely. Amnesty International estimated that about 200 protesters had been killed; in March 2012, Yemen's Ministry of Human Rights said that more than 2,000 people had died, including protesters, military defectors and more than 120 children.[4]</p>`,
   gallery: ["karmanMegaphone"],
   sources: [
     ["Wikipedia, 'Yemeni revolution', on the protests, Change Square, the Friday of Dignity, the defections, the fighting, the attack on Saleh, the GCC deal and the 2012 election.", "https://en.wikipedia.org/wiki/Yemeni_revolution"],
     ["Human Rights Watch, <em>Unpunished Massacre: Yemen's Failed Response to the 'Friday of Dignity' Killings</em> (2013).", "https://www.hrw.org"],
-    ["The Nobel Prize, 'Tawakkol Karman — Facts' (2011).", "https://www.nobelprize.org/prizes/peace/2011/karman/facts/"]
+    ["The Nobel Prize, 'Tawakkol Karman — Facts' (2011).", "https://www.nobelprize.org/prizes/peace/2011/karman/facts/"],
+    ["Gulf News (Reuters), 'More than 2,000 killed in uprising, Yemen says', 18 March 2012.", "https://gulfnews.com/amp/story/world%2Fgulf%2Fyemen%2Fmore-than-2000-killed-in-uprising-yemen-says-1.996595"]
   ],
   next: `
 <ul>

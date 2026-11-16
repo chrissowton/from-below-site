@@ -126,7 +126,7 @@ window.EVENTS.push(
 <ul>
   <li>439 Black Jamaicans were killed directly by the soldiers.</li>
   <li>354 more were arrested and later executed, many without proper trials. Paul Bogle was hanged with fourteen others, including his brother.</li>
-  <li>More than 600 men and women, including pregnant women, were flogged, and around 1,000 homes were burned.</li>
+  <li>More than 600 men and women, including pregnant women, were flogged, and soldiers burned thousands of homes.</li>
 </ul>
 <p>Eyre believed that George William Gordon was behind the revolt. Although Gordon was arrested in Kingston, where martial law did not apply, Eyre had him moved to Morant Bay, where he was tried by a court martial and hanged on 23 October, two days after his trial began.[1]</p>`,
   gallery: ["morantCourthouse", "gwGordon"],
@@ -218,7 +218,7 @@ window.EVENTS.push(
 <p>When the promise was not kept, protests resumed, and government troops killed a sayyid (a descendant of the Prophet) during clashes.[1] In the summer of 1906, the movement grew into a mass protest:[1]</p>
 <ul>
   <li>Many clerics left Tehran in protest for the holy city of Qom.</li>
-  <li>About 12,000 to 14,000 merchants, craftsmen, guild members and students took sanctuary in the grounds of the British legation in Tehran. They set up tents, held debates and lectures, and demanded a parliament.</li>
+  <li>About 12,000 to 14,000 merchants, craftsmen, guild members and students took sanctuary in the grounds of the British legation in Tehran. They set up tents, held debates and lectures, and demanded a parliament.[2]</li>
   <li>The bazaars remained closed, and the life of the capital ground to a halt.</li>
 </ul>
 <p>On 5 August 1906, the Shah agreed to the creation of an elected National Consultative Assembly (the Majlis). It first met in October 1906, and the constitution was signed by the dying Shah on 30 December 1906.[1] It limited the Shah's power and gave the Majlis control over loans, concessions and the budget — although voting was restricted to men of property, and women were excluded.[1]</p>

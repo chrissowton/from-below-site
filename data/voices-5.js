@@ -1,0 +1,9 @@
+/* "In their own words" — batch 6. Short quotations, each checked against the source given. */
+window.EXTRAS = window.EXTRAS || {};
+(function (X) { Object.entries(X).forEach(([id, v]) => { window.EXTRAS[id] = Object.assign(window.EXTRAS[id] || {}, { voices: ((window.EXTRAS[id] || {}).voices || []).concat(v) }); }); })({
+
+putney: [{ q: "For really I think that the poorest he that is in England hath a life to live, as the greatest he; and therefore truly, sir, I think it's clear, that every man that is to live under a government ought first by his own consent to put himself under that government.", who: "Colonel Thomas Rainsborough", when: "Putney Debates, 29 October 1647", src: ["Wikisource, 'Putney debates'", "https://en.wikisource.org/wiki/Putney_debates"] }],
+velvet1989: [{ q: "I really do inhabit a system in which words are capable of shaking the entire structure of government, where words can prove mightier than ten military divisions.", who: "Václav Havel", when: "Speech accepting a peace prize, October 1989, a month before the Velvet Revolution", src: ["Wikiquote, 'Václav Havel'", "https://en.wikiquote.org/wiki/V%C3%A1clav_Havel"] }],
+comadres: [{ q: "If you are really Christian, please stop sending military aid to the military here, because they use it only to kill my people.", who: "Archbishop Óscar Romero", when: "Letter to US President Jimmy Carter, February 1980, a month before Romero was murdered", src: ["Wikiquote, 'Óscar Romero'", "https://en.wikiquote.org/wiki/%C3%93scar_Romero"] }],
+uffo1982: [{ q: "the arrest of the Hargeisa Group and their trial in February 1982 radicalised the student community and virtually turned schools into war zones between the Government and students", who: "Africa Watch, human rights organisation", when: "Report on the government's war in the north", src: ["Wikipedia, 'Somaliland War of Independence'", "https://en.wikipedia.org/wiki/Somaliland_War_of_Independence"] }]
+});

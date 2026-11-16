@@ -103,7 +103,7 @@ window.EVENTS.push(
   happened: `
 <p>In August 1934, workers on the plantations around Limón went on strike. Carlos Luis Fallas, who had been sent to the coast as punishment for earlier union activity, became its leader.[1]</p>
 <ul>
-  <li>Accounts put the number of strikers at about 10,000, or as many as 15,000.[1]</li>
+  <li>The strike involved some 15,000 banana workers.[1]</li>
   <li>Workers demanded higher wages paid in cash, decent housing, medical care, and an end to the company's control of their lives.</li>
   <li>The government brokered an agreement, but the company failed to keep it, and the strike resumed.</li>
   <li>The authorities sent police, arrested leaders, including Fallas, and broke up the strike.</li>
@@ -338,7 +338,7 @@ window.EVENTS.push(
   <li>Four strikers died.[1]</li>
   <li>The strike gradually ended in late January, and the law was passed on 14 February 1961.[1]</li>
 </ul>`,
-  gallery: [],
+  gallery: ["belgiumBrussels1961"],
   sources: [
     ["Wikipedia, 'Belgian general strike of 1960–1961', on the Unitary Law, the FGTB, the numbers, the clashes, the deaths, the regional divide and the consequences.", "https://en.wikipedia.org/wiki/Belgian_general_strike_of_1960%E2%80%931961"],
     ["Jean Neuville and Jacques Yerna, <em>Le Choc de l'hiver '60–'61: Les grèves contre la loi unique</em> (Brussels, 1990).", ""]

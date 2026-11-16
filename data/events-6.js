@@ -227,7 +227,7 @@ window.EVENTS.push(
   <li>The operation cost far more than the crops were worth. Boycott left Ireland on 1 December 1880, and his name entered the English language.</li>
 </ul>
 <p>The Land League also resisted evictions, organised rent strikes, supported evicted families and set up its own courts. Its rules forbade members to take part in evictions or to deal in any way with boycotted people.[1]</p>`,
-  gallery: ["evictedFamily", "landWarPoster"],
+  gallery: ["evictedFamily", "landWarPoster", "landLeaguePoster"],
   sources: [
     ["Wikipedia, 'Land War', on the 1879 crisis, the Irishtown, Westport and Castlebar meetings, the League's rules and tactics.", "https://en.wikipedia.org/wiki/Land_War"],
     ["Parnell's speech at Ennis, 19 September 1880, as reported in <em>The Freeman's Journal</em>; quoted in R.F. Foster, <em>Modern Ireland 1600–1972</em> (1988).", ""],

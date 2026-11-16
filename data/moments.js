@@ -178,6 +178,119 @@ window.MOMENTS = [
   ]
  },
  {
+  "id": "1905",
+  "title": "1905–1911: The Constitutional Revolutions",
+  "years": "1905 – 1911",
+  "teaser": "In 1905 a massacre in St Petersburg set off a revolution across the Russian Empire. Within six years, constitutional revolutions had shaken Iran, the Ottoman Empire, Mexico and China — while workers, sailors and colonised peoples rose from Tanzania to Chile.",
+  "heroStory": "bloodysunday1905",
+  "links": [
+   [
+    "bloodysunday1905",
+    "finland1906"
+   ],
+   [
+    "bloodysunday1905",
+    "iran1906"
+   ],
+   [
+    "bloodysunday1905",
+    "ottoman1908"
+   ],
+   [
+    "iran1906",
+    "ottoman1908"
+   ],
+   [
+    "cananea",
+    "ayala"
+   ]
+  ],
+  "stories": [
+   {
+    "id": "bloodysunday1905",
+    "d": "1905-01-22",
+    "when": "22 January 1905",
+    "note": "Troops fired on a peaceful march to the Tsar's palace, setting off the revolution of 1905 across the Russian Empire."
+   },
+   {
+    "id": "majimaji",
+    "d": "1905-07-31",
+    "when": "July 1905 – August 1907",
+    "note": "A rising against forced cotton growing in German East Africa, in the same months as the revolution in Russia."
+   },
+   {
+    "id": "finland1906",
+    "d": "1905-10-30",
+    "when": "1905 – 1907",
+    "note": "The general strike of the Russian revolution spread to Finland and won votes for all adults, women included."
+   },
+   {
+    "id": "iran1906",
+    "d": "1905-12-12",
+    "when": "1905 – 1911",
+    "note": "Iranians won a constitution and a parliament in 1906, a year after the revolution in Russia."
+   },
+   {
+    "id": "bambatha",
+    "d": "1906-02-08",
+    "when": "February – July 1906",
+    "note": "Resistance to a new poll tax in Natal, crushed by colonial forces."
+   },
+   {
+    "id": "cananea",
+    "d": "1906-06-01",
+    "when": "1 – 3 June 1906",
+    "note": "A miners' strike that became a symbol of the Díaz regime's repression."
+   },
+   {
+    "id": "iquique",
+    "d": "1907-12-21",
+    "when": "21 December 1907",
+    "note": "Nitrate workers and their families were massacred at a school in Iquique."
+   },
+   {
+    "id": "ottoman1908",
+    "d": "1908-07-03",
+    "when": "3 July – December 1908",
+    "note": "Rebel officers forced the Sultan to restore the constitution, inspired in part by Russia and Iran; a wave of strikes followed."
+   },
+   {
+    "id": "chibata",
+    "d": "1910-11-22",
+    "when": "22 – 26 November 1910",
+    "note": "Sailors seized Brazil's most powerful warships to end flogging, days after the Mexican Revolution began."
+   },
+   {
+    "id": "sichuan1911",
+    "d": "1911-06-17",
+    "when": "17 June – 27 November 1911",
+    "note": "Protests against the seizure of Sichuan's railway helped trigger the revolution that ended the Qing empire."
+   },
+   {
+    "id": "ayala",
+    "d": "1911-11-28",
+    "when": "28 November 1911",
+    "note": "After Díaz fell, Zapata demanded that the land be returned to the villages."
+   }
+  ],
+  "intro": "<h3>The background</h3><ul>\n  <li>Around 1900, much of the world was ruled by empires and absolute monarchs: the Russian Tsar, the Shah of Iran, the Ottoman Sultan and the Qing emperors of China.</li>\n  <li>In Mexico, Porfirio Díaz had ruled as a dictator since 1876; much of Africa had just been conquered by European powers.</li>\n  <li>New railways, telegraphs and newspapers spread news quickly, and growing numbers of industrial workers began to organise.</li>\n  <li>Russia's defeat by Japan in 1904–05 showed that an absolute monarchy could be beaten.</li>\n</ul>\n<h3>How it spread</h3><ul>\n  <li>The revolution in Russia began with Bloody Sunday in January 1905, and reached Finland with the general strike in October.</li>\n  <li>Iran's constitutional revolution began in December 1905. The Young Turk Revolution of 1908 was influenced by both Russia and Iran, according to the historian Nader Sohrabi.[3]</li>\n  <li>In Mexico, strikes such as Cananea in 1906 became symbols of the Díaz regime's repression, and the Mexican Revolution began in 1910.</li>\n  <li>In China, the Railway Protection Movement in Sichuan in 1911 drew troops away from Wuhan and opened the way for the revolution that ended the empire.</li>\n  <li>At the same time, colonised peoples rose in Tanzania and South Africa, and workers struck from Chile to Brazil.</li>\n</ul>\n<h3>What changed</h3><ul>\n  <li><strong>Constitutions and parliaments</strong> were won in Russia, Iran and the Ottoman Empire, and China became a republic in 1912.[1]</li>\n  <li><strong>Votes for women:</strong> Finland gave women the vote in 1906, the first country in Europe to do so.</li>\n  <li><strong>Many gains were reversed:</strong> the Tsar limited his parliament, Russian troops helped close Iran's parliament in 1911, and the Ottoman government banned most strikes in 1909.</li>\n  <li><strong>Colonial risings</strong> were crushed with great loss of life.</li>\n</ul>",
+  "debates": "<ul>\n  <li><strong>A connected wave?</strong> Historians such as Charles Kurzman have studied these years as a wave of 'democratic revolutions'; others stress that each country had its own causes.[1]</li>\n  <li><strong>From above or from below?</strong> Some of these revolutions were led by officers, clerics or gentry; others by workers, peasants and sailors. Most involved both.</li>\n  <li><strong>Violence:</strong> the Tsar's troops and the colonial armies in Africa killed many thousands; revolutionaries and rebels also used violence, including assassinations and attacks on officials and settlers.</li>\n</ul>\n<h3>Questions to think about</h3>\n<ol class=\"q-list\"><li>Why did revolutions break out in so many places between 1905 and 1911?</li><li>How did news of one revolution reach people in other countries?</li><li>Why did most of these revolutions end in disappointment?</li><li>Were the colonial risings in Africa part of the same wave, or something different?</li></ol>",
+  "sources": [
+   [
+    "Charles Kurzman, <em>Democracy Denied, 1905–1915: Intellectuals and the Fate of Democracy</em> (2008).",
+    ""
+   ],
+   [
+    "Wikipedia, 'Young Turk Revolution', on the influence of the revolutions in Russia and Iran.",
+    "https://en.wikipedia.org/wiki/Young_Turk_Revolution"
+   ],
+   [
+    "Nader Sohrabi, <em>Revolution and Constitutionalism in the Ottoman Empire and Iran</em> (2011).",
+    ""
+   ]
+  ]
+ },
+ {
   "id": "1919",
   "title": "1916–1921: War, Revolution and Self-Determination",
   "years": "1916 – 1921",

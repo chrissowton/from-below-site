@@ -401,7 +401,7 @@ window.EVENTS.push(
   <li>Pugachev recruited Cossacks, Russian peasants and factory workers, Tatars, Bashkirs and Chuvash. The Bashkir leader Salavat Yulaev joined him.</li>
   <li>He set up his own court, army and administration, modelled on Catherine's, and besieged the city of Orenburg for six months.</li>
   <li>At its height, the rebellion controlled most of the territory between the Volga and the Ural Mountains. In July 1774 the rebels captured and burned much of the city of Kazan.</li>
-  <li>On 31 July 1774, Pugachev issued a manifesto granting the serfs their freedom and their land, freedom from taxes and recruitment, and calling on them to punish the nobles.</li>
+  <li>In July 1774, Pugachev issued a manifesto granting the serfs their freedom and their land, freedom from taxes and recruitment, and calling on them to punish the nobles.</li>
 </ul>
 <p>As the rebellion moved along the Volga, peasants rose against their landlords. Thousands of nobles, officials, officers and priests, and members of their families, were killed by the rebels. Government forces in turn carried out mass executions; gallows were floated down the Volga on rafts to terrify the population.[2] In August 1774 Pugachev's army was defeated near Tsaritsyn. He was betrayed by his own Cossack followers, handed over to the authorities, and taken to Moscow in a cage. He was executed in Moscow on 10 January 1775.[1]</p>`,
   gallery: ["pugachevPortrait", "pugachevExecution"],
@@ -523,7 +523,7 @@ window.EVENTS.push(
 <p>The French government and most of the press described the Communards as criminals, arsonists and murderers, emphasising the killing of the generals and the hostages and the burning of Paris. Supporters, such as Marx, presented the Commune as a heroic workers' government drowned in blood.</p>
 <h3>Historians' debates</h3>
 <ul>
-  <li><strong>How many died?</strong> Historians such as Robert Tombs have argued for lower figures, of perhaps 6,000–7,500 deaths; others, such as John Merriman, support higher estimates. All agree that the great majority of deaths were caused by government forces, many in summary executions.</li>
+  <li><strong>How many died?</strong> Historians such as Robert Tombs have argued for lower figures, of between 6,000 and 7,000 deaths, based on a 2012 study of cemetery records; others, such as John Merriman, support higher estimates. All agree that the great majority of deaths were caused by government forces, many in summary executions.</li>
   <li><strong>The Commune's violence:</strong> the execution of the generals and of the hostages, and the burning of public buildings, are part of the story; historians debate how far these were the acts of a minority in the chaos of defeat.</li>
   <li><strong>What kind of revolution?</strong> Marxists, anarchists and republicans have all claimed the Commune. Historians emphasise that its members held many different views, and that it was also a patriotic protest against defeat.</li>
 </ul>`,

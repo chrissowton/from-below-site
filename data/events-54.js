@@ -114,7 +114,7 @@ window.EVENTS.push(
   next: `
 <ul>
   <li><strong>Revenge:</strong> Tiberius and Germanicus led campaigns of retaliation; Germanicus captured Thusnelda in 15 CE.[1]</li>
-  <li><strong>The border:</strong> the Rhine became the empire's frontier, and Rome made no major attempt to conquer Germania for 150 years.[1]</li>
+  <li><strong>The border:</strong> the Rhine became the empire's frontier, and Rome made no major incursion into Germania again until the Marcomannic Wars under Marcus Aurelius (161–180 CE).[1]</li>
   <li><strong>Arminius:</strong> according to Tacitus, he was killed by his own relatives in about 21 CE.</li>
 </ul>`,
   why: `

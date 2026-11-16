@@ -374,7 +374,7 @@ window.EVENTS.push(
 <ul>
   <li>When US military police arrived, they focused on extracting the Americans, angering the crowd.[1]</li>
   <li>After warning shots were fired, the crowd grew to about 5,000 people, facing around 700 military police.[1]</li>
-  <li>Rioters overturned and burned more than 70 cars belonging to Americans, threw rocks and Molotov cocktails, and pulled some servicemen from their cars and beat them.[1]</li>
+  <li>Rioters overturned and burned about 80 cars belonging to Americans, threw rocks and Molotov cocktails, and pulled some servicemen from their cars and beat them.[1]</li>
   <li>Some danced traditional Okinawan folk dances amid the chaos.[1]</li>
   <li>Around 500 people broke through the fence into Kadena Air Base, burning buildings including the military employment office.[1]</li>
 </ul>
