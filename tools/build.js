@@ -70,12 +70,37 @@ ${img ? `<meta property="og:image" content="${img}">` : ""}
 const foot = `<footer class="site"><div class="wrap"><div><strong>From Below</strong> · an atlas of radical history.<br>Text licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Images from Wikimedia Commons, credited on each image.</div><div>Figures such as crowd sizes and casualty numbers are often disputed.<br>Where sources differ, we give a range and cite them.</div></div></footer>
 </body></html>`;
 
+
+// ---- glossary: underline the first use of each key word in a story (definition shown on hover)
+const GLOSS = W.GLOSSARY || [];
+const glForm = {}; GLOSS.forEach(g => (g.m || []).forEach(f => { glForm[f] = g; }));
+const glRe = GLOSS.length ? new RegExp("(^|[^\\p{L}\\p{N}-])(" + Object.keys(glForm).sort((a, b) => b.length - a.length).map(f => f.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")(?![\\p{L}\\p{N}])", "u") : null;
+function glossify(h, used) {
+  if (!glRe || !h) return h || "";
+  let skip = 0;
+  return String(h).split(/(<[^>]+>)/).map(tok => {
+    if (tok.startsWith("<")) { if (/^<(a|sup|h[1-4]|blockquote)\b/i.test(tok)) skip++; else if (/^<\/(a|sup|h[1-4]|blockquote)>/i.test(tok)) skip = Math.max(0, skip - 1); return tok; }
+    if (skip) return tok;
+    let out = "", rest = tok;
+    for (let k = 0; k < 20; k++) {
+      let m = null, off = 0, sub = rest;
+      while (sub.length) { const x = glRe.exec(sub); if (!x) break; if (!used.has(glForm[x[2]].id)) { m = x; break; } const cut = x.index + x[0].length; off += cut; sub = sub.slice(cut); }
+      if (!m) break;
+      const g = glForm[m[2]]; used.add(g.id);
+      const at = off + m.index + m[1].length;
+      out += rest.slice(0, at) + `<abbr class="gl" title="${esc(g.term + ": " + g.d)}">${m[2]}</abbr>`;
+      rest = rest.slice(at + m[2].length);
+    }
+    return out + rest;
+  }).join("");
+}
 function storyPage(e, i) {
   const prev = EVENTS[i - 1], next = EVENTS[i + 1];
   const hm = MEDIA[e.hero];
   const canonical = BASE ? `${BASE}/stories/${e.id}.html` : "";
+  const used = new Set(), G = h => glossify(h, used);
   const chap = (n, inner) => inner ? `<section class="chapter" id="ch-${n}"><div class="num">${String(n).padStart(2, "0")}</div><h2>${SECTIONS[n - 1]}</h2>${inner}</section>` : "";
-  const people = `<ul class="people">${(e.people || []).map(p => `<li class="person"><div class="p-body"><h3>${p.n}</h3><p>${p.r}</p></div></li>`).join("")}</ul>`;
+  const people = `<ul class="pp-acc">${(e.people || []).map(p => `<li><details><summary><span class="pp-face pp-dot" aria-hidden="true"></span><span class="pp-txt"><b>${p.n}</b><span class="pp-prev">${String(p.r || "").replace(/<[^>]+>/g, "")}</span></span><span class="pp-chev" aria-hidden="true"></span></summary><div class="pp-more"><p>${p.r}</p></div></details></li>`).join("")}</ul>`;
   const sources = `<div class="sources"><h3>Sources</h3><ol>${(e.sources || []).map(([t, u], j) => `<li id="s-${j + 1}">${t}${u ? ` <a href="${u}">Link ↗</a>` : ""}</li>`).join("")}</ol></div>`;
   const similar = `<ul class="more">${(e.similar || []).filter(s => s.id && byId[s.id]).map(s => `<li><span class="ty">${yr(byId[s.id].year)}</span><span><a href="${s.id}.html">${esc(byId[s.id].title)}</a> — ${esc(byId[s.id].teaser)}</span></li>`).join("")}</ul>`;
   const more = `<ul class="more">${(e.more || []).map(([t, l, u]) => `<li><span class="ty">${TYPES[t] || t}</span><span>${u ? `<a href="${u}">${l}</a>` : l}</span></li>`).join("")}</ul>`;
@@ -83,20 +108,21 @@ function storyPage(e, i) {
   return head(`${e.title} — From Below`, e.teaser, hm ? fileUrl(hm.f, 1200) : "", canonical) + `
 <main>
 <header class="s-hero"><div class="wrap">
-  <div><div class="tag">${esc(THEMES[e.theme] || "")}</div><h1>${esc(e.title)}</h1><p class="teaser">${esc(e.teaser)}</p>
+  <div><div class="tag">${esc(THEMES[e.theme] || "")}${e.ongoing ? ` <span class="recent-tag">Recent history</span>` : ""}</div><h1>${esc(e.title)}</h1><p class="teaser">${esc(e.teaser)}</p>
     <dl class="facts"><div><dt>When</dt><dd>${esc(e.date)}</dd></div><div><dt>Where</dt><dd>${esc(e.place)}</dd></div>${e.checked ? `<div><dt>Facts checked</dt><dd>${esc(e.checked)}</dd></div>` : ""}</dl>
     <p style="margin-top:22px"><a class="btn-play big" href="../index.html#${e.id}" style="text-decoration:none">See it on the map →</a></p></div>
   ${hm ? `<figure class="media"><div class="ph"><img src="${fileUrl(hm.f, 1200)}" alt="${esc(hm.cap)}"></div><figcaption>${esc(hm.cap)} ${credit(hm)}</figcaption></figure>` : ""}
 </div></header>
+${e.ongoing ? `<aside class="ongoing"><div class="wrap"><div class="og-in"><div class="og-head"><span class="og-dot"></span><b>Ongoing situation</b><span class="og-asof">Last reviewed ${esc(e.ongoing.asOf)}</span></div><div class="prose">${fn(e.ongoing.text)}</div>${(e.ongoing.watch || []).length ? `<p class="og-wl">Still unresolved:</p><ul>${e.ongoing.watch.map(w => `<li>${w}</li>`).join("")}</ul>` : ""}<p class="og-note">This is recent history. Accounts, casualty figures and outcomes may change as more evidence emerges.</p></div></div></aside>` : ""}
 <div class="s-body"><div class="wrap"><article>
-  ${chap(1, `<div class="prose">${fn(e.background)}</div>`)}
+  ${chap(1, `<div class="prose">${fn(G(e.background))}</div>`)}
   ${chap(2, people + voicesHtml(e))}
-  ${chap(3, `<div class="prose">${fn(e.happened)}</div>${(e.gallery || []).length ? `<div class="gallery">${e.gallery.map(k => fig(k, 800)).join("")}</div>` : ""}${sources}`)}
-  ${chap(4, `<div class="prose">${fn(e.next)}</div>`)}
-  ${chap(5, e.debates ? `<div class="prose">${fn(e.debates)}</div>` : "")}
-  ${chap(6, (e.evidence ? `<div class="prose">${fn(e.evidence)}</div>` : "") + primaryHtml(e))}
-  ${chap(7, e.memory ? `<div class="prose">${fn(e.memory)}</div>` : "")}
-  <div class="why-box">${chap(8, `<div class="prose">${fn(e.why)}</div>`)}</div>
+  ${chap(3, `<div class="prose">${fn(G(e.happened))}</div>${(e.gallery || []).length ? `<div class="gallery">${e.gallery.map(k => fig(k, 800)).join("")}</div>` : ""}${sources}`)}
+  ${chap(4, `<div class="prose">${fn(G(e.next))}</div>`)}
+  ${chap(5, e.debates ? `<div class="prose">${fn(G(e.debates))}</div>` : "")}
+  ${chap(6, (e.evidence ? `<div class="prose">${fn(G(e.evidence))}</div>` : "") + primaryHtml(e))}
+  ${chap(7, e.memory ? `<div class="prose">${fn(G(e.memory))}</div>` : "")}
+  <div class="why-box">${chap(8, `<div class="prose">${fn(G(e.why))}</div>`)}</div>
   ${e.questions ? `<aside class="questions"><h3>Questions to think about</h3><ol>${e.questions.map(q => `<li>${q}</li>`).join("")}</ol></aside>` : ""}
   ${chap(9, similar)}
   ${chap(10, more)}
@@ -104,7 +130,7 @@ function storyPage(e, i) {
     ${prev ? `<a class="pv" href="${prev.id}.html" style="text-decoration:none;border-radius:14px;background:var(--stone);padding:18px 20px"><small>← Earlier · ${yr(prev.year)}</small><br><b>${esc(prev.title)}</b></a>` : "<span></span>"}
     ${next ? `<a class="nx" href="${next.id}.html" style="text-decoration:none;border-radius:14px;background:var(--stone);padding:18px 20px;text-align:right"><small>Later · ${yr(next.year)} →</small><br><b>${esc(next.title)}</b></a>` : ""}
   </div>
-  <p class="credit" style="margin-top:24px"><a href="index.html">All stories</a> · <a href="../index.html#${e.id}">Open this story in the interactive atlas</a></p>
+  <p class="credit" style="margin-top:24px"><a href="index.html">All stories</a> · <a href="../index.html#${e.id}">Open this story in the interactive atlas</a> · <a href="../index.html#glossary">Glossary of key words</a></p>
 </article></div></div>
 </main>
 <script type="application/ld+json">${JSON.stringify(ld)}</script>

@@ -86,11 +86,20 @@
       <div class="ex-body"><small class="pw-level">${esc(p.level || "")} · ${p.steps.length} stories</small><h3>${esc(p.title)}</h3><p>${esc(p.teaser)}</p>
         <div class="ex-btns"><button type="button" class="btn-play" data-go="path/${p.id}">Start the pathway →</button></div></div>
     </article>`).join("");
+  const srcStats = document.getElementById("src-stats");
+  if (srcStats) {
+    const E = window.EVENTS || [], X = window.EXTRAS || {};
+    const nSrc = E.reduce((a, e) => a + ((e.sources || []).length), 0);
+    const nChecked = E.filter(e => e.checked || (window.REVIEWS && window.REVIEWS[e.id]) || (X[e.id] && X[e.id].checked)).length;
+    const nPrim = E.filter(e => X[e.id] && X[e.id].primary).length;
+    const nVoice = E.filter(e => X[e.id] && (X[e.id].voices || []).length).length;
+    const stat = (n, t) => `<div class="src-stat"><b>${n.toLocaleString("en-GB")}</b><span>${t}</span></div>`;
+    srcStats.innerHTML = stat(E.length, "stories, each with numbered footnotes") + stat(nSrc, "cited sources, each with a link") + stat(nChecked, "stories fact-checked, with the date shown") + stat(nPrim, "stories with a primary source from the time") + stat(nVoice, "stories with first-hand quotations");
+  }
   if (exMore) {
     const sugg = contactUrl("suggestion", "Story suggestion: ", "Event:\nPlace and date:\nWhy it matters:\nGood sources (with links):\n");
-    exMore.innerHTML = `<button type="button" class="ex-link" data-go="sources"><b>Sources and voices</b><span>Posters, petitions and photographs from the time — with questions to ask</span></button>
+    exMore.innerHTML = `<button type="button" class="ex-link" data-go="glossary"><b>Glossary</b><span>Key words explained in plain English</span></button>
       <button type="button" class="ex-link" data-go="people"><b>People A–Z</b><span>Everyone named in the stories</span></button>
-      <button type="button" class="ex-link" data-go="coverage"><b>Whose history is here?</b><span>What the atlas covers — and what it is missing</span></button>
       ${sugg ? `<a class="ex-link" href="${sugg}" target="_blank" rel="noopener"><b>Suggest a story ↗</b><span>Tell us what is missing</span></a>` : ""}`;
   }
   if (SITE.support && SITE.support.url) {
@@ -218,6 +227,75 @@
     }));
     return [...map.values()];
   }
+
+  /* ---------- glossary: page, and hover definitions in story text ---------- */
+  const GLOSS = window.GLOSSARY || [];
+  const glById = Object.fromEntries(GLOSS.map(g => [g.id, g]));
+  const glForm = {}; GLOSS.forEach(g => (g.m || []).forEach(f => { glForm[f] = g.id; }));
+  const glRe = GLOSS.length ? new RegExp("(^|[^\\p{L}\\p{N}-])(" + Object.keys(glForm).sort((a, b) => b.length - a.length).map(f => f.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")(?![\\p{L}\\p{N}])", "u") : null;
+  function markGlossary(root) {
+    if (!glRe || !root) return;
+    const used = new Set();
+    const SKIP = "a,sup,button,h1,h2,h3,h4,blockquote,figcaption,.sources,.gl,.voices,.similar,.more,.questions,summary,.ongoing";
+    root.querySelectorAll(".chapter .prose").forEach(block => {
+      const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement.closest(SKIP) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+      const nodes = []; let n; while ((n = walker.nextNode())) nodes.push(n);
+      nodes.forEach(node => {
+        let rest = node, guard = 0;
+        while (rest && guard++ < 20) {
+          const t = rest.nodeValue; let m = null, off = 0, sub = t;
+          // find the first match whose term has not been used yet in this story
+          while (sub.length) { const x = glRe.exec(sub); if (!x) break; const id = glForm[x[2]]; if (!used.has(id)) { m = x; break; } const cut = x.index + x[0].length; off += cut; sub = sub.slice(cut); }
+          if (!m) break;
+          const id = glForm[m[2]]; used.add(id);
+          const start = off + m.index + m[1].length, word = m[2];
+          const after = rest.splitText(start); rest = after.splitText(word.length);
+          const span = document.createElement("span"); span.className = "gl"; span.tabIndex = 0; span.dataset.gl = id; span.textContent = word;
+          span.setAttribute("aria-describedby", "gl-tip");
+          after.replaceWith(span);
+        }
+      });
+    });
+  }
+  // one floating definition box, shared by every underlined word
+  const tip = document.createElement("div"); tip.id = "gl-tip"; tip.className = "gl-tip"; tip.setAttribute("role", "tooltip"); tip.hidden = true; document.body.appendChild(tip);
+  let tipFor = null, tipT = null;
+  function showTip(el) {
+    const g = glById[el.dataset.gl]; if (!g) return;
+    clearTimeout(tipT); tipFor = el;
+    tip.innerHTML = `<b>${esc(g.term)}</b><span>${esc(g.d)}</span><a href="#glossary/${g.id}">See the glossary →</a>`;
+    tip.hidden = false;
+    const r = el.getBoundingClientRect(), tw = Math.min(320, window.innerWidth - 24);
+    tip.style.width = tw + "px";
+    let x = r.left + r.width / 2 - tw / 2; x = Math.max(12, Math.min(x, window.innerWidth - tw - 12));
+    const below = r.bottom + 10 + tip.offsetHeight < window.innerHeight;
+    tip.style.left = x + "px"; tip.style.top = (below ? r.bottom + 8 : r.top - tip.offsetHeight - 8) + "px";
+  }
+  function hideTip(now) { clearTimeout(tipT); tipT = setTimeout(() => { tip.hidden = true; tipFor = null; }, now ? 0 : 180); }
+  document.addEventListener("mouseover", ev => { const el = ev.target.closest && ev.target.closest(".gl"); if (el) showTip(el); else if (!ev.target.closest || !ev.target.closest("#gl-tip")) { if (tipFor) hideTip(); } else clearTimeout(tipT); });
+  document.addEventListener("focusin", ev => { const el = ev.target.closest && ev.target.closest(".gl"); if (el) showTip(el); });
+  document.addEventListener("focusout", ev => { if (ev.target.closest && ev.target.closest(".gl")) hideTip(); });
+  document.addEventListener("click", ev => { const el = ev.target.closest && ev.target.closest(".gl"); if (el) { ev.preventDefault(); if (tipFor === el && !tip.hidden) hideTip(true); else showTip(el); } else if (!ev.target.closest("#gl-tip")) hideTip(true); });
+  document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !tip.hidden) hideTip(true); });
+  FB.view.addEventListener("scroll", () => { if (!tip.hidden) hideTip(true); }, { passive: true });
+  tip.addEventListener("click", ev => { if (ev.target.closest("a")) hideTip(true); });
+
+  FB.routes.glossary = arg => {
+    const list = GLOSS.slice().sort((a, b) => a.term.localeCompare(b.term, "en", { sensitivity: "base" }));
+    const letters = [...new Set(list.map(g => g.term[0].toUpperCase()))];
+    FB.showPage(`${pageHero("Glossary", "Key words", `Short, plain-English explanations of ${list.length} words that come up again and again in the stories. In the stories, words from this list are gently underlined: hover over or tap one to see what it means.`, null)}
+      <div class="pg-body"><div class="wrap">
+        <div class="pp-tools"><input type="search" id="gl-q" placeholder="Find a word…" aria-label="Find a word"><nav class="pp-letters notranslate">${letters.map(l => `<a href="#" data-l="${esc(l)}">${esc(l)}</a>`).join("")}</nav></div>
+        <dl class="gl-list">${list.map(g => `<div class="gl-item" id="gl-${g.id}" data-l="${esc(g.term[0].toUpperCase())}" data-k="${esc((g.term + " " + (g.m || []).join(" ") + " " + g.d).toLowerCase())}"><dt>${esc(g.term)}</dt><dd>${esc(g.d)}</dd></div>`).join("")}</dl>
+        <p class="pp-empty" hidden>No word matches that search.</p>
+        <p class="pg-note">These definitions are simplified for a general audience. Many of these words have long and contested histories; the stories show how they were used in different times and places.</p>
+      </div></div>`, "Glossary");
+    const q = FB.vc.querySelector("#gl-q");
+    q.oninput = () => { const t = q.value.trim().toLowerCase(); let k = 0; FB.vc.querySelectorAll(".gl-item").forEach(d => { const v = !t || d.dataset.k.includes(t); d.hidden = !v; if (v) k++; }); FB.vc.querySelector(".pp-empty").hidden = k > 0; };
+    FB.vc.querySelectorAll(".pp-letters [data-l]").forEach(a => a.onclick = ev => { ev.preventDefault(); const d = [...FB.vc.querySelectorAll(".gl-item")].find(d => !d.hidden && d.dataset.l === a.dataset.l); if (d) FB.scrollToEl(d, 90); });
+    if (arg && glById[arg]) setTimeout(() => { const d = FB.vc.querySelector("#gl-" + arg); if (d) { FB.scrollToEl(d, 120); d.classList.add("flash"); setTimeout(() => d.classList.remove("flash"), 1800); } }, 80);
+    return true;
+  };
   FB.routes.sources = () => {
     const withP = EVENTS.filter(e => e.primary && MEDIA[e.primary.media]), withV = EVENTS.filter(e => e.voices && e.voices.length);
     FB.showPage(`${pageHero("Primary sources", "Sources and voices", `Sources made at the time — posters, petitions, photographs, pamphlets and prints — with questions to ask of each, and the words of people who were there. ${withP.length} stories so far, with more being added.`, null)}
@@ -356,10 +434,96 @@
     FB.vc.querySelectorAll(".st-mode button").forEach(b => b.setAttribute("aria-pressed", b.dataset.mode === mode));
     store.set("mode", mode);
   }
+
+  /* ---------- print-friendly version of a story ---------- */
+  function printStory(e) {
+    const SEC = FB.SECTIONS.map(x => x[1]);
+    const fnote = h => String(h || "").replace(/\[(\d+)\]/g, "<sup>[$1]</sup>");
+    const txt = h => String(h || "").replace(/<[^>]+>/g, "");
+    const url = SITE.storyPages && SITE.url ? shareUrl(`/stories/${e.id}.html`) : shareUrl(`/#${e.id}`);
+    const capOf = m => `${esc(m.cap)} <span class="cr">${txt(credit(m))}</span>`;
+    const hm = MEDIA[e.hero];
+    const sec = (n, body) => body ? `<section><h2><span>${n}</span> ${esc(SEC[n - 1])}</h2>${body}</section>` : "";
+    const voices = (e.voices || []).length ? `<div class="voices"><h3>In their own words</h3>${e.voices.map(v => `<blockquote>“${esc(v.q)}”<cite>${esc(v.who)}${v.when ? `, ${esc(v.when)}` : ""}${v.src ? ` — ${esc(v.src[0])}` : ""}</cite></blockquote>`).join("")}</div>` : "";
+    const p = e.primary, pm = p && MEDIA[p.media];
+    const primary = pm ? `<div class="box"><h3>Primary source: ${esc(p.kind)}</h3><figure class="pfig"><img src="${fileUrl(pm.f, 600)}" alt=""><figcaption>${capOf(pm)}</figcaption></figure><p><b>Made by, and when:</b> ${esc(p.made)}</p><p>${esc(p.about)}</p><p><b>Questions to ask of this source</b></p><ol>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></div>` : "";
+    const og = e.ongoing ? `<div class="box og"><h3>Ongoing situation (last reviewed ${esc(e.ongoing.asOf)})</h3>${fnote(e.ongoing.text)}${(e.ongoing.watch || []).length ? `<p><b>Still unresolved:</b></p><ul>${e.ongoing.watch.map(w => `<li>${w}</li>`).join("")}</ul>` : ""}<p class="small">This is recent history. Accounts, casualty figures and outcomes may change as more evidence emerges.</p></div>` : "";
+    const similar = (e.similar || []).map(x => x.id && byId[x.id] ? `<li>${esc(byId[x.id].title)} (${yr(byId[x.id].year)})</li>` : x.name ? `<li>${esc(x.name)}${x.url ? ` — <span class="u">${esc(x.url)}</span>` : ""}</li>` : "").join("");
+    const more = (e.more || []).map(([t, l, u]) => `<li>${esc(l)}${u ? ` — <span class="u">${esc(u)}</span>` : ""}</li>`).join("");
+    const today = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    const doc = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>${esc(e.title)} — From Below (print version)</title>
+<style>
+  @page{margin:18mm 16mm}
+  body{font-family:Georgia,"Times New Roman",serif;color:#111;max-width:720px;margin:24px auto;padding:0 18px;font-size:11.5pt;line-height:1.5}
+  .bar{font-family:Arial,sans-serif;display:flex;gap:10px;align-items:center;justify-content:space-between;border:1px solid #ccc;border-radius:8px;padding:10px 14px;margin-bottom:22px;font-size:10pt}
+  .bar button{font:inherit;font-weight:bold;background:#B5432F;color:#fff;border:0;border-radius:6px;padding:7px 14px;cursor:pointer}
+  .kicker{font-family:Arial,sans-serif;font-size:8.5pt;letter-spacing:.12em;text-transform:uppercase;color:#555;margin:0 0 6px}
+  h1{font-family:Arial,sans-serif;font-size:24pt;line-height:1.1;margin:0 0 8px}
+  .teaser{font-size:13pt;font-style:italic;margin:0 0 12px}
+  .facts{font-family:Arial,sans-serif;font-size:9.5pt;color:#333;border-top:1px solid #999;border-bottom:1px solid #999;padding:6px 0;margin:0 0 14px}
+  h2{font-family:Arial,sans-serif;font-size:13.5pt;margin:20px 0 6px;border-bottom:1px solid #ddd;padding-bottom:3px;break-after:avoid}
+  h2 span{color:#B5432F}
+  h3{font-family:Arial,sans-serif;font-size:11pt;margin:12px 0 6px}
+  figure{margin:0 0 14px;break-inside:avoid}
+  figure img{max-width:100%;max-height:240px;display:block}
+  .pfig img{max-height:200px}
+  figcaption{font-family:Arial,sans-serif;font-size:8.5pt;color:#444;margin-top:4px}
+  .cr{color:#777}
+  ul,ol{padding-left:22px;margin:6px 0 10px}
+  li{margin:0 0 4px}
+  dl{margin:0}dt{font-weight:bold;margin-top:6px}dd{margin:0 0 4px 0}
+  blockquote{margin:8px 0 10px;padding-left:12px;border-left:3px solid #B5432F;font-style:italic}
+  cite{display:block;font-style:normal;font-family:Arial,sans-serif;font-size:8.5pt;color:#444;margin-top:3px}
+  .box{border:1px solid #bbb;border-radius:6px;padding:8px 14px;margin:12px 0;break-inside:avoid}
+  .og{background:#FFF8E6}
+  sup{font-size:7pt;color:#B5432F}
+  .src li,.u{font-size:9pt;word-break:break-all}
+  .src .u{color:#333}
+  .small,footer{font-family:Arial,sans-serif;font-size:8.5pt;color:#555}
+  footer{border-top:1px solid #999;margin-top:24px;padding-top:8px}
+  @media print{.bar{display:none}body{margin:0;max-width:none}}
+</style></head><body>
+<div class="bar"><span>Print-friendly version. Use your browser's print dialog to print or save as PDF.</span><button onclick="window.print()">Print / Save as PDF</button></div>
+<p class="kicker">From Below · an atlas of radical history · ${esc(THEMES[e.theme] || "")}${e.ongoing ? " · Recent history" : ""}</p>
+<h1>${esc(e.title)}</h1>
+<p class="teaser">${esc(e.teaser)}</p>
+<p class="facts"><b>When:</b> ${esc(e.date)} &nbsp;·&nbsp; <b>Where:</b> ${esc(e.place)}${e.checked ? ` &nbsp;·&nbsp; <b>Facts last checked:</b> ${esc(fmtDate(e.checked))}` : ""}</p>
+${hm ? `<figure><img src="${fileUrl(hm.f, 900)}" alt=""><figcaption>${capOf(hm)}</figcaption></figure>` : ""}
+${og}
+${sec(1, fnote(e.background))}
+${sec(2, `<dl>${(e.people || []).map(x => `<dt>${x.n}</dt><dd>${x.r}</dd>`).join("")}</dl>${voices}`)}
+${sec(3, fnote(e.happened))}
+${sec(4, fnote(e.next))}
+${sec(5, fnote(e.debates))}
+${sec(6, fnote(e.evidence) + primary)}
+${sec(7, fnote(e.memory))}
+${sec(8, fnote(e.why))}
+${(e.questions || []).length ? `<div class="box"><h3>Questions to think about</h3><ol>${e.questions.map(q => `<li>${q}</li>`).join("")}</ol></div>` : ""}
+${sec(9, similar ? `<ul>${similar}</ul>` : "")}
+${sec(10, more ? `<ul>${more}</ul>` : "")}
+<section><h2>Sources</h2><p class="small">The numbers in square brackets in the text refer to these sources.</p><ol class="src">${(e.sources || []).map(([t, u]) => `<li>${txt(t)}${u ? `<br><span class="u">${esc(u)}</span>` : ""}</li>`).join("")}</ol></section>
+<footer>Printed from <b>From Below</b> on ${today}. Online version: ${esc(url)}<br>Text licensed CC BY-SA 4.0. Images from Wikimedia Commons; credits are given in each caption.</footer>
+</body></html>`;
+    const fire = win => {
+      const go2 = () => { try { win.focus(); win.print(); } catch (_) { } };
+      const imgs = [...win.document.images]; let left = imgs.length;
+      if (!left) return setTimeout(go2, 200);
+      const done = () => { if (--left <= 0) setTimeout(go2, 150); };
+      imgs.forEach(im => { if (im.complete) done(); else { im.onload = im.onerror = done; } });
+      setTimeout(go2, 4000);
+    };
+    let w = null; try { w = window.open("", "_blank"); } catch (_) { }
+    if (w && w.document) { w.document.open(); w.document.write(doc); w.document.close(); let fired = false; const f = () => { if (!fired) { fired = true; fire(w); } }; w.onload = f; setTimeout(f, 600); return; }
+    // pop-ups blocked: print from a hidden frame instead
+    const fr = document.createElement("iframe"); fr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0";
+    document.body.appendChild(fr); fr.contentDocument.open(); fr.contentDocument.write(doc); fr.contentDocument.close();
+    fire(fr.contentWindow); setTimeout(() => fr.remove(), 60000);
+  }
   FB.hooks.afterStory = (e, vc) => {
+    markGlossary(vc);
     setMode(store.get("mode") || "full");
     vc.querySelectorAll(".st-mode button").forEach(b => b.onclick = () => { setMode(b.dataset.mode); stopSpeech(); });
-    vc.querySelector(".st-print").onclick = () => window.print();
+    vc.querySelector(".st-print").onclick = () => printStory(e);
     vc.querySelector(".st-share").onclick = () => share(SITE.storyPages && SITE.url ? shareUrl(`/stories/${e.id}.html`) : shareUrl(`/#${e.id}`), e.title);
     const lb = vc.querySelector(".st-listen");
     if (!("speechSynthesis" in window)) lb.hidden = true;

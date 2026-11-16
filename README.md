@@ -136,3 +136,23 @@ All media are hotlinked from **Wikimedia Commons** via `Special:FilePath`, and e
 * **Code** (`index.html`, `assets/css`, `assets/js/`, `tools/`): MIT.
 * **Images/video**: individual licences as listed on the Credits page (public domain or Creative Commons).
 * **Map data**: Natural Earth via [world-atlas](https://github.com/topojson/world-atlas) (public domain). **Libraries**: [D3](https://d3js.org) and [topojson-client](https://github.com/topojson/topojson-client) (ISC), loaded from the jsDelivr CDN.
+
+## Recent history and the "ongoing situation" box
+
+Stories about recent events may be added once the main events are at least six months old. Use cautious language about impact and outcomes, give ranges or named sources for casualty figures, and note where accounts differ.
+
+A story about a situation that is not yet resolved can carry an optional `ongoing` field:
+
+```js
+ongoing: {
+  asOf: "16 November 2026",          // date the box was last reviewed
+  text: `<p>Short summary of where things stand, with footnotes.[3]</p>`,
+  watch: ["Open question 1", "Open question 2"]   // optional
+}
+```
+
+The box appears under the story header (in the atlas and on the static story pages), and the story is tagged "Recent history". Review these boxes regularly and update `asOf` each time; remove the field once the situation is settled.
+
+## Glossary
+
+Key words are defined in `data/glossary.js`. Each entry has a term, a short plain-English definition (`d`) and the word forms to look for in stories (`m`, case-sensitive). The first use of each word in a story is gently underlined, with the definition shown on hover, tap or keyboard focus; the full A–Z list is at `#glossary`. Keep definitions short and neutral, and avoid word forms that often appear in names (for example "Union" in "Soviet Union").

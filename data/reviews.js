@@ -406,5 +406,10 @@ window.EXTRAS = window.EXTRAS || {};
   belarus2020: { date: "2026-11-16", note: "Dates and figures checked against the cited sources." },
   eswatini2021: { date: "2026-11-16", note: "Dates and figures checked against the cited sources." },
   iran2022: { date: "2026-11-16", note: "Dates and figures checked against the cited sources." },
-  uffo1982: { date: "2026-11-16", note: "New story; dates and figures checked against the cited sources when written." }
+  uffo1982: { date: "2026-11-16", note: "New story; dates and figures checked against the cited sources when written." },
+  kenya2024: { date: "2026-11-16", note: "New recent-history story; facts checked against the cited sources when written. Includes an ongoing-situation box to be reviewed as events develop." },
+  bangladesh2024: { date: "2026-11-16", note: "New recent-history story; facts checked against the cited sources when written. Includes an ongoing-situation box to be reviewed as events develop." },
+  serbia2024: { date: "2026-11-16", note: "New recent-history story; facts checked against the cited sources when written. Includes an ongoing-situation box to be reviewed as events develop." },
+  georgia2024: { date: "2026-11-16", note: "New recent-history story; facts checked against the cited sources when written. Includes an ongoing-situation box to be reviewed as events develop." },
+  nepal2025: { date: "2026-11-16", note: "New recent-history story; facts checked against the cited sources when written. Includes an ongoing-situation box to be reviewed as events develop." }
 });

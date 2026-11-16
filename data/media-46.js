@@ -1,0 +1,12 @@
+/* Media for recent stories (batch 78): Wikimedia Commons. */
+Object.assign(window.MEDIA, {
+  kenyaPeriodProtest: { f: "Young women protesting the increase of period products in the Reject Finance Bill 2024 Protests in Nairobi, Kenya, 2024.jpg", cap: "Young women in Nairobi protest against the proposed tax on period products, 20 June 2024.", by: "Egotieno", lic: "CC0" },
+  banglaBlockade: { f: "3.Bangladesh quota reform movement 2024.jpg", cap: "Students on a 'Bangla Blockade' against government job quotas, Dhaka, July 2024.", by: "Rayhan9d", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  banglaDhakaProtest: { f: "Students protest against Quota in Dhaka City.jpg", cap: "Students protest against the quota system in Dhaka, 8 July 2024.", by: "S.M.M. Musabbir Uddin", lic: "CC BY 4.0", lu: "https://creativecommons.org/licenses/by/4.0" },
+  cacakProtest2025: { f: "Protests in Serbia regarding the fall of a concrete canopy (54296636890).jpg", cap: "A protest in Čačak, 26 January 2025. The banner reads: 'We don't have a plan B, but we are destroying plan A'.", by: "Dejan Krsmanovic", lic: "CC BY 2.0", lu: "https://creativecommons.org/licenses/by/2.0" },
+  noviSadAnniversary: { f: "Novi Sad 2025-11-01 - 2.jpg", cap: "The first anniversary of the canopy collapse, commemorated in Novi Sad, 1 November 2025.", by: "Emilija Knezevic", lic: "CC BY 4.0", lu: "https://creativecommons.org/licenses/by/4.0" },
+  tbilisiMarch2024: { f: "Tbilisi - election protests 4 November 2024 - March to Rustaveli Avenue.jpg", cap: "Protesters march to Rustaveli Avenue in Tbilisi against the official election results, 4 November 2024.", by: "Jelger Groeneveld", lic: "CC BY-SA 2.0", lu: "https://creativecommons.org/licenses/by-sa/2.0" },
+  tbilisiCordon2024: { f: "Georgian Police Cordon.jpg", cap: "A police cordon around the Georgian parliament building, 1 December 2024.", by: "AlexandreAssatiani", lic: "CC0" },
+  nepalGenZFlag: { f: "2025 Nepalese Gen Z movement protesters with flag of Nepal.jpg", cap: "Young protesters with the flag of Nepal, 9 September 2025.", by: "Himal Subedi", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  nepalParliamentAfter: { f: "Sansad Bhavan of Nepal (International Convention Centre Nepal) After GenZ Protest-070A6053.jpg", cap: "The parliament building in Kathmandu after it was set on fire, photographed 20 September 2025.", by: "Bijay Chaurasia", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" }
+});

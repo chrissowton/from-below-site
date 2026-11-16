@@ -354,27 +354,35 @@
   const ov = document.getElementById("tl-overview"), vtl = document.getElementById("vtl");
   const BRK = [-1200, 0, 1500, 1800, 1900, 1950, 2000, 2027], FR = [0, .06, .13, .2, .34, .56, .87, 1];
   const TICKS = [1500, 1800, 1900, 1950, 2000];
-  let tlX = null, brush = null, brushG = null, ovSvg = null;
+  let tlX = null, brush = null, brushG = null, ovSvg = null, tlZoom = null;
+  // when a period is chosen, the overview zooms to it (with a little margin either side)
+  function zoomTo(a, z) { const span = Math.max(4, z - a), pad = Math.max(1, Math.round(span * .08)); tlZoom = [a - pad, z + pad]; }
   function drawOverview() {
     const w = ov.clientWidth; if (!w) return;
     const m = 4, iw = w - 2 * m, H0 = 74, base = H0 - 18, top = 12;
-    tlX = d3.scaleLinear().domain(BRK).range(FR.map(f => m + f * iw)).clamp(true);
+    const inZ = e => !tlZoom || (e.year >= tlZoom[0] && e.year <= tlZoom[1]);
+    let ticks = TICKS;
+    if (tlZoom) {
+      tlX = d3.scaleLinear().domain(tlZoom).range([m, m + iw]).clamp(true);
+      ticks = tlX.ticks(Math.max(3, Math.floor(iw / 80))).filter(Number.isInteger);
+    } else tlX = d3.scaleLinear().domain(BRK).range(FR.map(f => m + f * iw)).clamp(true);
+    const SHOWN = EVENTS.filter(inZ);
     const nb = Math.max(30, Math.floor(iw / 6)), bw = iw / nb;
     ov.innerHTML = "";
     ovSvg = d3.select(ov).append("svg").attr("width", w).attr("height", H0).attr("role", "img").attr("aria-label", "Number of stories over time — drag across to choose a period");
     // stacked, coloured columns: one small square per story, by theme
     const bins = Array.from({ length: nb }, () => []);
-    EVENTS.forEach(e => { const i = Math.min(nb - 1, Math.max(0, Math.floor((tlX(e.year) - m) / bw))); bins[i].push(e); });
+    SHOWN.forEach(e => { const i = Math.min(nb - 1, Math.max(0, Math.floor((tlX(e.year) - m) / bw))); bins[i].push(e); });
     const maxN = d3.max(bins, b => b.length) || 1, unit = Math.min(4, (base - top - 2) / maxN);
     const order = Object.keys(THEMES);
     bins.forEach((b, i) => b.sort((p, q) => order.indexOf(p.theme) - order.indexOf(q.theme)).forEach((e, j) => { e.bx = m + i * bw; e.by = base - (j + 1) * unit; }));
-    ovSvg.append("g").selectAll("rect").data(EVENTS).join("rect")
+    ovSvg.append("g").selectAll("rect").data(SHOWN).join("rect")
       .attr("class", d => "ov-sq t-" + d.theme).attr("x", d => d.bx + .5).attr("y", d => d.by).attr("width", Math.max(1, bw - 1)).attr("height", Math.max(.6, unit - .3));
     ovSvg.append("rect").attr("class", "tl-band").attr("x", m).attr("y", base).attr("width", iw).attr("height", 1.5);
-    const tg = ovSvg.append("g").selectAll("g").data(TICKS).join("g").attr("transform", t => `translate(${tlX(t)},${base})`);
+    const tg = ovSvg.append("g").selectAll("g").data(ticks).join("g").attr("transform", t => `translate(${tlX(t)},${base})`);
     tg.append("line").attr("class", "tl-tick").attr("y2", 4);
     tg.append("text").attr("class", "tl-lab").attr("y", 15).text(t => t < 0 ? `${-t} BCE` : t)
-      .style("display", (t, i) => (i > 0 && tlX(t) - tlX(TICKS[i - 1]) < 30) ? "none" : null);
+      .style("display", (t, i) => (i > 0 && tlX(t) - tlX(ticks[i - 1]) < 30) ? "none" : null);
     brushG = ovSvg.append("g").attr("class", "tl-brush");
     const markers = ovSvg.append("g").attr("class", "ov-moments");
     brush = d3.brushX().extent([[m, 0], [m + iw, H0]])
@@ -383,11 +391,16 @@
         if (!ev.selection) { state.y0 = -Infinity; state.y1 = Infinity; }
         else { state.y0 = Math.floor(tlX.invert(ev.selection[0])); state.y1 = Math.ceil(tlX.invert(ev.selection[1])); }
         refresh(ev.type === "end");
+        if (ev.type === "end") {                       // zoom the overview in on the chosen period
+          if (ev.selection) zoomTo(state.y0, state.y1); else tlZoom = null;
+          setTimeout(drawOverview, 0);
+        }
       });
     brushG.call(brush);
-    if (isFinite(state.y0)) brushG.call(brush.move, [tlX(state.y0), tlX(state.y1)]);
+    // when zoomed, the whole strip is the chosen period, so leave it clear for a new, narrower selection
+    if (isFinite(state.y0) && !tlZoom) brushG.call(brush.move, [tlX(state.y0), tlX(state.y1)]);
     // moments: small flags above the bars (drawn after the brush so they stay clickable)
-    const mk = markers.raise().selectAll("g").data(window.MOMENTS || []).join("g").attr("class", "ov-mk").attr("tabindex", 0).attr("role", "link")
+    const mk = markers.raise().selectAll("g").data((window.MOMENTS || []).filter(d => !tlZoom || (parseInt(d.years) >= tlZoom[0] && parseInt(d.years) <= tlZoom[1]))).join("g").attr("class", "ov-mk").attr("tabindex", 0).attr("role", "link")
       .attr("aria-label", d => `Moment: ${d.title}`)
       .attr("transform", d => `translate(${tlX(parseInt(d.years))},0)`);
     mk.append("path").attr("d", "M-5,1 h10 l-5,7 z");
@@ -422,11 +435,11 @@
       era.hidden = !n; era.querySelector("small").textContent = n === 1 ? "1 story" : `${n} stories`;
     });
   }
-  function clearPeriod() { state.y0 = -Infinity; state.y1 = Infinity; if (brushG) brushG.call(brush.move, null); }
+  function clearPeriod() { state.y0 = -Infinity; state.y1 = Infinity; if (tlZoom) { tlZoom = null; drawOverview(); } else if (brushG) brushG.call(brush.move, null); }
   document.getElementById("tl-reset").onclick = () => { clearPeriod(); refresh(); };
   document.querySelectorAll("[data-era]").forEach(b => b.onclick = () => {
     const [a, z] = b.dataset.era.split(",").map(Number); state.y0 = a; state.y1 = z;
-    if (brushG) brushG.call(brush.move, [tlX(a), tlX(z)]); refresh(true); vtl.scrollTop = 0;
+    zoomTo(a, Math.min(z, new Date().getFullYear())); drawOverview(); refresh(true); vtl.scrollTop = 0;
   });
   let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(drawOverview, 150); });
 
@@ -508,7 +521,7 @@
     const vis = EVENTS.filter(visible), n = vis.length;
     const range = isFinite(state.y0) ? `${yr(Math.max(state.y0, EVENTS[0].year))} – ${yr(Math.min(state.y1, EVENTS[EVENTS.length - 1].year))}` : `${yr(EVENTS[0].year)} – ${yr(EVENTS[EVENTS.length - 1].year)}`;
     document.getElementById("count").textContent = state.focus ? `${n} of ${EVENTS.length} stories · ${state.focus.title}` : `${n} of ${EVENTS.length} stories · ${range}${state.country ? " · " + state.country : ""}`;
-    document.getElementById("tl-range").textContent = isFinite(state.y0) ? `Showing ${range}` : "Drag across the bars to choose a period";
+    document.getElementById("tl-range").textContent = isFinite(state.y0) ? `Showing ${range} — the timeline has zoomed in. Drag again to narrow it further, or press “All years” to zoom out.` : "Drag across the bars to choose a period — the timeline will zoom in";
     document.getElementById("tl-reset").hidden = !isFinite(state.y0);
     const empty = document.getElementById("empty"); if (empty) empty.hidden = n > 0;
     const filtered = !all || isFinite(state.y0) || state.country || state.hits || state.focus;
@@ -588,7 +601,7 @@
     const i = EVENTS.indexOf(e), prev = EVENTS[i - 1], next = EVENTS[i + 1];
     const fn = html => html.replace(/\[(\d+)\]/g, (_, n) => `<sup class="fn"><button data-fn="${n}" aria-label="Source ${n}">${n}</button></sup>`);
     const chap = (n, id, inner, cls = "") => `<section class="chapter ${cls}" id="ch-${id}"><div class="num">${String(n).padStart(2, "0")}</div><h2>${SECTIONS[n - 1][1]}</h2>${inner}</section>`;
-    const people = `<ul class="people">${e.people.map(p => `<li class="person ${p.img ? "has-img" : ""}">${p.img ? `<div class="p-img" role="img" aria-label="${esc(MEDIA[p.img].cap)}" style="${bg(p.img, 400)}"></div>` : ""}<div class="p-body"><h3>${p.n}</h3><p>${p.r}</p></div></li>`).join("")}</ul>
+    const people = `<div class="people-acc">${e.people.length > 2 ? `<button type="button" class="pp-all" aria-expanded="false">Open all</button>` : ""}<ul class="pp-acc">${e.people.map(p => `<li><details><summary>${p.img ? `<span class="pp-face" role="img" aria-label="${esc(MEDIA[p.img].cap)}" style="${bg(p.img, 160)}"></span>` : `<span class="pp-face pp-dot" aria-hidden="true"></span>`}<span class="pp-txt"><b>${p.n}</b><span class="pp-prev">${String(p.r || "").replace(/<[^>]+>/g, "")}</span></span><span class="pp-chev" aria-hidden="true"></span></summary><div class="pp-more">${p.img ? `<div class="pp-big" role="img" aria-label="${esc(MEDIA[p.img].cap)}" style="${bg(p.img, 400)}"></div>` : ""}<p>${p.r}</p></div></details></li>`).join("")}</ul></div>
       ${e.people.some(p => p.img) ? `<p class="credit" style="margin-top:12px">Portraits: ${e.people.filter(p => p.img).map(p => `${esc(p.n)} — ${credit(MEDIA[p.img])}`).join("; ")}.</p>` : ""}`;
     const sources = `<div class="sources" id="src-${e.id}"><h3>Sources for this section</h3><ol>${e.sources.map(([t, u], j) => `<li id="s-${e.id}-${j + 1}">${t}${u ? ` <a href="${u}" target="_blank" rel="noopener">Link ↗</a>` : ""}</li>`).join("")}</ol></div>`;
     const happened = `<div class="verify"><span>✓</span><div><b>Sourced account.</b> Every factual claim and quotation in this section is linked to a numbered source. Click a red number to see it.</div></div>
@@ -601,6 +614,7 @@
       : `<a class="sim" href="${s.url}" target="_blank" rel="noopener"><small>Elsewhere ↗</small><b>${s.name}</b><span>${s.text}</span></a>`).join("")}</div>`;
     const more = `<ul class="more">${e.more.map(([t, l, u]) => `<li><span class="ty">${TYPES[t] || t}</span><span>${u ? `<a href="${u}" target="_blank" rel="noopener">${l}</a>` : l}</span></li>`).join("")}</ul>`;
     const hm = MEDIA[e.hero];
+    const ongoing = e.ongoing ? `<aside class="ongoing" aria-label="Ongoing situation"><div class="wrap"><div class="og-in"><div class="og-head"><span class="og-dot" aria-hidden="true"></span><b>Ongoing situation</b><span class="og-asof">Last reviewed ${esc(e.ongoing.asOf)}</span></div><div class="prose">${fn(e.ongoing.text)}</div>${(e.ongoing.watch || []).length ? `<p class="og-wl">Still unresolved:</p><ul>${e.ongoing.watch.map(w => `<li>${w}</li>`).join("")}</ul>` : ""}<p class="og-note">This is recent history. Accounts, casualty figures and outcomes may change as more evidence emerges.</p></div></div></aside>` : "";
 
     const H = window.FB && FB.hooks ? FB.hooks : {};
     const banner = H.storyBanner ? H.storyBanner(e) : "";
@@ -609,10 +623,10 @@
     const voices = H.voicesBox ? H.voicesBox(e) : "";
     vc.innerHTML = `${banner}
       <header class="s-hero"><div class="wrap">
-        <div><div class="tag">${icon(e.theme)}${THEMES[e.theme]}</div><h1 id="s-title">${esc(e.title)}</h1><p class="teaser">${esc(e.teaser)}</p>
+        <div><div class="tag">${icon(e.theme)}${THEMES[e.theme]}${e.ongoing ? ` <span class="recent-tag">Recent history</span>` : ""}</div><h1 id="s-title">${esc(e.title)}</h1><p class="teaser">${esc(e.teaser)}</p>
           <dl class="facts"><div><dt>When</dt><dd>${esc(e.date)}</dd></div><div><dt>Where</dt><dd>${esc(e.place)}</dd></div></dl></div>
         ${hm ? `<figure class="media"><div class="ph"><img src="${fileUrl(hm.f, 1200)}" alt="${esc(hm.cap)}" onerror="this.closest('figure').classList.add('noimg')"></div><figcaption>${esc(hm.cap)} ${credit(hm)}</figcaption></figure>` : ""}
-      </div></header>${tools}
+      </div></header>${ongoing}${tools}
       <div class="s-body"><div class="wrap">
         <nav class="toc" aria-label="Sections"><ol>${SECTIONS.map(([id, t]) => `<li><a href="#" data-ch="${id}">${t}</a></li>`).join("")}</ol></nav>
         <article>
@@ -633,6 +647,8 @@
           </div>
         </article>
       </div></div>`;
+    const ppAll = vc.querySelector(".pp-all");
+    if (ppAll) ppAll.onclick = () => { const open = ppAll.getAttribute("aria-expanded") !== "true"; vc.querySelectorAll(".pp-acc details").forEach(d => d.open = open); ppAll.setAttribute("aria-expanded", open); ppAll.textContent = open ? "Close all" : "Open all"; };
     vc.querySelector(".pv").onclick = () => prev && go(prev.id);
     vc.querySelector(".nx").onclick = () => next && go(next.id);
     vc.querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(b.dataset.go));
@@ -697,7 +713,14 @@
     }
   }
   function open() { toTop.hidden = true; view.classList.add("open"); document.body.style.overflow = "hidden"; hideTip(); setTimeout(() => document.getElementById("v-close").focus({ preventScroll: true }), 60); }
-  window.addEventListener("hashchange", route);
+  const trail = [location.hash];                     // in-site history, so "Back" never leaves the site
+  window.addEventListener("hashchange", () => {
+    if (trail.length > 1 && trail[trail.length - 2] === location.hash) trail.pop(); else trail.push(location.hash);
+    backBtn.hidden = false;
+    route();
+  });
+  const backBtn = document.getElementById("v-back");
+  backBtn.onclick = () => { if (trail.length > 1) history.back(); else home(); };
   document.getElementById("v-close").onclick = home;
   document.getElementById("v-home").onclick = home;
   document.getElementById("v-prev").onclick = () => { const i = EVENTS.indexOf(current); if (i > 0) go(EVENTS[i - 1].id); };

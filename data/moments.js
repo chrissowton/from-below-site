@@ -388,6 +388,152 @@ window.MOMENTS = [
   ]
  },
  {
+  "id": "1945",
+  "title": "1945–1949: After the War, the Fight Against Empire",
+  "years": "1945 – 1949",
+  "teaser": "Colonised peoples had fought and worked for the Allies, and been promised the right to choose their own government. When the war ended, they demanded it — from Algeria and Madagascar to Malaya, Iraq and the Gold Coast.",
+  "heroStory": "accra1948",
+  "links": [],
+  "stories": [
+   {
+    "id": "setif",
+    "d": "1945-05-08",
+    "when": "8 May – June 1945",
+    "note": "On the day the war in Europe ended, a march in Sétif turned into an uprising and a massacre."
+   },
+   {
+    "id": "surabaya",
+    "d": "1945-09-01",
+    "when": "September – November 1945",
+    "note": "Indonesian youths fought British and Indian troops for weeks after the declaration of independence."
+   },
+   {
+    "id": "mahabad",
+    "d": "1945-12-01",
+    "when": "1945 – 1947",
+    "note": "Kurds in Iran ran their own short-lived republic before it was crushed."
+   },
+   {
+    "id": "syl",
+    "d": "1946-01-01",
+    "when": "1943 – 1948",
+    "note": "The Somali Youth League demanded a united, independent Somalia; a demonstration in Mogadishu in January 1948 ended in bloodshed."
+   },
+   {
+    "id": "maasinaruru",
+    "d": "1946-06-01",
+    "when": "1944 – 1952",
+    "note": "Solomon Islanders refused taxes and plantation work and set up their own villages and courts."
+   },
+   {
+    "id": "abeokuta",
+    "d": "1946-09-01",
+    "when": "1946 – 1949",
+    "note": "Market women protesting unfair taxes forced their king to give up his throne."
+   },
+   {
+    "id": "malagasy",
+    "d": "1947-03-29",
+    "when": "29 March 1947 – 1949",
+    "note": "A nationalist rising in Madagascar was put down with repression that killed tens of thousands."
+   },
+   {
+    "id": "dakarniger",
+    "d": "1947-10-10",
+    "when": "10 October 1947 – 19 March 1948",
+    "note": "African railway workers struck for more than five months for equal treatment with Europeans."
+   },
+   {
+    "id": "hartal1947",
+    "d": "1947-10-20",
+    "when": "20 October 1947",
+    "note": "Malays, Chinese and Indians shut down the country for a day in support of a 'People's Constitution'."
+   },
+   {
+    "id": "wathbah",
+    "d": "1948-01-15",
+    "when": "January 1948",
+    "note": "Protests in Baghdad forced the Iraqi government to abandon a new treaty with Britain."
+   },
+   {
+    "id": "accra1948",
+    "d": "1948-02-28",
+    "when": "28 February 1948",
+    "note": "Police fired on ex-servicemen marching in Accra; the riots that followed became a turning point for independence."
+   },
+   {
+    "id": "grandbassam",
+    "d": "1949-12-22",
+    "when": "22 – 24 December 1949",
+    "note": "Hundreds of women marched to the prison at Grand-Bassam to demand the release of jailed anti-colonial leaders."
+   }
+  ],
+  "intro": "<h3>The background</h3><ul>\n  <li>Many Africans and Asians served in the Allied armies in the Second World War; about a million soldiers came from sub-Saharan Africa alone, many of them conscripted.[2]</li>\n  <li>The Atlantic Charter of 1941 spoke of the right of peoples to choose their form of government. Churchill said it meant the nations of occupied Europe, but anti-colonial politicians saw it as applying to them too.[2]</li>\n  <li>In 1945, the Fifth Pan-African Congress in Manchester demanded the end of colonialism. Its delegates included future leaders of Ghana, Kenya and Malawi.[2]</li>\n</ul>\n<h3>How it spread</h3><ul>\n  <li>In the years after the war, colonised peoples demanded votes, fair pay, an end to forced labour and, above all, independence.</li>\n  <li>Some protests were peaceful: strikes, petitions, hartals and market women's campaigns. Others turned into armed risings.</li>\n  <li>Colonial powers often answered with force. In Algeria, Madagascar and elsewhere, repression killed thousands, and the events were long kept out of official histories.</li>\n</ul>\n<h3>What changed</h3><ul>\n  <li>India and Pakistan became independent in 1947, Burma and Ceylon in 1948, and Indonesia's independence was recognised in 1949.[1]</li>\n  <li>In Africa, most colonies won independence in the following fifteen years. The Gold Coast became Ghana in 1957.[2]</li>\n  <li>Where colonial powers held on, as in Algeria and later the Portuguese colonies, the struggle turned into long wars.[2]</li>\n</ul>",
+  "debates": "<ul><li><strong>Who ended empire?</strong> Some historians stress the weakness of the European powers after the war, others the pressure of colonised peoples themselves. These stories show the second.</li><li><strong>Remembering repression:</strong> massacres such as Sétif and the repression in Madagascar were long played down by the colonial powers, and their death tolls are still disputed.</li></ul>",
+  "sources": [
+   [
+    "Wikipedia, 'Decolonization', on the independence of colonies in Asia after 1945.",
+    "https://en.wikipedia.org/wiki/Decolonization"
+   ],
+   [
+    "Wikipedia, 'Decolonisation of Africa', on African soldiers in the Second World War, the Atlantic Charter, the 1945 Pan-African Congress and the Accra riots.",
+    "https://en.wikipedia.org/wiki/Decolonisation_of_Africa"
+   ]
+  ]
+ },
+ {
+  "id": "1960",
+  "title": "1959–1961: The Year of Africa — and its Limits",
+  "years": "1959 – 1961",
+  "teaser": "In 1960, seventeen African countries became independent. But where Portugal and Spain refused to let go, protests in docks, cotton fields and villages were met with massacres, and the struggle turned to war.",
+  "heroStory": "leopoldville",
+  "links": [],
+  "stories": [
+   {
+    "id": "leopoldville",
+    "d": "1959-01-04",
+    "when": "4 – 7 January 1959",
+    "note": "Three days of rioting after a banned meeting; within eighteen months the Congo was independent."
+   },
+   {
+    "id": "pidjiguiti",
+    "d": "1959-08-03",
+    "when": "3 August 1959",
+    "note": "Portuguese police fired on striking dockers in Bissau, killing at least 25."
+   },
+   {
+    "id": "monalige",
+    "d": "1959-10-01",
+    "when": "c. 1950 – 1968",
+    "note": "Acacio Mañé built a secret independence movement in Spanish Guinea; he disappeared after his arrest in 1959."
+   },
+   {
+    "id": "mueda",
+    "d": "1960-06-16",
+    "when": "16 June 1960",
+    "note": "Portuguese soldiers fired on Makonde farmers who had gathered peacefully in northern Mozambique."
+   },
+   {
+    "id": "cassanje",
+    "d": "1961-01-01",
+    "when": "January 1961",
+    "note": "Angolan cotton farmers refused to work; Portugal answered with air raids, and the war of independence soon began."
+   }
+  ],
+  "intro": "<h3>The background</h3><ul>\n  <li>During 1960, seventeen African colonies became independent: fourteen from France, two from Britain and one from Belgium. The year became known as the \"Year of Africa\".[1]</li>\n  <li>The year also brought the realities of post-colonial violence, and the beginning of armed opposition to apartheid in South Africa.[1]</li>\n</ul>\n<h3>How it spread</h3><ul>\n  <li>In the Belgian Congo, riots in Léopoldville in January 1959 pushed Belgium to promise independence, which came in June 1960.</li>\n  <li>Portugal's dictatorship refused to give up its colonies. In Portuguese Guinea, Mozambique and Angola, strikes and peaceful protests were met with killings.[2]</li>\n  <li>In Spanish Guinea, nationalists campaigned for independence, which came only in 1968.</li>\n</ul>\n<h3>What changed</h3><ul>\n  <li>Much of Africa became independent within a few years.[1]</li>\n  <li>In the Portuguese colonies, the massacres convinced many nationalists that peaceful protest was impossible. Wars of independence followed, ending only after the Carnation Revolution in Portugal in 1974.[2]</li>\n</ul>",
+  "debates": "<ul><li><strong>Independence or neo-colonialism?</strong> Critics argued that many new states remained dependent on the former colonial powers for trade, aid and military support. Others point to what independence did change.</li><li><strong>Peaceful or armed struggle?</strong> These stories show why some movements decided that peaceful protest could not succeed against regimes that answered with massacres.</li></ul>",
+  "sources": [
+   [
+    "Wikipedia, 'Year of Africa', on the seventeen independences of 1960 and their limits.",
+    "https://en.wikipedia.org/wiki/Year_of_Africa"
+   ],
+   [
+    "Wikipedia, 'Decolonisation of Africa', on Portugal's refusal to withdraw and the wars that followed.",
+    "https://en.wikipedia.org/wiki/Decolonisation_of_Africa"
+   ]
+  ]
+ },
+ {
   "id": "1968",
   "title": "1968: The Year the World Rebelled",
   "years": "1967 – 1969",
@@ -739,6 +885,47 @@ window.MOMENTS = [
    [
     "Wikipedia, 'April 6 Youth Movement', on its use of Otpor's symbol.",
     "https://en.wikipedia.org/wiki/April_6_Youth_Movement"
+   ]
+  ]
+ },
+ {
+  "id": "2024",
+  "title": "2024–2025: The Gen Z Wave",
+  "years": "2024 – 2025",
+  "teaser": "Young people who grew up online organised against taxes, quotas, corruption and censorship. In Bangladesh and Nepal, they brought down governments within weeks.",
+  "heroStory": "bangladesh2024",
+  "links": [
+   [
+    "bangladesh2024",
+    "nepal2025"
+   ]
+  ],
+  "stories": [
+   {
+    "id": "kenya2024",
+    "d": "2024-06-18",
+    "when": "June 2024 – July 2025",
+    "note": "The Kenyan campaign against the Finance Bill was the first to be called 'Gen Z protests'."
+   },
+   {
+    "id": "bangladesh2024",
+    "d": "2024-07-01",
+    "when": "June – August 2024",
+    "note": "Bangladesh's July Uprising is widely cited as the first successful Gen Z revolution."
+   },
+   {
+    "id": "nepal2025",
+    "d": "2025-09-08",
+    "when": "8 – 13 September 2025",
+    "note": "Bangladesh's uprising helped inspire the Gen Z protests that brought down Nepal's government."
+   }
+  ],
+  "intro": "<h3>The background</h3><ul>\n  <li>The causes differed from country to country, but generally included rising living costs, inequality, corruption, unemployment among the young and authoritarian government.[1]</li>\n  <li>As the first generation to grow up online, young protesters used social media to share information and organise.[1]</li>\n</ul>\n<h3>How it spread</h3><ul>\n  <li>The term \"Gen Z protests\" was first used for Kenya's campaign against the Finance Bill in 2024.[1]</li>\n  <li>Bangladesh's uprising, which forced Sheikh Hasina from power in August 2024, inspired protests in Nepal, Indonesia, the Philippines and elsewhere.[1]</li>\n  <li>A pirate flag from the Japanese manga One Piece became a shared symbol, carried by protesters in Indonesia, Madagascar, Nepal and other countries.[1]</li>\n</ul>\n<h3>What changed</h3><ul>\n  <li>In Bangladesh and Nepal, governments fell and new elections were held in 2026. Both countries also saw new political parties founded by young activists.[1]</li>\n  <li>In Kenya, the Finance Bill was withdrawn, but protests in 2024 and 2025 were met with lethal force.</li>\n</ul>\n<p><em>These are recent events. Read the stories' \"ongoing situation\" boxes for what is still unresolved.</em></p>",
+  "debates": "<ul><li><strong>One movement or many?</strong> Commentators group these protests together as a 'Gen Z wave', but each grew from local grievances and history.[1]</li><li><strong>Leaderless protest:</strong> movements without leaders can be hard to repress, but also hard to turn into lasting change.</li></ul>",
+  "sources": [
+   [
+    "Wikipedia, 'Gen Z protests' (accessed November 2026), on the causes, spread and symbols of the wave.",
+    "https://en.wikipedia.org/wiki/Gen_Z_protests"
    ]
   ]
  }

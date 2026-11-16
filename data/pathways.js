@@ -101,5 +101,124 @@ window.PATHWAYS = [
     { id: "standingrock", look: "Why did Indigenous people call themselves 'water protectors'?" }
   ],
   closing: "Who should decide how land and water are used — and who usually does?"
+},
+{
+  id: "language",
+  title: "Language and identity",
+  level: "Ages 11–16 and up",
+  teaser: "Secret classrooms, pirate radio and 'language nests': people who fought for the right to speak, learn and live in their own language.",
+  intro: "Governments have often tried to make everyone speak one language. These stories follow people who refused to let their language die — and asked why language matters so much.",
+  steps: [
+    { id: "bengali", look: "Why did students risk their lives over which language would be official?" },
+    { id: "antihindi", look: "Why did Tamil students see Hindi as a threat, and what did they win?" },
+    { id: "ikastola", look: "How did parents and teachers keep Basque alive when it was banned?" },
+    { id: "gaeltacht", look: "What did Irish speakers learn from the civil rights movement?" },
+    { id: "diwan", look: "Why was opening a school a form of protest?" },
+    { id: "punanaleo", look: "How can a language come back when only a few children speak it?" },
+    { id: "tajik1989", look: "How was the fight for a language linked to the fight for democracy?" }
+  ],
+  closing: "Is the right to speak your own language a human right? What does a community lose when a language dies?"
+},
+{
+  id: "disability",
+  title: "Rights, not charity: disability activism",
+  level: "Ages 11–16 and up",
+  teaser: "Marches, sit-ins, chained wheelchairs and a campus shutdown: disabled people who demanded rights instead of pity.",
+  intro: "For a long time, disabled people were treated as objects of charity rather than citizens with rights. These stories follow the people who changed that, often by putting their own bodies in the way.",
+  steps: [
+    { id: "blindmarch", look: "What did the blind marchers mean by 'rights not charity'?" },
+    { id: "lph", look: "Why were disabled New Yorkers refused government jobs, and how did they respond?" },
+    { id: "sec504", look: "Why did the sit-in last so long, and who helped the protesters?" },
+    { id: "aoishiba", look: "Why did Aoi Shiba refuse to be pitied?" },
+    { id: "deafpresident", look: "Why did it matter that the university's president should be deaf?" },
+    { id: "dan", look: "Why did activists chain themselves to buses?" },
+    { id: "bolivia2016", look: "What were the protesters asking for, and how did the government respond?" }
+  ],
+  closing: "Why do you think disability rights movements so often used direct action? What barriers remain today?"
+},
+{
+  id: "slavery",
+  title: "Resisting slavery",
+  level: "Ages 14 and up",
+  teaser: "Escape, free communities, uprisings and a revolution: how enslaved people fought for their own freedom.",
+  intro: "Slavery was not ended only by laws passed in distant capitals. Enslaved people resisted in many ways — by running away, building free communities and rising up. These stories put them at the centre.",
+  steps: [
+    { id: "palmares", look: "How did people who escaped slavery build and defend a free society?" },
+    { id: "tacky", look: "How did enslaved Africans organise a rising across Jamaica?" },
+    { id: "saramaka", look: "How did the Saramaka force the Dutch to recognise their freedom?" },
+    { id: "haiti", look: "Why is the Haitian Revolution unique in world history?" },
+    { id: "germancoast", look: "How did the authorities respond, and why so harshly?" },
+    { id: "bussa", look: "Why did the enslaved people of Barbados believe freedom was near?" },
+    { id: "martinique1848", look: "Who really ended slavery in Martinique: the government in Paris, or the enslaved themselves?" }
+  ],
+  closing: "Why have the actions of enslaved people often been left out of the story of abolition?"
+},
+{
+  id: "disappeared",
+  title: "Mothers, memory and the disappeared",
+  level: "Ages 14 and up",
+  teaser: "Silent marches, embroidered patchworks and Saturday vigils: how families of the missing and the dead refused to forget.",
+  intro: "Some governments have tried to make their opponents vanish without trace. Mothers, wives and daughters — and sometimes whole communities — turned grief into protest and memory into evidence.",
+  steps: [
+    { id: "plazademayo", look: "Why could the military not easily stop women walking in a circle?" },
+    { id: "comadres", look: "What risks did the CoMadres face, and why did they keep going?" },
+    { id: "arpilleras", look: "How could a patchwork be a form of protest — and a historical source?" },
+    { id: "saturdaymothers", look: "Why do the Saturday Mothers hold photographs, and why do they keep returning?" },
+    { id: "avega", look: "How did widows of the genocide help each other and seek justice?" },
+    { id: "ladiesinwhite", look: "Why did the Ladies in White walk in silence and dress in white?" },
+    { id: "kurapaty", look: "How did uncovering the past help start a democracy movement?" }
+  ],
+  closing: "Why is remembering the dead so often seen as a threat by governments? What is the difference between memory and history?"
+},
+{
+  id: "early",
+  title: "Rebels before the modern age",
+  level: "Ages 11–16 and up",
+  teaser: "A strike in ancient Egypt, a slave army in Italy, and peasant risings in China, France, England, Germany and Japan.",
+  intro: "Protest did not begin with modern politics. These stories show ordinary people demanding food, fairness and freedom thousands of years ago — and how we know about them, often only through their enemies' records.",
+  steps: [
+    { id: "deirmedina", look: "What did the tomb-builders want, and how did they get it?" },
+    { id: "spartacus", look: "Who wrote down the story of Spartacus, and how might that shape what we know?" },
+    { id: "redeyebrows", look: "Why did natural disaster and failed reforms lead to rebellion?" },
+    { id: "jacquerie", look: "How did chroniclers describe the rebels, and why?" },
+    { id: "peasants", look: "What did the rebels of 1381 demand, and what happened to their leaders?" },
+    { id: "germanpeasants", look: "How did printing and the Reformation help the peasants spread their demands?" },
+    { id: "shimabara", look: "How did religion and taxes combine to cause the rebellion?" }
+  ],
+  closing: "What do these early rebellions have in common with protests today? What makes them hard to study?"
+},
+{
+  id: "indigenous",
+  title: "Indigenous peoples resist",
+  level: "Ages 11–16 and up",
+  teaser: "From a coordinated revolt in New Mexico to a court victory in the Amazon: Indigenous peoples defending their land, culture and self-government.",
+  intro: "Across the Americas and Australia, Indigenous peoples have resisted conquest and dispossession for five centuries — by war, by strikes, by occupation and in the courts.",
+  steps: [
+    { id: "curalaba", look: "How did the Mapuche keep their independence for so long?" },
+    { id: "pueblo", look: "How did the Pueblo towns coordinate a revolt across great distances?" },
+    { id: "tupackatari", look: "What did Túpac Katari and Bartolina Sisa want, and how are they remembered?" },
+    { id: "wavehill", look: "How did a strike over pay become a struggle for land?" },
+    { id: "alcatraz", look: "What did the occupiers want, and how did federal policy change afterwards?" },
+    { id: "oka", look: "Why was a golf course worth a 78-day standoff?" },
+    { id: "sarayaku", look: "What did the Sarayaku win in court, and why does it matter for others?" }
+  ],
+  closing: "What different strategies did these peoples use? Which do you think worked best, and why?"
+},
+{
+  id: "recent",
+  title: "Protest in the 2020s",
+  level: "Ages 14 and up",
+  teaser: "From Minsk to Kathmandu: the protests of the last few years, and what they tell us about power, social media and young people.",
+  intro: "These are recent events, and their outcomes are still unfolding. Read them as history in the making: ask what we know, how we know it, and what might change as more evidence emerges.",
+  steps: [
+    { id: "belarus2020", look: "Why did three women lead the challenge to Lukashenko?" },
+    { id: "iran2022", look: "What did the slogan 'Woman, Life, Freedom' mean to the protesters?" },
+    { id: "kenya2024", look: "How did young Kenyans use social media to understand and oppose a law?" },
+    { id: "bangladesh2024", look: "How did a protest about job quotas turn into a movement to remove the government?" },
+    { id: "serbia2024", look: "How did a disaster become a movement for accountability?" },
+    { id: "georgia2024", look: "How has the protest movement kept going for so long?" },
+    { id: "nepal2025", look: "Why did a social media ban provoke such anger?" }
+  ],
+  closing: "What do these movements have in common? Why is it harder to write the history of events that are still going on?"
 }
 ];
