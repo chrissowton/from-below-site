@@ -86,6 +86,19 @@
       <div class="ex-body"><small class="pw-level">${esc(p.level || "")} · ${p.steps.length} stories</small><h3>${esc(p.title)}</h3><p>${esc(p.teaser)}</p>
         <div class="ex-btns"><button type="button" class="btn-play" data-go="path/${p.id}">Start the pathway →</button></div></div>
     </article>`).join("");
+  const ogList = document.getElementById("og-list");
+  if (ogList) {
+    const strip = h => String(h).replace(/<[^>]+>/g, "").replace(/\[\d+\]/g, "");
+    const og = (window.EVENTS || []).filter(e => e.ongoing).sort((a, b) => (b.year || 0) - (a.year || 0));
+    if (og.length) {
+      document.getElementById("og-block").hidden = false;
+      ogList.innerHTML = og.map(e => `<button type="button" class="og-item" data-go="${e.id}">
+        <span class="og-place">${esc(e.place || "")} · ${esc(e.date || String(e.year || ""))}</span>
+        <b>${esc(e.title)}</b>
+        ${(e.ongoing.watch || []).length ? `<span class="og-watch">Still unresolved: ${esc(strip(e.ongoing.watch[0]))}</span>` : ""}
+        <span class="og-asof">Last reviewed ${esc(e.ongoing.asOf)} →</span></button>`).join("");
+    }
+  }
   const srcStats = document.getElementById("src-stats");
   if (srcStats) {
     const E = window.EVENTS || [], X = window.EXTRAS || {};
@@ -297,14 +310,43 @@
     return true;
   };
   FB.routes.sources = () => {
-    const withP = EVENTS.filter(e => e.primary && MEDIA[e.primary.media]), withV = EVENTS.filter(e => e.voices && e.voices.length);
-    FB.showPage(`${pageHero("Primary sources", "Sources and voices", `Sources made at the time — posters, petitions, photographs, pamphlets and prints — with questions to ask of each, and the words of people who were there. ${withP.length} stories so far, with more being added.`, null)}
+    const withP = EVENTS.filter(e => e.primary && MEDIA[e.primary.media]).sort((a, b) => (a.year || 0) - (b.year || 0));
+    const withV = EVENTS.filter(e => e.voices && e.voices.length).sort((a, b) => (a.year || 0) - (b.year || 0));
+    const group = k => /photo|daguerreotype/i.test(k) ? "photo" : /poster|notice|leaflet|flyer|pamphlet|newspaper|newsletter|petition|declaration|proclamation|manuscript|poem|ballad|cover|letter|document|charter|banner|placard|broadside|card|ticket|stamp|map|record|report|book$/i.test(k) ? "doc" : /engrav|print|cartoon|lithograph|painting|drawing|illustration|sketch|woodcut|mural|watercolour|etching/i.test(k) ? "pic" : "obj";
+    const GROUPS = [["all", "All"], ["doc", "Documents and printed words"], ["photo", "Photographs"], ["pic", "Pictures and cartoons"], ["obj", "Objects and other"]];
+    const pageUrlC = f => "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(String(f).replace(/ /g, "_"));
+    const card = e => {
+      const p = e.primary, m = MEDIA[p.media];
+      return `<article class="ps-item" data-g="${group(p.kind || "")}" data-k="${esc(((m.cap || "") + " " + p.kind + " " + p.made + " " + e.title + " " + (e.country || "")).toLowerCase())}">
+        <a class="ps-pic" href="${pageUrlC(m.f)}" target="_blank" rel="noopener" title="View full size on Wikimedia Commons" style="${bg(p.media, 600)}"><span class="ps-zoom">View full size ↗</span></a>
+        <div class="ps-txt">
+          <small class="ps-kind">${esc(p.kind)} · ${esc(p.made)}</small>
+          <h3>${esc(m.cap || p.kind)}</h3>
+          <p>${esc(p.about || "")}</p>
+          ${(p.questions || []).length ? `<details class="ps-q"><summary>Questions to ask</summary><ul>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ul></details>` : ""}
+          <p class="ps-credit">${esc(m.by || "")}${m.lic ? ` · ${esc(m.lic)}` : ""}</p>
+          <button type="button" class="ps-story" data-go="${e.id}"><span>The story</span><b>${esc(e.title)}</b><em>${esc(e.country || "")}${e.year ? " · " + yr(e.year) : ""} →</em></button>
+        </div></article>`;
+    };
+    FB.showPage(`${pageHero("Primary sources", "Sources and voices", `Evidence made at the time — posters, petitions, photographs, pamphlets and prints — and the words of people who were there. ${withP.length} sources and ${withV.reduce((a, e) => a + e.voices.length, 0)} quotations so far.`, null)}
       <div class="pg-body"><div class="wrap">
-        <p class="pg-note">A primary source was made at the time, by people involved or watching. It is evidence — but every source was made by someone, for a reason. Ask who made it, why, and who is missing.</p>
-        <div class="ps-grid">${withP.map(e => { const m = MEDIA[e.primary.media]; return `<button type="button" class="ps-card t-${e.theme}" data-go="${e.id}"><span class="ps-img" style="${bg(e.primary.media, 500)}"></span><span class="ps-body"><small>${esc(e.primary.kind)} · ${esc(e.primary.made)}</small><b>${esc(e.title)}</b></span></button>`; }).join("")}</div>
+        <p class="pg-note">A primary source was made at the time, by people involved or watching. It is evidence — but every source was made by someone, for a reason. Ask who made it, why, and who is missing. Each source below links to the full story it comes from.</p>
+        <div class="ps-tools"><div class="ps-chips" role="group" aria-label="Type of source">${GROUPS.map(([g, l], i) => `<button type="button" class="chip${i ? "" : " on"}" data-g="${g}">${esc(l)}</button>`).join("")}</div>
+          <input type="search" id="ps-q" placeholder="Search sources…" aria-label="Search sources"></div>
+        <div class="ps-list" id="ps-list">${withP.map(card).join("")}</div>
+        <p class="pp-empty ps-empty" hidden>No sources match.</p>
         <section class="pg-sec"><h2>In their own words</h2>
-          <div class="voices">${withV.map(e => e.voices.map(v => `<figure><blockquote>${esc(v.q)}</blockquote><figcaption><b>${esc(v.who)}</b> · ${esc(v.when || "")} · <button type="button" class="linkish" data-go="${e.id}">${esc(e.title)} →</button></figcaption></figure>`).join("")).join("")}</div></section>
+          <div class="voices">${withV.map(e => e.voices.map(v => `<figure><blockquote>${esc(v.q)}</blockquote><figcaption><b>${esc(v.who)}</b>${v.when ? ` · ${esc(v.when)}` : ""}<button type="button" class="ps-story ps-story-sm" data-go="${e.id}"><span>The story</span><b>${esc(e.title)}</b><em>${esc(e.country || "")}${e.year ? " · " + yr(e.year) : ""} →</em></button></figcaption></figure>`).join("")).join("")}</div></section>
       </div></div>`, "Sources and voices");
+    let g = "all";
+    const q = FB.vc.querySelector("#ps-q");
+    const apply = () => {
+      const t = q.value.trim().toLowerCase(); let n = 0;
+      FB.vc.querySelectorAll(".ps-item").forEach(a => { const v = (g === "all" || a.dataset.g === g) && (!t || a.dataset.k.includes(t)); a.hidden = !v; if (v) n++; });
+      FB.vc.querySelector(".ps-empty").hidden = n > 0;
+    };
+    q.oninput = apply;
+    FB.vc.querySelectorAll(".ps-chips .chip").forEach(c => c.onclick = () => { g = c.dataset.g; FB.vc.querySelectorAll(".ps-chips .chip").forEach(x => x.classList.toggle("on", x === c)); apply(); });
     return true;
   };
   FB.routes.people = () => {
