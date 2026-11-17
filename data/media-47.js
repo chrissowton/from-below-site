@@ -1,0 +1,24 @@
+/* Media for primary sources, batch 13: Wikimedia Commons. */
+Object.assign(window.MEDIA, {
+  neroHead: { f: "Bronze Head of Nero (51220993066).jpg", cap: "A bronze head of the emperor Nero (AD 54–61), found in the River Alde in Suffolk. British Museum.", by: "Jamie Heath", lic: "CC BY-SA 2.0", lu: "https://creativecommons.org/licenses/by-sa/2.0" },
+  gracchanStones: { f: "Gracchan land commission inscriptions, CIL vol 1 (2nd edn, 1918) p 514.png", cap: "Inscriptions from boundary stones set up by the Gracchan land commission, as printed in the Corpus Inscriptionum Latinarum (1918).", by: "Corpus Inscriptionum Latinarum", lic: "Public domain" },
+  arjunavad: { f: "Arjunavad-inscription.jpg", cap: "The Arjunavad inscription of 1260 CE, which names Basava and his family.", by: "P. B. Desai", lic: "Public domain" },
+  bandaSeal: { f: "Detail of the seal on an issued edict or hukamnama of Banda Singh Bahadur.jpg", cap: "The Persian seal on an edict (hukamnama) issued by Banda Singh Bahadur. Bhai Rupa collection.", by: "Banda Singh Bahadur's chancery", lic: "Public domain" },
+  batavianStela: { f: "Funerary Stela Corporis Custodes.jpg", cap: "The tombstone of Indus, a Batavian in Nero's imperial bodyguard. Museo Nazionale Romano.", by: "Salvatore Falco", lic: "CC SA 1.0", lu: "http://creativecommons.org/licenses/sa/1.0/" },
+  villaniVespers: { f: "Sicilian Vespers 1281 How and after what manner the island of Sicily rebelled against King Charles Nuova Cronica Giovanni Villani 14th century.png", cap: "The Sicilian rising against Charles of Anjou, illustrated in a fourteenth-century manuscript of Giovanni Villani's Nuova Cronica.", by: "Illuminator of Villani's Nuova Cronica", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  astrakhan1681: { f: "Astrachan2.jpg", cap: "Razin's rebels in Astrakhan, from a book published in Amsterdam in 1681.", by: "Unknown engraver", lic: "Public domain" },
+  cyprusDemo: { f: "Cypriot demonstration 1930.jpg", cap: "A demonstration in Cyprus in favour of enosis (union with Greece), 1930s.", by: "Unknown photographer", lic: "Public domain" },
+  holymanGun: { f: "Thai Soldiers with Field Gun at Holy Man's Rebellion.png", cap: "Siamese soldiers with a field gun during the Holy Man's Rebellion, 1901.", by: "Unknown photographer", lic: "Public domain" },
+  kurapaty1989: { f: "Kurapaty 1989 meeting.jpg", cap: "A Dziady (All Souls) gathering at Kurapaty, 1989.", by: "Valer Pałściuk", lic: "CC BY-SA 3.0", lu: "http://creativecommons.org/licenses/by-sa/3.0/" },
+  ptolemyBust: { f: "Ptolemy of Mauretania Louvre Ma1887.jpg", cap: "Bust of King Ptolemy of Mauretania, Rome's ally against Tacfarinas. Louvre.", by: "Marie-Lan Nguyen", lic: "Public domain" },
+  mamunCoin: { f: "Coin of the Abbasid Caliph al-Ma'mun.jpg", cap: "A coin of the Abbasid caliph al-Ma'mun.", by: "Classical Numismatic Group", lic: "CC BY-SA 3.0", lu: "http://creativecommons.org/licenses/by-sa/3.0/" },
+  marti1929: { f: "Farabundomarti.jpg", cap: "Farabundo Martí during a visit to Nicaragua, 1929.", by: "Unknown photographer", lic: "Public domain" },
+  bussaFlag: { f: "God always saves endavour.jpg", cap: "A sketch of a flag taken from the rebels in Barbados, April 1816. The National Archives, UK (MFQ 1/112).", by: "The National Archives UK", lic: "No known restrictions" },
+  kahoolaweTNT: { f: "TNT detonation on Kaho'olawe Island during Operation Sailor Hat, shot Bravo, 1965.jpg", cap: "A 500-ton TNT explosion on Kahoʻolawe during the US Navy's Operation Sailor Hat, 6 February 1965.", by: "US Navy", lic: "Public domain" },
+  nkrumahTime: { f: "Kwame Nkrumah-TIME-1953.jpg", cap: "Kwame Nkrumah on the cover of Time magazine, 9 February 1953.", by: "Boris Chaliapin / Time", lic: "Public domain" },
+  mosleyMussolini: { f: "Oswald Mosley and Benito Mussolini 1936.jpg", cap: "Oswald Mosley with Benito Mussolini, 1936.", by: "Probably an Italian official photographer", lic: "Public domain" },
+  rainsboroughPortrait: { f: "ThomasRainsborough.gif", cap: "Thomas Rainsborough, in a contemporary portrait.", by: "Unknown artist", lic: "Public domain" },
+  sec377Judgment: { f: "Section 377 - Supreme Court of India - WP(C) NO. 76 OF 2016 Judgement 06-Sep-2018.pdf", cap: "The Supreme Court of India's judgment in Navtej Singh Johar v. Union of India, 6 September 2018.", by: "Supreme Court of India", lic: "Public domain (edict of government)" },
+  oduprise: { f: "Oduprise.jpg", cap: "The '#Oduprise' (Resist!) logo used by the protest organisers, 2019.", by: "Organisers of the protest", lic: "Free Art License", lu: "http://artlibre.org/licence/lal/en" },
+  trungParade1957: { f: "HaiBaTrung.JPG", cap: "A procession of elephants at the Hai Bà Trưng parade in Saigon, March 1957.", by: "Press and Information Office, Embassy of the Republic of Vietnam", lic: "Public domain" }
+});

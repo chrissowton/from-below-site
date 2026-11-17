@@ -107,4 +107,71 @@ window.THREADS = [
     ["Wikipedia, 'Women's suffrage in New Zealand'.", "https://en.wikipedia.org/wiki/Women%27s_suffrage_in_New_Zealand"]
   ]
 }
+,{
+  id: "mothers",
+  title: "Mothers of the disappeared: from Buenos Aires to Istanbul and Havana",
+  teaser: "How the silent marches of Argentina's mothers inspired women demanding the truth about their missing children and husbands in El Salvador, Turkey and Cuba.",
+  steps: [
+    { id: "plazademayo", link: "" },
+    { id: "comadres", link: "In El Salvador, CoMadres drew direct inspiration from the Mothers of the Plaza de Mayo. Like them, its members used their grief as mothers to build a political movement.[1]" },
+    { id: "saturdaymothers", link: "In Turkey, relatives of people who disappeared in state custody were reportedly influenced by the Mothers of the Plaza de Mayo. They held their first sit-in in Istanbul on 27 May 1995.[2]" },
+    { id: "ladiesinwhite", link: "In Cuba, the white clothing worn by the wives and mothers of jailed dissidents is reminiscent of the Mothers of the Plaza de Mayo.[3]" }
+  ],
+  sources: [
+    ["Wikipedia, 'Mothers of the Plaza de Mayo', on the movement's influence in Central America, including CoMadres.", "https://en.wikipedia.org/wiki/Mothers_of_the_Plaza_de_Mayo"],
+    ["Wikipedia, 'Saturday Mothers', on the influence of the Mothers of the Plaza de Mayo and the first sit-in.", "https://en.wikipedia.org/wiki/Saturday_Mothers"],
+    ["Wikipedia, 'Ladies in White', on their white clothing.", "https://en.wikipedia.org/wiki/Ladies_in_White"]
+  ]
+}
+,{
+  id: "satyagraha",
+  title: "Satyagraha: Gandhi's method in other hands",
+  teaser: "Gandhi called his method of non-violent resistance satyagraha — 'truth force'. Others took it up: Pashtun 'Red Shirts' on the North-West Frontier, Tamil politicians in Sri Lanka and French sheep farmers.",
+  steps: [
+    { id: "saltmarch", link: "" },
+    { id: "qissakhwani", link: "On the North-West Frontier, Abdul Ghaffar Khan — a close friend of Gandhi, known as 'the Frontier Gandhi' — led the non-violent Khudai Khidmatgar movement.[2] In April 1930, weeks after the Salt March, his arrest brought crowds onto the streets of Peshawar, and troops opened fire.[3]" },
+    { id: "galleface", link: "In 1956, Sri Lanka's Tamil Federal Party chose a satyagraha — a peaceful sit-in — to oppose the Sinhala Only language law.[4]" },
+    { id: "larzac", link: "In France, the pacifist Lanza del Vasto, who had joined Gandhi's movement in India in the 1930s, fasted for fifteen days in 1972 in support of the Larzac farmers.[5] Ten years of non-violent resistance followed, and the army's plan was cancelled.[6]" }
+  ],
+  sources: [
+    ["Wikipedia, 'Satyagraha', on the meaning of the term and its influence.", "https://en.wikipedia.org/wiki/Satyagraha"],
+    ["Wikipedia, 'Abdul Ghaffar Khan', on his friendship with Gandhi and the Khudai Khidmatgar.", "https://en.wikipedia.org/wiki/Abdul_Ghaffar_Khan"],
+    ["Wikipedia, 'Qissa Khwani massacre', on the events of 23 April 1930.", "https://en.wikipedia.org/wiki/Qissa_Khwani_massacre"],
+    ["Wikipedia, '1956 anti-Tamil pogrom', on the Federal Party's satyagraha.", "https://en.wikipedia.org/wiki/1956_anti-Tamil_pogrom"],
+    ["Wikipedia, 'Lanza del Vasto', on his time with Gandhi and his fast for Larzac.", "https://en.wikipedia.org/wiki/Lanza_del_Vasto"],
+    ["Wikipedia, 'Larzac', on the ten years of non-violent resistance.", "https://en.wikipedia.org/wiki/Larzac"]
+  ]
+}
+,{
+  id: "civilrights",
+  title: "Civil rights travels: from Selma to Jerusalem and Bombay",
+  teaser: "How the African American freedom struggle inspired Aboriginal Australians, Irish speakers in Connemara, Mizrahi Jews in Jerusalem and Dalit poets in Bombay.",
+  steps: [
+    { id: "selma", link: "" },
+    { id: "freedomride", link: "In Australia, Charles Perkins and a busload of students toured country towns exposing segregation. They were partly inspired by the Freedom Riders of the US civil rights movement.[1]" },
+    { id: "gaeltacht", link: "In Ireland, the Gaeltacht Civil Rights Movement took inspiration from the Northern Ireland civil rights movement and the American civil rights movement.[2]" },
+    { id: "blackpanthers", link: "In Jerusalem, young Jews from Moroccan families were influenced by the American Black Panther Party and took its name, to protest discrimination against Mizrahi Jews.[3]" },
+    { id: "dalitpanthers", link: "In India, Dalit writers in Bombay founded the Dalit Panthers, largely inspired by the Black Panther Party.[4]" }
+  ],
+  sources: [
+    ["Wikipedia, 'Freedom Ride (Australia)', on its inspiration.", "https://en.wikipedia.org/wiki/Freedom_Ride_(Australia)"],
+    ["Wikipedia, 'Gluaiseacht Chearta Sibhialta na Gaeltachta', on its inspiration.", "https://en.wikipedia.org/wiki/Gluaiseacht_Chearta_Sibhialta_na_Gaeltachta"],
+    ["Wikipedia, 'Israeli Black Panthers', on the movement's name and origins.", "https://en.wikipedia.org/wiki/Israeli_Black_Panthers"],
+    ["Wikipedia, 'Dalit Panthers', on the influence of the Black Panther Party.", "https://en.wikipedia.org/wiki/Dalit_Panthers"]
+  ]
+}
+,{
+  id: "carnation",
+  title: "From the colonies to Lisbon: how Africa's wars ended Portugal's dictatorship",
+  teaser: "Massacres in Guinea, Mozambique and Angola turned protest into war. Thirteen years later, the war brought down the dictatorship in Lisbon itself.",
+  steps: [
+    { id: "pidjiguiti", link: "" },
+    { id: "mueda", link: "In Mozambique, less than a year later, Portuguese soldiers fired on farmers who had gathered peacefully at Mueda. As in Bissau, the killings convinced many that peaceful protest could not end colonial rule." },
+    { id: "cassanje", link: "In Angola, the cotton farmers' revolt was answered with air raids, and within weeks the war of independence had begun. Wars followed in all three colonies from 1961 to 1974.[1]" },
+    { id: "carnation", link: "The colonial wars consumed up to 40 per cent of Portugal's budget. By December 1973, several officers had concluded that the war was unsustainable and could only be ended politically, and they began to plan a coup.[1] After the revolution, Guinea-Bissau, Mozambique and Angola became independent in 1974–75.[1]" }
+  ],
+  sources: [
+    ["Wikipedia, 'Carnation Revolution', on the colonial wars, the officers' decision and decolonisation.", "https://en.wikipedia.org/wiki/Carnation_Revolution"]
+  ]
+}
 ];

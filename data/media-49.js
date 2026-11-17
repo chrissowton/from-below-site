@@ -1,0 +1,15 @@
+/* Media for the colour revolution stories (batch 79): Wikimedia Commons. */
+Object.assign(window.MEDIA, {
+  orangeMorning: { f: "Morning first day of Orange Revolution.jpg", cap: "Protesters in central Kyiv on the morning of the first day of the Orange Revolution, 22 November 2004.", by: "Serhiy", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  orangeShields: { f: "Militsiya and orange flowers, Kiev.jpg", cap: "A girl attaches flowers to riot police officers' shields in Kyiv, 1 December 2004.", by: "jf1234", lic: "CC BY-SA 2.0", lu: "https://creativecommons.org/licenses/by-sa/2.0" },
+  orangeRoundTable: { f: "Ukrainian Round Table 2004.jpg", cap: "Round-table talks between the two sides and international mediators in Kyiv, 1 December 2004.", by: "Unknown photographer", lic: "GFDL 1.2", lu: "https://www.gnu.org/licenses/old-licenses/fdl-1.2.html" },
+  sievierodonetsk2004: { f: "Митинг 28 ноября 2004 года в поддержку Северодонецкого съезда. Северодонецк, Луганская область.jpg", cap: "A rally in Sievierodonetsk, eastern Ukraine, in support of the congress of pro-Yanukovych regional leaders, 28 November 2004.", by: "LOBAN53", lic: "Public domain" },
+  cedarDemonstrators: { f: "Cedar Revolution Demonstrators.jpg", cap: "Demonstrators in Beirut on 14 March 2005, a month after Rafic Hariri's assassination.", by: "Elie Ghobeira", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  haririSite: { f: "Beirut-Rue Minet al Hosn-Assn R Hariri.jpg", cap: "Rue Minet al Hosn in Beirut, where Rafic Hariri was assassinated on 14 February 2005, photographed in July 2005.", by: "Heretiq", lic: "CC BY-SA 3.0", lu: "https://creativecommons.org/licenses/by-sa/3.0" },
+  lebanonTrucks: { f: "Truck line in Lebanon 2005.jpg", cap: "Lorries queue in Akkar, northern Lebanon, after Syria closed the border following its withdrawal, 2005.", by: "FunkMonk", lic: "CC BY 3.0", lu: "https://creativecommons.org/licenses/by/3.0" },
+  minsk2006: { f: "Belarus-Minsk-Opposition Protests 2006.03.19.jpg", cap: "Protesters on October Square in Minsk on election night, 19 March 2006.", by: "Unomano", lic: "Public domain" },
+  minskTents: { f: "Belarus-Minsk-Opposition Protests 2006.03.21-6.jpg", cap: "The opposition's tent camp on October Square, Minsk, 21 March 2006.", by: "Alex Zelenko", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  bishkekLooted: { f: "Бішкек 28 березня 2005.jpg", cap: "A looted shop in central Bishkek, 28 March 2005, days after President Akayev fled.", by: "Bektur Iskender", lic: "Public domain" },
+  bakiyevRumsfeld: { f: "Kurmanbek Bakijev & Donald Rumsfeld 2005-July-26.jpg", cap: "President-elect Kurmanbek Bakiyev with US Defense Secretary Donald Rumsfeld, 26 July 2005.", by: "US Department of Defense", lic: "Public domain" },
+  akayevPutin: { f: "Askar Akayev (Cropped).jpg", cap: "President Askar Akayev of Kyrgyzstan at a meeting with Vladimir Putin, 2001.", by: "Presidential Press and Information Office (Russia)", lic: "CC BY 4.0", lu: "https://creativecommons.org/licenses/by/4.0" }
+});

@@ -1,0 +1,15 @@
+/* Media for new stories (batch 82): Wikimedia Commons. */
+Object.assign(window.MEDIA, {
+  cmLawyers2016: { f: "Anglophone lawyers during the 2016-17 Cameroonian protests.png", cap: "English-speaking lawyers protesting in Cameroon, 13 November 2016.", by: "Moki Edwin Kindzeka / Voice of America", lic: "Public domain" },
+  cmGhostTown2017: { f: "Street of Buea (SW Region Cameroon) on a Ghost town day 2.jpg", cap: "An empty street in Buea on a 'ghost town' day, when people stayed at home in protest, September 2017.", by: "DrAgach", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  cmDisplaced: { f: "Internally displaced people from the Anglophone crisis in Douala.png", cap: "English-speaking Cameroonians who fled the violence in their home regions, in Douala.", by: "Voice of America", lic: "Public domain" },
+  haitiPetro2018: { f: "Manifestation Haiti.jpg", cap: "A protest in Port-au-Prince demanding an account of how PetroCaribe funds were managed, 9 September 2018.", by: "Rony D'Haiti", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  haitiTires2019: { f: "2019 Haitian protests tire fire.png", cap: "Burning tyres in the streets of Hinche, central Haiti, 11 February 2019.", by: "Voice of America", lic: "Public domain" },
+  renunciaYa1: { f: "Renuncia Ya-04.jpg", cap: "A citizens' protest against corruption and for the government's resignation, Guatemala, 30 May 2015.", by: "Eric Walter", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  renunciaYa2: { f: "Renuncia Ya-23.jpg", cap: "Protesters in Guatemala, 30 May 2015.", by: "Eric Walter", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  guate25Abril: { f: "Chacalacadefresa.jpg", cap: "The peaceful protest of 25 April 2015 in Guatemala City.", by: "Makenso", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  drBandera2020: { f: "Protestas Plaza de la Bandera día uno 3.jpg", cap: "Protesters at the Plaza de la Bandera, Santo Domingo, 17 February 2020.", by: "Adolfo Sesto", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  drVigilia2020: { f: "Vigilia del domingo 16 de febrero.jpg", cap: "People protesting outside the Central Electoral Board on the night the municipal elections were suspended, Santo Domingo, 16 February 2020.", by: "Orlando Barría / EFE", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  drSantiago2020: { f: "Protestas dominicanas en Santiago 2020.jpg", cap: "A protest in Santiago against the suspended elections, February 2020.", by: "Robert Pérez (algomio_rd)", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  bio2020: { f: "Julius Maada Bio - 2020 (cropped).jpg", cap: "President Julius Maada Bio of Sierra Leone, London, January 2020.", by: "UK Department for International Development", lic: "CC BY 2.0", lu: "https://creativecommons.org/licenses/by/2.0" }
+});

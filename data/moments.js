@@ -388,6 +388,76 @@ window.MOMENTS = [
   ]
  },
  {
+  "id": "1931",
+  "title": "1931–1937: Hard Times — Resistance in the Great Depression",
+  "years": "1931 – 1937",
+  "teaser": "When the world economy collapsed, wages fell, prices for crops and timber crashed and millions lost their jobs. From Swedish sawmills to Caribbean oilfields, working people fought back.",
+  "heroStory": "adalen",
+  "links": [],
+  "stories": [
+   {
+    "id": "adalen",
+    "d": "1931-05-14",
+    "when": "14 May 1931",
+    "note": "Soldiers fired on striking sawmill and pulp workers in Sweden, killing five."
+   },
+   {
+    "id": "menstad",
+    "d": "1931-06-08",
+    "when": "8 June 1931",
+    "note": "Locked-out workers in Norway marched on a port where strikebreakers were working."
+   },
+   {
+    "id": "barcelona1931",
+    "d": "1931-07-01",
+    "when": "July – December 1931",
+    "note": "Families in Barcelona stopped paying rent as unemployment soared."
+   },
+   {
+    "id": "matanza",
+    "d": "1932-01-22",
+    "when": "January – February 1932",
+    "note": "When coffee prices collapsed, peasants in El Salvador rose; the army's revenge killed thousands."
+   },
+   {
+    "id": "belize1934",
+    "d": "1934-02-01",
+    "when": "1934 – 1935",
+    "note": "With timber exports collapsing, the unemployed of Belize City demanded work and a minimum wage."
+   },
+   {
+    "id": "copperbelt1935",
+    "d": "1935-05-01",
+    "when": "May 1935",
+    "note": "African mineworkers in Northern Rhodesia struck against a tax rise."
+   },
+   {
+    "id": "lph",
+    "d": "1935-05-29",
+    "when": "May 1935 – 1938",
+    "note": "Disabled New Yorkers refused relief jobs occupied the relief offices."
+   },
+   {
+    "id": "trinidad1937",
+    "d": "1937-06-19",
+    "when": "June – July 1937",
+    "note": "Oil workers in Trinidad struck against low wages and racism."
+   }
+  ],
+  "intro": "<h3>The background</h3><ul>\n  <li>The Great Depression was a severe global economic downturn from 1929 to 1939, marked by high unemployment and poverty and by the collapse of industrial production and trade.[1]</li>\n  <li>International trade fell by more than half, and unemployment in some countries rose as high as a third of workers.[1]</li>\n  <li>Farmers and producers of raw materials were hit hard as prices for crops and commodities fell.[1]</li>\n</ul>\n<h3>How it spread</h3><ul>\n  <li>Employers cut wages and laid off workers; governments cut spending or raised taxes. Across Europe, the Americas and the colonies, people answered with strikes, marches and refusals to pay.</li>\n  <li>In the British Caribbean, a wave of strikes and riots ran from 1934 to 1939, from British Honduras (Belize) to Trinidad, Barbados, Jamaica and British Guiana.[2]</li>\n  <li>The authorities often answered with force. In Sweden, El Salvador, Northern Rhodesia and Trinidad, police or soldiers fired on crowds.</li>\n</ul>\n<h3>What changed</h3><ul>\n  <li>Some of these confrontations led to lasting reforms. In the Caribbean, the British government set up the Moyne Commission, and new trade unions and political parties grew out of the unrest.[2]</li>\n  <li>Elsewhere, as in El Salvador, repression closed down protest for decades.</li>\n</ul>",
+  "debates": "<ul><li><strong>Economic or political?</strong> These protests began over wages, rents, jobs and taxes. Historians debate how far they were also about race, empire and democracy.</li><li><strong>Repression or reform?</strong> Why did some governments respond with reforms and others with massacres?</li></ul>",
+  "sources": [
+   [
+    "Wikipedia, 'Great Depression', on its causes and global effects.",
+    "https://en.wikipedia.org/wiki/Great_Depression"
+   ],
+   [
+    "Wikipedia, 'British West Indian labour unrest of 1934–1939', on the Caribbean strikes and the Moyne Commission.",
+    "https://en.wikipedia.org/wiki/British_West_Indian_labour_unrest_of_1934%E2%80%931939"
+   ]
+  ]
+ },
+ {
   "id": "1945",
   "title": "1945–1949: After the War, the Fight Against Empire",
   "years": "1945 – 1949",
@@ -637,6 +707,54 @@ window.MOMENTS = [
   ]
  },
  {
+  "id": "1986",
+  "title": "1986–1990: People Power in Asia",
+  "years": "1986 – 1990",
+  "teaser": "Millions filled the streets of Manila in 1986 and brought down a dictator. Over the next four years, students, monks, workers and parties rose against military and one-party rule from Burma to Mongolia, Taiwan and Nepal.",
+  "heroStory": "peoplepower",
+  "links": [],
+  "stories": [
+   {
+    "id": "peoplepower",
+    "d": "1986-02-22",
+    "when": "22 – 25 February 1986",
+    "note": "Unarmed Filipinos ended Ferdinand Marcos's twenty-year rule."
+   },
+   {
+    "id": "myanmar8888",
+    "d": "1988-08-08",
+    "when": "March – September 1988",
+    "note": "Burma rose against military rule; the army crushed the uprising."
+   },
+   {
+    "id": "mongolia1990",
+    "d": "1989-12-10",
+    "when": "December 1989 – March 1990",
+    "note": "A hunger strike in Ulaanbaatar brought down the communist leadership."
+   },
+   {
+    "id": "nepal1990",
+    "d": "1990-02-18",
+    "when": "18 February – 8 April 1990",
+    "note": "Nepal's parties joined forces against the absolute monarchy."
+   },
+   {
+    "id": "wildlily",
+    "d": "1990-03-16",
+    "when": "16 – 22 March 1990",
+    "note": "Students in Taipei demanded direct elections; within six years Taiwan held them."
+   }
+  ],
+  "intro": "<h3>The background</h3><ul>\n  <li>Political scientists describe a 'third wave' of democratisation that began in the 1970s, spreading to Latin America in the 1980s and to Asia-Pacific countries — the Philippines, South Korea and Taiwan — from 1986 to 1988.[1]</li>\n  <li>In 1989, the end of communist rule in Eastern Europe added to the pressure on one-party states.[1]</li>\n</ul>\n<h3>How it spread</h3><ul>\n  <li>In the Philippines, crowds protected rebel soldiers and forced Marcos into exile — a peaceful 'People Power' revolution watched around the world.</li>\n  <li>In Burma, Mongolia, Nepal and Taiwan, students led the way, joined by workers, monks and opposition parties.</li>\n</ul>\n<h3>What changed</h3><ul>\n  <li>The Philippines, Mongolia, Nepal and Taiwan moved to multi-party elections. In Burma, the army crushed the uprising and kept power.</li>\n</ul>",
+  "debates": "<ul><li><strong>A wave, or separate stories?</strong> These movements had different causes and enemies. How far did they learn from each other, and how far were they responding to the same changes in the world?</li><li><strong>Why did some succeed?</strong> Compare Burma, where the army held together, with the Philippines, where part of it changed sides.</li></ul>",
+  "sources": [
+   [
+    "Wikipedia, 'Third wave of democracy', on the wave of transitions in Latin America, Asia, Eastern Europe and Africa.",
+    "https://en.wikipedia.org/wiki/Third_wave_of_democracy"
+   ]
+  ]
+ },
+ {
   "id": "1989",
   "title": "1989–1991: The Wave of People Power",
   "years": "1988 – 1991",
@@ -806,6 +924,133 @@ window.MOMENTS = [
   ]
  },
  {
+  "id": "1990",
+  "title": "1990–1993: Africa's Democratic Wave",
+  "years": "1990 – 1993",
+  "teaser": "Unpaid teachers, students, workers and church leaders challenged one-party rule across Africa. In Benin they turned a national conference into a peaceful revolution — and Gabon, Mali and Malawi followed their own paths to multi-party politics.",
+  "heroStory": "benin1990",
+  "links": [],
+  "stories": [
+   {
+    "id": "benin1990",
+    "d": "1990-02-19",
+    "when": "19 – 28 February 1990",
+    "note": "Benin's national conference declared itself sovereign and took power from the military ruler."
+   },
+   {
+    "id": "gabon1990",
+    "d": "1990-03-01",
+    "when": "January – October 1990",
+    "note": "Strikes forced Omar Bongo to call a national conference and accept other parties."
+   },
+   {
+    "id": "zambia1990",
+    "d": "1990-07-01",
+    "when": "June 1990 – November 1991",
+    "note": "Riots, strikes and a trade-union-led movement ended one-party rule; Kaunda handed over power peacefully."
+   },
+   {
+    "id": "mali1991",
+    "d": "1991-03-22",
+    "when": "22 – 26 March 1991",
+    "note": "Soldiers fired on demonstrators — then other soldiers overthrew the dictator."
+   },
+   {
+    "id": "malawi1993",
+    "d": "1993-06-14",
+    "when": "1992 – 1993",
+    "note": "A bishops' letter, strikes and protests led to a referendum that ended one-party rule."
+   }
+  ],
+  "intro": "<h3>The background</h3><ul>\n  <li>The 'third wave' of democratisation reached sub-Saharan Africa from 1989.[1]</li>\n  <li>The end of the Cold War reduced Western support for one-party rulers, and international pressure for reform grew.[2]</li>\n  <li>Many governments faced economic crisis and could no longer pay teachers and civil servants.</li>\n</ul>\n<h3>How it spread</h3><ul>\n  <li>In Benin, strikes forced the government to call a national conference in February 1990, which declared itself sovereign.</li>\n  <li>By the end of 1991, Malawi was the only country in southern Africa still under one-party rule, as neighbours such as Zambia, Tanzania and Mozambique adopted multiparty systems. This regional shift encouraged Malawians to demand change.[2]</li>\n</ul>\n<h3>What changed</h3><ul>\n  <li>Benin, Mali and Malawi held competitive elections in which rulers lost power. In Gabon, Omar Bongo stayed in power until his death in 2009.</li>\n</ul>",
+  "debates": "<ul><li><strong>Pressure from below or from abroad?</strong> How much did these changes owe to protest at home, and how much to donors and the end of the Cold War?</li><li><strong>How deep was the change?</strong> Some of these democracies lasted; others slid back into one-party or military rule.</li></ul>",
+  "sources": [
+   [
+    "Wikipedia, 'Third wave of democracy', on the wave reaching sub-Saharan Africa from 1989.",
+    "https://en.wikipedia.org/wiki/Third_wave_of_democracy"
+   ],
+   [
+    "Wikipedia, '1993 Malawian democracy referendum', on the end of the Cold War and the regional shift.",
+    "https://en.wikipedia.org/wiki/1993_Malawian_democracy_referendum"
+   ]
+  ]
+ },
+ {
+  "id": "2000",
+  "title": "2000–2006: The Colour Revolutions",
+  "years": "2000 – 2006",
+  "teaser": "From Belgrade to Tbilisi, Kyiv, Beirut and Bishkek, crowds in coloured scarves and ribbons challenged rigged elections and foreign occupation. Some brought down governments; in Minsk, the protest was crushed.",
+  "heroStory": "orange2004",
+  "links": [
+   [
+    "otpor",
+    "rose2003"
+   ],
+   [
+    "otpor",
+    "orange2004"
+   ],
+   [
+    "rose2003",
+    "tulip2005"
+   ]
+  ],
+  "stories": [
+   {
+    "id": "otpor",
+    "d": "2000-10-05",
+    "when": "1998 – 5 October 2000",
+    "note": "Serbia's student movement helped bring down Milošević after a disputed election."
+   },
+   {
+    "id": "rose2003",
+    "d": "2003-11-22",
+    "when": "3 – 23 November 2003",
+    "note": "Protesters carrying roses entered Georgia's parliament; the president resigned."
+   },
+   {
+    "id": "orange2004",
+    "d": "2004-11-22",
+    "when": "22 November 2004 – 23 January 2005",
+    "note": "Ukrainians camped in Kyiv until a rigged run-off was annulled and held again."
+   },
+   {
+    "id": "cedar2005",
+    "d": "2005-03-14",
+    "when": "14 February – 27 April 2005",
+    "note": "After Hariri's assassination, Lebanese protests helped end Syria's military presence."
+   },
+   {
+    "id": "tulip2005",
+    "d": "2005-03-24",
+    "when": "February – April 2005",
+    "note": "Kyrgyzstan's president fled after protesters took the south and marched on the capital."
+   },
+   {
+    "id": "jeans2006",
+    "d": "2006-03-19",
+    "when": "19 – 25 March 2006",
+    "note": "In Belarus, the protest camp was cleared and its leaders jailed."
+   }
+  ],
+  "intro": "<h3>The background</h3><ul>\n  <li>The 'colour revolutions' were a series of protests, some successful and some not, mainly in post-Soviet states and states allied to Russia.[1]</li>\n  <li>The term became popular after successful revolutions in Georgia, Ukraine and Kyrgyzstan between 2003 and 2005. Political scientists have described them as a wave of democracy between the revolutions of 1989 and the Arab Spring of 2010–2012.[1]</li>\n  <li>Many began after elections that observers judged to be rigged.[1]</li>\n</ul>\n<h3>How it spread</h3><ul>\n  <li>Serbia's Otpor inspired and trained members of youth movements elsewhere, including Kmara in Georgia, Pora in Ukraine and Zubr in Belarus.[1][2]</li>\n  <li>A Georgian politician who had been involved in the Rose Revolution advised opposition leaders in Ukraine and then in Kyrgyzstan.[3]</li>\n  <li>Movements took colours and flowers as symbols — roses in Georgia, orange in Ukraine, red-and-white scarves in Lebanon, denim in Belarus. The name 'Tulip Revolution' was coined by the Kyrgyz president himself, as a warning.[3]</li>\n</ul>\n<h3>What changed</h3><ul>\n  <li>Governments fell in Serbia, Georgia, Ukraine and Kyrgyzstan, and Syrian troops left Lebanon. In Belarus, the protests were crushed.</li>\n  <li>Several of the new governments disappointed their supporters, and in Kyrgyzstan the new president was himself overthrown in 2010.</li>\n</ul>",
+  "debates": "<ul><li><strong>From below or from abroad?</strong> Western governments and organisations funded civil society and election monitoring, and Russia backed governments and candidates it favoured. Critics, especially in Russia, call the colour revolutions Western-organised coups; supporters point to the hundreds of thousands who took to the streets.</li><li><strong>Did they bring democracy?</strong> Compare what happened next in each country.</li><li><strong>Why did some fail?</strong> Compare Belarus with Ukraine.</li></ul>",
+  "sources": [
+   [
+    "Wikipedia, 'Colour revolution', on the term, the wave, Otpor's influence and the failed protests in Belarus.",
+    "https://en.wikipedia.org/wiki/Colour_revolution"
+   ],
+   [
+    "Wikipedia, 'Pora!', on Otpor's training of the Ukrainian youth movement.",
+    "https://en.wikipedia.org/wiki/Pora!"
+   ],
+   [
+    "Wikipedia, 'Tulip Revolution', on Georgian advice to the opposition and the origin of the name.",
+    "https://en.wikipedia.org/wiki/Tulip_Revolution"
+   ]
+  ]
+ },
+ {
   "id": "2011",
   "title": "2011: The Arab Spring and Beyond",
   "years": "2010 – 2011",
@@ -839,16 +1084,22 @@ window.MOMENTS = [
     "note": ""
    },
    {
-    "id": "tahrir2011",
-    "d": "2011-01-25",
-    "when": "25 January – 11 February 2011",
-    "note": "Egypt's revolution began eleven days after Tunisia's president fled."
-   },
-   {
     "id": "yemen2011",
     "d": "2011-01-01",
     "when": "January 2011 – February 2012",
     "note": "Yemen's protests began in January 2011, inspired by Tunisia."
+   },
+   {
+    "id": "yenamarre",
+    "d": "2011-01-01",
+    "when": "2011 – 2012",
+    "note": ""
+   },
+   {
+    "id": "tahrir2011",
+    "d": "2011-01-25",
+    "when": "25 January – 11 February 2011",
+    "note": "Egypt's revolution began eleven days after Tunisia's president fled."
    },
    {
     "id": "bahrain2011",
@@ -857,15 +1108,15 @@ window.MOMENTS = [
     "note": "Bahrain's protesters gathered at the Pearl Roundabout three days after Mubarak fell."
    },
    {
+    "id": "syria2011",
+    "d": "2011-03-15",
+    "when": "March – July 2011",
+    "note": "Peaceful protests that began in Daraa were met with live fire, and the uprising turned into a civil war."
+   },
+   {
     "id": "walktowork",
     "d": "2011-04-01",
     "when": "April – May 2011",
-    "note": ""
-   },
-   {
-    "id": "yenamarre",
-    "d": "2011-01-01",
-    "when": "2011 – 2012",
     "note": ""
    },
    {
@@ -912,6 +1163,12 @@ window.MOMENTS = [
     "d": "2024-07-01",
     "when": "June – August 2024",
     "note": "Bangladesh's July Uprising is widely cited as the first successful Gen Z revolution."
+   },
+   {
+    "id": "mozambique2024",
+    "d": "2024-10-21",
+    "when": "October 2024 – March 2025",
+    "note": "Protests against a disputed election left more than 300 dead, according to Amnesty International."
    },
    {
     "id": "nepal2025",
