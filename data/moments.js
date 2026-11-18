@@ -346,16 +346,10 @@ window.MOMENTS = [
     "note": ""
    },
    {
-    "id": "iraq1920",
-    "d": "1920-05-01",
-    "when": "May – October 1920",
-    "note": ""
-   },
-   {
-    "id": "kronstadt",
-    "d": "1921-03-01",
-    "when": "1 – 18 March 1921",
-    "note": ""
+    "id": "malta1919",
+    "d": "1919-06-07",
+    "when": "7 – 8 June 1919",
+    "note": "In Malta, post-war price rises and demands for self-government led to riots in which British troops killed four people."
    },
    {
     "id": "patagonia",
@@ -364,9 +358,21 @@ window.MOMENTS = [
     "note": ""
    },
    {
+    "id": "iraq1920",
+    "d": "1920-05-01",
+    "when": "May – October 1920",
+    "note": ""
+   },
+   {
     "id": "rif",
     "d": "1921-01-01",
     "when": "1921 – 1926",
+    "note": ""
+   },
+   {
+    "id": "kronstadt",
+    "d": "1921-03-01",
+    "when": "1 – 18 March 1921",
     "note": ""
    }
   ],
@@ -784,24 +790,6 @@ window.MOMENTS = [
   ],
   "stories": [
    {
-    "id": "estonia1988",
-    "d": "1988-06-01",
-    "when": "June – September 1988",
-    "note": ""
-   },
-   {
-    "id": "candle",
-    "d": "1988-03-25",
-    "when": "25 March 1988",
-    "note": ""
-   },
-   {
-    "id": "myanmar8888",
-    "d": "1988-03-01",
-    "when": "March – September 1988",
-    "note": ""
-   },
-   {
     "id": "kurapaty",
     "d": "1988-01-01",
     "when": "1988 – 2002",
@@ -811,6 +799,24 @@ window.MOMENTS = [
     "id": "ecoglasnost",
     "d": "1988-01-01",
     "when": "1988 – 1989",
+    "note": ""
+   },
+   {
+    "id": "myanmar8888",
+    "d": "1988-03-01",
+    "when": "March – September 1988",
+    "note": ""
+   },
+   {
+    "id": "candle",
+    "d": "1988-03-25",
+    "when": "25 March 1988",
+    "note": ""
+   },
+   {
+    "id": "estonia1988",
+    "d": "1988-06-01",
+    "when": "June – September 1988",
     "note": ""
    },
    {
@@ -856,27 +862,33 @@ window.MOMENTS = [
     "note": "Prague's students marched eight days after the Berlin Wall fell."
    },
    {
-    "id": "timisoara1989",
-    "d": "1989-12-16",
-    "when": "16 – 25 December 1989",
-    "note": "Romania was the last of the Eastern Bloc regimes to fall in 1989 — and the only one by force."
-   },
-   {
     "id": "mongolia1990",
     "d": "1989-12-01",
     "when": "December 1989 – March 1990",
     "note": ""
    },
    {
-    "id": "benin1990",
-    "d": "1990-02-19",
-    "when": "19 – 28 February 1990",
-    "note": ""
+    "id": "timisoara1989",
+    "d": "1989-12-16",
+    "when": "16 – 25 December 1989",
+    "note": "Romania was the last of the Eastern Bloc regimes to fall in 1989 — and the only one by force."
+   },
+   {
+    "id": "blackjanuary1990",
+    "d": "1990-01-19",
+    "when": "19 – 22 January 1990",
+    "note": "Soviet troops crushed Azerbaijan’s Popular Front in Baku, killing well over 100 civilians."
    },
    {
     "id": "nepal1990",
     "d": "1990-02-18",
     "when": "18 February – 8 April 1990",
+    "note": ""
+   },
+   {
+    "id": "benin1990",
+    "d": "1990-02-19",
+    "when": "19 – 28 February 1990",
     "note": ""
    },
    {
@@ -1108,6 +1120,12 @@ window.MOMENTS = [
     "note": "Bahrain's protesters gathered at the Pearl Roundabout three days after Mubarak fell."
    },
    {
+    "id": "libya2011",
+    "d": "2011-02-15",
+    "when": "15 – 27 February 2011",
+    "note": "Protests in Benghazi became an armed uprising, and then a civil war that ended Gaddafi’s rule."
+   },
+   {
     "id": "syria2011",
     "d": "2011-03-15",
     "when": "March – July 2011",
@@ -1118,6 +1136,12 @@ window.MOMENTS = [
     "d": "2011-04-01",
     "when": "April – May 2011",
     "note": ""
+   },
+   {
+    "id": "israel2011",
+    "d": "2011-07-14",
+    "when": "July – October 2011",
+    "note": "Some saw links between Israel’s tent protests — led by young people organising online against the cost of living — and the Arab Spring."
    },
    {
     "id": "wukan",

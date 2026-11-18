@@ -65,7 +65,7 @@ ${img ? `<meta property="og:image" content="${img}">` : ""}
 </style>
 </head>
 <body>
-<header class="static-top"><div class="wrap"><a class="logo" href="../index.html"><img src="../assets/img/logo-white.svg" alt="" width="28" height="28">From Below</a><a class="open" href="../index.html">Open the interactive atlas →</a></div></header>
+<header class="static-top"><div class="wrap"><a class="logo" href="../index.html"><img src="../assets/img/logo-white.svg" alt="" width="36" height="36">From Below<span class="logo-tip" aria-hidden="true"><b>Δ Delta</b> — the sign for change, rising from below.</span></a><a class="open" href="../index.html">Open the interactive atlas →</a></div></header>
 `;
 }
 const foot = `<footer class="site"><div class="wrap"><div><strong>From Below</strong> · an atlas of radical history.<br>Text licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Images from Wikimedia Commons, credited on each image.</div><div>Figures such as crowd sizes and casualty numbers are often disputed.<br>Where sources differ, we give a range and cite them.</div></div></footer>

@@ -122,6 +122,12 @@
     if (sf) { sf.hidden = false; sf.innerHTML = `${esc(SITE.support.text || "From Below is free, has no adverts and is openly licensed. If you find it useful, you can help keep it going.")}<br><a class="btn-support" href="${SITE.support.url}" target="_blank" rel="noopener">♥ ${esc(lbl)}</a>`; }
     if (exMore) exMore.insertAdjacentHTML("beforeend", `<a class="ex-link ex-support" href="${SITE.support.url}" target="_blank" rel="noopener"><b>♥ ${esc(lbl)} ↗</b><span>Free, no adverts, openly licensed — help keep it going</span></a>`);
   }
+  // Support links always open in a new tab (some embedded viewers ignore target="_blank").
+  document.addEventListener("click", ev => {
+    const a = ev.target.closest && ev.target.closest("a.nav-support, a.btn-support, a.ex-support"); if (!a) return;
+    let w = null; try { w = window.open(a.href, "_blank"); } catch (_) { }
+    if (w) { try { w.opener = null; } catch (_) { } ev.preventDefault(); }
+  });
   FB.vc.addEventListener("click", ev => { const b = ev.target.closest("[data-go]"); if (b && !b.onclick) { ev.preventDefault(); go(b.dataset.go); } });
   document.querySelectorAll(".explore [data-go]").forEach(b => b.onclick = () => go(b.dataset.go));
 
