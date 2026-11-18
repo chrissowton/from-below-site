@@ -54,6 +54,7 @@ ${img ? `<meta property="og:image" content="${img}">` : ""}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
 <link rel="stylesheet" href="../assets/css/style.css">
 <style>
   .static-top{background:var(--red);color:#fff}.static-top .wrap{display:flex;align-items:center;gap:14px;height:58px}
@@ -64,7 +65,7 @@ ${img ? `<meta property="og:image" content="${img}">` : ""}
 </style>
 </head>
 <body>
-<header class="static-top"><div class="wrap"><a class="logo" href="../index.html"><i></i>From Below</a><a class="open" href="../index.html">Open the interactive atlas →</a></div></header>
+<header class="static-top"><div class="wrap"><a class="logo" href="../index.html"><img src="../assets/img/logo-white.svg" alt="" width="28" height="28">From Below</a><a class="open" href="../index.html">Open the interactive atlas →</a></div></header>
 `;
 }
 const foot = `<footer class="site"><div class="wrap"><div><strong>From Below</strong> · an atlas of radical history.<br>Text licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Images from Wikimedia Commons, credited on each image.</div><div>Figures such as crowd sizes and casualty numbers are often disputed.<br>Where sources differ, we give a range and cite them.</div></div></footer>
