@@ -31,8 +31,9 @@ const fig = (k, w = 900) => { const m = MEDIA[k]; return m ? `<figure class="med
 
 const voicesHtml = e => !(e.voices && e.voices.length) ? "" : `<aside class="voices"><h3>In their own words</h3>${e.voices.map(v => `<figure><blockquote>${esc(v.q)}</blockquote><figcaption><b>${esc(v.who)}</b>${v.when ? ` · ${esc(v.when)}` : ""}${v.src ? ` · <a href="${v.src[1]}">${esc(v.src[0])}</a>` : ""}</figcaption></figure>`).join("")}</aside>`;
 const primaryHtml = e => {
-  const p = e.primary, m = p && MEDIA[p.media]; if (!m) return "";
-  return `<div class="lookclose primary"><h3>Primary source: ${esc(p.kind)}</h3><div class="lc-grid"><figure><img loading="lazy" src="${fileUrl(m.f, 800)}" alt="${esc(m.cap)}"><figcaption>${esc(m.cap)} <span class="credit">${credit(m)}</span></figcaption></figure>
+  const p = e.primary, m = p && MEDIA[p.media]; if (!m && !(p && p.text)) return "";
+  const doc = p.text ? `<blockquote class="ps-doc"><p>${esc(p.text.t)}</p><cite>${esc(p.text.from || "")}${p.text.src ? ` · <a href="${p.text.src[1]}">${esc(p.text.src[0])}</a>` : ""}</cite></blockquote>` : "";
+  return `<div class="lookclose primary"><h3>Primary source: ${esc(p.kind)}</h3><div class="lc-grid">${m ? `<figure><img loading="lazy" src="${fileUrl(m.f, 800)}" alt="${esc(m.cap)}"><figcaption>${esc(m.cap)} <span class="credit">${credit(m)}</span></figcaption></figure>` : doc}
     <div><dl class="ps-facts"><div><dt>What is it?</dt><dd>${esc(p.kind)}</dd></div><div><dt>Made by, and when</dt><dd>${esc(p.made)}</dd></div></dl><p class="ps-about">${esc(p.about)}</p>
     <h4>Questions to ask of this source</h4><ol>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></div></div></div>`;
 };

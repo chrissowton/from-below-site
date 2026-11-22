@@ -7,6 +7,7 @@ window.EVENTS.push(
   place: "Dublin, Ireland",
   date: "26 August 1913 – 18 January 1914",
   year: 1913, lat: 53.35, lon: -6.26, theme: "labour",
+  deep: "ireland",
   teaser: "When 300 employers locked out some 20,000 workers to destroy a new union of the unskilled, Dublin's poorest families held out for five months, fed by food ships from British workers.",
   hero: "sackville1913",
   background: `

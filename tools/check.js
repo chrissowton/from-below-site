@@ -56,7 +56,8 @@ E.forEach(e => {
   if (e.checked && !/^\d{4}-\d{2}(-\d{2})?$/.test(e.checked)) warn(e.id, `checked date "${e.checked}" should look like 2026-11-15`);
   if (e.primary) {
     const p = e.primary;
-    if (!M[p.media]) err(e.id, `primary source image "${p.media}" is not in any media file`); else usedMedia.add(p.media);
+    if (p.text) { if (!p.text.t || !p.text.from) err(e.id, "a text primary source needs \"t\" (the excerpt) and \"from\" (the document)"); if (!p.text.src || !p.text.src[1]) warn(e.id, "a text primary source should link to where the text can be read"); }
+    else if (!M[p.media]) err(e.id, `primary source image "${p.media}" is not in any media file`); else usedMedia.add(p.media);
     ["kind", "made", "about"].forEach(k => { if (!p[k]) err(e.id, `primary source is missing "${k}"`); });
     if (!Array.isArray(p.questions) || !p.questions.length) err(e.id, "primary source has no questions");
   }

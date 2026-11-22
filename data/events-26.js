@@ -178,6 +178,7 @@ window.EVENTS.push(
   place: "Nghệ An and Hà Tĩnh provinces, Vietnam",
   date: "1930 – 1931",
   year: 1930, lat: 18.68, lon: 105.68, theme: "labour",
+  deep: "vietnam",
   teaser: "Peasants and workers in central Vietnam rose against French taxes, landlords and mandarins, and set up their own village councils. The French bombed them from the air.",
   hero: "ngheTinhMuseum",
   background: `

@@ -1,0 +1,42 @@
+/* Primary sources — batch 21: short excerpts from texts of the time, as quoted in the linked articles. */
+window.EXTRAS = window.EXTRAS || {};
+(function (X) { Object.entries(X).forEach(([id, v]) => { window.EXTRAS[id] = Object.assign(window.EXTRAS[id] || {}, v); }); })({
+
+kett: { primary: { kind: "Petition (text)", made: "The rebel camp on Mousehold Heath, Norwich, July 1549",
+  text: { t: "We pray your grace... that all bondmen may be made free, for God made all free, with his precious blood shedding.", from: "The rebels' 29 articles of grievance, signed by Robert Kett and sent to Protector Somerset", src: ["As quoted in Wikipedia, 'Kett's Rebellion'", "https://en.wikipedia.org/wiki/Kett%27s_Rebellion"] },
+  about: "The rebels at Mousehold drew up 29 demands. Most were about rents, common land and corrupt officials; this one calls for the freeing of 'bondmen' — either serfs, or the poor who could be enslaved under a new law against vagabonds. Only one article mentioned enclosure, even though the rebels were tearing down hedges.",
+  questions: ["Why might the rebels appeal to God in a petition to the government?", "Why do you think they addressed their demands to Protector Somerset?", "Why might only one of 29 demands mention enclosure, when the rebels were pulling down fences?"] } },
+germancoast: { primary: { kind: "Letter (text)", made: "Louisiana, January 1811",
+  text: { t: "An attempt was made to assassinate me by the stroke of an axe. My poor son has been ferociously murdered by a horde of brigands...", from: "Manuel Andry, the planter on whose plantation the revolt began", src: ["As quoted in Wikipedia, '1811 German Coast uprising'", "https://en.wikipedia.org/wiki/1811_German_Coast_uprising"] },
+  about: "Much of what we know about the revolt comes from slaveholders and officials, not from the enslaved rebels. Here, the planter Manuel Andry describes the first night of the uprising, when he was wounded and his son killed. He calls the rebels 'brigands' — a word that tells us how slaveholders wanted the revolt to be seen.",
+  questions: ["Why does Andry call the rebels 'brigands' rather than slaves or rebels?", "Whose side of the story is missing from this source?", "How might the rebels themselves have described what they did?"] } },
+male: { primary: { kind: "Testimony (text)", made: "Salvador, Bahia, January 1835",
+  text: { t: "...on the following day they'd be masters of the whiplash, but not of the land.", from: "Sabina da Cruz, a freed woman, as reported in the investigation of the revolt", src: ["As quoted in Wikipedia, 'Malê revolt'", "https://en.wikipedia.org/wiki/Mal%C3%AA_revolt"] },
+  about: "The night before the revolt, Sabina da Cruz found her husband with the organisers, who told her that the next day they would be masters of the land. Her retort was recorded in the investigation that followed. Through a friend, word of the plan reached the authorities.",
+  questions: ["What did Sabina da Cruz mean by her reply?", "Why might her words have been recorded at all?", "What does this tell us about the risks of planning a revolt?"] } },
+crofters: { primary: { kind: "Slogan (text)", made: "The Scottish Highlands, 1880s",
+  text: { t: "Is treasa tuath na tighearna — The people are mightier than a lord.", from: "The best-known Gaelic slogan of the Highland Land League", src: ["As quoted in Wikipedia, 'Highland Land League'", "https://en.wikipedia.org/wiki/Highland_Land_League"] },
+  about: "The Highland Land League used rent strikes, boycotts and land occupations against evictions by landlords. Its slogan, in Gaelic, can also be read as 'the whole clan is mightier than the chief' — turning the old loyalty of the clans against the landlords.",
+  questions: ["Why might a slogan in Gaelic, rather than English, be powerful?", "What does the slogan say about who should hold power?", "How does it echo the Irish Land League?"] } },
+yellowturban: { primary: { kind: "Slogan (text)", made: "China, 184 AD",
+  text: { t: "The Azure Sky is already dead; the Yellow Sky will soon rise. When the year is jiǎzǐ, there will be prosperity under Heaven!", from: "The sixteen-word slogan spread by Zhang Jue when the rebellion was proclaimed", src: ["As quoted in Wikipedia, 'Yellow Turban Rebellion'", "https://en.wikipedia.org/wiki/Yellow_Turban_Rebellion"] },
+  about: "Zhang Jue's slogan announced that the Han dynasty's mandate — the 'Azure Sky' — was over, and that a new age would begin in the jiǎzǐ year, the first of the sixty-year cycle. It spread through the brothers' healing work among the poor.",
+  questions: ["Why might a religious prophecy inspire a peasant rebellion?", "Why would a slogan need to be short and easy to remember?", "How might the Han government have reacted to it?"] } },
+chensheng: { primary: { kind: "Saying (text)", made: "China, 209 BC, as recorded by the historian Sima Qian about a century later",
+  text: { t: "王侯將相寧有種乎 — Are kings and nobles given their high status by birth?", from: "Chen Sheng, as recorded in Sima Qian's Records of the Grand Historian", src: ["As quoted in Wikipedia, 'Chen Sheng and Wu Guang uprising'", "https://en.wikipedia.org/wiki/Chen_Sheng_and_Wu_Guang_uprising"] },
+  about: "Chen Sheng's question became one of the most famous lines in Chinese history: a challenge to the idea that rulers are born to rule. We know it because the court historian Sima Qian wrote a biography of the rebels about a century later.",
+  questions: ["Why might a court historian record a rebel's words?", "Why has this question been remembered for over two thousand years?", "How reliable are words recorded a century after they were spoken?"] } },
+sec504: { primary: { kind: "Law (text)", made: "United States, 1973",
+  text: { t: "No otherwise qualified individual with a disability in the United States... shall, solely by reason of her or his disability, be excluded from the participation in, be denied the benefits of, or be subjected to discrimination under any program or activity receiving federal financial assistance...", from: "Section 504 of the Rehabilitation Act of 1973 (as later amended)", src: ["As quoted in Wikipedia, 'Section 504 of the Rehabilitation Act'", "https://en.wikipedia.org/wiki/Section_504_of_the_Rehabilitation_Act"] },
+  about: "This one sentence was passed into law in 1973 — but it could not be enforced until the government issued regulations. Disabled activists occupied federal offices in 1977 to force it to do so. The words of the law are what they were fighting for.",
+  questions: ["Why might a law mean little until regulations are issued?", "Who is protected by these words, and who has to obey them?", "Why did activists have to occupy buildings to make a law work?"] } },
+helots: { primary: { kind: "Ancient histories (text)", made: "Greece, 5th–4th centuries BC",
+  text: { t: "Most Spartan institutions have always been designed with a view to security against the Helots.", from: "Thucydides, the Athenian historian; Aristotle similarly compared the helots to an enemy waiting for Sparta's disasters", src: ["As quoted in Wikipedia, 'Helots'", "https://en.wikipedia.org/wiki/Helots"] },
+  about: "We know about the helots almost entirely through what Greek writers — none of them helots — said about them. Thucydides and Aristotle both saw Spartan society as shaped by fear of the people it held in servitude.",
+  questions: ["Why do we have no writings by the helots themselves?", "Why might Athenian writers be interested in Sparta's fear of the helots?", "What does fear of the helots tell us about their resistance?"] } },
+bagaudae: { primary: { kind: "Speech (text)", made: "Gaul, 289 AD",
+  text: { t: "Simple farmers sought military garb; the plowman imitated the infantryman, the shepherd the cavalryman, the rustic harvester of his own crops the barbarian enemy.", from: "The Panegyric of Maximian, a speech in praise of the emperor, attributed to Claudius Mamertinus", src: ["As quoted in Wikipedia, 'Bagaudae'", "https://en.wikipedia.org/wiki/Bagaudae"] },
+  about: "This speech praised the emperor Maximian for crushing the bagaudae uprisings of 284–285. It describes the rebels as farmers and shepherds who had taken up arms — and calls them 'two-shaped monsters'. It is written entirely from the side of the empire.",
+  questions: ["Why would a speech praising the emperor describe the rebels like this?", "What does the speech reveal, perhaps without meaning to, about who the rebels were?", "What might the farmers have said about why they rose?"] } }
+
+});

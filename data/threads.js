@@ -173,5 +173,28 @@ window.THREADS = [
   sources: [
     ["Wikipedia, 'Carnation Revolution', on the colonial wars, the officers' decision and decolonisation.", "https://en.wikipedia.org/wiki/Carnation_Revolution"]
   ]
+},
+{
+  id: "justice",
+  title: "Justice after atrocity: from Nuremberg to Dakar",
+  teaser: "How survivors, witnesses and families moved from the margins of the courtroom to its centre — and forced trials that governments did not want.",
+  steps: [
+    { id: "ringelblum1940", link: "" },
+    { id: "nuremberg1945", link: "At Nuremberg, the American and British prosecutors relied mainly on documents rather than survivors' testimony, though some survivors, such as Marie-Claude Vaillant-Couturier, did testify.[1][2]" },
+    { id: "eichmann1961", link: "Unlike Nuremberg, which relied heavily on documents, the Eichmann trial put Holocaust survivors on the world stage, and it was widely televised.[3]" },
+    { id: "plazademayo", link: "In Argentina, the Mothers of the disappeared began their regular Thursday marches under the dictatorship; the Trial of the Juntas in 1985 convicted senior commanders.[4]" },
+    { id: "avega", link: "After the genocide in Rwanda, women survivors testified before the International Criminal Tribunal for Rwanda and took part in the community gacaca courts.[5]" },
+    { id: "riosmontt2013", link: "In 2013, Ixil survivors testified at the first trial of a former Latin American head of state for genocide in his own country.[6]" },
+    { id: "habre", link: "In 2016, after 25 years of campaigning by his victims, Hissène Habré became the first former head of state convicted by another country's courts for crimes against humanity.[7]" }
+  ],
+  sources: [
+    ["Wikipedia, 'Nuremberg trials', on the prosecutors' reliance on documents.", "https://en.wikipedia.org/wiki/Nuremberg_trials"],
+    ["Wikipedia, 'Marie-Claude Vaillant-Couturier'.", "https://en.wikipedia.org/wiki/Marie-Claude_Vaillant-Couturier"],
+    ["Wikipedia, 'Eichmann trial'.", "https://en.wikipedia.org/wiki/Eichmann_trial"],
+    ["Wikipedia, 'Mothers of the Plaza de Mayo' and 'Trial of the Juntas'.", "https://en.wikipedia.org/wiki/Mothers_of_the_Plaza_de_Mayo"],
+    ["Wikipedia, 'International Criminal Tribunal for Rwanda' and 'Gacaca court'.", "https://en.wikipedia.org/wiki/Gacaca_court"],
+    ["Wikipedia, 'Efraín Ríos Montt'.", "https://en.wikipedia.org/wiki/Efra%C3%ADn_R%C3%ADos_Montt"],
+    ["Wikipedia, 'Hissène Habré'.", "https://en.wikipedia.org/wiki/Hiss%C3%A8ne_Habr%C3%A9"]
+  ]
 }
 ];

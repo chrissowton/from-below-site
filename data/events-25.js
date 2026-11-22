@@ -341,6 +341,7 @@ window.EVENTS.push(
   place: "Okahandja, Waterberg and across central and southern Namibia",
   date: "1904 – 1908",
   year: 1904, lat: -20.50, lon: 17.24, theme: "freedom",
+  deep: "namibia",
   teaser: "The Herero and Nama rose against German settlers who had taken their land and cattle. Germany's response was the first genocide of the twentieth century.",
   hero: "maharero",
   background: `
@@ -370,8 +371,14 @@ window.EVENTS.push(
   sources: [
     ["Wikipedia, 'Herero and Nama genocide', on the colonial background, the uprising, the Battle of Waterberg, the extermination order, the camps, the death toll and Germany's acknowledgement.", "https://en.wikipedia.org/wiki/Herero_and_Nama_genocide"],
     ["David Olusoga and Casper W. Erichsen, <em>The Kaiser's Holocaust: Germany's Forgotten Genocide</em> (Faber and Faber, 2010).", ""],
-    ["Jan-Bart Gewald, <em>Herero Heroes: A Socio-Political History of the Herero of Namibia, 1890–1923</em> (James Currey, 1999).", ""]
+    ["Jan-Bart Gewald, <em>Herero Heroes: A Socio-Political History of the Herero of Namibia, 1890–1923</em> (James Currey, 1999).", ""],
+    ["Africa Briefing, 'Namibia chiefs split over German genocide deal' (November 2026), on the unsigned Joint Declaration.", "https://africabriefing.com/namibia-chiefs-split-over-german-genocide-deal/"]
   ],
+  ongoing: {
+    asOf: "22 November 2026",
+    text: `<p>The Joint Declaration agreed between the two governments in 2021 had still not been signed at the time of our last check. In November 2026, some traditional leaders called for it to be signed by December, while others said the €1.1 billion offered did not make up for what their ancestors had lost.[4]</p>`,
+    watch: ["Whether the Joint Declaration is signed, and on what terms", "Whether Herero and Nama representatives are given a direct role", "Court challenges in Namibia"]
+  },
   next: `
 <ul>
   <li><strong>Dispossession:</strong> the survivors lost almost all their land and cattle and were forced into labour.</li>

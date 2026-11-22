@@ -1,0 +1,26 @@
+/* Media for batch 85 (1800s, minority themes): Wikimedia Commons. */
+Object.assign(window.MEDIA, {
+  ludditeLeader: { f: "Luddite.jpg", cap: "'The Leader of the Luddites', a print published in London in May 1812.", by: "Unknown artist; published by Walker and Knight", lic: "Public domain" },
+  merthyrRising: { f: "Merthyr Rising.jpg", cap: "The Merthyr Rising of 1831, as imagined by the illustrator Hablot Knight Browne ('Phiz') in 1887.", by: "Hablot Knight Browne", lic: "Public domain" },
+  penderynPlaque: { f: "Dic Penderyn Plaque (8053781082).jpg", cap: "The plaque to Dic Penderyn outside Cardiff Market, where he was hanged in 1831.", by: "John Levin", lic: "CC BY-SA 2.0", lu: "https://creativecommons.org/licenses/by-sa/2.0" },
+  welshNote1879: { f: "\"Y Welsh Note\". Trysorfa y Plant.png", cap: "'Y Welsh Note': an illustration of the Welsh Not in the Welsh-language children's magazine Trysorfa y Plant, October 1879.", by: "Trysorfa y Plant", lic: "Public domain" },
+  llanddogedLog: { f: "Extract from the 1877 logbook of Llanddoged school.png", cap: "The logbook of Llanddoged school, 1877, recording parents' complaints about children speaking Welsh.", by: "Llanddoged school", lic: "Public domain" },
+  blueBooksPage: { f: "Blue Books prt 2, no.9, p.66 - Evils of the Welsh Language.gif", cap: "A page of the 1847 Blue Books headed 'Evils of the Welsh Language'.", by: "R. R. W. Lingen, J. C. Symons and H. R. Vaughan Johnson", lic: "CC0", lu: "https://creativecommons.org/publicdomain/zero/1.0/" },
+  ulrichsPortrait: { f: "Karl Heinrich Ulrichs (from Kennedy).jpg", cap: "Karl Heinrich Ulrichs, from an engraving published in 1899.", by: "Unknown artist", lic: "Public domain" },
+  ulrichsGrave: { f: "Grave of Ulrichs in Italy.jpg", cap: "Ulrichs's grave in L'Aquila, Italy, with its Latin inscription.", by: "Ad scribendum", lic: "CC BY 4.0", lu: "https://creativecommons.org/licenses/by/4.0" },
+  uranus1870: { f: "Ulrichs 10a - Uranus.jpg", cap: "The cover of Uranus, a journal published by Ulrichs in 1870.", by: "Karl Heinrich Ulrichs; scan by James Steakley", lic: "Public domain" },
+  dragaoAgostini: { f: "Quadro de Dragão do Mar.jpg", cap: "Angelo Agostini's drawing honouring the jangadeiro Dragão do Mar, published in the Revista Ilustrada, 1884.", by: "Angelo Agostini", lic: "Public domain" },
+  dragaoStatue: { f: "Statue of Francisco José do Nascimento, Fortaleza, 29-01-2026.jpg", cap: "The statue of Francisco José do Nascimento, the 'Sea Dragon', in Fortaleza.", by: "Jcornelius", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  veditz1911: { f: "George veditz 1911.jpg", cap: "George Veditz, president of the National Association of the Deaf, 1911.", by: "Unknown photographer", lic: "Public domain" },
+  veditzFilm: { f: "Preservation of the Sign Language.png", cap: "A still from 'The Preservation of the Sign Language' (1913), in which George Veditz signs his defence of the language.", by: "George Veditz / National Association of the Deaf", lic: "Public domain" },
+  dockStrikers1889: { f: "Strikers at the East India Dock Road during the 1889 London dock strike.jpg", cap: "Dock strikers assembling on the East India Dock Road before marching to the City, 1889.", by: "Unknown photographer", lic: "Public domain" },
+  dockMeeting1889: { f: "Dock-labourers-great-strike-london-meeting-september-7-1889.jpg", cap: "Dock labourers meet outside the West India Docks gates, 7 September 1889.", by: "Unknown artist", lic: "Public domain" },
+  dockManifesto: { f: "South Side Central Strike Committee.jpg", cap: "A manifesto of the South Side Central Strike Committee, signed by Ben Tillett, John Burns, Tom Mann and others, 1889.", by: "South Side Central Strike Committee", lic: "Public domain" },
+  claidheamhSoluis: { f: "An claideamn soluis.jpg", cap: "An Claidheamh Soluis ('The Sword of Light'), the Gaelic League's newspaper, 1903.", by: "Gaelic League", lic: "Public domain" },
+  gaelicAdvert1894: { f: "Gaelic League advert in Gaelic Journal 1894.jpg", cap: "An advertisement for the Gaelic League in the Gaelic Journal, June 1894.", by: "Gaelic Journal", lic: "Public domain" },
+  laVictoria2024: { f: "Población La Victoria, Pedro Aguirre Cerda, Santiago 20240526 01.jpg", cap: "A street in La Victoria, Santiago, 2024.", by: "Carlos Figueroa Rojas", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  laVictoria1985: { f: "Protesta contra la dictadura, Población La Victoria.jpg", cap: "Residents of La Victoria during a national day of protest against the dictatorship, September 1985.", by: "Paulo Slachevsky", lic: "CC BY-SA 4.0", lu: "https://creativecommons.org/licenses/by-sa/4.0" },
+  flh1972: { f: "Frente de Liberación Homosexual 1972.jpg", cap: "Two members of the FLH pose with their faces covered for an interview in the magazine Panorama, August 1972.", by: "Panorama magazine", lic: "Public domain" },
+  flhAsi1973: { f: "Frente de Liberación Homosexual.jpg", cap: "The FLH on the cover of the magazine Así, 1973.", by: "Revista Así", lic: "Public domain" },
+  somos1973: { f: "Revista Somos 1973.jpg", cap: "The first issue of Somos, the FLH's underground magazine, December 1973.", by: "Frente de Liberación Homosexual", lic: "Public domain" }
+});

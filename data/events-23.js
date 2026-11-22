@@ -354,6 +354,7 @@ window.EVENTS.push(
   place: "Oriente Province, Cuba",
   date: "1908 – 1912",
   year: 1912, lat: 20.02, lon: -75.82, theme: "civil",
+  deep: "cuba",
   teaser: "Black veterans of Cuba's independence war founded a party to demand equality. When it was banned, they protested — and thousands of Afro-Cubans were massacred.",
   hero: "picLeaders",
   background: `

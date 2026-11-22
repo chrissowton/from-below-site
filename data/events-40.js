@@ -7,6 +7,7 @@ window.EVENTS.push(
   place: "Gdeim Izik, near El Aaiún (Laayoune), Western Sahara",
   date: "October – November 2010",
   year: 2010, lat: 27.07, lon: -13.40, theme: "freedom",
+  deep: "westernsahara",
   teaser: "Thousands of Sahrawis pitched tents in the desert to protest against poverty and discrimination in Moroccan-controlled Western Sahara. The camp's destruction led to deadly violence on both sides — and long prison sentences.",
   hero: "gdeimIzik",
   background: `

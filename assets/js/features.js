@@ -82,6 +82,9 @@
         <h3>${esc(t.title)}</h3><p>${esc(t.teaser)}</p>
         <div class="ex-btns"><button type="button" class="btn-play" data-show="thread:${t.id}" data-autoplay="1">▶ Follow on the map</button><button type="button" class="btn-ghost" data-go="thread/${t.id}">Read</button></div></div>
     </article>`).join("");
+  const exMk = document.getElementById("ex-making");
+  if (exMk && window.MAKING) { const M = window.MAKING, h = MEDIA[M.hero];
+    exMk.innerHTML = `<article class="ex-card mk-card"><div class="ex-img" style="${h ? bg(M.hero, 600) : ""}"></div><div class="ex-body"><h3>${esc(M.title)}</h3><p>${esc(M.teaser)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="making">Explore →</button></div></div></article>`; }
   if (exP) exP.innerHTML = PATHWAYS.map(p => `<article class="ex-card pw-card">
       <div class="ex-body"><small class="pw-level">${esc(p.level || "")} · ${p.steps.length} stories</small><h3>${esc(p.title)}</h3><p>${esc(p.teaser)}</p>
         <div class="ex-btns"><button type="button" class="btn-play" data-go="path/${p.id}">Start the pathway →</button></div></div>
@@ -205,6 +208,27 @@
     return true;
   };
 
+  /* ---------- Making history (a page about evidence, memory and silence) ---------- */
+  FB.routes.making = () => {
+    const M = window.MAKING; if (!M) return false;
+    const DEEP = window.DEEP || {};
+    const item = it => {
+      if (it.deep && DEEP[it.deep]) return `<li class="mk-item"><button type="button" class="st-link mk-deep" data-go="deep/${it.deep}"><span class="mk-dd">Map</span><span><b>${esc(DEEP[it.deep].title)}</b><small>Deep dive · ${esc(DEEP[it.deep].years)}</small></span></button><p>${esc(it.note)}</p></li>`;
+      if (it.id && byId[it.id]) return `<li class="mk-item">${storyLink(it.id)}<p>${esc(it.note)}</p></li>`;
+      return "";
+    };
+    FB.showPage(`${pageHero("Making history", M.title, M.teaser, M.hero && MEDIA[M.hero] ? M.hero : null)}
+      <div class="pg-body"><div class="wrap narrow">
+        <p class="pg-lede">${esc(M.intro)}</p>
+        <nav class="mk-toc" aria-label="Sections">${M.sections.map(sec => `<a href="#making" data-mk="${sec.id}">${esc(sec.title)}</a>`).join("")}</nav>
+        ${M.sections.map(sec => `<section class="pg-sec mk-sec" id="mk-${sec.id}"><h2>${esc(sec.title)}</h2><p>${esc(sec.text)}</p><ul class="mk-list">${sec.items.map(item).join("")}</ul></section>`).join("")}
+        ${M.questions ? `<aside class="questions"><h3>Questions to ask of any history</h3><ol>${M.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></aside>` : ""}
+        <p class="pg-note">Every story on this site has a section called "How do we know?" and a "Look closely at a source" activity. Use them to ask these questions of each story.</p>
+      </div></div>`, M.title);
+    FB.vc.querySelectorAll("[data-mk]").forEach(a => a.onclick = ev => { ev.preventDefault(); const t = document.getElementById("mk-" + a.dataset.mk); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    return true;
+  };
+
   /* ---------- Pathway pages, and the banner shown on stories in a pathway ---------- */
   FB.routes.path = id => {
     const p = pathById[id]; if (!p) return false;
@@ -316,18 +340,19 @@
     return true;
   };
   FB.routes.sources = () => {
-    const withP = EVENTS.filter(e => e.primary && MEDIA[e.primary.media]).sort((a, b) => (a.year || 0) - (b.year || 0));
+    const withP = EVENTS.filter(e => e.primary && (MEDIA[e.primary.media] || e.primary.text)).sort((a, b) => (a.year || 0) - (b.year || 0));
     const withV = EVENTS.filter(e => e.voices && e.voices.length).sort((a, b) => (a.year || 0) - (b.year || 0));
     const group = k => /photo|daguerreotype/i.test(k) ? "photo" : /poster|notice|leaflet|flyer|pamphlet|newspaper|newsletter|petition|declaration|proclamation|manuscript|poem|ballad|cover|letter|document|charter|banner|placard|broadside|card|ticket|stamp|map|record|report|book$/i.test(k) ? "doc" : /engrav|print|cartoon|lithograph|painting|drawing|illustration|sketch|woodcut|mural|watercolour|etching/i.test(k) ? "pic" : "obj";
     const GROUPS = [["all", "All"], ["doc", "Documents and printed words"], ["photo", "Photographs"], ["pic", "Pictures and cartoons"], ["obj", "Objects and other"]];
     const pageUrlC = f => "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(String(f).replace(/ /g, "_"));
     const card = e => {
-      const p = e.primary, m = MEDIA[p.media];
-      return `<article class="ps-item" data-g="${group(p.kind || "")}" data-k="${esc(((m.cap || "") + " " + p.kind + " " + p.made + " " + e.title + " " + (e.country || "")).toLowerCase())}">
-        <a class="ps-pic" href="${pageUrlC(m.f)}" target="_blank" rel="noopener" title="View full size on Wikimedia Commons" style="${bg(p.media, 600)}"><span class="ps-zoom">View full size ↗</span></a>
+      const p = e.primary, m = MEDIA[p.media] || { cap: p.text ? p.text.from : p.kind, by: p.text && p.text.src ? p.text.src[0] : "" };
+      return `<article class="ps-item${MEDIA[p.media] ? "" : " ps-item-text"}" data-g="${MEDIA[p.media] ? group(p.kind || "") : "doc"}" data-k="${esc(((m.cap || "") + " " + p.kind + " " + p.made + " " + e.title + " " + (e.country || "") + " " + (p.text ? p.text.t : "")).toLowerCase())}">
+        ${MEDIA[p.media] ? `<a class="ps-pic" href="${pageUrlC(m.f)}" target="_blank" rel="noopener" title="View full size on Wikimedia Commons" style="${bg(p.media, 600)}"><span class="ps-zoom">View full size ↗</span></a>` : `<div class="ps-quote" aria-hidden="true">“</div>`}
         <div class="ps-txt">
           <small class="ps-kind">${esc(p.kind)} · ${esc(p.made)}</small>
           <h3>${esc(m.cap || p.kind)}</h3>
+          ${p.text && !MEDIA[p.media] ? `<blockquote class="ps-doc ps-doc-sm"><p>${esc(p.text.t)}</p></blockquote>` : ""}
           <p>${esc(p.about || "")}</p>
           ${(p.questions || []).length ? `<details class="ps-q"><summary>Questions to ask</summary><ul>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ul></details>` : ""}
           <p class="ps-credit">${esc(m.by || "")}${m.lic ? ` · ${esc(m.lic)}` : ""}</p>
@@ -453,8 +478,17 @@
     </div></div>`;
   };
   FB.hooks.voicesBox = e => !(e.voices && e.voices.length) ? "" : `<aside class="voices" aria-label="In their own words"><h3>In their own words</h3>${e.voices.map(v => `<figure><blockquote>${esc(v.q)}</blockquote><figcaption><b>${esc(v.who)}</b>${v.when ? ` · ${esc(v.when)}` : ""}${v.src ? ` · <a href="${v.src[1]}" target="_blank" rel="noopener">${esc(v.src[0])} ↗</a>` : ""}</figcaption></figure>`).join("")}</aside>`;
-  FB.hooks.sourceBox = e => {
+const docQuote = p => `<blockquote class="ps-doc"><p>${esc(p.text.t)}</p><cite>${esc(p.text.from || "")}${p.text.src ? ` · <a href="${p.text.src[1]}" target="_blank" rel="noopener">${esc(p.text.src[0])} ↗</a>` : ""}</cite></blockquote>`;
+    FB.hooks.sourceBox = e => {
     const p = e.primary;
+    if (p && p.text && !MEDIA[p.media]) {
+      return `<div class="lookclose primary ps-textsrc"><h3>Primary source: ${esc(p.kind)}</h3>
+      <div class="lc-grid">${docQuote(p)}
+      <div><dl class="ps-facts"><div><dt>What is it?</dt><dd>${esc(p.kind)}</dd></div><div><dt>Made by, and when</dt><dd>${esc(p.made)}</dd></div></dl>
+        <p class="ps-about">${esc(p.about)}</p>
+        <h4>Questions to ask of this source</h4>
+        <ol>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}<li>Does it support the account in "What happened?", or raise new questions?</li></ol></div></div></div>`;
+    }
     if (p && MEDIA[p.media]) {
       const m = MEDIA[p.media];
       return `<div class="lookclose primary"><h3>Primary source: ${esc(p.kind)}</h3>
@@ -494,7 +528,7 @@
     const sec = (n, body) => body ? `<section><h2><span>${n}</span> ${esc(SEC[n - 1])}</h2>${body}</section>` : "";
     const voices = (e.voices || []).length ? `<div class="voices"><h3>In their own words</h3>${e.voices.map(v => `<blockquote>“${esc(v.q)}”<cite>${esc(v.who)}${v.when ? `, ${esc(v.when)}` : ""}${v.src ? ` — ${esc(v.src[0])}` : ""}</cite></blockquote>`).join("")}</div>` : "";
     const p = e.primary, pm = p && MEDIA[p.media];
-    const primary = pm ? `<div class="box"><h3>Primary source: ${esc(p.kind)}</h3><figure class="pfig"><img src="${fileUrl(pm.f, 600)}" alt=""><figcaption>${capOf(pm)}</figcaption></figure><p><b>Made by, and when:</b> ${esc(p.made)}</p><p>${esc(p.about)}</p><p><b>Questions to ask of this source</b></p><ol>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></div>` : "";
+    const primary = (pm || (p && p.text)) ? `<div class="box"><h3>Primary source: ${esc(p.kind)}</h3>${pm ? `<figure class="pfig"><img src="${fileUrl(pm.f, 600)}" alt=""><figcaption>${capOf(pm)}</figcaption></figure>` : `<blockquote><p>${esc(p.text.t)}</p><p><i>${esc(p.text.from || "")}</i></p></blockquote>`}<p><b>Made by, and when:</b> ${esc(p.made)}</p><p>${esc(p.about)}</p><p><b>Questions to ask of this source</b></p><ol>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></div>` : "";
     const og = e.ongoing ? `<div class="box og"><h3>Ongoing situation (last reviewed ${esc(e.ongoing.asOf)})</h3>${fnote(e.ongoing.text)}${(e.ongoing.watch || []).length ? `<p><b>Still unresolved:</b></p><ul>${e.ongoing.watch.map(w => `<li>${w}</li>`).join("")}</ul>` : ""}<p class="small">This is recent history. Accounts, casualty figures and outcomes may change as more evidence emerges.</p></div>` : "";
     const similar = (e.similar || []).map(x => x.id && byId[x.id] ? `<li>${esc(byId[x.id].title)} (${yr(byId[x.id].year)})</li>` : x.name ? `<li>${esc(x.name)}${x.url ? ` — <span class="u">${esc(x.url)}</span>` : ""}</li>` : "").join("");
     const more = (e.more || []).map(([t, l, u]) => `<li>${esc(l)}${u ? ` — <span class="u">${esc(u)}</span>` : ""}</li>`).join("");

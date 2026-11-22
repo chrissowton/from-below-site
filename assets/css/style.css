@@ -749,6 +749,9 @@ details[open] .pp-chev{transform:rotate(-135deg);margin-bottom:-4px}
 .dp-other{fill:#E9E2DA;stroke:#fff;stroke-width:.6}
 .dp-prov{fill:var(--land);stroke:var(--border);stroke-width:.7}
 .dp-prov:hover{fill:#F1E3D8}
+.dp-nb{fill:#E4DDD4;stroke:#CFC4B8}
+.dp-lbl{font-family:var(--body);font-size:13px;font-weight:600;fill:#9A8E82;letter-spacing:.12em;text-transform:uppercase;text-anchor:middle;pointer-events:none}
+.dp-lbl.sea{fill:#7F9BB0;font-style:italic;text-transform:none;letter-spacing:.04em}
 .dp-mark{cursor:pointer;outline:none}
 .dp-mark .dp-pt{stroke:#fff;stroke-width:2.2;transition:r .15s}
 .dp-mark .dp-ring{fill:none;stroke:var(--ink);stroke-width:2;opacity:0}
@@ -792,3 +795,20 @@ details[open] .pp-chev{transform:rotate(-135deg);margin-bottom:-4px}
 @media (max-width:860px){.dp-grid{grid-template-columns:1fr}.dp-card{position:static;max-height:none}.dp-fig.side{float:none;width:100%;margin:0 0 10px}.dp-item-body{padding-left:0}}
 .dp-leader{stroke:var(--ink-3);stroke-width:1;opacity:.6}
 .dp-hub{fill:var(--ink)}
+/* text primary sources */
+.ps-doc{margin:0;background:#fff;border:1px solid #EADBB8;border-left:4px solid #B8902F;border-radius:10px;padding:18px 20px;font-family:var(--serif);font-size:18px;line-height:1.55;color:var(--ink)}
+.ps-doc p{margin:0 0 10px}
+.ps-doc cite{display:block;font-family:var(--body);font-style:normal;font-size:13px;color:var(--ink-3)}
+.ps-doc cite a{color:var(--red-deep)}
+.ps-doc-sm{font-size:15.5px;padding:12px 14px;margin:6px 0 10px}
+.ps-item-text .ps-quote{display:flex;align-items:flex-start;justify-content:center;background:#FBF4E4;font-family:var(--serif);font-size:110px;line-height:1;color:#B8902F;padding-top:14px}
+
+/* Making history */
+.mk-toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px}
+.mk-toc a{font-size:14px;padding:6px 12px;border:1px solid var(--border);border-radius:999px;text-decoration:none;color:var(--ink)}
+.mk-toc a:hover{background:var(--red-tint)}
+.mk-list{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:14px}
+.mk-item{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:16px;align-items:start;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.mk-item p{margin:0;font-size:16px}
+.mk-dd{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--red-dark);color:#fff;font-size:11px;font-weight:700;flex:none}
+@media (max-width:640px){.mk-item{grid-template-columns:1fr}}

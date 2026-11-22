@@ -223,6 +223,7 @@ window.EVENTS.push(
   place: "Soweto, Johannesburg, South Africa",
   date: "16 June 1976",
   year: 1976, lat: -26.2397, lon: 27.9086, theme: "civil",
+  deep: "southafrica",
   teaser: "Thousands of Black schoolchildren marched against being taught in Afrikaans. Police opened fire, and the uprising spread across the country.",
   hero: "pieterson",
   background: `

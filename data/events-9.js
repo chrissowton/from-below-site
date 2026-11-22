@@ -7,6 +7,7 @@ window.EVENTS.push(
   place: "Sétif, Guelma and Kherrata, Algeria",
   date: "8 May – June 1945",
   year: 1945, lat: 36.19, lon: 5.41, theme: "freedom",
+  deep: "algeria",
   teaser: "On the day the Second World War ended in Europe, Algerians marched for independence in Sétif. The colonial response killed thousands and set the course towards war.",
   hero: "setifMemorial",
   background: `

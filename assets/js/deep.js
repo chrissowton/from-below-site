@@ -10,13 +10,18 @@
   const stop = () => { if (timer) { clearInterval(timer); timer = null; } const b = document.getElementById("dp-play"); if (b) { b.textContent = "▶ Play"; b.setAttribute("aria-pressed", "false"); } };
 
   const monthKey = d => d.slice(0, 7);
+  const yearMode = D => D.step === "year";
+  const keyOf = (D, d) => yearMode(D) ? d.slice(0, 4) : d.slice(0, 7);
   function steps(D) {
-    const out = []; let [y, m] = D.start.split("-").map(Number); const [ey, em] = D.end.split("-").map(Number);
-    while (y < ey || (y === ey && m <= em)) { out.push({ key: `${y}-${String(m).padStart(2, "0")}`, label: `${MONTHS[m - 1]} ${y}` }); m++; if (m > 12) { m = 1; y++; } }
-    if (D.incidents.some(i => monthKey(i.d) > D.end)) out.push({ key: "after", label: "After the war" });
+    const out = [];
+    if (yearMode(D)) { for (let y = +D.start; y <= +D.end; y++) out.push({ key: String(y), label: String(y) }); }
+    else { let [y, m] = D.start.split("-").map(Number); const [ey, em] = D.end.split("-").map(Number);
+      while (y < ey || (y === ey && m <= em)) { out.push({ key: `${y}-${String(m).padStart(2, "0")}`, label: `${MONTHS[m - 1]} ${y}` }); m++; if (m > 12) { m = 1; y++; } } }
+    if (D.incidents.some(i => keyOf(D, i.d) > D.end)) out.push({ key: "after", label: D.afterLabel || "After the war" });
+    if (D.incidents.some(i => keyOf(D, i.d) < D.start)) out.unshift({ key: "before", label: D.beforeLabel || "Before" });
     return out;
   }
-  const stepOf = (D, st, inc) => { const k = monthKey(inc.d); if (k > D.end) return st.length - 1; const i = st.findIndex(s => s.key === k); return i < 0 ? 0 : i; };
+  const stepOf = (D, st, inc) => { const k = keyOf(D, inc.d); if (k > D.end) return st.length - 1; if (k < D.start) return 0; const i = st.findIndex(s => s.key === k); return i < 0 ? 0 : i; };
   const fig = (k, w, cls = "") => { const m = MEDIA[k]; if (!m) return ""; return `<figure class="dp-fig ${cls}"><a href="${fileUrl(m.f)}" target="_blank" rel="noopener"><img loading="lazy" src="${fileUrl(m.f, w)}" alt="${esc(m.cap)}"></a><figcaption>${esc(m.cap)} <span class="credit">${credit(m)}</span></figcaption></figure>`; };
   const srcLinks = s => (s || []).map(([l, u]) => u ? `<a href="${u}" target="_blank" rel="noopener">${esc(l)} ↗</a>` : esc(l)).join(" · ");
 
@@ -39,7 +44,7 @@
     const st = steps(D), incs = D.incidents.slice().sort((a, b) => a.d.localeCompare(b.d));
     const types = Object.entries(D.types).filter(([k]) => incs.some(i => i.type === k));
     const hero = D.hero && MEDIA[D.hero] ? `style="--hero:url('${fileUrl(MEDIA[D.hero].f, 1400)}')"` : "";
-    const byYear = {}; incs.forEach(i => { const y = monthKey(i.d) > D.end ? "Afterwards" : i.d.slice(0, 4); (byYear[y] = byYear[y] || []).push(i); });
+    const byYear = {}; incs.forEach(i => { const y = keyOf(D, i.d) > D.end ? "Afterwards" : i.d.slice(0, 4); (byYear[y] = byYear[y] || []).push(i); });
     const others = Object.values(DEEP).filter(x => x.id !== D.id);
     FB.showPage(`
       <header class="pg-hero" ${hero}><div class="wrap">
@@ -52,7 +57,7 @@
         <section class="dp-mapwrap" aria-label="Map of incidents">
           <div class="dp-controls">
             <button type="button" class="btn-play" id="dp-play" aria-pressed="false">▶ Play</button>
-            <label class="dp-range"><span class="sr">Month</span><input type="range" id="dp-range" min="0" max="${st.length - 1}" value="${st.length - 1}" step="1"></label>
+            <label class="dp-range"><span class="sr">${yearMode(D) ? "Year" : "Month"}</span><input type="range" id="dp-range" min="0" max="${st.length - 1}" value="${st.length - 1}" step="1"></label>
             <output id="dp-label" class="dp-label notranslate">${esc(st[st.length - 1].label)}</output>
           </div>
           <div class="dp-legend" role="group" aria-label="Show or hide types of incident">${types.map(([k, t]) => `<button type="button" class="dp-chip on" data-type="${k}" aria-pressed="true"><span class="dp-dot" style="background:${t.colour}"></span>${esc(t.label)}</button>`).join("")}</div>
@@ -62,7 +67,7 @@
           </div>
           <p class="dp-count" id="dp-count"></p>
         </section>
-        ${D.phaseMap && MEDIA[D.phaseMap.media] ? `<section class="pg-sec dp-phase"><h2>Who controlled what</h2><p>${esc(D.phaseMap.note)}</p>${fig(D.phaseMap.media, 1100, "wide")}</section>` : ""}
+        ${D.phaseMap && MEDIA[D.phaseMap.media] ? `<section class="pg-sec dp-phase"><h2>${esc(D.phaseMap.title || "Who controlled what")}</h2><p>${esc(D.phaseMap.note)}</p>${fig(D.phaseMap.media, 1100, "wide")}</section>` : ""}
         <section class="pg-sec"><h2>All incidents</h2>
           ${Object.entries(byYear).map(([y, list]) => `<h3 class="dp-year">${esc(y)}</h3><ol class="dp-list">${list.map(i => `<li id="dpi-${i.id}" class="dp-item">
             <div class="dp-item-head"><span class="dp-dot" style="background:${(D.types[i.type] || {}).colour}"></span><div><small class="notranslate">${esc(i.when)} · ${esc(i.place)}</small><h4>${esc(i.title)}</h4></div></div>
@@ -70,7 +75,7 @@
             <div class="ex-btns"><button type="button" class="btn-ghost" data-show-inc="${i.id}">Show on the map</button>${i.story && byId[i.story] ? `<button type="button" class="btn-ghost" data-go="${i.story}">Full story →</button>` : ""}</div></div></li>`).join("")}</ol>`).join("")}
         </section>
         ${D.memoryNote ? `<section class="pg-sec"><h2>How it is remembered</h2><div class="prose">${D.memoryNote}</div></section>` : ""}
-        ${D.ukNote ? `<section class="pg-sec"><h2>The British and Irish connection</h2><div class="prose">${D.ukNote}</div><div class="dp-uk">${(D.ukMedia || []).map(k => fig(k, 600)).join("")}</div></section>` : ""}
+        ${D.ukNote ? `<section class="pg-sec"><h2>${esc(D.linkHead || "The British and Irish connection")}</h2><div class="prose">${D.ukNote}</div><div class="dp-uk">${(D.ukMedia || []).map(k => fig(k, 600)).join("")}</div></section>` : ""}
         <div class="sources"><h3>Sources</h3><ol>${(D.sources || []).map(([t, u]) => `<li>${esc(t)}${u ? ` <a href="${u}" target="_blank" rel="noopener">Link ↗</a>` : ""}</li>`).join("")}</ol><p class="dp-note">Each incident also lists its own source.</p></div>
         ${others.length ? `<section class="pg-sec"><h2>Other deep dives</h2><div class="pg-others">${others.map(o => `<button type="button" class="pg-other" data-go="deep/${o.id}"><small>${esc(o.years)}</small><b>${esc(o.title)}</b></button>`).join("")}</div></section>` : ""}
       </div></div>`, D.title);
@@ -88,9 +93,10 @@
     const topo = window[R.topo];
     if (topo) {
       const feats = topojson.feature(topo, topo.objects[R.object]).features.filter(f => !(R.skip || []).includes(f.properties.name));
-      svg.append("g").selectAll("path").data(feats).join("path").attr("d", path).attr("class", "dp-prov").append("title").text(f => f.properties.name);
+      svg.append("g").selectAll("path").data(feats).join("path").attr("d", path).attr("class", f => R.focus && f.properties.name !== R.focus ? "dp-other dp-nb" : "dp-prov").append("title").text(f => f.properties.name);
     }
-    // spread out points that would sit on top of each other (e.g. several incidents in Madrid)
+    if (R.labels) svg.append("g").attr("class", "dp-lbls").selectAll("text").data(R.labels).join("text").attr("x", l => proj([l.lon, l.lat])[0]).attr("y", l => proj([l.lon, l.lat])[1]).attr("class", l => "dp-lbl" + (l.sea ? " sea" : "")).text(l => l.t);
+    // spread out points that would sit on top of each other (e.g. several incidents in one city)
     const pos = new Map(), clusters = [];
     incs.forEach(i => { const p = proj([i.lon, i.lat]); const c = clusters.find(c => Math.hypot(c.x - p[0], c.y - p[1]) < 40); if (c) c.items.push(i); else clusters.push({ x: p[0], y: p[1], items: [i] }); });
     clusters.forEach(c => c.items.forEach((i, k) => {
@@ -165,7 +171,7 @@
   FB.hooks.storyBanner = e => {
     const base = prevBanner ? prevBanner(e) : "";
     const D = e.deep && DEEP[e.deep]; if (!D) return base;
-    return base + `<div class="dp-banner"><div class="wrap"><div><small>Deep dive</small><b>Explore ${esc(D.title)} on a detailed map</b><p>${D.incidents.length} incidents, month by month, with sources.</p></div><button type="button" class="btn-play" data-go="deep/${D.id}">Open the map →</button></div></div>`;
+    return base + `<div class="dp-banner"><div class="wrap"><div><small>Deep dive</small><b>Explore ${esc(D.title)} on a detailed map</b><p>${D.incidents.length} incidents, ${yearMode(D) ? "year" : "month"} by ${yearMode(D) ? "year" : "month"}, with sources.</p></div><button type="button" class="btn-play" data-go="deep/${D.id}">Open the map →</button></div></div>`;
   };
   const prevAfter = FB.hooks.afterStory;
   FB.hooks.afterStory = (e, vc) => { if (prevAfter) prevAfter(e, vc); vc.querySelectorAll(".dp-banner [data-go]").forEach(b => b.onclick = () => go(b.dataset.go)); };
