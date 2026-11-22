@@ -635,7 +635,7 @@
           ${chap(3, "happened", happened)}
           ${chap(4, "next", `<div class="prose">${fn(e.next)}</div>`)}
           ${e.debates ? chap(5, "debates", `<div class="debate-note">Different people have understood this event in different ways. This section sets out how it was seen at the time, where historians disagree, and the difficult questions it raises.</div><div class="prose">${fn(e.debates)}</div>`) : ""}
-          ${e.evidence || lookClose ? chap(6, "evidence", `${e.evidence ? `<div class="prose">${fn(e.evidence)}</div>` : ""}${lookClose}`) : ""}
+          ${e.evidence || lookClose ? chap(6, "evidence", `${e.evidence ? `<div class="prose">${fn(e.evidence)}</div>` : ""}${lookClose}<p class="bh-link"><a href="#behind">Behind the history: how evidence is made, kept and contested →</a></p>`) : ""}
           ${e.memory ? chap(7, "memory", `<div class="prose">${fn(e.memory)}</div>`) : ""}
           <div class="why-box">${chap(8, "why", `<div class="prose">${fn(e.why)}</div>`)}</div>
           ${e.questions ? `<aside class="questions" aria-label="Questions to think about"><h3>Questions to think about</h3><ol>${e.questions.map(q => `<li>${q}</li>`).join("")}</ol></aside>` : ""}

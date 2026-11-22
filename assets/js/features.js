@@ -83,8 +83,7 @@
         <div class="ex-btns"><button type="button" class="btn-play" data-show="thread:${t.id}" data-autoplay="1">▶ Follow on the map</button><button type="button" class="btn-ghost" data-go="thread/${t.id}">Read</button></div></div>
     </article>`).join("");
   const exMk = document.getElementById("ex-making");
-  if (exMk && window.MAKING) { const M = window.MAKING, h = MEDIA[M.hero];
-    exMk.innerHTML = `<article class="ex-card mk-card"><div class="ex-img" style="${h ? bg(M.hero, 600) : ""}"></div><div class="ex-body"><h3>${esc(M.title)}</h3><p>${esc(M.teaser)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="making">Explore →</button></div></div></article>`; }
+  if (exMk && window.BEHIND) exMk.innerHTML = window.BEHIND.cards.map(c => `<article class="ex-card mk-card"><div class="ex-img" style="${MEDIA[c.hero] ? bg(c.hero, 600) : ""}"></div><div class="ex-body"><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="${c.route}">Open →</button></div></div></article>`).join("");
   if (exP) exP.innerHTML = PATHWAYS.map(p => `<article class="ex-card pw-card">
       <div class="ex-body"><small class="pw-level">${esc(p.level || "")} · ${p.steps.length} stories</small><h3>${esc(p.title)}</h3><p>${esc(p.teaser)}</p>
         <div class="ex-btns"><button type="button" class="btn-play" data-go="path/${p.id}">Start the pathway →</button></div></div>
@@ -217,15 +216,70 @@
       if (it.id && byId[it.id]) return `<li class="mk-item">${storyLink(it.id)}<p>${esc(it.note)}</p></li>`;
       return "";
     };
-    FB.showPage(`${pageHero("Making history", M.title, M.teaser, M.hero && MEDIA[M.hero] ? M.hero : null)}
+    FB.showPage(`${pageHero(`<a href="#behind" class="bh-crumb">Behind the history</a> · Making history`, M.title, M.teaser, M.hero && MEDIA[M.hero] ? M.hero : null)}
       <div class="pg-body"><div class="wrap narrow">
         <p class="pg-lede">${esc(M.intro)}</p>
         <nav class="mk-toc" aria-label="Sections">${M.sections.map(sec => `<a href="#making" data-mk="${sec.id}">${esc(sec.title)}</a>`).join("")}</nav>
         ${M.sections.map(sec => `<section class="pg-sec mk-sec" id="mk-${sec.id}"><h2>${esc(sec.title)}</h2><p>${esc(sec.text)}</p><ul class="mk-list">${sec.items.map(item).join("")}</ul></section>`).join("")}
         ${M.questions ? `<aside class="questions"><h3>Questions to ask of any history</h3><ol>${M.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></aside>` : ""}
-        <p class="pg-note">Every story on this site has a section called "How do we know?" and a "Look closely at a source" activity. Use them to ask these questions of each story.</p>
+        <p class="pg-note">Every story on this site has a section called "The evidence", with a "Look closely at a source" activity. Use them to ask these questions of each story.</p>
+        ${bhOthers("making")}
       </div></div>`, M.title);
     FB.vc.querySelectorAll("[data-mk]").forEach(a => a.onclick = ev => { ev.preventDefault(); const t = document.getElementById("mk-" + a.dataset.mk); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    return true;
+  };
+
+  /* ---------- Behind the history: hub, the official story, our method ---------- */
+  const BH = window.BEHIND;
+  const bhTarget = it => it.deep && (window.DEEP || {})[it.deep] ? `<button type="button" class="st-link mk-deep" data-go="deep/${it.deep}"><span class="mk-dd">Map</span><span><b>${esc(window.DEEP[it.deep].title)}</b><small>Deep dive · ${esc(window.DEEP[it.deep].years)}</small></span></button>` : (it.id && byId[it.id] ? storyLink(it.id) : "");
+  const bhOthers = cur => `<section class="pg-sec"><h2>Behind the history</h2><div class="pg-others">${BH.cards.filter(c => c.route !== cur).map(c => `<button type="button" class="pg-other" data-go="${c.route}"><small>Behind the history</small><b>${esc(c.title)}</b></button>`).join("")}</div></section>`;
+  FB.routes.behind = () => {
+    if (!BH) return false;
+    FB.showPage(`${pageHero("Behind the history", BH.title, BH.teaser, MEDIA[BH.hero] ? BH.hero : null)}
+      <div class="pg-body"><div class="wrap">
+        <p class="pg-lede bh-lede">${esc(BH.intro)}</p>
+        <div class="bh-grid">${BH.cards.map((c, i) => `<button type="button" class="bh-card" data-go="${c.route}"><span class="bh-img" style="${MEDIA[c.hero] ? bg(c.hero, 600) : ""}"></span><span class="bh-txt"><small>${i + 1} of ${BH.cards.length}</small><b>${esc(c.title)}</b><span>${esc(c.text)}</span><em>Open →</em></span></button>`).join("")}</div>
+      </div></div>`, BH.title);
+    return true;
+  };
+  FB.routes.official = () => {
+    if (!BH) return false; const O = BH.official;
+    FB.showPage(`${pageHero(`<a href="#behind" class="bh-crumb">Behind the history</a> · The official story`, O.title, O.teaser, "reiterdenkmal")}
+      <div class="pg-body"><div class="wrap narrow">
+        <p class="pg-lede">${esc(O.intro)}</p>
+        <nav class="mk-toc" aria-label="Sections"><a href="#official" data-mk="figures">Counting the dead</a><a href="#official" data-mk="words">The language of power</a><a href="#official" data-mk="erase">Erasing and rewriting</a></nav>
+        <section class="pg-sec mk-sec" id="mk-figures"><h2>Counting the dead</h2>
+          <p>Governments have often published low figures for the number of people their forces killed, and later research has often found far more. Opponents can exaggerate too. Here are official figures set beside other estimates, from stories on this site.</p>
+          <div class="of-table" role="table" aria-label="Official figures and other estimates">
+            <div class="of-row of-head" role="row"><span role="columnheader">Event</span><span role="columnheader">The official figure</span><span role="columnheader">Other estimates</span></div>
+            ${O.figures.map(f => { const t = f.deep ? `deep/${f.deep}` : f.id; return `<div class="of-row" role="row"><span role="cell"><button type="button" class="of-ev" data-go="${t}">${esc(f.event)} →</button></span><span role="cell" class="of-off">${esc(f.official)}</span><span role="cell" class="of-oth">${esc(f.other)}</span></div>`; }).join("")}
+          </div>
+          <p class="pg-note">Each figure comes from the linked story, which names its sources.</p>
+        </section>
+        <section class="pg-sec mk-sec" id="mk-words"><h2>The language of power</h2>
+          <p>Before anyone counts the dead, someone decides what to call the people who rose up. The same people can be rebels or patriots, agitators or workers, terrorists or citizens.</p>
+          ${O.language.map(g => `<h3 class="of-h3">${esc(g.title)}</h3><p class="of-lead">${esc(g.text)}</p><ul class="mk-list">${g.items.filter(it => byId[it.id]).map(it => `<li class="mk-item">${storyLink(it.id)}<p>${esc(it.said)}</p></li>`).join("")}</ul>`).join("")}
+        </section>
+        <section class="pg-sec mk-sec" id="mk-erase"><h2>Erasing and rewriting</h2>
+          <p>Records can be destroyed, deaths explained away, places renamed and monuments built to tell one side of the story.</p>
+          <ul class="mk-list">${O.erasing.map(it => `<li class="mk-item">${bhTarget(it)}<p>${esc(it.note)}</p></li>`).join("")}</ul>
+        </section>
+        <aside class="questions"><h3>Questions to think about</h3><ol>${O.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></aside>
+        ${bhOthers("official")}
+      </div></div>`, O.title);
+    FB.vc.querySelectorAll("[data-mk]").forEach(a => a.onclick = ev => { ev.preventDefault(); const t = document.getElementById("mk-" + a.dataset.mk); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    return true;
+  };
+  FB.routes.method = () => {
+    if (!BH) return false; const M = BH.method;
+    const N = EVENTS.length, nP = EVENTS.filter(e => e.primary).length, nV = EVENTS.filter(e => e.voices && e.voices.length).length, nOg = EVENTS.filter(e => e.ongoing).length;
+    FB.showPage(`${pageHero(`<a href="#behind" class="bh-crumb">Behind the history</a> · Our method`, M.title, M.teaser, null)}
+      <div class="pg-body"><div class="wrap narrow">
+        <div class="bh-stats"><div><b>${N}</b><span>stories, each with numbered sources</span></div><div><b>${nP}</b><span>with a primary source to look at closely</span></div><div><b>${nV}</b><span>with quotations from people who were there</span></div><div><b>${nOg}</b><span>recent stories with an 'ongoing situation' box</span></div></div>
+        ${M.sections.map(s => `<section class="pg-sec"><h2>${esc(s.title)}</h2><div class="prose">${s.html}</div></section>`).join("")}
+        <p class="pg-btns"><button type="button" class="btn-play" data-go="coverage">See our coverage, and the gaps →</button></p>
+        ${bhOthers("method")}
+      </div></div>`, M.title);
     return true;
   };
 
@@ -359,7 +413,7 @@
           <button type="button" class="ps-story" data-go="${e.id}"><span>The story</span><b>${esc(e.title)}</b><em>${esc(e.country || "")}${e.year ? " · " + yr(e.year) : ""} →</em></button>
         </div></article>`;
     };
-    FB.showPage(`${pageHero("Primary sources", "Sources and voices", `Evidence made at the time — posters, petitions, photographs, pamphlets and prints — and the words of people who were there. ${withP.length} sources and ${withV.reduce((a, e) => a + e.voices.length, 0)} quotations so far.`, null)}
+    FB.showPage(`${pageHero(`<a href="#behind" class="bh-crumb">Behind the history</a> · Primary sources`, "Sources and voices", `Evidence made at the time — posters, petitions, photographs, pamphlets and prints — and the words of people who were there. ${withP.length} sources and ${withV.reduce((a, e) => a + e.voices.length, 0)} quotations so far.`, null)}
       <div class="pg-body"><div class="wrap">
         <p class="pg-note">A primary source was made at the time, by people involved or watching. It is evidence — but every source was made by someone, for a reason. Ask who made it, why, and who is missing. Each source below links to the full story it comes from.</p>
         <div class="ps-tools"><div class="ps-chips" role="group" aria-label="Type of source">${GROUPS.map(([g, l], i) => `<button type="button" class="chip${i ? "" : " on"}" data-g="${g}">${esc(l)}</button>`).join("")}</div>
