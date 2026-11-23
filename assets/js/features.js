@@ -58,6 +58,11 @@
       const p = pathById[id];
       return { key, kind: "Pathway", title: p.title, seq: p.steps.map(s => s.id).filter(i => byId[i]), dates: Object.fromEntries(p.steps.map(s => [s.id, byId[s.id] ? yr(byId[s.id].year) : ""])), arcs: false, numbered: true, link: "path/" + id };
     }
+    if (kind === "guide") {
+      const g = (window.GUIDES || []).find(x => x.id === id); if (!g) return null;
+      const ids = [...new Set(g.sections.flatMap(sec => (sec.stories || []).map(it => it.id)))].filter(i => byId[i]).sort((x, y) => (byId[x].year || 0) - (byId[y].year || 0));
+      return { key, kind: "Issue guide", title: g.title, seq: ids, dates: Object.fromEntries(ids.map(i => [i, yr(byId[i].year)])), arcs: false, numbered: true, link: "guide/" + id };
+    }
     return null;
   };
   const showOnMap = (key, autoplay) => { const f = focusFor(key); if (f) FB.showOnMap({ ...f, autoplay }); };
@@ -84,6 +89,8 @@
     </article>`).join("");
   const exMk = document.getElementById("ex-making");
   if (exMk && window.BEHIND) exMk.innerHTML = window.BEHIND.cards.map(c => `<article class="ex-card mk-card"><div class="ex-img" style="${MEDIA[c.hero] ? bg(c.hero, 600) : ""}"></div><div class="ex-body"><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="${c.route}">Open →</button></div></div></article>`).join("");
+  const exG = document.getElementById("ex-guides");
+  if (exG) exG.innerHTML = (window.GUIDES || []).map(g => { const h = heroOf(g.heroStory); return `<article class="ex-card gd-card"><div class="ex-img" style="${h ? bg(h, 600) : ""}"></div><div class="ex-body"><small class="pw-level">Issue guide · ${esc(g.level || "")}</small><h3>${esc(g.title)}</h3><p>${esc(g.teaser)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="guide/${g.id}">Read the guide →</button></div></div></article>`; }).join("");
   if (exP) exP.innerHTML = PATHWAYS.map(p => `<article class="ex-card pw-card">
       <div class="ex-body"><small class="pw-level">${esc(p.level || "")} · ${p.steps.length} stories</small><h3>${esc(p.title)}</h3><p>${esc(p.teaser)}</p>
         <div class="ex-btns"><button type="button" class="btn-play" data-go="path/${p.id}">Start the pathway →</button></div></div>
@@ -225,6 +232,32 @@
         <p class="pg-note">Every story on this site has a section called "The evidence", with a "Look closely at a source" activity. Use them to ask these questions of each story.</p>
         ${bhOthers("making")}
       </div></div>`, M.title);
+    FB.vc.querySelectorAll("[data-mk]").forEach(a => a.onclick = ev => { ev.preventDefault(); const t = document.getElementById("mk-" + a.dataset.mk); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    return true;
+  };
+
+  /* ---------- Issue guides ---------- */
+  const GUIDES = window.GUIDES || [];
+  FB.routes.guide = id => {
+    const G = GUIDES.find(g => g.id === id); if (!G) return false;
+    const h = heroOf(G.heroStory);
+    const sItem = it => byId[it.id] ? `<li class="mk-item">${storyLink(it.id)}<p>${esc(it.note)}</p></li>` : "";
+    FB.showPage(`${pageHero(`Issue guide · ${esc(G.level || "")}`, G.title, G.teaser, h, `<button type="button" class="btn-ghost light" id="gd-print">Print this guide</button><button type="button" class="btn-ghost light" data-show="guide:${G.id}">See the stories on the map</button>`)}
+      <div class="pg-body"><div class="wrap narrow gd">
+        <p class="pg-lede">${esc(G.intro)}</p>
+        <nav class="mk-toc" aria-label="Sections">${G.sections.map(sec => `<a href="#guide/${G.id}" data-mk="${sec.id}">${esc(sec.title)}</a>`).join("")}<a href="#guide/${G.id}" data-mk="source">A source</a><a href="#guide/${G.id}" data-mk="use">Using this guide</a></nav>
+        ${G.sections.map(sec => `<section class="pg-sec mk-sec" id="mk-${sec.id}"><h2>${esc(sec.title)}</h2><div class="prose">${fnLinks(sec.html, "gs")}</div>${sec.stories ? `<ul class="mk-list">${sec.stories.map(sItem).join("")}</ul>` : ""}</section>`).join("")}
+        ${G.source ? `<section class="pg-sec mk-sec" id="mk-source"><h2>Look closely at a source</h2><div class="gd-src"><small>${esc(G.source.kind)} · ${esc(G.source.made)}</small><blockquote class="ps-doc"><p>${esc(G.source.text).replace(/ \/ /g, "<br>")}</p></blockquote><p>${fnLinks(esc(G.source.about), "gs")}</p><ol>${G.source.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></div></section>` : ""}
+        <section class="pg-sec mk-sec" id="mk-use"><h2>Using this guide</h2>
+          ${G.words ? `<h3 class="of-h3">Key words</h3><dl class="gd-words">${G.words.map(([w, d]) => `<dt>${esc(w)}</dt><dd>${esc(d)}</dd>`).join("")}</dl>` : ""}
+          ${G.questions ? `<aside class="questions"><h3>Questions for discussion</h3><ol>${G.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></aside>` : ""}
+          ${G.activities ? `<h3 class="of-h3">Activities</h3><ol class="gd-act">${G.activities.map(a => `<li>${esc(a)}</li>`).join("")}</ol>` : ""}
+        </section>
+        ${srcList(G.sources, "gs")}
+        ${GUIDES.length > 1 ? `<section class="pg-sec"><h2>Other issue guides</h2>${otherCards(GUIDES, "guide", G.id)}</section>` : ""}
+      </div></div>`, G.title);
+    wireSources(FB.vc);
+    FB.vc.querySelector("#gd-print").onclick = () => window.print();
     FB.vc.querySelectorAll("[data-mk]").forEach(a => a.onclick = ev => { ev.preventDefault(); const t = document.getElementById("mk-" + a.dataset.mk); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); });
     return true;
   };

@@ -479,6 +479,7 @@ window.EVENTS.push(
   place: "Central Kenya",
   date: "1952 – 1960",
   year: 1952, lat: -0.42, lon: 36.95, theme: "freedom",
+  deep: "kenya",
   teaser: "An armed rebellion over land and freedom was met with mass detention and torture. Decades later, the British government paid compensation to survivors.",
   hero: "kimathiStatue",
   background: `

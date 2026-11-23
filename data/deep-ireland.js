@@ -19,8 +19,7 @@ window.DEEP.ireland = {
     civilwar: { label: "Civil War", colour: "#2E5E8C" },
     politics: { label: "Votes and treaties", colour: "#2F7F6F" }
   },
-  intro: `<p>Between 1913 and 1923, Ireland went through a labour war, an armed rising, a revolutionary election, a war for independence against Britain, partition and a civil war. Our map shows the whole island, as it was at the start of the decade; Northern Ireland was created by the Government of Ireland Act 1920.</p>
-<p>Use the slider to move through the years, or press play. Select a point on the map, or browse the list below, to read what happened there. The full story, with its background, debates and sources, is in <a href="#easter1916">The Easter Rising</a>.</p>`,
+  intro: `<p>Between 1913 and 1923, Ireland went through a labour war, an armed rising, a revolutionary election, a war for independence against Britain, partition and a civil war. Our map shows the whole island, as it was at the start of the decade; Northern Ireland was created by the Government of Ireland Act 1920.</p>`,
   balance: "This map includes killings by British forces, by the IRA, by loyalists and by both sides in the Civil War. According to the study The Dead of the Irish Revolution, 2,346 people were killed or died as a result of the War of Independence.",
   incidents: [
     { id: "ie-lockout", d: "1913-08-26", when: "August 1913 – January 1914", title: "The Dublin Lockout", place: "Dublin", lat: 53.35, lon: -6.26, type: "labour",

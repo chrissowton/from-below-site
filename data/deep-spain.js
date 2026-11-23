@@ -10,6 +10,7 @@ window.DEEP.spain = {
   hero: "bcnBarricade1936",
   region: { lon: [-10.2, 4.8], lat: [35.0, 44.0], topo: "ES_PROV", object: "provinces", skip: ["Las Palmas", "Santa Cruz de Tenerife"] },
   start: "1936-02", end: "1939-04",
+  afterLabel: "After the war",
   phaseMap: { media: "scwGeneralMap", note: "The shading shows the rebels' initial zone in July 1936 and how far they had advanced by each later stage. The incidents on our map can be compared with it." },
   types: {
     rising:     { label: "The military rising", colour: "#5E2117" },
@@ -21,8 +22,7 @@ window.DEEP.spain = {
     exile:      { label: "Refugees and exile", colour: "#2F7F6F" },
     memory:     { label: "Memory", colour: "#6A4C93" }
   },
-  intro: `<p>The Spanish Civil War began with a military rising against the elected Popular Front government in July 1936. Where the rising failed, workers' organisations took power in the streets, the factories and the fields; where it succeeded, the rebels began a campaign of mass killing. Both sides killed civilians behind their lines. The war ended in April 1939 with the victory of General Franco, whose dictatorship lasted until 1975.</p>
-<p>Use the slider to move through the war month by month, or press play. Select a point on the map, or browse the list below, to read what happened there. The full story, with its background, debates and sources, is in <a href="#spain1936">The Spanish Revolution and Civil War</a>.</p>`,
+  intro: `<p>The Spanish Civil War began with a military rising against the elected Popular Front government in July 1936. Where the rising failed, workers' organisations took power in the streets, the factories and the fields; where it succeeded, the rebels began a campaign of mass killing. Both sides killed civilians behind their lines. The war ended in April 1939 with the victory of General Franco, whose dictatorship lasted until 1975.</p>`,
   balance: "This map includes killings by both sides. Death tolls are given as ranges, with who produced each figure, because many remain disputed.",
   incidents: [
     { id: "es-mujereslibres", d: "1936-05-01", when: "May 1936", title: "Mujeres Libres launches its magazine", place: "Madrid", lat: 40.43, lon: -3.69, type: "revolution",

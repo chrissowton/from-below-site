@@ -20,8 +20,7 @@ window.DEEP.westernsahara = {
     protest: { label: "Protest and repression", colour: "#C2563F" },
     diplomacy: { label: "Ceasefire and diplomacy", colour: "#2E5E8C" }
   },
-  intro: `<p>Spain ruled the Western Sahara as the Spanish Sahara until 1975–76, when it handed the territory to Morocco and Mauritania without the consent of its people, the Sahrawis. The Polisario Front, founded in 1973, fought both. Mauritania withdrew in 1979; Morocco built a sand wall across the territory and still controls most of it. A UN mission set up in 1991 to hold a referendum on independence has never held one, and many Sahrawis have lived in refugee camps in Algeria for half a century.</p>
-<p>Use the slider to move through the years, or press play. Select a point on the map, or browse the list below, to read what happened there.</p>`,
+  intro: `<p>Spain ruled the Western Sahara as the Spanish Sahara until 1975–76, when it handed the territory to Morocco and Mauritania without the consent of its people, the Sahrawis. The Polisario Front, founded in 1973, fought both. Mauritania withdrew in 1979; Morocco built a sand wall across the territory and still controls most of it. A UN mission set up in 1991 to hold a referendum on independence has never held one, and many Sahrawis have lived in refugee camps in Algeria for half a century.</p>`,
   balance: "The Western Sahara is claimed by Morocco, which calls it its Southern Provinces, and by the Sahrawi Arab Democratic Republic proclaimed by the Polisario Front. Figures for deaths and refugees are often disputed between the two sides; we give both where we can.",
   incidents: [
     { id: "ws-zemla", d: "1970-06-17", when: "17 June 1970", title: "The Zemla rising", place: "Zemla district, El Aaiún", lat: 27.15, lon: -13.20, type: "anticolonial",

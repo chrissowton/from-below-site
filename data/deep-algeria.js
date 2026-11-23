@@ -18,8 +18,7 @@ window.DEEP.algeria = {
     politics: { label: "Politics and independence", colour: "#2F7F6F" },
     exodus: { label: "Exile and reprisals", colour: "#2E5E8C" }
   },
-  intro: `<p>France conquered Algeria from 1830 and ruled it as part of France, with a large European settler population. The Algerian War of Independence (1954–1962) was fought by the National Liberation Front (FLN) against the French army, and divided Algerians as well as the French. Estimates of the dead range from 400,000 to 1.5 million Algerians, alongside 25,600 French soldiers and 6,000 Europeans.</p>
-<p>Use the slider to move through the years, or press play. Select a point on the map, or browse the list below, to read what happened there. The full story is in <a href="#algeria1954">The Algerian War of Independence</a>.</p>`,
+  intro: `<p>France conquered Algeria from 1830 and ruled it as part of France, with a large European settler population. The Algerian War of Independence (1954–1962) was fought by the National Liberation Front (FLN) against the French army, and divided Algerians as well as the French. Estimates of the dead range from 400,000 to 1.5 million Algerians, alongside 25,600 French soldiers and 6,000 Europeans.</p>`,
   balance: "This map includes killings and torture by the French army, police and settler militias, killings of civilians by the FLN, and reprisals against Algerians who had served France. We give the ranges of estimates and say who produced each figure.",
   incidents: [
     { id: "dz-setif", d: "1945-05-08", when: "8 May 1945 and the weeks after", title: "Sétif and Guelma", place: "Sétif, Guelma and Kherrata", lat: 36.19, lon: 5.41, type: "massacre",
@@ -68,6 +67,7 @@ window.DEEP.algeria = {
       text: "By 1960, about 150,000 Muslim Algerians served in the French army or as auxiliaries, known as harkis. Regarded as traitors, thousands were reportedly killed in reprisals after the war, despite the ceasefire's amnesty. In 2012, President Nicolas Sarkozy recognised France's 'historical responsibility' for abandoning them.",
       src: [["Wikipedia, 'Harki'", "https://en.wikipedia.org/wiki/Harki"]] }
   ],
+  memoryNote: `<p>In Algeria, 1 November, when the war began, and 5 July, independence day, are national days. France and Algeria still remember the war very differently. French recognition has come slowly: in 1998 the state acknowledged 40 deaths in the Paris massacre of 1961, and in 2024 President Emmanuel Macron acknowledged that Larbi Ben M'hidi was 'assassinated by French soldiers'.</p>`,
   linkHead: "The French connection",
   ukNote: `<p>The war was also fought in France. On 17 October 1961, Paris police attacked a peaceful demonstration by Algerians: after 37 years of denial, the French government acknowledged 40 deaths in 1998, while some historians estimate that 200 to 300 Algerians died. Torture was widely denied and censored in France at the time; books such as Henri Alleg's La Question were banned. Across the world, solidarity movements supported Algerian independence.</p>`,
   ukMedia: ["dzSolidarity"],

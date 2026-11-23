@@ -289,6 +289,7 @@ window.EVENTS.push(
   place: "Mahad, Maharashtra, India",
   date: "20 March 1927",
   year: 1927, lat: 18.08, lon: 73.42, theme: "civil",
+  deep: "india",
   teaser: "B. R. Ambedkar led thousands of Dalits to drink from a public water tank that caste Hindus had forbidden them to touch — a founding moment of the struggle against untouchability.",
   hero: "chavdarTank",
   background: `

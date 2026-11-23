@@ -20,8 +20,7 @@ window.DEEP.vietnam = {
     hunger: { label: "Famine and the land", colour: "#C77700" },
     protest: { label: "Protest", colour: "#2F7F6F" }
   },
-  intro: `<p>France conquered Viet Nam in the 19th century and ruled it as part of French Indochina. Resistance took many forms: prison mutinies, army risings, peasant soviets and, in 1945, a revolution that declared independence. France fought to return until its defeat at Điện Biên Phủ in 1954. The country was then divided, and the war that followed, with the United States backing the South, ended only in 1975.</p>
-<p>Use the slider to move through the years, or press play. Select a point on the map, or browse the list below, to read what happened there. The full story is in <a href="#vietnam1945">Viet Nam: From the August Revolution to Reunification</a>.</p>`,
+  intro: `<p>France conquered Viet Nam in the 19th century and ruled it as part of French Indochina. Resistance took many forms: prison mutinies, army risings, peasant soviets and, in 1945, a revolution that declared independence. France fought to return until its defeat at Điện Biên Phủ in 1954. The country was then divided, and the war that followed, with the United States backing the South, ended only in 1975.</p>`,
   balance: "Estimates of the war's dead vary widely. A 1995 demographic study counted 791,000 to 1,141,000 Vietnamese deaths in 1965–75; the Vietnamese government estimated 1.1 million communist soldiers and 2 million civilians dead in 1955–75. This map includes killings of civilians by French, American, South Vietnamese and communist forces, with ranges and who produced each figure.",
   incidents: [
     { id: "vn-condao", d: "1861-01-01", when: "From 1861", title: "Côn Đảo: the colonial prison island", place: "Côn Sơn island", lat: 8.68, lon: 106.61, type: "colonial",

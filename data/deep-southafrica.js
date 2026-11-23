@@ -19,8 +19,7 @@ window.DEEP.southafrica = {
     prison: { label: "Trials, prison and deaths in custody", colour: "#5E2117" },
     transition: { label: "Transition and democracy", colour: "#2E5E8C" }
   },
-  intro: `<p>After the National Party won the 1948 election, it built apartheid: a system of laws that classified every South African by race and controlled where black, coloured and Indian South Africans could live, work, travel and go to school. Resistance took the form of mass campaigns, strikes, boycotts, school protests, armed struggle and international solidarity. Apartheid ended with the country's first election under universal suffrage in 1994.</p>
-<p>Use the slider to move through the years, or press play. Select a point on the map, or browse the list below, to read what happened there.</p>`,
+  intro: `<p>After the National Party won the 1948 election, it built apartheid: a system of laws that classified every South African by race and controlled where black, coloured and Indian South Africans could live, work, travel and go to school. Resistance took the form of mass campaigns, strikes, boycotts, school protests, armed struggle and international solidarity. Apartheid ended with the country's first election under universal suffrage in 1994.</p>`,
   balance: "This map includes killings by police, the army and the homeland forces, by the Inkatha Freedom Party's supporters, and by anti-apartheid activists. Official figures were often far lower than later research; we give both where we can.",
   incidents: [
     { id: "za-groupareas", d: "1950-07-07", when: "1950", title: "The Group Areas Act", place: "Cape Town", lat: -33.93, lon: 18.42, type: "removals",

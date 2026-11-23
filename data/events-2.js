@@ -147,6 +147,7 @@ window.EVENTS.push(
   place: "Sabarmati Ashram to Dandi, Gujarat, India",
   date: "12 March – 6 April 1930",
   year: 1930, lat: 20.89, lon: 72.80, theme: "freedom",
+  deep: "india",
   teaser: "A 24-day march to the sea to make salt in defiance of British law set off a campaign of civil disobedience across India.",
   hero: "marcheSel",
   background: `

@@ -225,6 +225,7 @@ window.EVENTS.push(
   place: "Santiago, Chile",
   date: "1974 – 1990",
   year: 1975, lat: -33.45, lon: -70.66, theme: "thought",
+  deep: "chile",
   teaser: "Under Pinochet's dictatorship, poor women stitched scenes of their lives — disappeared relatives, soup kitchens, protests — onto scraps of sacking. Smuggled abroad, their patchworks told the world what was happening.",
   hero: "arpilleras",
   background: `

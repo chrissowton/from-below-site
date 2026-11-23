@@ -19,8 +19,7 @@ window.DEEP.cuba = {
     revolution: { label: "Revolution of the 1950s", colour: "#C2563F" },
     change: { label: "After 1959", colour: "#C77700" }
   },
-  intro: `<p>Cubans fought three wars for independence from Spain between 1868 and 1898. Slavery, which underpinned the island's sugar economy, was ended in 1886. Independence, when it came, was limited by the United States, which kept the right to intervene and a naval base at Guantánamo. In the 1950s, a revolution against the dictatorship of Fulgencio Batista brought Fidel Castro to power in 1959.</p>
-<p>Use the slider to move through the years, or press play. Select a point on the map, or browse the list below, to read what happened there. The story of the 1950s is in <a href="#cuba1959">The Cuban Revolution</a>.</p>`,
+  intro: `<p>Cubans fought three wars for independence from Spain between 1868 and 1898. Slavery, which underpinned the island's sugar economy, was ended in 1886. Independence, when it came, was limited by the United States, which kept the right to intervene and a naval base at Guantánamo. In the 1950s, a revolution against the dictatorship of Fulgencio Batista brought Fidel Castro to power in 1959.</p>`,
   balance: "This map includes killings by Spanish colonial forces, by the Batista dictatorship and by the revolutionary government after 1959, and the US-backed invasion of 1961. Many death tolls are disputed; we give ranges and say who produced each figure.",
   incidents: [
     { id: "cu-yara", d: "1868-10-10", when: "10 October 1868", title: "The Cry of Yara", place: "La Demajagua, near Manzanillo", lat: 20.31, lon: -77.18, type: "independence",
