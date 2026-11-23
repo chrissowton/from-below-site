@@ -90,7 +90,7 @@
   const exMk = document.getElementById("ex-making");
   if (exMk && window.BEHIND) exMk.innerHTML = window.BEHIND.cards.map(c => `<article class="ex-card mk-card"><div class="ex-img" style="${MEDIA[c.hero] ? bg(c.hero, 600) : ""}"></div><div class="ex-body"><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="${c.route}">Open →</button></div></div></article>`).join("");
   const exG = document.getElementById("ex-guides");
-  if (exG) exG.innerHTML = (window.GUIDES || []).map(g => { const h = heroOf(g.heroStory); return `<article class="ex-card gd-card"><div class="ex-img" style="${h ? bg(h, 600) : ""}"></div><div class="ex-body"><small class="pw-level">Issue guide · ${esc(g.level || "")}</small><h3>${esc(g.title)}</h3><p>${esc(g.teaser)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="guide/${g.id}">Read the guide →</button></div></div></article>`; }).join("");
+  if (exG) exG.innerHTML = (window.GUIDES || []).map(g => { const h = heroOf(g.heroStory); return `<article class="ex-card gd-card"><div class="ex-img" style="${h ? bg(h, 600) : ""}"></div><div class="ex-body"><small class="pw-level">Issue guide${g.sections ? ` · ${g.sections.length} chapters` : ""}</small><h3>${esc(g.title)}</h3><p>${esc(g.teaser)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="guide/${g.id}">Read the guide →</button></div></div></article>`; }).join("");
   if (exP) exP.innerHTML = PATHWAYS.map(p => `<article class="ex-card pw-card">
       <div class="ex-body"><small class="pw-level">${esc(p.level || "")} · ${p.steps.length} stories</small><h3>${esc(p.title)}</h3><p>${esc(p.teaser)}</p>
         <div class="ex-btns"><button type="button" class="btn-play" data-go="path/${p.id}">Start the pathway →</button></div></div>
@@ -242,23 +242,36 @@
     const G = GUIDES.find(g => g.id === id); if (!G) return false;
     const h = heroOf(G.heroStory);
     const sItem = it => byId[it.id] ? `<li class="mk-item">${storyLink(it.id)}<p>${esc(it.note)}</p></li>` : "";
-    FB.showPage(`${pageHero(`Issue guide · ${esc(G.level || "")}`, G.title, G.teaser, h, `<button type="button" class="btn-ghost light" id="gd-print">Print this guide</button><button type="button" class="btn-ghost light" data-show="guide:${G.id}">See the stories on the map</button>`)}
+    const n = G.sections.length;
+    FB.showPage(`${pageHero("Issue guide", G.title, G.teaser, h, `<button type="button" class="btn-ghost light" data-show="guide:${G.id}">See the stories on the map</button><button type="button" class="btn-ghost light" id="gd-print">Print</button>`)}
       <div class="pg-body"><div class="wrap narrow gd">
         <p class="pg-lede">${esc(G.intro)}</p>
-        <nav class="mk-toc" aria-label="Sections">${G.sections.map(sec => `<a href="#guide/${G.id}" data-mk="${sec.id}">${esc(sec.title)}</a>`).join("")}<a href="#guide/${G.id}" data-mk="source">A source</a><a href="#guide/${G.id}" data-mk="use">Using this guide</a></nav>
-        ${G.sections.map(sec => `<section class="pg-sec mk-sec" id="mk-${sec.id}"><h2>${esc(sec.title)}</h2><div class="prose">${fnLinks(sec.html, "gs")}</div>${sec.stories ? `<ul class="mk-list">${sec.stories.map(sItem).join("")}</ul>` : ""}</section>`).join("")}
-        ${G.source ? `<section class="pg-sec mk-sec" id="mk-source"><h2>Look closely at a source</h2><div class="gd-src"><small>${esc(G.source.kind)} · ${esc(G.source.made)}</small><blockquote class="ps-doc"><p>${esc(G.source.text).replace(/ \/ /g, "<br>")}</p></blockquote><p>${fnLinks(esc(G.source.about), "gs")}</p><ol>${G.source.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></div></section>` : ""}
-        <section class="pg-sec mk-sec" id="mk-use"><h2>Using this guide</h2>
-          ${G.words ? `<h3 class="of-h3">Key words</h3><dl class="gd-words">${G.words.map(([w, d]) => `<dt>${esc(w)}</dt><dd>${esc(d)}</dd>`).join("")}</dl>` : ""}
-          ${G.questions ? `<aside class="questions"><h3>Questions for discussion</h3><ol>${G.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></aside>` : ""}
-          ${G.activities ? `<h3 class="of-h3">Activities</h3><ol class="gd-act">${G.activities.map(a => `<li>${esc(a)}</li>`).join("")}</ol>` : ""}
-        </section>
+        <div class="gd-bar"><span>${n} chapters</span><button type="button" class="btn-ghost" id="gd-all">Open all</button></div>
+        <div class="gd-acc">${G.sections.map((sec, k) => { const im = sec.hero && heroOf(sec.hero); return `
+          <details class="gd-ch" id="mk-${sec.id}"${k === 0 ? " open" : ""}>
+            <summary>
+              <span class="gd-no">${k + 1}</span>
+              <span class="gd-sum"><small>${esc(sec.when || "")}</small><b>${esc(sec.title)}</b><em>${esc(sec.kicker || "")}</em></span>
+              ${im && MEDIA[im] ? `<span class="gd-thumb" style="${bg(im, 300)}" aria-hidden="true"></span>` : ""}
+              <span class="gd-chev" aria-hidden="true"></span>
+            </summary>
+            <div class="gd-body">
+              <div class="prose">${fnLinks(sec.html, "gs")}</div>
+              ${sec.stories ? `<h3 class="gd-more">${sec.stories.length > 1 ? "Read the stories" : "Read the story"}</h3><ul class="mk-list">${sec.stories.map(sItem).join("")}</ul>` : ""}
+              ${k < n - 1 ? `<button type="button" class="gd-next" data-next="${k + 1}">Next: ${esc(G.sections[k + 1].title)} →</button>` : ""}
+            </div>
+          </details>`; }).join("")}</div>
         ${srcList(G.sources, "gs")}
         ${GUIDES.length > 1 ? `<section class="pg-sec"><h2>Other issue guides</h2>${otherCards(GUIDES, "guide", G.id)}</section>` : ""}
       </div></div>`, G.title);
     wireSources(FB.vc);
-    FB.vc.querySelector("#gd-print").onclick = () => window.print();
-    FB.vc.querySelectorAll("[data-mk]").forEach(a => a.onclick = ev => { ev.preventDefault(); const t = document.getElementById("mk-" + a.dataset.mk); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    const chs = [...FB.vc.querySelectorAll(".gd-ch")], allBtn = FB.vc.querySelector("#gd-all");
+    const sync = () => { allBtn.textContent = chs.every(c => c.open) ? "Close all" : "Open all"; };
+    chs.forEach(c => c.addEventListener("toggle", sync));
+    allBtn.onclick = () => { const open = !chs.every(c => c.open); chs.forEach(c => c.open = open); sync(); };
+    FB.vc.querySelectorAll("[data-next]").forEach(b => b.onclick = () => { const c = chs[+b.dataset.next]; b.closest(".gd-ch").open = false; c.open = true; c.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    // footnote links may point into a closed chapter: open everything before printing
+    FB.vc.querySelector("#gd-print").onclick = () => { chs.forEach(c => c.open = true); sync(); setTimeout(() => window.print(), 50); };
     return true;
   };
 
