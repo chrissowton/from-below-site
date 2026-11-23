@@ -92,20 +92,20 @@
   const exG = document.getElementById("ex-guides");
   if (exG) exG.innerHTML = (window.GUIDES || []).map(g => { const h = heroOf(g.heroStory); return `<article class="ex-card gd-card"><div class="ex-img" style="${h ? bg(h, 600) : ""}"></div><div class="ex-body"><small class="pw-level">Issue guide${g.sections ? ` · ${g.sections.length} chapters` : ""}</small><h3>${esc(g.title)}</h3><p>${esc(g.teaser)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="guide/${g.id}">Read the guide →</button></div></div></article>`; }).join("");
   if (exP) exP.innerHTML = PATHWAYS.map(p => `<article class="ex-card pw-card">
-      <div class="ex-body"><small class="pw-level">${esc(p.level || "")} · ${p.steps.length} stories</small><h3>${esc(p.title)}</h3><p>${esc(p.teaser)}</p>
+      <div class="ex-body"><small class="pw-level">Pathway · ${p.steps.length} stories</small><h3>${esc(p.title)}</h3><p>${esc(p.teaser)}</p>
         <div class="ex-btns"><button type="button" class="btn-play" data-go="path/${p.id}">Start the pathway →</button></div></div>
     </article>`).join("");
   const ogList = document.getElementById("og-list");
   if (ogList) {
-    const strip = h => String(h).replace(/<[^>]+>/g, "").replace(/\[\d+\]/g, "");
     const og = (window.EVENTS || []).filter(e => e.ongoing).sort((a, b) => (b.year || 0) - (a.year || 0));
     if (og.length) {
-      document.getElementById("og-block").hidden = false;
-      ogList.innerHTML = og.map(e => `<button type="button" class="og-item" data-go="${e.id}">
-        <span class="og-place">${esc(e.place || "")} · ${esc(e.date || String(e.year || ""))}</span>
+      document.getElementById("exb-og").hidden = false;
+      const where = e => esc(e.country || String(e.place || "").split(",").pop().trim());
+      ogList.innerHTML = og.map((e, i) => `<button type="button" class="og-note" data-go="${e.id}" style="--tilt:${[-1.6, 1.1, -0.6, 1.7, -1.2, 0.7][i % 6]}deg">
+        <span class="og-pin" aria-hidden="true"></span>
+        <small>${where(e)} · since ${yr(e.year)}</small>
         <b>${esc(e.title)}</b>
-        ${(e.ongoing.watch || []).length ? `<span class="og-watch">Still unresolved: ${esc(strip(e.ongoing.watch[0]))}</span>` : ""}
-        <span class="og-asof">Last reviewed ${esc(e.ongoing.asOf)} →</span></button>`).join("");
+        <em>Reviewed ${esc(e.ongoing.asOf)}</em></button>`).join("");
     }
   }
   const srcStats = document.getElementById("src-stats");
@@ -156,24 +156,73 @@
     const mo = MONTHS.indexOf(m[2].toLowerCase()); if (mo < 0) return null;
     return { d: +m[1], m: mo };
   }
-  (function onThisDay() {
-    const el = document.getElementById("otd"); if (!el) return;
+  (function comingUpSoon() {
+    const el = document.getElementById("soon"), blk = document.getElementById("exb-soon"); if (!el) return;
     const now = new Date(), today = { d: now.getDate(), m: now.getMonth() };
     const dayNum = x => Math.floor((Date.UTC(2001, x.m, x.d) - Date.UTC(2001, 0, 1)) / 864e5);
     const t = dayNum(today);
-    const dated = EVENTS.map(e => ({ e, s: startDay(e) })).filter(x => x.s);
-    let hits = dated.filter(x => x.s.d === today.d && x.s.m === today.m), label = "On this day";
-    if (!hits.length) {
-      hits = dated.map(x => ({ ...x, gap: ((dayNum(x.s) - t) + 365) % 365 })).filter(x => x.gap <= 7).sort((a, b) => a.gap - b.gap);
-      label = "Coming up this week";
-    }
-    if (!hits.length) return;
+    const list = EVENTS.map(e => ({ e, s: startDay(e) })).filter(x => x.s && MEDIA[x.e.hero])
+      .map(x => ({ ...x, gap: ((dayNum(x.s) - t) + 365) % 365 })).sort((a, b) => a.gap - b.gap || a.e.year - b.e.year);
+    if (!list.length) return;
     const fmt = s => `${s.d} ${MONTHS[s.m][0].toUpperCase() + MONTHS[s.m].slice(1)}`;
-    el.hidden = false;
-    el.innerHTML = `<div class="otd-head"><span class="otd-lbl">${label}</span><span class="otd-date">${fmt(today)}</span></div>
-      <div class="otd-row">${hits.slice(0, 3).map(({ e, s }) => `<button type="button" class="otd-card" data-go="${e.id}" style="${bg(e.hero, 500)}"><span><small>${fmt(s)} ${yr(e.year)}</small><b>${esc(e.title)}</b><em>${esc(e.country)}</em></span></button>`).join("")}</div>`;
-    el.querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(b.dataset.go));
+    const when = g => g === 0 ? "Today" : g === 1 ? "Tomorrow" : g < 7 ? `In ${g} days` : g < 14 ? "Next week" : `In ${Math.round(g / 7)} weeks`;
+    blk.hidden = false;
+    document.getElementById("soon-date").textContent = `Anniversaries from today, ${fmt(today)}. Use the arrows to go forward or back through the year.`;
+    let start = 0;
+    const per = () => innerWidth < 640 ? 1 : innerWidth < 960 ? 2 : 3;
+    el.innerHTML = `<button type="button" class="ex-arrow prev" aria-label="Earlier anniversaries">‹</button><div class="soon-row" aria-live="polite"></div><button type="button" class="ex-arrow next" aria-label="Later anniversaries">›</button>`;
+    const row = el.querySelector(".soon-row");
+    function draw(dir) {
+      const n = per(), L = list.length;
+      row.innerHTML = Array.from({ length: n }, (_, k) => list[((start + k) % L + L) % L]).map(({ e, s, gap }) => `<button type="button" class="otd-card" data-go="${e.id}" style="${bg(e.hero, 500)}"><span><small><i>${when(gap)}</i> ${fmt(s)} ${yr(e.year)}</small><b>${esc(e.title)}</b><em>${esc(e.country || "")}</em></span></button>`).join("");
+      row.style.setProperty("--n", n);
+      row.classList.remove("in-l", "in-r"); void row.offsetWidth; if (dir) row.classList.add(dir > 0 ? "in-r" : "in-l");
+      row.querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(b.dataset.go));
+    }
+    el.querySelector(".prev").onclick = () => { start -= per(); draw(-1); };
+    el.querySelector(".next").onclick = () => { start += per(); draw(1); };
+    let lastN = per(); addEventListener("resize", () => { if (per() !== lastN) { lastN = per(); draw(0); } });
+    draw(0);
   })();
+
+  /* ---------- Explore: icons, jump chips and row arrows ---------- */
+  const ICO = {
+    soon: '<path d="M4 7h16v13H4z"/><path d="M4 11h16M8 4v5M16 4v5"/>',
+    og: '<circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/>',
+    moments: '<circle cx="12" cy="12" r="2.2"/><circle cx="12" cy="12" r="5.6"/><circle cx="12" cy="12" r="9"/>',
+    threads: '<circle cx="5" cy="17" r="2.2"/><circle cx="12" cy="7" r="2.2"/><circle cx="19" cy="15" r="2.2"/><path d="M6.4 15.3 10.7 8.8M13.6 8.3l4.1 5"/>',
+    guides: '<path d="M3 5.5c3-1 6-1 9 1 3-2 6-2 9-1V19c-3-1-6-1-9 1-3-2-6-2-9-1z"/><path d="M12 6.5V20"/>',
+    deep: '<path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/>',
+    paths: '<path d="M5 20c0-4 4-4 4-8s-4-4-4-8"/><path d="M15 20c0-4 4-4 4-8s-4-4-4-8" opacity=".55"/><circle cx="5" cy="20" r="1.3"/><circle cx="19" cy="4" r="1.3"/>',
+    behind: '<path d="M3 7h18v4H3z"/><path d="M5 11v9h14v-9M10 15h4"/>'
+  };
+  const ico = k => `<svg class="ex-ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${ICO[k] || ""}</svg>`;
+  FB.exIcon = ico;
+  function setupExplore() {
+    const blocks = [...document.querySelectorAll(".explore .ex-block[data-ico]")];
+    blocks.forEach(b => { const h = b.querySelector(".ex-head h2"); if (h && !h.querySelector(".ex-ico")) h.insertAdjacentHTML("afterbegin", ico(b.dataset.ico)); });
+    const nav = document.getElementById("ex-nav");
+    if (nav) {
+      nav.innerHTML = `<div class="ex-nav-in">${blocks.filter(b => !b.hidden).map(b => `<a href="#" class="ex-chip" data-to="${b.id}">${ico(b.dataset.ico)}<span>${esc(b.dataset.nav)}</span></a>`).join("")}</div>`;
+      nav.querySelectorAll("[data-to]").forEach(a => a.onclick = ev => { ev.preventDefault(); const t = document.getElementById(a.dataset.to); const y = t.getBoundingClientRect().top + scrollY - (nav.offsetHeight + 70); scrollTo({ top: y, behavior: "smooth" }); });
+      let raf = 0;
+      const spy = () => { raf = 0; const lim = nav.getBoundingClientRect().bottom + 140; let cur = null; blocks.forEach(b => { if (!b.hidden && b.getBoundingClientRect().top < lim) cur = b; }); nav.querySelectorAll(".ex-chip").forEach(c => c.classList.toggle("on", !!cur && c.dataset.to === cur.id)); const on = nav.querySelector(".ex-chip.on"); if (on) { const r = nav.firstElementChild; const x = on.offsetLeft - r.clientWidth / 2 + on.offsetWidth / 2; r.scrollTo({ left: x, behavior: "smooth" }); } };
+      addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(spy); }, { passive: true }); spy();
+    }
+    document.querySelectorAll(".explore .ex-row").forEach(row => {
+      if (row.parentElement.classList.contains("ex-rowwrap")) return;
+      const w = document.createElement("div"); w.className = "ex-rowwrap"; row.before(w); w.appendChild(row);
+      w.insertAdjacentHTML("afterbegin", '<button type="button" class="ex-arrow prev" aria-label="Scroll back">‹</button>');
+      w.insertAdjacentHTML("beforeend", '<button type="button" class="ex-arrow next" aria-label="Scroll forward">›</button>');
+      const [pv, nx] = [w.querySelector(".prev"), w.querySelector(".next")];
+      const sync = () => { const max = row.scrollWidth - row.clientWidth - 2; w.classList.toggle("scrolls", max > 0); pv.disabled = row.scrollLeft <= 2; nx.disabled = row.scrollLeft >= max; };
+      pv.onclick = () => row.scrollBy({ left: -row.clientWidth * 0.85, behavior: "smooth" });
+      nx.onclick = () => row.scrollBy({ left: row.clientWidth * 0.85, behavior: "smooth" });
+      row.addEventListener("scroll", sync, { passive: true }); addEventListener("resize", sync); sync(); setTimeout(sync, 400);
+    });
+  }
+  FB.setupExplore = setupExplore;
+  if (document.readyState === "complete") setTimeout(setupExplore, 0); else addEventListener("load", setupExplore);
 
   /* ---------- page helpers ---------- */
   const pageHero = (eyebrow, title, teaser, heroKey, btns = "") => `
@@ -207,6 +256,7 @@
       <div class="pg-body"><div class="wrap narrow">
         <ol class="th-list">${steps.map((s, i) => `${s.link ? `<li class="th-link"><span aria-hidden="true">↓</span><p>${fnLinks(s.link, "ts")}</p></li>` : ""}<li class="th-step">${storyLink(s.id)}</li>`).join("")}</ol>
         <p class="pg-note">A thread links stories where there is evidence of influence or a direct connection. The links are summaries — follow the sources to read more.</p>
+        ${(() => { const gs = (window.GUIDES || []).filter(g => g.sections.some(sec => (sec.stories || []).some(it => steps.some(st => st.id === it.id)))); return gs.length ? `<aside class="th-guides"><h3>The bigger picture</h3><p>These stories also appear in ${gs.length > 1 ? "these issue guides, which follow the wider struggle" : "an issue guide, which follows the wider struggle"}:</p>${gs.map(g => `<button type="button" class="pg-other" data-go="guide/${g.id}"><small>Issue guide</small><b>${esc(g.title)}</b></button>`).join("")}</aside>` : ""; })()}
         ${srcList(t.sources, "ts")}
         <section class="pg-sec"><h2>Other threads</h2>${otherCards(THREADS, "thread", t.id)}</section>
       </div></div>`, t.title);
@@ -241,13 +291,17 @@
   FB.routes.guide = id => {
     const G = GUIDES.find(g => g.id === id); if (!G) return false;
     const h = heroOf(G.heroStory);
-    const sItem = it => byId[it.id] ? `<li class="mk-item">${storyLink(it.id)}<p>${esc(it.note)}</p></li>` : "";
-    const n = G.sections.length;
+    // stories open in a new tab, so the reader keeps their place in the guide
+    const sItem = it => { const e = byId[it.id]; return e ? `<li class="mk-item"><a class="st-link t-${e.theme}" href="#${it.id}" target="_blank" rel="noopener">${badge(e.theme)}<span><b>${esc(e.title)}</b><small>${yr(e.year)} · ${esc(e.country)} ↗</small></span></a><p>${esc(it.note)}</p></li>` : ""; };
+    const S = G.sources || [];
+    const fnG = html => String(html || "").replace(/\[(\d+)\]/g, (m, k) => { const x = S[k - 1]; return x && x[1] ? `<sup class="fn"><a href="${x[1]}" target="_blank" rel="noopener" title="${esc(x[0])}">${k}</a></sup>` : ""; });
+    const n = G.sections.length, shownT = new Set();
     FB.showPage(`${pageHero("Issue guide", G.title, G.teaser, h, `<button type="button" class="btn-ghost light" data-show="guide:${G.id}">See the stories on the map</button><button type="button" class="btn-ghost light" id="gd-print">Print</button>`)}
       <div class="pg-body"><div class="wrap narrow gd">
         <p class="pg-lede">${esc(G.intro)}</p>
+        <p class="pg-note gd-what">An issue guide follows one injustice across time and place. Its stories are linked by the issue, not necessarily by influence — where one movement directly inspired another, the guide points you to the thread that traces it.</p>
         <div class="gd-bar"><span>${n} chapters</span><button type="button" class="btn-ghost" id="gd-all">Open all</button></div>
-        <div class="gd-acc">${G.sections.map((sec, k) => { const im = sec.hero && heroOf(sec.hero); return `
+        <div class="gd-acc">${G.sections.map((sec, k) => { const im = (sec.img && MEDIA[sec.img]) ? sec.img : (sec.hero && heroOf(sec.hero)); return `
           <details class="gd-ch" id="mk-${sec.id}"${k === 0 ? " open" : ""}>
             <summary>
               <span class="gd-no">${k + 1}</span>
@@ -256,15 +310,16 @@
               <span class="gd-chev" aria-hidden="true"></span>
             </summary>
             <div class="gd-body">
-              <div class="prose">${fnLinks(sec.html, "gs")}</div>
+              <div class="prose">${fnG(sec.html)}</div>
+              ${(() => { const ts = THREADS.filter(t => !shownT.has(t.id) && (sec.stories || []).some(it => t.steps.some(st => st.id === it.id))); ts.forEach(t => shownT.add(t.id)); return ts.length ? `<p class="gd-thread">${ts.map(t => `<a href="#thread/${t.id}" target="_blank" rel="noopener"><small>Follow the thread</small><b>${esc(t.title)}</b> ↗</a>`).join("")}</p>` : ""; })()}
               ${sec.stories ? `<h3 class="gd-more">${sec.stories.length > 1 ? "Read the stories" : "Read the story"}</h3><ul class="mk-list">${sec.stories.map(sItem).join("")}</ul>` : ""}
+              ${im && MEDIA[im] ? `<p class="gd-credit">Picture: ${esc(MEDIA[im].cap)} ${credit(MEDIA[im])}</p>` : ""}
               ${k < n - 1 ? `<button type="button" class="gd-next" data-next="${k + 1}">Next: ${esc(G.sections[k + 1].title)} →</button>` : ""}
             </div>
           </details>`; }).join("")}</div>
-        ${srcList(G.sources, "gs")}
+        ${S.length ? `<div class="gd-srcs"><span>Sources</span>${S.map(([t, u], i) => u ? `<a href="${u}" target="_blank" rel="noopener" title="${esc(t)}">${i + 1}</a>` : "").join("")}</div>` : ""}
         ${GUIDES.length > 1 ? `<section class="pg-sec"><h2>Other issue guides</h2>${otherCards(GUIDES, "guide", G.id)}</section>` : ""}
       </div></div>`, G.title);
-    wireSources(FB.vc);
     const chs = [...FB.vc.querySelectorAll(".gd-ch")], allBtn = FB.vc.querySelector("#gd-all");
     const sync = () => { allBtn.textContent = chs.every(c => c.open) ? "Close all" : "Open all"; };
     chs.forEach(c => c.addEventListener("toggle", sync));
@@ -333,7 +388,7 @@
   FB.routes.path = id => {
     const p = pathById[id]; if (!p) return false;
     const steps = p.steps.filter(s => byId[s.id]);
-    FB.showPage(`${pageHero(`Pathway · ${esc(p.level || "")}`, p.title, p.teaser, heroOf(steps[0].id), `<button type="button" class="btn-play big" id="pw-start">Start the pathway →</button><button type="button" class="btn-ghost light" data-show="path:${p.id}">See it on the map</button>`)}
+    FB.showPage(`${pageHero("Pathway", p.title, p.teaser, heroOf(steps[0].id), `<button type="button" class="btn-play big" id="pw-start">Start the pathway →</button><button type="button" class="btn-ghost light" data-show="path:${p.id}">See it on the map</button>`)}
       <div class="pg-body"><div class="wrap narrow">
         <p class="pg-lede">${esc(p.intro || "")}</p>
         <ol class="pw-list">${steps.map((s, i) => `<li><span class="mo-n">${i + 1}</span><div>${storyLink(s.id, ` data-pw="${i}"`)}<p class="pw-look"><b>Look for:</b> ${esc(s.look || "")}</p></div></li>`).join("")}</ol>

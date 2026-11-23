@@ -69,7 +69,7 @@
     const colour = i => (D.types[i.type] || {}).colour || "#333";
     const S = scale(D, incs);
     const even = new Map(incs.map((i, k) => [i.id, (k + 0.5) / incs.length]));
-    let spacing = "date";
+    let spacing = "even";
     const P = i => (spacing === "date" ? S.pos : even).get(i.id);
     const hero = D.hero && MEDIA[D.hero] ? `style="--hero:url('${fileUrl(MEDIA[D.hero].f, 1400)}')"` : "";
     const others = Object.values(DEEP).filter(x => x.id !== D.id);
@@ -84,35 +84,41 @@
     const H = Math.round(proj([R.lon[0], R.lat[0]])[1]);
     const howto = `Press <b>▶ Play</b> to move through the events one by one, or drag along the timeline. Each numbered point on the map matches a dot on the timeline and a card in the list below — select any of them to read what happened. Where many events happened close together, a cluster opens a close-up map.`;
 
-    FB.showPage(`
-      <header class="pg-hero dp-hero" ${hero}><div class="wrap">
-        <div class="eyebrow">Deep dive · ${esc(D.years)} · ${incs.length} events</div><h1 id="s-title">${esc(D.title)}</h1><p class="teaser">${esc(D.teaser)}</p>
-      </div></header>
-      <div class="pg-body dp-body"><div class="wrap">
-        <div class="dp-legend" role="group" aria-label="Show or hide types of event"><button type="button" class="dp-chip dp-all" id="dp-all">Hide all</button>${types.map(([k, t]) => `<button type="button" class="dp-chip on" data-type="${k}" aria-pressed="true"><span class="dp-dot" style="background:${t.colour}"></span>${esc(t.label)}</button>`).join("")}</div>
-        <section class="dp-top${tall ? " tall" : ""}" aria-label="Map, timeline and introduction">
-          <div class="dp-side">
-            <div id="dp-introPane">
-              <div class="dp-about prose">${D.intro}</div>
-              ${story ? `<button type="button" class="btn-play dp-storybtn" data-go="${D.story}">Read the full story: ${esc(story.title)} →</button>` : ""}
-              <details class="dp-box" open><summary>How to use this map</summary><p>${howto}</p></details>
-              <details class="dp-box"><summary>A note on the figures</summary><p>${esc(D.balance || "Figures are given as ranges, with who produced them, where they are disputed.")}</p></details>
-            </div>
-            <div class="dp-card" id="dp-card" hidden aria-live="polite"></div>
-          </div>
-          <div class="dp-mapcol"><div class="dp-map" id="dp-map"></div></div>
-          <div class="dp-tl" aria-label="Timeline">
+    const tlHtml = `<div class="dp-panel dp-tl" aria-label="Timeline">
             <div class="dp-tl-head">
               <button type="button" class="btn-play" id="dp-play" aria-pressed="false">▶ Play</button>
               <output id="dp-label" class="dp-label notranslate"></output>
               <span class="dp-count" id="dp-count"></span>
               <span class="dp-opts">
                 <label title="Seconds between events when playing"><input type="number" id="dp-secs" min="1" max="60" step="1" value="10"> sec per event</label>
-                <span class="dp-seg" role="group" aria-label="Space the dots"><button type="button" data-sp="date" class="on">By date</button><button type="button" data-sp="even">Evenly</button></span>
+                <span class="dp-seg" role="group" aria-label="Space the dots"><button type="button" data-sp="even" class="on">Evenly</button><button type="button" data-sp="date">By date</button></span>
               </span>
             </div>
             <div class="dp-tl-track${tall ? " v" : ""}" id="dp-track" tabindex="0" role="slider" aria-label="Move through time" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>`;
+    FB.showPage(`
+      <header class="pg-hero dp-hero" ${hero}><div class="wrap">
+        <div class="eyebrow">Deep dive · ${esc(D.years)} · ${incs.length} events</div><h1 id="s-title">${esc(D.title)}</h1><p class="teaser">${esc(D.teaser)}</p>
+      </div></header>
+      <div class="pg-body dp-body"><div class="wrap">
+        <section class="dp-top${tall ? " tall" : ""}" aria-label="Map, timeline and introduction">
+          <div class="dp-stack dp-side">
+            <div class="dp-panel" id="dp-introPane">
+              <div class="dp-about prose">${D.intro}</div>
+              ${story ? `<button type="button" class="btn-play dp-storybtn" data-go="${D.story}">Read the full story: ${esc(story.title)} →</button>` : ""}
+            </div>
+            <div class="dp-panel dp-card" id="dp-card" hidden aria-live="polite"></div>
+            <details class="dp-panel dp-box"><summary>How to use this map</summary><p>${howto}</p></details>
+            <details class="dp-panel dp-box"><summary>A note on the figures</summary><p>${esc(D.balance || "Figures are given as ranges, with who produced them, where they are disputed.")}</p></details>
           </div>
+          <div class="dp-stack dp-mapcol">
+            <div class="dp-panel dp-mappanel">
+              <div class="dp-legend" role="group" aria-label="Show or hide types of event"><button type="button" class="dp-chip dp-all" id="dp-all">Hide all</button>${types.map(([k, t]) => `<button type="button" class="dp-chip on" data-type="${k}" aria-pressed="true"><span class="dp-dot" style="background:${t.colour}"></span>${esc(t.label)}</button>`).join("")}</div>
+              <div class="dp-map" id="dp-map"></div>
+            </div>
+            ${tall ? "" : tlHtml}
+          </div>
+          ${tall ? `<div class="dp-stack dp-tlcol">${tlHtml}</div>` : ""}
         </section>
         <section class="pg-sec"><h2>All events</h2>
           <div class="dp-masonry" id="dp-masonry">${incs.map(i => `<article class="dp-item" id="dpi-${i.id}" style="--c:${colour(i)}">

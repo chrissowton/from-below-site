@@ -63,34 +63,38 @@
 </div></section>
 
 <section class="explore" id="explore"><div class="wrap">
-  <div class="otd" id="otd" hidden></div>
-  <div class="ex-block og-block" id="og-block" hidden>
-    <div class="ex-head"><h2><span class="og-dot" aria-hidden="true"></span> Ongoing situations</h2><p>Recent stories where events are still unfolding. Each has an "Ongoing situation" box showing when it was last reviewed and what is still unresolved.</p></div>
-    <div class="og-list" id="og-list"></div>
+  <nav class="ex-nav" id="ex-nav" aria-label="Jump to a section"></nav>
+  <div class="ex-block" id="exb-soon" data-ico="soon" data-nav="Coming up" hidden>
+    <div class="ex-head"><h2>Coming up soon</h2><p id="soon-date"></p></div>
+    <div class="soon" id="soon"></div>
   </div>
-  <div class="ex-block">
+  <div class="ex-block og-block" id="exb-og" data-ico="og" data-nav="Still unfolding" hidden>
+    <div class="ex-head"><h2>Still unfolding</h2><p>Recent stories where events have not yet run their course. Each is reviewed regularly; open one to see what is still unresolved.</p></div>
+    <div class="ex-row og-board" id="og-list"></div>
+  </div>
+  <div class="ex-block" id="exb-moments" data-ico="moments" data-nav="Moments">
     <div class="ex-head"><h2>Moments</h2><p>Years when change spread from place to place. Press play to watch each one unfold on the map.</p></div>
     <div class="ex-row" id="ex-moments"></div>
   </div>
-  <div class="ex-block">
+  <div class="ex-block" id="exb-threads" data-ico="threads" data-nav="Threads">
     <div class="ex-head"><h2>Threads</h2><p>How one struggle inspired another — followed across the world.</p></div>
     <div class="ex-row" id="ex-threads"></div>
   </div>
-  <div class="ex-block">
-    <div class="ex-head"><h2>Pathways</h2><p>Guided routes through six or seven stories, for students, teachers and anyone looking for a way in.</p></div>
+  <div class="ex-block" id="exb-guides" data-ico="guides" data-nav="Issue guides">
+    <div class="ex-head"><h2>Issue guides</h2><p>Longer reads that follow one injustice across centuries and continents — what happened, how people resisted, and why it still matters.</p></div>
+    <div class="ex-row" id="ex-guides"></div>
+  </div>
+  <div class="ex-block" id="exb-deep" data-ico="deep" data-nav="Deep dives">
+    <div class="ex-head"><h2>Deep dives</h2><p>Detailed maps of a single country or conflict, with many short, sourced incidents and a timeline.</p></div>
+    <div class="ex-row" id="ex-deep"></div>
+  </div>
+  <div class="ex-block" id="exb-paths" data-ico="paths" data-nav="Pathways">
+    <div class="ex-head"><h2>Pathways</h2><p>Guided routes through six or seven stories — a good way in if you don't know where to start.</p></div>
     <div class="ex-row" id="ex-paths"></div>
   </div>
-  <div class="ex-block">
-    <div class="ex-head"><h2>Issue guides</h2><p>Longer reads that follow one idea across centuries and continents — what happened, how people resisted, and why it still matters — told through the stories on this site.</p></div>
-    <div class="ex-row ex-row-few" id="ex-guides"></div>
-  </div>
-  <div class="ex-block">
+  <div class="ex-block" id="exb-behind" data-ico="behind" data-nav="Behind the history">
     <div class="ex-head"><h2>Behind the history</h2><p>How history is made: the sources, the struggles over memory, the official story — and how this site is made. <a href="#behind">See all →</a></p></div>
     <div class="ex-row" id="ex-making"></div>
-  </div>
-  <div class="ex-block">
-    <div class="ex-head"><h2>Deep dives</h2><p>Detailed maps of a single country or conflict, with many short, sourced incidents and a time slider. More to come.</p></div>
-    <div class="ex-row ex-row-few" id="ex-deep"></div>
   </div>
   <div class="ex-more" id="ex-more"></div>
 </div></section>
@@ -236,6 +240,8 @@
 <script src="data/media-59.js"></script>
 <script src="data/media-60.js"></script>
 <script src="data/media-61.js"></script>
+<script src="data/media-62.js"></script>
+<script src="data/media-63.js"></script>
 <script src="data/events-1.js"></script>
 <script src="data/events-2.js"></script>
 <script src="data/events-3.js"></script>

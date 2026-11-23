@@ -4,7 +4,6 @@ window.PATHWAYS = [
 {
   id: "vote",
   title: "How was the vote won?",
-  level: "Ages 11–16 and up",
   teaser: "From soldiers' debates in a church to a march from Selma: who fought for the vote, and what did it cost them?",
   intro: "Today most adults in the world can vote. It was never simply given. Follow these stories to see who demanded it, how they campaigned and what they faced.",
   steps: [
@@ -21,7 +20,6 @@ window.PATHWAYS = [
 {
   id: "women",
   title: "Women who led the way",
-  level: "Ages 11–16 and up",
   teaser: "Market women, match girls, mothers and peace-makers: women at the front of struggles for bread, pay, justice and peace.",
   intro: "Women have often been left out of history books, even when they led from the front. These stories put them at the centre.",
   steps: [
@@ -38,7 +36,6 @@ window.PATHWAYS = [
 {
   id: "empire",
   title: "Ending empire in Africa",
-  level: "Ages 14 and up",
   teaser: "From the first Chimurenga to independence in Ghana and Mozambique: how Africans resisted and ended colonial rule.",
   intro: "By 1914, almost all of Africa was ruled by European empires. Within fifty years, most of it was independent. Follow the resistance — peaceful and armed — that made this happen.",
   steps: [
@@ -55,7 +52,6 @@ window.PATHWAYS = [
 {
   id: "nonviolence",
   title: "Does non-violence work?",
-  level: "Ages 14 and up",
   teaser: "Marches, strikes, songs and keys — and the times when governments answered with guns. A pathway for debate.",
   intro: "Many movements chose non-violent resistance. Sometimes it brought down governments without a shot; sometimes it was met with massacre. Compare the stories and decide for yourself.",
   steps: [
@@ -72,7 +68,6 @@ window.PATHWAYS = [
 {
   id: "workers",
   title: "Workers organise",
-  level: "Ages 11–16 and up",
   teaser: "Farm labourers, match girls, mill workers and shipyard electricians: how working people built unions — and what they risked.",
   intro: "Most of the rights workers have today — a shorter working day, safe conditions, the right to join a union — were won by workers themselves.",
   steps: [
@@ -89,7 +84,6 @@ window.PATHWAYS = [
 {
   id: "land",
   title: "Land and the living world",
-  level: "Ages 11–16 and up",
   teaser: "Diggers, tree-huggers, fishing villages and water protectors: people defending land, water and forests.",
   intro: "Struggles over land and the environment are as old as history. These stories show communities defending the places they depend on.",
   steps: [
@@ -105,7 +99,6 @@ window.PATHWAYS = [
 {
   id: "language",
   title: "Language and identity",
-  level: "Ages 11–16 and up",
   teaser: "Secret classrooms, pirate radio and 'language nests': people who fought for the right to speak, learn and live in their own language.",
   intro: "Governments have often tried to make everyone speak one language. These stories follow people who refused to let their language die — and asked why language matters so much.",
   steps: [
@@ -122,7 +115,6 @@ window.PATHWAYS = [
 {
   id: "disability",
   title: "Rights, not charity: disability activism",
-  level: "Ages 11–16 and up",
   teaser: "Marches, sit-ins, chained wheelchairs and a campus shutdown: disabled people who demanded rights instead of pity.",
   intro: "For a long time, disabled people were treated as objects of charity rather than citizens with rights. These stories follow the people who changed that, often by putting their own bodies in the way.",
   steps: [
@@ -139,7 +131,6 @@ window.PATHWAYS = [
 {
   id: "slavery",
   title: "Resisting slavery",
-  level: "Ages 14 and up",
   teaser: "Escape, free communities, uprisings and a revolution: how enslaved people fought for their own freedom.",
   intro: "Slavery was not ended only by laws passed in distant capitals. Enslaved people resisted in many ways — by running away, building free communities and rising up. These stories put them at the centre.",
   steps: [
@@ -156,7 +147,6 @@ window.PATHWAYS = [
 {
   id: "disappeared",
   title: "Mothers, memory and the disappeared",
-  level: "Ages 14 and up",
   teaser: "Silent marches, embroidered patchworks and Saturday vigils: how families of the missing and the dead refused to forget.",
   intro: "Some governments have tried to make their opponents vanish without trace. Mothers, wives and daughters — and sometimes whole communities — turned grief into protest and memory into evidence.",
   steps: [
@@ -173,7 +163,6 @@ window.PATHWAYS = [
 {
   id: "early",
   title: "Rebels before the modern age",
-  level: "Ages 11–16 and up",
   teaser: "A strike in ancient Egypt, a slave army in Italy, and peasant risings in China, France, England, Germany and Japan.",
   intro: "Protest did not begin with modern politics. These stories show ordinary people demanding food, fairness and freedom thousands of years ago — and how we know about them, often only through their enemies' records.",
   steps: [
@@ -190,7 +179,6 @@ window.PATHWAYS = [
 {
   id: "indigenous",
   title: "Indigenous peoples resist",
-  level: "Ages 11–16 and up",
   teaser: "From a coordinated revolt in New Mexico to a court victory in the Amazon: Indigenous peoples defending their land, culture and self-government.",
   intro: "Across the Americas and Australia, Indigenous peoples have resisted conquest and dispossession for five centuries — by war, by strikes, by occupation and in the courts.",
   steps: [
@@ -207,7 +195,6 @@ window.PATHWAYS = [
 {
   id: "recent",
   title: "Protest in the 2020s",
-  level: "Ages 14 and up",
   teaser: "From Minsk to Kathmandu: the protests of the last few years, and what they tell us about power, social media and young people.",
   intro: "These are recent events, and their outcomes are still unfolding. Read them as history in the making: ask what we know, how we know it, and what might change as more evidence emerges.",
   steps: [
