@@ -26,16 +26,17 @@ const yr = y => y < 0 ? `${-y} BCE` : (y < 500 ? `${y} CE` : `${y}`);
 const fileUrl = (f, w) => "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(f.replace(/ /g, "_")) + (w ? "?width=" + w : "");
 const pageUrl = f => "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(f.replace(/ /g, "_"));
 const credit = m => `${esc(m.by)} · ${m.lu ? `<a href="${m.lu}">${esc(m.lic)}</a>` : esc(m.lic)} · <a href="${pageUrl(m.f)}">Wikimedia Commons</a>`;
-const fn = h => String(h || "").replace(/\[(\d+)\]/g, (_, n) => `<sup class="fn"><a href="#s-${n}">${n}</a></sup>`);
+const fn = h => String(h || "").replace(/\[(\d+)\]/g, "\u0001s$1\u0002");
+let XR = []; const xref = (l, u) => { XR.push([l, u]); return `\u0001u${XR.length - 1}\u0002`; };
 const fig = (k, w = 900) => { const m = MEDIA[k]; return m ? `<figure class="media"><div class="ph"><img loading="lazy" src="${fileUrl(m.f, w)}" alt="${esc(m.cap)}"></div><figcaption>${esc(m.cap)} <span class="credit">${credit(m)}</span></figcaption></figure>` : ""; };
 
-const voicesHtml = e => !(e.voices && e.voices.length) ? "" : `<aside class="voices"><h3>In their own words</h3>${e.voices.map(v => `<figure><blockquote>${esc(v.q)}</blockquote><figcaption><b>${esc(v.who)}</b>${v.when ? ` · ${esc(v.when)}` : ""}${v.src ? ` · <a href="${v.src[1]}">${esc(v.src[0])}</a>` : ""}</figcaption></figure>`).join("")}</aside>`;
+const voicesHtml = e => !(e.voices && e.voices.length) ? "" : `<aside class="voices"><h3>In their own words</h3>${e.voices.map(v => `<figure><blockquote>${esc(v.q)}</blockquote><figcaption><b>${esc(v.who)}</b>${v.when ? ` · ${esc(v.when)}` : ""}${v.src ? xref(v.src[0], v.src[1]) : ""}</figcaption></figure>`).join("")}</aside>`;
 const primaryHtml = e => {
   const p = e.primary, m = p && MEDIA[p.media]; if (!m && !(p && p.text)) return "";
-  const doc = p.text ? `<blockquote class="ps-doc"><p>${esc(p.text.t)}</p><cite>${esc(p.text.from || "")}${p.text.src ? ` · <a href="${p.text.src[1]}">${esc(p.text.src[0])}</a>` : ""}</cite></blockquote>` : "";
+  const doc = p.text ? `<blockquote class="ps-doc"><p>${esc(p.text.t)}</p><cite>${esc(p.text.from || "")}${p.text.src ? xref(p.text.src[0], p.text.src[1]) : ""}</cite></blockquote>` : "";
   return `<div class="lookclose primary"><h3>Primary source: ${esc(p.kind)}</h3><div class="lc-grid">${m ? `<figure><img loading="lazy" src="${fileUrl(m.f, 800)}" alt="${esc(m.cap)}"><figcaption>${esc(m.cap)} <span class="credit">${credit(m)}</span></figcaption></figure>` : doc}
     <div><dl class="ps-facts"><div><dt>What is it?</dt><dd>${esc(p.kind)}</dd></div><div><dt>Made by, and when</dt><dd>${esc(p.made)}</dd></div></dl><p class="ps-about">${esc(p.about)}</p>
-    <h4>Questions to ask of this source</h4><ol>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></div></div></div>`;
+    ${p.read ? `<h4>Reading it</h4><p class="ps-read">${esc(p.read)}</p>` : `<h4>Things worth asking</h4><ul class="ps-q">${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ul>`}</div></div></div>`;
 };
 function head(title, desc, img, canonical) {
   return `<!DOCTYPE html>
@@ -96,14 +97,21 @@ function glossify(h, used) {
     return out + rest;
   }).join("");
 }
-function storyPage(e, i) {
+function storyPage(e, i) { return numberRefs(storyPage0(e, i), e); }
+function numberRefs(html, e) {
+  const map = new Map(), ord = [], S = e.sources || [];
+  let out = html.replace(/\u0001([su]\d+)\u0002/g, (m, k) => { if (k[0] === "s" && !S[+k.slice(1) - 1]) return ""; if (!map.has(k)) { map.set(k, ord.length + 1); ord.push(k); } const n = map.get(k); return `<sup class="fn"><a href="#s-${n}">${n}</a></sup>`; });
+  S.forEach((_, j) => { const k = "s" + (j + 1); if (!map.has(k)) { map.set(k, ord.length + 1); ord.push(k); } });
+  return out.replace("\u0003REFS\u0003", `<ol class="refs">${ord.map(k => k[0] === "s" ? S[+k.slice(1) - 1] : XR[+k.slice(1)]).map(([t, u], j) => `<li id="s-${j + 1}">${u ? `<a href="${u}">${t}</a>` : t}</li>`).join("")}</ol>`);
+}
+function storyPage0(e, i) {
   const prev = EVENTS[i - 1], next = EVENTS[i + 1];
   const hm = MEDIA[e.hero];
   const canonical = BASE ? `${BASE}/stories/${e.id}.html` : "";
   const used = new Set(), G = h => glossify(h, used);
   const chap = (n, inner) => inner ? `<section class="chapter" id="ch-${n}"><div class="num">${String(n).padStart(2, "0")}</div><h2>${SECTIONS[n - 1]}</h2>${inner}</section>` : "";
   const people = `<ul class="pp-acc">${(e.people || []).map(p => `<li><details><summary><span class="pp-face pp-dot" aria-hidden="true"></span><span class="pp-txt"><b>${p.n}</b><span class="pp-prev">${String(p.r || "").replace(/<[^>]+>/g, "")}</span></span><span class="pp-chev" aria-hidden="true"></span></summary><div class="pp-more"><p>${p.r}</p></div></details></li>`).join("")}</ul>`;
-  const sources = `<div class="sources"><h3>Sources</h3><ol>${(e.sources || []).map(([t, u], j) => `<li id="s-${j + 1}">${t}${u ? ` <a href="${u}">Link ↗</a>` : ""}</li>`).join("")}</ol></div>`;
+  XR = [];
   const similar = `<ul class="more">${(e.similar || []).filter(s => s.id && byId[s.id]).map(s => `<li><span class="ty">${yr(byId[s.id].year)}</span><span><a href="${s.id}.html">${esc(byId[s.id].title)}</a> — ${esc(byId[s.id].teaser)}</span></li>`).join("")}</ul>`;
   const more = `<ul class="more">${(e.more || []).map(([t, l, u]) => `<li><span class="ty">${TYPES[t] || t}</span><span>${u ? `<a href="${u}">${l}</a>` : l}</span></li>`).join("")}</ul>`;
   const ld = { "@context": "https://schema.org", "@type": "Article", headline: e.title, description: e.teaser, about: { "@type": "Event", name: e.title, startDate: String(e.year), location: { "@type": "Place", name: e.place, geo: { "@type": "GeoCoordinates", latitude: e.lat, longitude: e.lon } } }, image: hm ? fileUrl(hm.f, 1200) : undefined, license: "https://creativecommons.org/licenses/by-sa/4.0/" };
@@ -119,15 +127,16 @@ ${e.ongoing ? `<aside class="ongoing"><div class="wrap"><div class="og-in"><div 
 <div class="s-body"><div class="wrap"><article>
   ${chap(1, `<div class="prose">${fn(G(e.background))}</div>`)}
   ${chap(2, people + voicesHtml(e))}
-  ${chap(3, `<div class="prose">${fn(G(e.happened))}</div>${(e.gallery || []).length ? `<div class="gallery">${e.gallery.map(k => fig(k, 800)).join("")}</div>` : ""}${sources}`)}
+  ${chap(3, `<div class="prose">${fn(G(e.happened))}</div>${(e.gallery || []).length ? `<div class="gallery">${e.gallery.map(k => fig(k, 800)).join("")}</div>` : ""}`)}
   ${chap(4, `<div class="prose">${fn(G(e.next))}</div>`)}
   ${chap(5, e.debates ? `<div class="prose">${fn(G(e.debates))}</div>` : "")}
   ${chap(6, (e.evidence ? `<div class="prose">${fn(G(e.evidence))}</div>` : "") + primaryHtml(e))}
   ${chap(7, e.memory ? `<div class="prose">${fn(G(e.memory))}</div>` : "")}
   <div class="why-box">${chap(8, `<div class="prose">${fn(G(e.why))}</div>`)}</div>
-  ${e.questions ? `<aside class="questions"><h3>Questions to think about</h3><ol>${e.questions.map(q => `<li>${q}</li>`).join("")}</ol></aside>` : ""}
+  ${e.questions ? `<aside class="questions"><h3>Open questions</h3><ol>${e.questions.map(q => `<li>${q}</li>`).join("")}</ol></aside>` : ""}
   ${chap(9, similar)}
   ${chap(10, more)}
+  <section class="chapter" id="ch-refs"><h2>References</h2>\u0003REFS\u0003</section>
   <div class="pager">
     ${prev ? `<a class="pv" href="${prev.id}.html" style="text-decoration:none;border-radius:14px;background:var(--stone);padding:18px 20px"><small>← Earlier · ${yr(prev.year)}</small><br><b>${esc(prev.title)}</b></a>` : "<span></span>"}
     ${next ? `<a class="nx" href="${next.id}.html" style="text-decoration:none;border-radius:14px;background:var(--stone);padding:18px 20px;text-align:right"><small>Later · ${yr(next.year)} →</small><br><b>${esc(next.title)}</b></a>` : ""}

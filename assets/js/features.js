@@ -279,7 +279,7 @@
         <nav class="mk-toc" aria-label="Sections">${M.sections.map(sec => `<a href="#making" data-mk="${sec.id}">${esc(sec.title)}</a>`).join("")}</nav>
         ${M.sections.map(sec => `<section class="pg-sec mk-sec" id="mk-${sec.id}"><h2>${esc(sec.title)}</h2><p>${esc(sec.text)}</p><ul class="mk-list">${sec.items.map(item).join("")}</ul></section>`).join("")}
         ${M.questions ? `<aside class="questions"><h3>Questions to ask of any history</h3><ol>${M.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></aside>` : ""}
-        <p class="pg-note">Every story on this site has a section called "The evidence", with a "Look closely at a source" activity. Use them to ask these questions of each story.</p>
+        <p class="pg-note">Every story on this site has a section on the evidence, usually with a source from the time. These questions are worth asking of each of them.</p>
         ${bhOthers("making")}
       </div></div>`, M.title);
     FB.vc.querySelectorAll("[data-mk]").forEach(a => a.onclick = ev => { ev.preventDefault(); const t = document.getElementById("mk-" + a.dataset.mk); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); });
@@ -393,7 +393,7 @@
         <p class="pg-lede">${esc(p.intro || "")}</p>
         <ol class="pw-list">${steps.map((s, i) => `<li><span class="mo-n">${i + 1}</span><div>${storyLink(s.id, ` data-pw="${i}"`)}<p class="pw-look"><b>Look for:</b> ${esc(s.look || "")}</p></div></li>`).join("")}</ol>
         ${p.closing ? `<aside class="questions"><h3>The big question</h3><ol><li>${esc(p.closing)}</li></ol></aside>` : ""}
-        <p class="pg-note">For teachers: every story has the same ten sections, numbered sources, a "What do others say?" section for debate, four questions to think about, and a "Look closely at a source" activity. Use <b>Quick read</b> for a shorter version, and <b>Print</b> for a clean copy.</p>
+        <p class="pg-note">Every story has the same sections, numbered references, a "What do others say?" section, and a source from the time. Use <b>Quick read</b> for a shorter version, and <b>Print</b> for a clean copy.</p>
         <section class="pg-sec"><h2>Other pathways</h2>${otherCards(PATHWAYS, "path", p.id)}</section>
       </div></div>`, p.title);
     const start = i => { session.set("path", { id: p.id }); go(steps[i].id); };
@@ -632,8 +632,8 @@
       <div class="st-right">${e.checked ? `<span class="st-checked" title="${esc(e.checkNote || "")}">✓ Facts last checked ${esc(fmtDate(e.checked))}</span>` : ""}${report ? `<a class="st-report" href="${report}" target="_blank" rel="noopener">Report an error ↗</a>` : ""}</div>
     </div></div>`;
   };
-  FB.hooks.voicesBox = e => !(e.voices && e.voices.length) ? "" : `<aside class="voices" aria-label="In their own words"><h3>In their own words</h3>${e.voices.map(v => `<figure><blockquote>${esc(v.q)}</blockquote><figcaption><b>${esc(v.who)}</b>${v.when ? ` · ${esc(v.when)}` : ""}${v.src ? ` · <a href="${v.src[1]}" target="_blank" rel="noopener">${esc(v.src[0])} ↗</a>` : ""}</figcaption></figure>`).join("")}</aside>`;
-const docQuote = p => `<blockquote class="ps-doc"><p>${esc(p.text.t)}</p><cite>${esc(p.text.from || "")}${p.text.src ? ` · <a href="${p.text.src[1]}" target="_blank" rel="noopener">${esc(p.text.src[0])} ↗</a>` : ""}</cite></blockquote>`;
+  FB.hooks.voicesBox = e => !(e.voices && e.voices.length) ? "" : `<aside class="voices" aria-label="In their own words"><h3>In their own words</h3>${e.voices.map(v => `<figure><blockquote>${esc(v.q)}</blockquote><figcaption><b>${esc(v.who)}</b>${v.when ? ` · ${esc(v.when)}` : ""}${v.src ? FB.ref(v.src[0], v.src[1]) : ""}</figcaption></figure>`).join("")}</aside>`;
+const docQuote = p => `<blockquote class="ps-doc"><p>${esc(p.text.t)}</p><cite>${esc(p.text.from || "")}${p.text.src ? FB.ref(p.text.src[0], p.text.src[1]) : ""}</cite></blockquote>`;
     FB.hooks.sourceBox = e => {
     const p = e.primary;
     if (p && p.text && !MEDIA[p.media]) {
@@ -641,8 +641,7 @@ const docQuote = p => `<blockquote class="ps-doc"><p>${esc(p.text.t)}</p><cite>$
       <div class="lc-grid">${docQuote(p)}
       <div><dl class="ps-facts"><div><dt>What is it?</dt><dd>${esc(p.kind)}</dd></div><div><dt>Made by, and when</dt><dd>${esc(p.made)}</dd></div></dl>
         <p class="ps-about">${esc(p.about)}</p>
-        <h4>Questions to ask of this source</h4>
-        <ol>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}<li>Does it support the account in "What happened?", or raise new questions?</li></ol></div></div></div>`;
+        ${p.read ? `<h4>Reading it</h4><p class="ps-read">${esc(p.read)}</p>` : `<h4>Things worth asking</h4><ul class="ps-q">${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ul>`}</div></div></div>`;
     }
     if (p && MEDIA[p.media]) {
       const m = MEDIA[p.media];
@@ -650,21 +649,14 @@ const docQuote = p => `<blockquote class="ps-doc"><p>${esc(p.text.t)}</p><cite>$
       <div class="lc-grid"><figure><a href="${fileUrl(m.f)}" target="_blank" rel="noopener"><img loading="lazy" src="${fileUrl(m.f, 800)}" alt="${esc(m.cap)}" onerror="this.closest('figure').classList.add('noimg')"></a><figcaption>${esc(m.cap)} <span class="credit">${credit(m)}</span></figcaption></figure>
       <div><dl class="ps-facts"><div><dt>What is it?</dt><dd>${esc(p.kind)}</dd></div><div><dt>Made by, and when</dt><dd>${esc(p.made)}</dd></div></dl>
         <p class="ps-about">${esc(p.about)}</p>
-        <h4>Questions to ask of this source</h4>
-        <ol>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}<li>Does it support the account in "What happened?", or raise new questions?</li></ol></div></div></div>`;
+        ${p.read ? `<h4>Reading it</h4><p class="ps-read">${esc(p.read)}</p>` : `<h4>Things worth asking</h4><ul class="ps-q">${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ul>`}</div></div></div>`;
     }
     const key = e.hero && MEDIA[e.hero] ? e.hero : (e.gallery || []).find(k => MEDIA[k]);
     if (!key) return "";
     const m = MEDIA[key];
-    return `<div class="lookclose"><h3>Look closely at a source</h3>
+    return `<div class="lookclose"><h3>A picture as evidence</h3>
       <div class="lc-grid"><figure><img loading="lazy" src="${fileUrl(m.f, 700)}" alt="${esc(m.cap)}" onerror="this.closest('figure').classList.add('noimg')"><figcaption>${esc(m.cap)} <span class="credit">${credit(m)}</span></figcaption></figure>
-      <ol>
-        <li>Describe what you can see before deciding what it means.</li>
-        <li>Who made it, and when? Was it made at the time, or later? Use the caption and credit.</li>
-        <li>Why might it have been made — to record, to persuade, to celebrate or to remember?</li>
-        <li>Whose point of view does it show? Who is missing from it?</li>
-        <li>Does it support the account in "What happened?", or raise new questions?</li>
-      </ol></div></div>`;
+      <p class="ps-read">Pictures are evidence too, but they need reading with care. The caption and credit say who made this one and when — at the time, or long afterwards? It may have been made to record, to persuade, to celebrate or to remember, and it shows events from someone's point of view. It is worth asking whose, and who is missing from the frame.</p></div></div>`;
   };
   function setMode(mode) {
     FB.view.classList.toggle("quick", mode === "quick");
@@ -675,15 +667,16 @@ const docQuote = p => `<blockquote class="ps-doc"><p>${esc(p.text.t)}</p><cite>$
   /* ---------- print-friendly version of a story ---------- */
   function printStory(e) {
     const SEC = FB.SECTIONS.map(x => x[1]);
-    const fnote = h => String(h || "").replace(/\[(\d+)\]/g, "<sup>[$1]</sup>");
+    const fnote = h => String(h || "").replace(/\[(\d+)\]/g, "\u0001s$1\u0002");
+    const xr = []; const pref = (l, u) => { xr.push([l, u]); return `\u0001u${xr.length - 1}\u0002`; };
     const txt = h => String(h || "").replace(/<[^>]+>/g, "");
     const url = SITE.storyPages && SITE.url ? shareUrl(`/stories/${e.id}.html`) : shareUrl(`/#${e.id}`);
     const capOf = m => `${esc(m.cap)} <span class="cr">${txt(credit(m))}</span>`;
     const hm = MEDIA[e.hero];
     const sec = (n, body) => body ? `<section><h2><span>${n}</span> ${esc(SEC[n - 1])}</h2>${body}</section>` : "";
-    const voices = (e.voices || []).length ? `<div class="voices"><h3>In their own words</h3>${e.voices.map(v => `<blockquote>“${esc(v.q)}”<cite>${esc(v.who)}${v.when ? `, ${esc(v.when)}` : ""}${v.src ? ` — ${esc(v.src[0])}` : ""}</cite></blockquote>`).join("")}</div>` : "";
+    const voices = (e.voices || []).length ? `<div class="voices"><h3>In their own words</h3>${e.voices.map(v => `<blockquote>“${esc(v.q)}”<cite>${esc(v.who)}${v.when ? `, ${esc(v.when)}` : ""}${v.src ? pref(v.src[0], v.src[1]) : ""}</cite></blockquote>`).join("")}</div>` : "";
     const p = e.primary, pm = p && MEDIA[p.media];
-    const primary = (pm || (p && p.text)) ? `<div class="box"><h3>Primary source: ${esc(p.kind)}</h3>${pm ? `<figure class="pfig"><img src="${fileUrl(pm.f, 600)}" alt=""><figcaption>${capOf(pm)}</figcaption></figure>` : `<blockquote><p>${esc(p.text.t)}</p><p><i>${esc(p.text.from || "")}</i></p></blockquote>`}<p><b>Made by, and when:</b> ${esc(p.made)}</p><p>${esc(p.about)}</p><p><b>Questions to ask of this source</b></p><ol>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ol></div>` : "";
+    const primary = (pm || (p && p.text)) ? `<div class="box"><h3>Primary source: ${esc(p.kind)}</h3>${pm ? `<figure class="pfig"><img src="${fileUrl(pm.f, 600)}" alt=""><figcaption>${capOf(pm)}</figcaption></figure>` : `<blockquote><p>${esc(p.text.t)}</p><p><i>${esc(p.text.from || "")}</i></p></blockquote>`}<p><b>Made by, and when:</b> ${esc(p.made)}</p><p>${esc(p.about)}</p>${p.read ? `<p>${esc(p.read)}</p>` : `<p><b>Things worth asking</b></p><ul>${p.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ul>`}</div>` : "";
     const og = e.ongoing ? `<div class="box og"><h3>Ongoing situation (last reviewed ${esc(e.ongoing.asOf)})</h3>${fnote(e.ongoing.text)}${(e.ongoing.watch || []).length ? `<p><b>Still unresolved:</b></p><ul>${e.ongoing.watch.map(w => `<li>${w}</li>`).join("")}</ul>` : ""}<p class="small">This is recent history. Accounts, casualty figures and outcomes may change as more evidence emerges.</p></div>` : "";
     const similar = (e.similar || []).map(x => x.id && byId[x.id] ? `<li>${esc(byId[x.id].title)} (${yr(byId[x.id].year)})</li>` : x.name ? `<li>${esc(x.name)}${x.url ? ` — <span class="u">${esc(x.url)}</span>` : ""}</li>` : "").join("");
     const more = (e.more || []).map(([t, l, u]) => `<li>${esc(l)}${u ? ` — <span class="u">${esc(u)}</span>` : ""}</li>`).join("");
@@ -735,12 +728,16 @@ ${sec(5, fnote(e.debates))}
 ${sec(6, fnote(e.evidence) + primary)}
 ${sec(7, fnote(e.memory))}
 ${sec(8, fnote(e.why))}
-${(e.questions || []).length ? `<div class="box"><h3>Questions to think about</h3><ol>${e.questions.map(q => `<li>${q}</li>`).join("")}</ol></div>` : ""}
+${(e.questions || []).length ? `<div class="box"><h3>Open questions</h3><ol>${e.questions.map(q => `<li>${q}</li>`).join("")}</ol></div>` : ""}
 ${sec(9, similar ? `<ul>${similar}</ul>` : "")}
 ${sec(10, more ? `<ul>${more}</ul>` : "")}
-<section><h2>Sources</h2><p class="small">The numbers in square brackets in the text refer to these sources.</p><ol class="src">${(e.sources || []).map(([t, u]) => `<li>${txt(t)}${u ? `<br><span class="u">${esc(u)}</span>` : ""}</li>`).join("")}</ol></section>
+<section><h2>References</h2>\u0003REFS\u0003</section>
 <footer>Printed from <b>From Below</b> on ${today}. Online version: ${esc(url)}<br>Text licensed CC BY-SA 4.0. Images from Wikimedia Commons; credits are given in each caption.</footer>
 </body></html>`;
+    const pmap = new Map(), pord = [];
+    let pdoc = doc.replace(/\u0001([su]\d+)\u0002/g, (m, k) => { if (k[0] === "s" && !(e.sources || [])[+k.slice(1) - 1]) return ""; if (!pmap.has(k)) { pmap.set(k, pord.length + 1); pord.push(k); } return `<sup>${pmap.get(k)}</sup>`; });
+    (e.sources || []).forEach((_, j) => { const k = "s" + (j + 1); if (!pmap.has(k)) { pmap.set(k, pord.length + 1); pord.push(k); } });
+    pdoc = pdoc.replace("\u0003REFS\u0003", `<ol class="src">${pord.map(k => k[0] === "s" ? e.sources[+k.slice(1) - 1] : xr[+k.slice(1)]).map(([t, u]) => `<li>${txt(t)}${u ? `<br><span class="u">${esc(u)}</span>` : ""}</li>`).join("")}</ol>`);
     const fire = win => {
       const go2 = () => { try { win.focus(); win.print(); } catch (_) { } };
       const imgs = [...win.document.images]; let left = imgs.length;
@@ -750,10 +747,10 @@ ${sec(10, more ? `<ul>${more}</ul>` : "")}
       setTimeout(go2, 4000);
     };
     let w = null; try { w = window.open("", "_blank"); } catch (_) { }
-    if (w && w.document) { w.document.open(); w.document.write(doc); w.document.close(); let fired = false; const f = () => { if (!fired) { fired = true; fire(w); } }; w.onload = f; setTimeout(f, 600); return; }
+    if (w && w.document) { w.document.open(); w.document.write(pdoc); w.document.close(); let fired = false; const f = () => { if (!fired) { fired = true; fire(w); } }; w.onload = f; setTimeout(f, 600); return; }
     // pop-ups blocked: print from a hidden frame instead
     const fr = document.createElement("iframe"); fr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0";
-    document.body.appendChild(fr); fr.contentDocument.open(); fr.contentDocument.write(doc); fr.contentDocument.close();
+    document.body.appendChild(fr); fr.contentDocument.open(); fr.contentDocument.write(pdoc); fr.contentDocument.close();
     fire(fr.contentWindow); setTimeout(() => fr.remove(), 60000);
   }
   FB.hooks.afterStory = (e, vc) => {

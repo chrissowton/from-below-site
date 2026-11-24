@@ -32,6 +32,8 @@
   const MEDIA = window.MEDIA;
   const EXTRAS = window.EXTRAS || {};
   window.EVENTS.forEach(e => { if (EXTRAS[e.id]) Object.keys(EXTRAS[e.id]).forEach(k => { if (!e[k]) e[k] = EXTRAS[e.id][k]; }); });
+  const TRIAL = window.STORY_TRIAL || {};
+  window.EVENTS.forEach(e => { const t = TRIAL[e.id]; if (!t) return; e.trial = true; if (t.why) e.why = t.why; if (t.questions) e.questions = t.questions; if (t.read && e.primary) e.primary = { ...e.primary, read: t.read }; });
   const EVENTS = window.EVENTS.slice().sort((a, b) => a.year - b.year);
   const yr = y => y < 0 ? `${-y} BCE` : (y < 500 ? `${y} CE` : `${y}`);
   const byId = Object.fromEntries(EVENTS.map(e => [e.id, e]));
@@ -597,64 +599,118 @@
   const view = document.getElementById("view"), vc = document.getElementById("v-content");
   let current = null;
 
+  /* references: citations are collected as tokens while a page is built, then numbered in reading order */
+  const REF = { list: [] };
+  const ref = (label, url) => { REF.list.push([label, url]); return `\u0001u${REF.list.length - 1}\u0002`; };
+  function numberRefs(html, e) {
+    const map = new Map(), order = [];
+    const out = html.replace(/\u0001([su]\d+)\u0002/g, (m, k) => {
+      if (k[0] === "s" && !e.sources[+k.slice(1) - 1]) return "";
+      if (!map.has(k)) { map.set(k, order.length + 1); order.push(k); }
+      const n = map.get(k);
+      return `<sup class="fn"><button data-fn="${n}" aria-label="Reference ${n}">${n}</button></sup>`;
+    });
+    e.sources.forEach((_, j) => { const k = "s" + (j + 1); if (!map.has(k)) { map.set(k, order.length + 1); order.push(k); } });
+    const refs = order.map(k => k[0] === "s" ? e.sources[+k.slice(1) - 1] : REF.list[+k.slice(1)]);
+    return { out, refs };
+  }
+
   function renderStory(e) {
     const i = EVENTS.indexOf(e), prev = EVENTS[i - 1], next = EVENTS[i + 1];
-    const fn = html => html.replace(/\[(\d+)\]/g, (_, n) => `<sup class="fn"><button data-fn="${n}" aria-label="Source ${n}">${n}</button></sup>`);
-    const chap = (n, id, inner, cls = "") => `<section class="chapter ${cls}" id="ch-${id}"><div class="num">${String(n).padStart(2, "0")}</div><h2>${SECTIONS[n - 1][1]}</h2>${inner}</section>`;
-    const people = `<div class="people-acc">${e.people.length > 2 ? `<button type="button" class="pp-all" aria-expanded="false">Open all</button>` : ""}<ul class="pp-acc">${e.people.map(p => `<li><details><summary>${p.img ? `<span class="pp-face" role="img" aria-label="${esc(MEDIA[p.img].cap)}" style="${bg(p.img, 160)}"></span>` : `<span class="pp-face pp-dot" aria-hidden="true"></span>`}<span class="pp-txt"><b>${p.n}</b><span class="pp-prev">${String(p.r || "").replace(/<[^>]+>/g, "")}</span></span><span class="pp-chev" aria-hidden="true"></span></summary><div class="pp-more">${p.img ? `<div class="pp-big" role="img" aria-label="${esc(MEDIA[p.img].cap)}" style="${bg(p.img, 400)}"></div>` : ""}<p>${p.r}</p></div></details></li>`).join("")}</ul></div>
+    REF.list = [];
+    const fn = html => String(html || "").replace(/\[(\d+)\]/g, (_, n) => `\u0001s${n}\u0002`);
+    const T = !!e.trial;
+    const LBL = T ? { evidence: "How do we know?", more: "Find out more", similar: "Similar events" } : {};
+    const title = id => LBL[id] || (SECTIONS.find(x => x[0] === id) || [, id])[1];
+    let cn = 0;
+    const chap = (n, id, inner, cls = "") => `<section class="chapter ${cls}" id="ch-${id}"><div class="num">${String(T ? ++cn : n).padStart(2, "0")}</div><h2>${title(id)}</h2>${inner}</section>`;
+    const acc = (id, head, hint, inner) => `<details class="s-acc" id="ch-${id}"><summary><span class="sa-t"><b>${head}</b>${hint ? `<small>${hint}</small>` : ""}</span><span class="sa-chev" aria-hidden="true"></span></summary><div class="sa-body">${inner}</div></details>`;
+    const people = T
+      ? `<ul class="pp-open">${e.people.map(p => `<li>${p.img ? `<span class="pp-face" role="img" aria-label="${esc(MEDIA[p.img].cap)}" style="${bg(p.img, 200)}"></span>` : `<span class="pp-face pp-dot" aria-hidden="true"></span>`}<div><b>${p.n}</b><p>${p.r}</p></div></li>`).join("")}</ul>
+      ${e.people.some(p => p.img) ? `<p class="credit" style="margin-top:12px">Portraits: ${e.people.filter(p => p.img).map(p => `${esc(p.n)} — ${credit(MEDIA[p.img])}`).join("; ")}.</p>` : ""}`
+      : `<div class="people-acc">${e.people.length > 2 ? `<button type="button" class="pp-all" aria-expanded="false">Open all</button>` : ""}<ul class="pp-acc">${e.people.map(p => `<li><details><summary>${p.img ? `<span class="pp-face" role="img" aria-label="${esc(MEDIA[p.img].cap)}" style="${bg(p.img, 160)}"></span>` : `<span class="pp-face pp-dot" aria-hidden="true"></span>`}<span class="pp-txt"><b>${p.n}</b><span class="pp-prev">${String(p.r || "").replace(/<[^>]+>/g, "")}</span></span><span class="pp-chev" aria-hidden="true"></span></summary><div class="pp-more">${p.img ? `<div class="pp-big" role="img" aria-label="${esc(MEDIA[p.img].cap)}" style="${bg(p.img, 400)}"></div>` : ""}<p>${p.r}</p></div></details></li>`).join("")}</ul></div>
       ${e.people.some(p => p.img) ? `<p class="credit" style="margin-top:12px">Portraits: ${e.people.filter(p => p.img).map(p => `${esc(p.n)} — ${credit(MEDIA[p.img])}`).join("; ")}.</p>` : ""}`;
-    const sources = `<div class="sources" id="src-${e.id}"><h3>Sources for this section</h3><ol>${e.sources.map(([t, u], j) => `<li id="s-${e.id}-${j + 1}">${t}${u ? ` <a href="${u}" target="_blank" rel="noopener">Link ↗</a>` : ""}</li>`).join("")}</ol></div>`;
-    const happened = `<div class="verify"><span>✓</span><div><b>Sourced account.</b> Every factual claim and quotation in this section is linked to a numbered source. Click a red number to see it.</div></div>
-      <div class="prose">${fn(e.happened)}</div>
+    const happened = `<div class="prose">${fn(e.happened)}</div>
       ${(e.video || []).map(v => figure(v)).join("")}
-      ${e.gallery && e.gallery.length ? `<div class="gallery">${e.gallery.map(gk => figure(gk, 800)).join("")}</div>` : ""}
-      ${sources}`;
+      ${e.gallery && e.gallery.length ? `<div class="gallery">${e.gallery.map(gk => figure(gk, 800)).join("")}</div>` : ""}`;
     const similar = `<div class="similar">${e.similar.map(s => s.id && byId[s.id]
       ? `<button class="sim int" data-go="${s.id}"><small>On this site · ${yr(byId[s.id].year)}</small><b>${esc(byId[s.id].title)}</b><span>${esc(byId[s.id].teaser)}</span></button>`
       : `<a class="sim" href="${s.url}" target="_blank" rel="noopener"><small>Elsewhere ↗</small><b>${s.name}</b><span>${s.text}</span></a>`).join("")}</div>`;
     const more = `<ul class="more">${e.more.map(([t, l, u]) => `<li><span class="ty">${TYPES[t] || t}</span><span>${u ? `<a href="${u}" target="_blank" rel="noopener">${l}</a>` : l}</span></li>`).join("")}</ul>`;
     const hm = MEDIA[e.hero];
-    const ongoing = e.ongoing ? `<aside class="ongoing" aria-label="Ongoing situation"><div class="wrap"><div class="og-in"><div class="og-head"><span class="og-dot" aria-hidden="true"></span><b>Ongoing situation</b><span class="og-asof">Last reviewed ${esc(e.ongoing.asOf)}</span></div><div class="prose">${fn(e.ongoing.text)}</div>${(e.ongoing.watch || []).length ? `<p class="og-wl">Still unresolved:</p><ul>${e.ongoing.watch.map(w => `<li>${w}</li>`).join("")}</ul>` : ""}<p class="og-note">This is recent history. Accounts, casualty figures and outcomes may change as more evidence emerges.</p></div></div></aside>` : "";
+    const ongoing = e.ongoing ? `<aside class="ongoing" aria-label="Ongoing situation"><div class="wrap"><div class="og-in"><div class="og-head"><span class="og-dot" aria-hidden="true"></span><b>Ongoing situation</b><span class="og-asof">Last reviewed ${esc(e.ongoing.asOf)}</span></div><div class="prose">${fn(e.ongoing.text)}</div>${(e.ongoing.watch || []).length ? `<p class="og-wl">Still unresolved:</p><ul>${e.ongoing.watch.map(w => `<li>${fn(w)}</li>`).join("")}</ul>` : ""}<p class="og-note">This is recent history. Accounts, casualty figures and outcomes may change as more evidence emerges.</p></div></div></aside>` : "";
 
     const H = window.FB && FB.hooks ? FB.hooks : {};
     const banner = H.storyBanner ? H.storyBanner(e) : "";
     const tools = H.storyTools ? H.storyTools(e) : "";
     const lookClose = H.sourceBox ? H.sourceBox(e) : "";
     const voices = H.voicesBox ? H.voicesBox(e) : "";
-    vc.innerHTML = `${banner}
-      <header class="s-hero"><div class="wrap">
-        <div><div class="tag">${icon(e.theme)}${THEMES[e.theme]}${e.ongoing ? ` <span class="recent-tag">Recent history</span>` : ""}</div><h1 id="s-title">${esc(e.title)}</h1><p class="teaser">${esc(e.teaser)}</p>
-          <dl class="facts"><div><dt>When</dt><dd>${esc(e.date)}</dd></div><div><dt>Where</dt><dd>${esc(e.place)}</dd></div></dl></div>
-        ${hm ? `<figure class="media"><div class="ph"><img src="${fileUrl(hm.f, 1200)}" alt="${esc(hm.cap)}" onerror="this.closest('figure').classList.add('noimg')"></div><figcaption>${esc(hm.cap)} ${credit(hm)}</figcaption></figure>` : ""}
-      </div></header>${ongoing}${tools}
-      <div class="s-body"><div class="wrap">
-        <nav class="toc" aria-label="Sections"><ol>${SECTIONS.map(([id, t]) => `<li><a href="#" data-ch="${id}">${t}</a></li>`).join("")}</ol></nav>
-        <article>
-          ${chap(1, "background", `<div class="prose">${fn(e.background)}</div>`)}
+    const questions = e.questions ? (T ? `<ul class="q-open">${e.questions.map(q => `<li>${q}</li>`).join("")}</ul>` : `<aside class="questions" aria-label="Open questions"><h3>Open questions</h3><ol>${e.questions.map(q => `<li>${q}</li>`).join("")}</ol></aside>`) : "";
+    const evidence = `${e.evidence ? `<div class="prose">${fn(e.evidence)}</div>` : ""}${lookClose}<p class="bh-link"><a href="#behind">Behind the history: how evidence is made, kept and contested →</a></p>`;
+    const REFS = "\u0003REFS\u0003";
+    let body, toc;
+    if (T) {
+      const rows = [
+        e.debates && ["debates", "What do others say?", "How it was seen at the time, and where historians disagree", `<div class="prose">${fn(e.debates)}</div>`],
+        (e.evidence || lookClose) && ["evidence", "How do we know?", "The evidence, and a source from the time", evidence],
+        e.memory && ["memory", "How is it remembered?", "Memorials, anniversaries and arguments over memory", `<div class="prose">${fn(e.memory)}</div>`],
+        e.questions && ["questions", "Open questions", "What this story leaves unresolved", questions],
+        ["similar", "Similar events", "Other struggles like this one, here and elsewhere", similar],
+        ["more", "Find out more", "Books, websites and places to visit", more],
+        ["refs", "References", "", REFS]
+      ].filter(Boolean);
+      body = `${chap(0, "background", `<div class="prose">${fn(e.background)}</div>`)}
+          ${chap(0, "people", people + voices)}
+          ${chap(0, "happened", happened)}
+          ${chap(0, "next", `<div class="prose">${fn(e.next)}</div>`)}
+          <div class="why-box">${chap(0, "why", `<div class="prose">${fn(e.why)}</div>`)}</div>
+          <div class="s-accs"><h2 class="sa-h">Go further</h2>${rows.map(r => acc(...r)).join("")}<button type="button" class="sa-all">Open all</button></div>`;
+      const tl = [["background"], ["people"], ["happened"], ["next"], ["why"], ...rows.map(r => [r[0], r[1]])];
+      toc = tl.map(([id, t]) => `<li><a href="#" data-ch="${id}">${t || title(id)}</a></li>`).join("");
+    } else {
+      body = `${chap(1, "background", `<div class="prose">${fn(e.background)}</div>`)}
           ${chap(2, "people", people + voices)}
           ${chap(3, "happened", happened)}
           ${chap(4, "next", `<div class="prose">${fn(e.next)}</div>`)}
-          ${e.debates ? chap(5, "debates", `<div class="debate-note">Different people have understood this event in different ways. This section sets out how it was seen at the time, where historians disagree, and the difficult questions it raises.</div><div class="prose">${fn(e.debates)}</div>`) : ""}
-          ${e.evidence || lookClose ? chap(6, "evidence", `${e.evidence ? `<div class="prose">${fn(e.evidence)}</div>` : ""}${lookClose}<p class="bh-link"><a href="#behind">Behind the history: how evidence is made, kept and contested →</a></p>`) : ""}
+          ${e.debates ? chap(5, "debates", `<div class="prose">${fn(e.debates)}</div>`) : ""}
+          ${e.evidence || lookClose ? chap(6, "evidence", evidence) : ""}
           ${e.memory ? chap(7, "memory", `<div class="prose">${fn(e.memory)}</div>`) : ""}
           <div class="why-box">${chap(8, "why", `<div class="prose">${fn(e.why)}</div>`)}</div>
-          ${e.questions ? `<aside class="questions" aria-label="Questions to think about"><h3>Questions to think about</h3><ol>${e.questions.map(q => `<li>${q}</li>`).join("")}</ol></aside>` : ""}
+          ${questions}
           ${chap(9, "similar", similar)}
           ${chap(10, "more", more)}
+          <section class="chapter" id="ch-refs"><h2>References</h2>${REFS}</section>`;
+      toc = SECTIONS.map(([id, t]) => `<li><a href="#" data-ch="${id}">${t}</a></li>`).join("") + `<li><a href="#" data-ch="refs">References</a></li>`;
+    }
+    let html = `${banner}
+      <header class="s-hero"><div class="wrap">
+        <div><div class="tag">${icon(e.theme)}${THEMES[e.theme]}${e.ongoing ? ` <span class="recent-tag">Recent history</span>` : ""}</div><h1 id="s-title">${esc(e.title)}</h1><p class="teaser">${esc(e.teaser)}</p>
+          <dl class="facts"><div><dt>When</dt><dd>${esc(e.date)}</dd></div><div><dt>Where</dt><dd>${esc(e.place)}</dd></div></dl></div>
+        ${hm ? `<figure class="media"><div class="ph"><img src="${fileUrl(hm.f, 1200)}" alt="${esc(hm.cap)}" onerror="this.closest('figure').classList.add('noimg')"></figure>` : ""}
+      </div></header>${ongoing}${tools}
+      <div class="s-body${T ? " s-trial" : ""}"><div class="wrap">
+        <nav class="toc" aria-label="Sections"><ol>${toc}</ol></nav>
+        <article>
+          ${body}
           <div class="pager">
             <button class="pv" ${prev ? "" : "disabled"}><small>← Earlier · ${prev ? yr(prev.year) : ""}</small><b>${prev ? esc(prev.title) : ""}</b></button>
             <button class="nx" ${next ? "" : "disabled"}><small>Later · ${next ? yr(next.year) : ""} →</small><b>${next ? esc(next.title) : ""}</b></button>
           </div>
         </article>
       </div></div>`;
+    const { out, refs } = numberRefs(html, e);
+    vc.innerHTML = out.replace("\u0003REFS\u0003", `<ol class="refs" id="src-${e.id}">${refs.map(([t, u], j) => `<li id="s-${e.id}-${j + 1}">${u ? `<a href="${u}" target="_blank" rel="noopener">${t}</a>` : t}</li>`).join("")}</ol>`);
     const ppAll = vc.querySelector(".pp-all");
     if (ppAll) ppAll.onclick = () => { const open = ppAll.getAttribute("aria-expanded") !== "true"; vc.querySelectorAll(".pp-acc details").forEach(d => d.open = open); ppAll.setAttribute("aria-expanded", open); ppAll.textContent = open ? "Close all" : "Open all"; };
+    const accs = [...vc.querySelectorAll(".s-acc")], saAll = vc.querySelector(".sa-all");
+    if (saAll) { const sync = () => saAll.textContent = accs.every(d => d.open) ? "Close all" : "Open all"; accs.forEach(d => d.addEventListener("toggle", sync)); saAll.onclick = () => { const o = !accs.every(d => d.open); accs.forEach(d => d.open = o); sync(); }; }
     vc.querySelector(".pv").onclick = () => prev && go(prev.id);
     vc.querySelector(".nx").onclick = () => next && go(next.id);
     vc.querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(b.dataset.go));
-    vc.querySelectorAll(".toc a").forEach(a => a.onclick = ev => { ev.preventDefault(); scrollToEl(document.getElementById("ch-" + a.dataset.ch)); });
+    vc.querySelectorAll(".toc a").forEach(a => a.onclick = ev => { ev.preventDefault(); const t = document.getElementById("ch-" + a.dataset.ch); if (t.tagName === "DETAILS") t.open = true; scrollToEl(t); });
     vc.querySelectorAll("button[data-fn]").forEach(b => b.onclick = () => {
       const li = document.getElementById(`s-${e.id}-${b.dataset.fn}`); if (!li) return;
+      const d = li.closest("details"); if (d) d.open = true;
       scrollToEl(li, 160); li.classList.add("flash"); setTimeout(() => li.classList.remove("flash"), 1600);
     });
     document.getElementById("v-prev").style.visibility = prev ? "visible" : "hidden";
@@ -667,7 +723,7 @@
   function spy() {
     if (!current) return;
     let cur = "background";
-    vc.querySelectorAll(".chapter").forEach(s => { if (s.getBoundingClientRect().top < 200) cur = s.id.slice(3); });
+    vc.querySelectorAll(".chapter, .s-acc").forEach(s => { if (s.getBoundingClientRect().top < 200) cur = s.id.slice(3); });
     vc.querySelectorAll(".toc a").forEach(a => a.classList.toggle("cur", a.dataset.ch === cur));
   }
   view.addEventListener("scroll", () => { spy(); topCheck(); }, { passive: true });
@@ -737,7 +793,7 @@
   }
   window.FB = {
     EVENTS, byId, THEMES, MEDIA, ICONS, COLOURS, SECTIONS, state, active,
-    icon, badge, yr, esc, bg, figure, credit, fileUrl, pageUrl,
+    icon, badge, yr, esc, bg, figure, credit, fileUrl, pageUrl, ref,
     go, home, refresh, setFocus, play, showPage, toast, scrollToEl, view, vc, countries, cname,
     get current() { return current; },
     showOnMap(f) { home(); setTimeout(() => { setFocus(f); document.getElementById("mapbox").scrollIntoView({ behavior: "smooth", block: "center" }); if (f.autoplay) setTimeout(play, 900); }, 60); },
