@@ -753,7 +753,119 @@ ${sec(10, more ? `<ul>${more}</ul>` : "")}
     document.body.appendChild(fr); fr.contentDocument.open(); fr.contentDocument.write(pdoc); fr.contentDocument.close();
     fire(fr.contentWindow); setTimeout(() => fr.remove(), 60000);
   }
+  /* ---------- search suggestions: the rest of the word in grey, and a list of matches ---------- */
+  (function searchSuggest() {
+    const inp = document.getElementById("q"); if (!inp) return;
+    const box = inp.closest(".searchbox");
+    const norm = t => String(t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+    const strip = h => String(h || "").replace(/<[^>]+>/g, "");
+    const STOP = new Set("the and for with from that this were was their they them into over under after before about against between during while which where when what who whom whose have has had been being also more most than then there these those other such some many much very only just even still would could should will shall upon across around through without within among became become made make first last years year people workers women against".split(" "));
+    const ents = [], seen = new Set();
+    const add = (label, kind, extra = {}) => { const k = kind + "|" + norm(label); if (!label || seen.has(k)) return; seen.add(k); ents.push({ label, kind, n: norm(label), ...extra }); };
+    FB.EVENTS.forEach(e => add(e.title, "Story", { id: e.id, sub: `${FB.yr(e.year)} · ${e.country || ""}` }));
+    const cc = {}; FB.EVENTS.forEach(e => { if (e.country) cc[e.country] = (cc[e.country] || 0) + 1; });
+    Object.entries(cc).forEach(([c, n]) => add(c, "Place", { w: n }));
+    FB.EVENTS.forEach(e => (e.people || []).forEach(p => add(strip(p.n).replace(/\s*\(.*?\)\s*/g, " ").trim(), "Person", { w: 1 })));
+    Object.values(FB.THEMES || {}).forEach(t => add(t, "Theme", { w: 20 }));
+    (window.GLOSSARY || []).forEach(g => add(g.term, "Key word", { w: 3 }));
+    const freq = {};
+    FB.EVENTS.forEach(e => norm(strip(`${e.title} ${e.teaser} ${e.place}`)).split(/[^a-z0-9'-]+/).forEach(w => { w = w.replace(/^'+|'+$/g, ""); if (w.length >= 4 && !STOP.has(w) && !/^\d+$/.test(w)) freq[w] = (freq[w] || 0) + 1; }));
+    ents.forEach(x => x.n.split(/[^a-z0-9'-]+/).forEach(w => { if (w.length >= 4 && !STOP.has(w)) freq[w] = (freq[w] || 0) + (x.kind === "Place" ? 6 * (x.w || 1) : x.kind === "Theme" ? 30 : x.kind === "Story" ? 0 : 2); }));
+    const words = Object.entries(freq).sort((a, b) => b[1] - a[1]).map(([w]) => w);
+
+    const ghost = document.createElement("div"); ghost.className = "q-ghost"; ghost.setAttribute("aria-hidden", "true");
+    box.insertBefore(ghost, inp);
+    const list = document.createElement("ul"); list.className = "q-sugg"; list.id = "q-sugg"; list.setAttribute("role", "listbox"); list.hidden = true;
+    box.appendChild(list);
+    inp.setAttribute("role", "combobox"); inp.setAttribute("aria-autocomplete", "both"); inp.setAttribute("aria-controls", "q-sugg"); inp.setAttribute("aria-expanded", "false");
+    let items = [], sel = -1, completion = "";
+
+    function update() {
+      const v = inp.value, q = norm(v).trim();
+      completion = ""; items = []; sel = -1;
+      const last = (norm(v).match(/([a-z0-9'-]+)$/) || [])[1] || "";
+      if (last.length >= 2 && inp.selectionStart === v.length) {
+        const w = words.find(x => x.startsWith(last) && x !== last);
+        if (w) completion = w.slice(last.length);
+      }
+      ghost.innerHTML = completion ? `<span class="qg-typed">${esc(v)}</span><span class="qg-rest">${esc(completion)}</span>` : "";
+      if (q.length >= 2) {
+        const startsWord = x => x.n.split(/[^a-z0-9'-]+/).some(w => w.startsWith(q)) || x.n.startsWith(q);
+        const stories = ents.filter(x => x.kind === "Story" && (startsWord(x) || (q.length >= 4 && x.n.includes(q)))).slice(0, 5);
+        const others = ents.filter(x => x.kind !== "Story" && startsWord(x)).sort((a, b) => (b.n.startsWith(q) - a.n.startsWith(q)) || (b.w || 0) - (a.w || 0)).slice(0, 5);
+        items = [...others.slice(0, 4), ...stories];
+      }
+      const hl = t => { const n = norm(t), i = n.indexOf(q); return i < 0 ? esc(t) : esc(t.slice(0, i)) + "<mark>" + esc(t.slice(i, i + q.length)) + "</mark>" + esc(t.slice(i + q.length)); };
+      list.innerHTML = items.map((x, i) => `<li role="option" id="qs-${i}" data-i="${i}"><span class="qs-k">${x.kind === "Story" ? "Story" : x.kind}</span><span class="qs-l">${hl(x.label)}${x.sub ? `<small>${esc(x.sub)}</small>` : ""}</span>${x.kind === "Story" ? '<span class="qs-go">Open →</span>' : ""}</li>`).join("");
+      list.hidden = !items.length || document.activeElement !== inp;
+      inp.setAttribute("aria-expanded", String(!list.hidden));
+    }
+    function mark() { list.querySelectorAll("li").forEach((li, i) => li.classList.toggle("on", i === sel)); inp.setAttribute("aria-activedescendant", sel >= 0 ? "qs-" + sel : ""); }
+    function choose(x) {
+      list.hidden = true; ghost.innerHTML = "";
+      if (x.kind === "Story") { inp.value = ""; inp.dispatchEvent(new Event("input")); FB.go(x.id); return; }
+      inp.value = x.label; inp.dispatchEvent(new Event("input")); inp.focus();
+    }
+    function accept() { if (!completion) return false; inp.value += completion; completion = ""; inp.dispatchEvent(new Event("input")); return true; }
+    inp.addEventListener("input", update);
+    inp.addEventListener("focus", update);
+    inp.addEventListener("blur", () => setTimeout(() => { list.hidden = true; ghost.innerHTML = ""; inp.setAttribute("aria-expanded", "false"); }, 150));
+    inp.addEventListener("keydown", ev => {
+      if ((ev.key === "Tab" && !ev.shiftKey) || (ev.key === "ArrowRight" && inp.selectionStart === inp.value.length)) { if (accept()) ev.preventDefault(); return; }
+      if (list.hidden) return;
+      if (ev.key === "ArrowDown") { ev.preventDefault(); sel = (sel + 1) % items.length; mark(); }
+      else if (ev.key === "ArrowUp") { ev.preventDefault(); sel = (sel - 1 + items.length) % items.length; mark(); }
+      else if (ev.key === "Escape") { list.hidden = true; ghost.innerHTML = ""; }
+      else if (ev.key === "Enter" && sel >= 0) { ev.preventDefault(); ev.stopImmediatePropagation(); choose(items[sel]); }
+    }, true);
+    list.addEventListener("mousedown", ev => { const li = ev.target.closest("li"); if (li) { ev.preventDefault(); choose(items[+li.dataset.i]); } });
+  })();
+
+  /* ---------- "Where it happened": a locator map for every story ---------- */
+  let WFEAT = null;
+  function drawLocMap(e, vc) {
+    const box = vc.querySelector("#s-locmap"); if (!box || !window.WORLD || !window.d3 || !isFinite(e.lat)) { if (box) box.remove(); return; }
+    WFEAT = WFEAT || topojson.feature(WORLD, WORLD.objects.countries).features.filter(f => f.id !== "010");
+    const pt = [e.lon, e.lat];
+    const home = WFEAT.find(f => d3.geoContains(f, pt));
+    let frame;
+    if (home) {
+      const [[x0, y0], [x1, y1]] = d3.geoBounds(home);
+      const w = x1 - x0, h = y1 - y0;
+      if (w > 0 && w < 40 && h < 26) { const px = Math.max(w * 0.35, 2.5), py = Math.max(h * 0.35, 2); frame = [[x0 - px, y0 - py], [x1 + px, y1 + py]]; }
+    }
+    if (!frame) frame = [[e.lon - 11, e.lat - 7], [e.lon + 11, e.lat + 7]];
+    const W = 760, H = 300;
+    const fr = { type: "MultiPoint", coordinates: [frame[0], frame[1], [frame[0][0], frame[1][1]], [frame[1][0], frame[0][1]]] };
+    const proj = d3.geoMercator().fitExtent([[8, 8], [W - 8, H - 8]], fr), path = d3.geoPath(proj);
+    const svg = d3.select(box).append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", `Map showing ${e.place}`);
+    svg.append("rect").attr("width", W).attr("height", H).attr("class", "lm-sea");
+    svg.append("g").selectAll("path").data(WFEAT).join("path").attr("d", path).attr("class", f => f === home ? "lm-home" : "lm-land");
+    if (home) { const c = proj(d3.geoCentroid(home)); const name = home.properties.name; if (c && c[0] > 40 && c[0] < W - 40 && c[1] > 20 && c[1] < H - 20) svg.append("text").attr("class", "lm-lbl").attr("x", c[0]).attr("y", c[1]).text(name); }
+    // other stories in view
+    const inView = FB.EVENTS.filter(o => o !== e && isFinite(o.lat)).map(o => ({ o, p: proj([o.lon, o.lat]) })).filter(({ p }) => p && p[0] > 6 && p[0] < W - 6 && p[1] > 6 && p[1] < H - 6);
+    const og = svg.append("g").selectAll("g").data(inView).join("g").attr("class", "lm-other").attr("transform", d => `translate(${d.p})`).attr("tabindex", 0).attr("role", "link").attr("aria-label", d => d.o.title);
+    og.append("circle").attr("r", 3.6);
+    og.append("title").text(d => `${d.o.title} (${FB.yr(d.o.year)})`);
+    og.on("click", (ev, d) => FB.go(d.o.id)).on("keydown", (ev, d) => { if (ev.key === "Enter") FB.go(d.o.id); });
+    const P = proj(pt);
+    const me = svg.append("g").attr("transform", `translate(${P})`).attr("class", "lm-me");
+    me.append("circle").attr("r", 18).attr("class", "lm-pulse");
+    me.append("circle").attr("r", 8);
+    // globe inset
+    const G = 92, gp = d3.geoOrthographic().scale(G / 2 - 3).translate([W - G / 2 - 10, G / 2 + 10]).rotate([-e.lon, -Math.max(-50, Math.min(50, e.lat))]).clipAngle(90), gpath = d3.geoPath(gp);
+    const gg = svg.append("g").attr("class", "lm-globe");
+    gg.append("circle").attr("cx", W - G / 2 - 10).attr("cy", G / 2 + 10).attr("r", G / 2 - 3).attr("class", "lm-gsea");
+    gg.append("path").datum({ type: "FeatureCollection", features: WFEAT }).attr("d", gpath).attr("class", "lm-gland");
+    const gpt = gp(pt); if (gpt) gg.append("circle").attr("cx", gpt[0]).attr("cy", gpt[1]).attr("r", 4).attr("class", "lm-gme");
+    const D = e.deep && window.DEEP && DEEP[e.deep];
+    box.insertAdjacentHTML("beforeend", `<figcaption><span><b>Where it happened:</b> ${esc(e.place)}${inView.length ? ` · <span class="lm-key"><i></i> other stories nearby</span>` : ""}</span>${D ? `<button type="button" class="lm-deep" data-go="deep/${D.id}">Open the detailed map →</button>` : `<button type="button" class="lm-deep ghost" data-show-here="1">See it on the world map</button>`}</figcaption>`);
+    const dd = box.querySelector("[data-go]"); if (dd) dd.onclick = () => FB.go(dd.dataset.go);
+    const sh = box.querySelector("[data-show-here]"); if (sh) sh.onclick = () => FB.showOnMap({ key: "story:" + e.id, kind: "Story", title: e.title, seq: [e.id], arcs: false });
+  }
+
   FB.hooks.afterStory = (e, vc) => {
+    drawLocMap(e, vc);
     markGlossary(vc);
     setMode(store.get("mode") || "full");
     vc.querySelectorAll(".st-mode button").forEach(b => b.onclick = () => { setMode(b.dataset.mode); stopSpeech(); });

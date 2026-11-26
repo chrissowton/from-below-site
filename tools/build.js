@@ -14,6 +14,9 @@ const html = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
 [...html.matchAll(/<script src="(data\/[^"]+)"/g)].forEach(m => (0, eval)(fs.readFileSync(path.join(ROOT, m[1]), "utf8")));
 const W = global.window, MEDIA = W.MEDIA, SITE = W.SITE || {};
 W.EVENTS.forEach(e => { const x = W.EXTRAS[e.id]; if (x) Object.keys(x).forEach(k => { if (!e[k]) e[k] = x[k]; }); });
+const TR = W.STORY_TRIAL || {};
+const addWhy = (why, add) => { const li = add.map(b => `<li>${b}</li>`).join("\n  "); const w = String(why || ""); const i = w.lastIndexOf("</ul>"); return i >= 0 ? w.slice(0, i) + "  " + li + "\n" + w.slice(i) : w + `\n<ul>\n  ${li}\n</ul>`; };
+W.EVENTS.forEach(e => { const t = TR[e.id]; if (!t) return; if (t.why) e.why = t.why; if (t.whyAdd) e.why = addWhy(e.why, t.whyAdd); if (t.questions) e.questions = t.questions; if (t.read && e.primary) e.primary = { ...e.primary, read: t.read }; });
 const EVENTS = W.EVENTS.slice().sort((a, b) => a.year - b.year);
 const byId = Object.fromEntries(EVENTS.map(e => [e.id, e]));
 const BASE = (SITE.url || "").replace(/\/$/, "");
@@ -109,8 +112,9 @@ function storyPage0(e, i) {
   const hm = MEDIA[e.hero];
   const canonical = BASE ? `${BASE}/stories/${e.id}.html` : "";
   const used = new Set(), G = h => glossify(h, used);
-  const chap = (n, inner) => inner ? `<section class="chapter" id="ch-${n}"><div class="num">${String(n).padStart(2, "0")}</div><h2>${SECTIONS[n - 1]}</h2>${inner}</section>` : "";
-  const people = `<ul class="pp-acc">${(e.people || []).map(p => `<li><details><summary><span class="pp-face pp-dot" aria-hidden="true"></span><span class="pp-txt"><b>${p.n}</b><span class="pp-prev">${String(p.r || "").replace(/<[^>]+>/g, "")}</span></span><span class="pp-chev" aria-hidden="true"></span></summary><div class="pp-more"><p>${p.r}</p></div></details></li>`).join("")}</ul>`;
+  const chap = (n, inner, t) => inner ? `<section class="chapter" id="ch-${n}"><div class="num">${String(n).padStart(2, "0")}</div><h2>${t || SECTIONS[n - 1]}</h2>${inner}</section>` : "";
+  const acc = (head, hint, inner) => inner ? `<details class="s-acc"><summary><span class="sa-t"><b>${head}</b>${hint ? `<small>${hint}</small>` : ""}</span><span class="sa-chev" aria-hidden="true"></span></summary><div class="sa-body">${inner}</div></details>` : "";
+  const people = `<ul class="pp-open">${(e.people || []).map(p => `<li><span class="pp-face pp-dot" aria-hidden="true"></span><div><b>${p.n}</b><p>${p.r}</p></div></li>`).join("")}</ul>`;
   XR = [];
   const similar = `<ul class="more">${(e.similar || []).filter(s => s.id && byId[s.id]).map(s => `<li><span class="ty">${yr(byId[s.id].year)}</span><span><a href="${s.id}.html">${esc(byId[s.id].title)}</a> — ${esc(byId[s.id].teaser)}</span></li>`).join("")}</ul>`;
   const more = `<ul class="more">${(e.more || []).map(([t, l, u]) => `<li><span class="ty">${TYPES[t] || t}</span><span>${u ? `<a href="${u}">${l}</a>` : l}</span></li>`).join("")}</ul>`;
@@ -129,14 +133,16 @@ ${e.ongoing ? `<aside class="ongoing"><div class="wrap"><div class="og-in"><div 
   ${chap(2, people + voicesHtml(e))}
   ${chap(3, `<div class="prose">${fn(G(e.happened))}</div>${(e.gallery || []).length ? `<div class="gallery">${e.gallery.map(k => fig(k, 800)).join("")}</div>` : ""}`)}
   ${chap(4, `<div class="prose">${fn(G(e.next))}</div>`)}
-  ${chap(5, e.debates ? `<div class="prose">${fn(G(e.debates))}</div>` : "")}
-  ${chap(6, (e.evidence ? `<div class="prose">${fn(G(e.evidence))}</div>` : "") + primaryHtml(e))}
-  ${chap(7, e.memory ? `<div class="prose">${fn(G(e.memory))}</div>` : "")}
-  <div class="why-box">${chap(8, `<div class="prose">${fn(G(e.why))}</div>`)}</div>
-  ${e.questions ? `<aside class="questions"><h3>Open questions</h3><ol>${e.questions.map(q => `<li>${q}</li>`).join("")}</ol></aside>` : ""}
-  ${chap(9, similar)}
-  ${chap(10, more)}
-  <section class="chapter" id="ch-refs"><h2>References</h2>\u0003REFS\u0003</section>
+  <div class="why-box">${chap(5, `<div class="prose">${fn(G(e.why))}</div>`, "Why does it matter?")}</div>
+  <div class="s-accs"><h2 class="sa-h">Go further</h2>
+  ${acc("What do others say?", "How it was seen at the time, and where historians disagree", e.debates ? `<div class="prose">${fn(G(e.debates))}</div>` : "")}
+  ${acc("How do we know?", "The evidence, and a source from the time", (e.evidence ? `<div class="prose">${fn(G(e.evidence))}</div>` : "") + primaryHtml(e))}
+  ${acc("How is it remembered?", "Memorials, anniversaries and arguments over memory", e.memory ? `<div class="prose">${fn(G(e.memory))}</div>` : "")}
+  ${acc("Open questions", "What this story leaves unresolved", e.questions ? `<ul class="q-open">${e.questions.map(q => `<li>${q}</li>`).join("")}</ul>` : "")}
+  ${acc("Similar events", "Other struggles like this one", similar)}
+  ${acc("Find out more", "Books, websites and places to visit", more)}
+  ${acc("References", "", "\u0003REFS\u0003")}
+  </div>
   <div class="pager">
     ${prev ? `<a class="pv" href="${prev.id}.html" style="text-decoration:none;border-radius:14px;background:var(--stone);padding:18px 20px"><small>← Earlier · ${yr(prev.year)}</small><br><b>${esc(prev.title)}</b></a>` : "<span></span>"}
     ${next ? `<a class="nx" href="${next.id}.html" style="text-decoration:none;border-radius:14px;background:var(--stone);padding:18px 20px;text-align:right"><small>Later · ${yr(next.year)} →</small><br><b>${esc(next.title)}</b></a>` : ""}

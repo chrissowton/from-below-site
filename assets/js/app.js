@@ -33,7 +33,8 @@
   const EXTRAS = window.EXTRAS || {};
   window.EVENTS.forEach(e => { if (EXTRAS[e.id]) Object.keys(EXTRAS[e.id]).forEach(k => { if (!e[k]) e[k] = EXTRAS[e.id][k]; }); });
   const TRIAL = window.STORY_TRIAL || {};
-  window.EVENTS.forEach(e => { const t = TRIAL[e.id]; if (!t) return; e.trial = true; if (t.why) e.why = t.why; if (t.questions) e.questions = t.questions; if (t.read && e.primary) e.primary = { ...e.primary, read: t.read }; });
+  const addWhy = (why, add) => { const li = add.map(b => `<li>${b}</li>`).join("\n  "); const w = String(why || ""); const i = w.lastIndexOf("</ul>"); return i >= 0 ? w.slice(0, i) + "  " + li + "\n" + w.slice(i) : w + `\n<ul>\n  ${li}\n</ul>`; };
+  window.EVENTS.forEach(e => { const t = TRIAL[e.id]; if (!t) return; e.trial = true; if (t.why) e.why = t.why; if (t.whyAdd) e.why = addWhy(e.why, t.whyAdd); if (t.questions) e.questions = t.questions; if (t.read && e.primary) e.primary = { ...e.primary, read: t.read }; });
   const EVENTS = window.EVENTS.slice().sort((a, b) => a.year - b.year);
   const yr = y => y < 0 ? `${-y} BCE` : (y < 500 ? `${y} CE` : `${y}`);
   const byId = Object.fromEntries(EVENTS.map(e => [e.id, e]));
@@ -619,7 +620,7 @@
     const i = EVENTS.indexOf(e), prev = EVENTS[i - 1], next = EVENTS[i + 1];
     REF.list = [];
     const fn = html => String(html || "").replace(/\[(\d+)\]/g, (_, n) => `\u0001s${n}\u0002`);
-    const T = !!e.trial;
+    const T = true;  // the accordion layout, now used for every story
     const LBL = T ? { evidence: "How do we know?", more: "Find out more", similar: "Similar events" } : {};
     const title = id => LBL[id] || (SECTIONS.find(x => x[0] === id) || [, id])[1];
     let cn = 0;
@@ -659,7 +660,8 @@
         ["more", "Find out more", "Books, websites and places to visit", more],
         ["refs", "References", "", REFS]
       ].filter(Boolean);
-      body = `${chap(0, "background", `<div class="prose">${fn(e.background)}</div>`)}
+      body = `<figure class="s-locmap" id="s-locmap" aria-label="Map: where it happened"></figure>
+          ${chap(0, "background", `<div class="prose">${fn(e.background)}</div>`)}
           ${chap(0, "people", people + voices)}
           ${chap(0, "happened", happened)}
           ${chap(0, "next", `<div class="prose">${fn(e.next)}</div>`)}

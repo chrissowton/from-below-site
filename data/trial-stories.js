@@ -27,6 +27,12 @@ window.STORY_TRIAL = {
     read: "The placards are the thing to read. The strikers tied their fight against landlords to the war, casting rent rises as an attack on soldiers' families — which made them very hard to dismiss as unpatriotic. Photographs like this were part of the campaign too: they showed organised, respectable women rather than a mob."
   },
   haiti: {
+    questions: [
+      "Why was the Haitian Revolution, in Michel-Rolph Trouillot's word, 'silenced' in Western history for so long?",
+      "Should France repay the 1825 indemnity — and what are the arguments on each side?",
+      "How should historians write about violence committed by people fighting for their freedom?",
+      "What does the revolution reveal about how 'universal' the rights of the 1790s really were?"
+    ],
     read: "The artist was far from Saint-Domingue and worked from reports reaching Europe, so the picture says as much about European fears as about the revolution itself. Look at how the rebels are drawn, and think about who would have bought such an image. An enslaved person in Saint-Domingue would surely have chosen a very different scene."
   },
   serbia2024: {
