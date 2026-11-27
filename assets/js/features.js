@@ -91,7 +91,7 @@
   if (exMk && window.BEHIND) exMk.innerHTML = window.BEHIND.cards.map(c => `<article class="ex-card mk-card"><div class="ex-img" style="${MEDIA[c.hero] ? bg(c.hero, 600) : ""}"></div><div class="ex-body"><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="${c.route}">Open →</button></div></div></article>`).join("");
   const exG = document.getElementById("ex-guides");
   const exL = document.getElementById("ex-library");
-  if (exL) exL.innerHTML = (window.TEXTS || []).map(t => { const h = heroOf(t.heroStory); return `<article class="ex-card lib-card"><div class="ex-img" style="${h ? bg(h, 600) : ""}"></div><div class="ex-body"><small class="pw-level">${esc(t.kind)} · ${t.when ? esc(t.when) : yr(t.year)}</small><h3>${esc(t.title)}</h3><p>${esc(t.teaser)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="text/${t.id}">Read it →</button></div></div></article>`; }).join("");
+  if (exL) exL.innerHTML = (window.TEXTS || []).map(t => { const h = (t.hero || heroOf(t.heroStory)); return `<article class="ex-card lib-card"><div class="ex-img" style="${h ? bg(h, 600) : ""}"></div><div class="ex-body"><small class="pw-level">${esc(t.kind)} · ${t.when ? esc(t.when) : yr(t.year)}</small><h3>${esc(t.title)}</h3><p>${esc(t.teaser)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="text/${t.id}">Read it →</button></div></div></article>`; }).join("");
   if (exG) exG.innerHTML = (window.GUIDES || []).map(g => { const h = heroOf(g.heroStory); return `<article class="ex-card gd-card"><div class="ex-img" style="${h ? bg(h, 600) : ""}"></div><div class="ex-body"><small class="pw-level">Issue guide${g.sections ? ` · ${g.sections.length} chapters` : ""}</small><h3>${esc(g.title)}</h3><p>${esc(g.teaser)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="guide/${g.id}">Read the guide →</button></div></div></article>`; }).join("");
   if (exP) exP.innerHTML = PATHWAYS.map(p => `<article class="ex-card pw-card">
       <div class="ex-body"><small class="pw-level">Pathway · ${p.steps.length} stories</small><h3>${esc(p.title)}</h3><p>${esc(p.teaser)}</p>
@@ -342,18 +342,68 @@
     : b.v ? `<p class="lib-verse">${b.v.map(esc).join("<br>")}</p>`
     : b.sp ? `<p class="lib-sp"><b>${esc(b.sp)}</b>${esc(b.p)}</p>`
     : `<p>${esc(b.p)}</p>`).join("");
+  const TYPES = [["official", "Official documents", /^UN |Convention|Resolution|Act of Congress|Act of Parliament|Supreme Court|Presidential|National Assembly/], ["decl", "Declarations & manifestos", /Declaration|Manifesto|Proclamation|Petition|Charter/], ["speech", "Speeches & debates", /Speech|debate|Lecture/], ["poem", "Poems", /Poem/], ["memoir", "Memoirs & histories", /Memoir|Eyewitness|history/i], ["prose", "Pamphlets, essays & letters", /./]];
+  const tType = t => TYPES.find(([, , re]) => re.test(t.kind))[0];
+  const tTags = t => [...new Set([...(t.stories || []).map(id => byId[id] && byId[id].theme).filter(Boolean), ...(t.tags || [])])];
   FB.routes.library = () => {
+    const tagN = {}; TEXTS.forEach(t => tTags(t).forEach(g => tagN[g] = (tagN[g] || 0) + 1));
+    const tags = Object.keys(THEMES).filter(g => tagN[g]);
+    const sorted = TEXTS.slice().sort((x, y) => x.year - y.year);
+    const tile = t => { const h = (t.hero || heroOf(t.heroStory)); return `<button type="button" class="lib-tile" data-go="text/${t.id}" data-id="${t.id}"><span class="lib-tile-img" style="${h ? bg(h, 500) : ""}"></span><span class="lib-tile-txt"><small>${esc(t.kind)} · ${tYr(t)} · ${esc(t.place)}</small><b>${esc(t.title)}</b><span>${esc(t.teaser)}</span><span class="lib-tags">${tTags(t).map(g => `<i class="t-${g}" title="${esc(THEMES[g])}">${badge(g)}</i>`).join("")}</span><em>${esc(t.author)}${t.translated ? ` · <i>new translation</i>` : ""}</em></span></button>`; };
     FB.showPage(`${pageHero("The Library", "Radical texts", "Declarations, pamphlets, poems and speeches by the people in these stories — in their own words, introduced and linked to the history around them.", heroOf("diggers"))}
       <div class="pg-body"><div class="wrap">
-        <p class="pg-lede">Every text in the Library is out of copyright. English texts are copied from a published edition; texts in other languages are either old published translations or new translations made for this site from the original, and each page says which. The source is always named, with a link to the full version. Long works are abridged, and the gaps are marked. Each comes with a short introduction, a note on how to read it, and what happened next.</p>
-        ${[["The ancient world", -9999, 500], ["1400–1799", 500, 1800], ["The nineteenth century", 1800, 1900], ["1900 onwards", 1900, 9999]].map(([lab, a, b]) => { const ts = TEXTS.filter(t => t.year >= a && t.year < b).sort((x, y) => x.year - y.year); return ts.length ? `<h2 class="lib-era">${lab} <span>${ts.length}</span></h2><div class="lib-grid">${ts.map(t => { const h = heroOf(t.heroStory); return `<button type="button" class="lib-tile" data-go="text/${t.id}"><span class="lib-tile-img" style="${h ? bg(h, 500) : ""}"></span><span class="lib-tile-txt"><small>${esc(t.kind)} · ${tYr(t)} · ${esc(t.place)}</small><b>${esc(t.title)}</b><span>${esc(t.teaser)}</span><em>${esc(t.author)}${t.translated ? ` · <i>new translation</i>` : ""}</em></span></button>`; }).join("")}</div>` : ""; }).join("")}
+        <section class="lib-tl" aria-label="Timeline of the texts">
+          <div class="lib-tl-head"><h2>Two thousand years of radical texts</h2><span>Click a point to read it</span></div>
+          <div class="lib-tl-wrap"><button type="button" class="lib-tl-arr prev" aria-label="Scroll back">‹</button>
+            <div class="lib-tl-row" id="lib-tl">${sorted.map(t => `<button type="button" class="lib-tl-pt" data-go="text/${t.id}" data-id="${t.id}"><span class="lib-tl-yr">${t.year < 0 ? `${-t.year} BCE` : t.year}</span><span class="lib-tl-dot"></span><span class="lib-tl-t">${esc(t.title)}</span></button>`).join("")}</div>
+          <button type="button" class="lib-tl-arr next" aria-label="Scroll on">›</button></div>
+        </section>
+        <p class="lib-lede">Every text in the Library is out of copyright, or was placed in the public domain by its publisher, as United Nations documents are. English texts are copied from a published edition; texts in other languages are either old published translations or new translations made for this site from the original, and each page says which. The source is always named, with a link to the full version. Long works are abridged, and the gaps are marked.</p>
+        <div class="lib-tools">
+          <div class="lib-chips" role="group" aria-label="Filter by theme"><button type="button" class="lib-chip on" data-tag="">All themes <span>${TEXTS.length}</span></button>${tags.map(g => `<button type="button" class="lib-chip" data-tag="${g}" aria-pressed="false">${badge(g)}${esc(THEMES[g])} <span>${tagN[g]}</span></button>`).join("")}</div>
+          <div class="lib-sel">
+            <label>Type <select id="lib-type"><option value="">All types</option>${TYPES.map(([k, l]) => { const n = TEXTS.filter(t => tType(t) === k).length; return n ? `<option value="${k}">${esc(l)} (${n})</option>` : ""; }).join("")}</select></label>
+            <label>Sort <select id="lib-sort"><option value="old">Oldest first</option><option value="new">Newest first</option><option value="az">Title A–Z</option></select></label>
+            <label class="lib-q"><input type="search" id="lib-q" placeholder="Search the texts" aria-label="Search the texts"></label>
+          </div>
+        </div>
+        <p class="lib-count" id="lib-count" aria-live="polite"></p>
+        <div id="lib-list"></div>
         <p class="pg-note lib-note">More recent texts are still in copyright, so they are not reproduced here. Where they matter to a story, the story's "Find out more" section points to an authorised edition.</p>
       </div></div>`, "The Library");
+    const V = FB.vc, list = V.querySelector("#lib-list"), cnt = V.querySelector("#lib-count");
+    const sel = new Set(); let type = "", sort = "old", q = "";
+    const ERAS = [["The ancient world", -9999, 500], ["1400–1799", 500, 1800], ["The nineteenth century", 1800, 1900], ["1900 onwards", 1900, 9999]];
+    const apply = () => {
+      const hay = t => (t.title + " " + t.author + " " + t.teaser + " " + t.kind + " " + t.place).toLowerCase();
+      const ok = TEXTS.filter(t => (!sel.size || tTags(t).some(g => sel.has(g))) && (!type || tType(t) === type) && (!q || hay(t).includes(q)));
+      const ids = new Set(ok.map(t => t.id));
+      V.querySelectorAll(".lib-tl-pt").forEach(p => p.classList.toggle("dim", !ids.has(p.dataset.id)));
+      cnt.textContent = ok.length === TEXTS.length ? `${ok.length} texts` : `${ok.length} of ${TEXTS.length} texts`;
+      if (!ok.length) { list.innerHTML = `<p class="lib-none">No texts match. <button type="button" class="lib-reset">Clear the filters</button></p>`; list.querySelector(".lib-reset").onclick = reset; return; }
+      if (sort === "old" || sort === "new") {
+        const eras = sort === "new" ? ERAS.slice().reverse() : ERAS;
+        list.innerHTML = eras.map(([lab, a, b]) => { const ts = ok.filter(t => t.year >= a && t.year < b).sort((x, y) => sort === "new" ? y.year - x.year : x.year - y.year); return ts.length ? `<h2 class="lib-era">${lab} <span>${ts.length}</span></h2><div class="lib-grid">${ts.map(tile).join("")}</div>` : ""; }).join("");
+      } else list.innerHTML = `<div class="lib-grid">${ok.slice().sort((x, y) => x.title.replace(/^The /, "").localeCompare(y.title.replace(/^The /, ""))).map(tile).join("")}</div>`;
+    };
+    const chips = [...V.querySelectorAll(".lib-chip")];
+    const syncChips = () => chips.forEach(c => { const on = c.dataset.tag ? sel.has(c.dataset.tag) : !sel.size; c.classList.toggle("on", on); if (c.dataset.tag) c.setAttribute("aria-pressed", on); });
+    chips.forEach(c => c.onclick = () => { const g = c.dataset.tag; if (!g) sel.clear(); else if (sel.has(g)) sel.delete(g); else sel.add(g); syncChips(); apply(); });
+    V.querySelector("#lib-type").onchange = ev => { type = ev.target.value; apply(); };
+    V.querySelector("#lib-sort").onchange = ev => { sort = ev.target.value; apply(); };
+    V.querySelector("#lib-q").oninput = ev => { q = ev.target.value.trim().toLowerCase(); apply(); };
+    function reset() { sel.clear(); type = ""; q = ""; V.querySelector("#lib-type").value = ""; V.querySelector("#lib-q").value = ""; syncChips(); apply(); }
+    const row = V.querySelector("#lib-tl"), pv = V.querySelector(".lib-tl-arr.prev"), nx = V.querySelector(".lib-tl-arr.next");
+    const arr = () => { pv.disabled = row.scrollLeft < 4; nx.disabled = row.scrollLeft + row.clientWidth > row.scrollWidth - 4; };
+    pv.onclick = () => row.scrollBy({ left: -row.clientWidth * 0.8, behavior: "smooth" });
+    nx.onclick = () => row.scrollBy({ left: row.clientWidth * 0.8, behavior: "smooth" });
+    row.addEventListener("scroll", arr); setTimeout(arr, 50);
+    apply();
     return true;
   };
   FB.routes.text = id => {
     const t = TEXTS.find(x => x.id === id); if (!t) return false;
-    const h = heroOf(t.heroStory);
+    const h = (t.hero || heroOf(t.heroStory));
     FB.showPage(`${pageHero(`The Library · ${esc(t.kind)} · ${tYr(t)}`, t.title, t.teaser, h, `<button type="button" class="btn-ghost light" id="lib-print">Print</button><button type="button" class="btn-ghost light" data-go="library">All texts</button>`)}
       <div class="pg-body"><div class="wrap narrow lib">
         <p class="lib-by">${esc(t.author)}${t.translated ? `<span class="lib-tr">Translated from the ${esc(t.translated)} for From Below</span>` : ""}</p>
@@ -364,7 +414,7 @@
         </article>
         <section class="lib-box"><h2>Reading it</h2><p>${esc(t.reading)}</p></section>
         <section class="lib-box"><h2>What happened next</h2><div class="prose">${t.after}</div></section>
-        <section class="lib-box lib-stories"><h2>${t.stories.length > 1 ? "The stories" : "The story"}</h2><div class="mk-list lib-links">${t.stories.map(sid => storyLink(sid)).join("")}</div></section>
+        ${t.stories.length ? `<section class="lib-box lib-stories"><h2>${t.stories.length > 1 ? "The stories" : "The story"}</h2><div class="mk-list lib-links">${t.stories.map(sid => storyLink(sid)).join("")}</div></section>` : ""}
         <p class="lib-src"><b>Text:</b> ${esc(t.edition)}. <a href="${t.src[1]}" target="_blank" rel="noopener">Read the full text ↗</a>${t.fixes ? ` <span>Corrections: ${esc(t.fixes)}</span>` : ""}</p>
         ${TEXTS.length > 1 ? `<section class="pg-sec"><h2>More from the Library</h2><div class="pg-others">${TEXTS.filter(x => x.id !== t.id).map(x => `<button type="button" class="pg-other" data-go="text/${x.id}"><small>${esc(x.kind)} · ${tYr(x)}</small><b>${esc(x.title)}</b></button>`).join("")}</div></section>` : ""}
       </div></div>`, t.title);
@@ -671,6 +721,7 @@
         <button type="button" class="st-btn st-listen" aria-pressed="false">🔊 Listen</button>
         <button type="button" class="st-btn st-print">🖨 Print</button>
         <button type="button" class="st-btn st-share">🔗 Share</button>
+        ${(() => { const ts = (window.TEXTS || []).filter(t => t.stories.includes(e.id)); if (!ts.length) return ""; return ts.length === 1 ? `<a class="st-btn st-lib" href="#text/${ts[0].id}" title="${esc(ts[0].title)}">📖 Read the original: ${esc(ts[0].kind.toLowerCase())}</a>` : `<details class="st-libd"><summary class="st-btn st-lib">📖 In the Library · ${ts.length} texts</summary><div class="st-libpop">${ts.map(t => `<a href="#text/${t.id}"><b>${esc(t.title)}</b><small>${esc(t.kind)} · ${t.when ? esc(t.when) : yr(t.year)}</small></a>`).join("")}</div></details>`; })()}
       </div>
       <div class="st-right">${e.checked ? `<span class="st-checked" title="${esc(e.checkNote || "")}">✓ Facts last checked ${esc(fmtDate(e.checked))}</span>` : ""}${report ? `<a class="st-report" href="${report}" target="_blank" rel="noopener">Report an error ↗</a>` : ""}</div>
     </div></div>`;
