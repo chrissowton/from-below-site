@@ -1272,3 +1272,5 @@ a.st-link{text-decoration:none;color:inherit}
 .lib-inline a:hover b{text-decoration:underline}
 @media (max-width:640px){.lib-text{font-size:18px;padding:22px 20px}.lib-box{padding:16px 18px}}
 @media print{.lib-text{background:none;border-left:2px solid #000}.lib-box{border:1px solid #000}}
+.lib-era{font-family:var(--display);font-size:26px;margin:10px 0 14px;display:flex;align-items:baseline;gap:10px}.lib-era span{font-family:var(--body);font-size:14px;font-weight:700;color:var(--ink-3)}
+.lib-tr{display:block;margin-top:4px;font-weight:600;font-size:13.5px;color:var(--red)}.lib-tile-txt em i{font-style:normal;color:var(--red);font-weight:700}

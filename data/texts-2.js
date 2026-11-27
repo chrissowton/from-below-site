@@ -1,0 +1,227 @@
+/* The Library, second shelf. Same rules as data/texts.js. */
+window.TEXTS = (window.TEXTS || []).concat([
+{
+  id: "kabirpoems",
+  title: "Poems of Kabir",
+  author: "Kabir, translated by Rabindranath Tagore with Evelyn Underhill",
+  year: 1450, when: "15th century", place: "India",
+  kind: "Poems",
+  stories: ["kabir"],
+  heroStory: "kabir",
+  teaser: "'It is needless to ask of a saint the caste to which he belongs.' Two songs by the weaver-poet of Varanasi, who told priests and mullahs alike that God was not in their temples.",
+  intro: `<p>Kabir was a weaver in Varanasi in the fifteenth century, from a family of low-caste Muslim weavers. He composed short songs and verses in the everyday speech of northern India, and they were sung and passed on by word of mouth long before anyone wrote them down.</p>
+<p>In 1915 the Bengali poet Rabindranath Tagore, working with the English writer Evelyn Underhill, published a hundred of these songs in English. They worked from a Bengali collection rather than the oldest manuscripts, and scholars have long debated how many of the poems are Kabir's own and how many were added by later singers in his name.</p>`,
+  reading: "The first poem refuses every religious address God might be thought to live at — temple, mosque, Kaaba, Kailash — and every route to him through ritual. The second goes further and names the people who have found God: a barber, a washerwoman, a carpenter, Raidas the leatherworker, a tanner. In a society ordered by caste, that list was the point. Tagore's English is formal and a little old-fashioned; Kabir's own language was plain and blunt.",
+  after: `<p>Kabir's verses entered the scriptures of the Sikhs and the songs of the Kabir Panth, a community that follows his teaching. Hindus and Muslims both claimed him after his death. In the twentieth century, Dalit writers and activists, and many poets and musicians, took him up as a voice against caste and religious division; his songs are still widely sung.</p>`,
+  abridged: true,
+  edition: "One Hundred Poems of Kabir, translated by Rabindranath Tagore assisted by Evelyn Underhill (1915), poems I and II, as transcribed on Wikisource",
+  src: ["Wikisource: One Hundred Poems by Kabir", "https://en.wikisource.org/wiki/One_Hundred_Poems_by_Kabir"],
+  fixes: "",
+  body: [
+    { h: "I" },
+    { v: ["O servant, where dost thou seek Me?", "Lo! I am beside thee.", "I am neither in temple nor in mosque: I am neither in Kaaba nor in Kailash:", "Neither am I in rites and ceremonies, nor in Yoga and renunciation.", "If thou art a true seeker, thou shalt at once see Me: thou shalt meet Me in a moment of time.", "Kabir says, “O Sadhu! God is the breath of all breath.”"] },
+    { h: "II" },
+    { v: ["It is needless to ask of a saint the caste to which he belongs;", "For the priest, the warrior, the tradesman, and all the thirty-six castes, alike are seeking for God.", "It is but folly to ask what the caste of a saint may be;", "The barber has sought God, the washerwoman, and the carpenter—", "Even Raidas was a seeker after God.", "The Rishi Swapacha was a tanner by caste.", "Hindus and Moslems alike have achieved that End, where remains no mark of distinction."] }
+  ]
+},
+{
+  id: "agreement",
+  title: "An Agreement of the People",
+  author: "The Levellers and the agents of the army regiments",
+  year: 1647, place: "England",
+  kind: "Manifesto",
+  stories: ["putney", "diggers"],
+  heroStory: "putney",
+  teaser: "The Levellers' draft constitution — Parliaments elected every two years, seats shared out by population, and rights that no government could take away.",
+  intro: `<p>In October 1647 a group of soldiers' representatives in the New Model Army, working with the London radicals known as the Levellers, drew up a short document setting out the kind of country they wanted after the civil war. They called it An Agreement of the People, and they meant it literally: a settlement to be agreed by the people themselves, not granted by king or Parliament.</p>
+<p>It was this paper that the army debated at Putney a few days later. The argument over its first article — seats "proportioned according to the number of the inhabitants" — became the great debate about who should have the vote.</p>`,
+  reading: "Look at the 'native rights' it puts out of any government's reach: freedom of religion, freedom from being forced to fight, equality before the law. These are some of the earliest written limits on the power of a Parliament elected by the people, and they anticipate later bills of rights. Notice what it does not say: it never spells out who should vote. That silence is exactly what Ireton seized on at Putney.",
+  after: `<p>The generals did not adopt the Agreement, and a mutiny in its support was put down in November 1647. Later versions followed in 1648 and 1649, but none was put into effect, and the Leveller leaders were imprisoned. Historians now often see the Agreement as one of the first attempts anywhere to write a democratic constitution.</p>`,
+  abridged: true,
+  edition: "An Agreement of the People (1647), in modernised spelling, as transcribed on Wikisource",
+  src: ["Wikisource: An Agreement of the People (1647)", "https://en.wikisource.org/wiki/An_Agreement_of_the_People_(1647)"],
+  fixes: "Wikisource does not name the printed edition this modernised transcription came from.",
+  body: [
+    { h: "An Agreement of the people for a firm and present peace upon grounds of common right" },
+    { p: "Having by our late labours and hazards made it appear to the world at how high a rate we value our just freedom, and God having so far owned our cause as to deliver the enemies thereof into our hands, we do now hold ourselves bound in mutual duty to each other to take the best care we can for the future to avoid both the danger of returning into a slavish condition and the chargeable remedy of another war. For as it cannot be imagined that so many of our countrymen would have opposed us in this quarrel if they had understood their own good, so may we safely promise to ourselves that when our common rights and liberties shall be cleared, their endeavours will be disappointed that seek to make themselves our masters. Since therefore our former oppressions and scarce-yet-ended troubles have been occasioned either by want of frequent national meetings in council or by rendering those meetings ineffectual, we are fully agreed and resolved to provide that hereafter our representatives be neither left to an uncertainty for the time, nor made useless to the ends for which they are intended. In order whereunto we declare:" },
+    { p: "That the people of England being at this day very unequally distributed by counties, cities and boroughs for the election of their deputies in parliament, ought to be more indifferently proportioned according to the number of the inhabitants: the circumstances whereof, for number, place, and manner, are to be set down before the end of this present parliament." },
+    { p: "That to prevent the many inconveniences apparently arising from the long continuance of the same persons in authority, this present parliament be dissolved upon the last day of September, which shall be in the year of our Lord, 1648." },
+    { p: "That the people do of course choose themselves a parliament once in two years, viz. upon the first Thursday in every second March, after the manner as shall be prescribed before the end of this parliament, to begin to sit upon the first Thursday in April following at Westminster or such other place as shall be appointed from time to time by the preceding representatives, and to continue till the last day of September then next ensuing, and no longer." },
+    { p: "That the power of this and all future representatives of this nation is inferior only to theirs who choose them, and doth extend, without the consent or concurrence of any other person or persons, to the enacting, altering, and repealing of laws; to the erecting and abolishing of offices and courts; to the appointing, removing, and calling to account magistrates and officers of all degrees; to the making war and peace; to the treating with foreign states; and generally, to whatsoever is not expressly or impliedly reserved by the represented to themselves." },
+    { p: "Which are as follows:" },
+    { p: "That matters of religion and the ways of God's worship are not at all entrusted by us to any human power, because therein we cannot remit or exceed a tittle of what our consciences dictate to be the mind of God, without wilful sin. Nevertheless the public way of instructing the nation — so it be not compulsive — is referred to their discretion." },
+    { p: "That the matter of impressing and constraining any of us to serve in the wars is against our freedom; and therefore we do not allow it in our representatives; the rather, because money (the sinews of war) being always at their disposal, they can never want numbers of men apt enough to engage in any just cause." },
+    { p: "That after the dissolution of this present parliament, no person be at any time questioned for anything said or done in reference to the late public differences, otherwise than in execution of the judgements of the present representatives (or House of Commons)." },
+    { p: "That in all laws made or to be made, every person may be bound alike; and that no tenure, estate, charter, degree, birth, or place do confer any exemption from the ordinary course of legal proceedings whereunto others are subjected." },
+    { p: "That as the laws ought to be equal, so they must be good and not evidently destructive to the safety and well-being of the people." },
+    { p: "These things we declare to be our native rights; and therefore are agreed and resolved to maintain them with our utmost possibilities against all opposition whatsoever: being compelled thereunto, not only by the examples of our ancestors — whose blood was often spent in vain for the recovery of their freedoms, suffering themselves through fraudulent accommodations to be still deluded of the fruit of their victories — but also by our own woeful experience, who having long expected and dearly earned the establishment of these certain rules of government, are yet made to depend for the settlement of our peace and freedom upon him that intended our bondage and brought a cruel war upon us." },
+    { gap: 1 }
+  ]
+},
+{
+  id: "frameode",
+  title: "An Ode to the Framers of the Frame Bill",
+  author: "Lord Byron",
+  year: 1812, place: "England",
+  kind: "Poem",
+  stories: ["luddites"],
+  heroStory: "luddites",
+  teaser: "'Men are more easily made than machinery.' A young lord's savage attack, published anonymously, on the law making machine-breaking a hanging offence.",
+  intro: `<p>In February 1812 Parliament debated a bill to make the breaking of knitting frames — the Luddites' chief tactic — punishable by death. The 24-year-old Lord Byron, whose family seat was near Nottingham, gave his first speech in the House of Lords against it, describing the poverty he had seen among the framework knitters.</p>
+<p>The bill passed anyway. A few days later this poem appeared in the Morning Chronicle, without his name. It mocks the government and its supporters by name — among them the Lord Chancellor, Eldon, the Home Secretary, Ryder, and the Prime Minister, Liverpool — and the 'mistake' that Eldon blamed for the riots.</p>`,
+  reading: "The poem is sarcasm from start to finish: Byron speaks in the voice of the government, cheerfully proposing to hang the weavers in clusters round each factory. The line that cuts deepest is a plain statement of the law's values — 'Stockings fetch better prices than lives'. Byron was an aristocrat writing about workers rather than one of them, and the poem says nothing of what the Luddites themselves wanted. Its power is in turning the language of the powerful against them.",
+  after: `<p>The Frame-Breaking Act became law in 1812, and Luddites were hanged under it in 1812 and 1813, after mass trials in York and elsewhere. Byron's speech and poem are often quoted in histories of the Luddites as rare voices of sympathy from inside the ruling class.</p>`,
+  abridged: false,
+  edition: "The Works of Lord Byron, ed. E. H. Coleridge and R. E. Prothero, Poetry, vol. 7 (1904), as transcribed on Wikisource",
+  src: ["Wikisource: An Ode to the Framers of the Frame Bill", "https://en.wikisource.org/wiki/The_Works_of_Lord_Byron_(ed._Coleridge,_Prothero)/Poetry/Volume_7/An_Ode_to_the_Framers_of_the_Frame_Bill"],
+  fixes: "",
+  body: [
+    { v: ["Oh well done Lord E——n! and better done R——r!", "Britannia must prosper with councils like yours;", "Hawkesbury, Harrowby, help you to guide her,", "Whose remedy only must kill ere it cures:", "Those villains; the Weavers, are all grown refractory,", "Asking some succour for Charity's sake—", "So hang them in clusters round each Manufactory,", "That will at once put an end to mistake."] },
+    { v: ["The rascals, perhaps, may betake them to robbing,", "The dogs to be sure have got nothing to eat—", "So if we can hang them for breaking a bobbin,", "'T will save all the Government's money and meat:", "Men are more easily made than machinery—", "Stockings fetch better prices than lives—", "Gibbets on Sherwood will heighten the scenery,", "Shewing how Commerce, how Liberty thrives!"] },
+    { v: ["Justice is now in pursuit of the wretches,", "Grenadiers, Volunteers, Bow-street Police,", "Twenty-two Regiments, a score of Jack Ketches,", "Three of the Quorum and two of the Peace;", "Some Lords, to be sure, would have summoned the Judges,", "To take their opinion, but that they ne'er shall,", "For Liverpool such a concession begrudges,", "So now they're condemned by no Judges at all."] },
+    { v: ["Some folks for certain have thought it was shocking,", "When Famine appeals and when Poverty groans,", "That Life should be valued at less than a stocking,", "And breaking of frames lead to breaking of bones.", "If it should prove so, I trust, by this token,", "(And who will refuse to partake in the hope?)", "That the frames of the fools may be first to be broken,", "Who, when asked for a remedy, sent down a rope."] }
+  ]
+},
+{
+  id: "douglassrights",
+  title: "The Rights of Women",
+  author: "Frederick Douglass",
+  year: 1848, place: "United States",
+  kind: "Newspaper editorial",
+  stories: ["senecafalls"],
+  heroStory: "senecafalls",
+  teaser: "'Right is of no sex.' The famous abolitionist backs the Seneca Falls Convention in his own paper, the week after it met.",
+  intro: `<p>Frederick Douglass had escaped from slavery in Maryland ten years earlier and become the most famous Black abolitionist in the United States. He published his own newspaper, The North Star, from Rochester, near Seneca Falls, and he was one of the few men to attend the women's rights convention there in July 1848.</p>
+<p>When the convention debated whether to demand the vote for women, Douglass spoke in favour, and the resolution passed. About a week after the convention, he published this editorial.</p>`,
+  reading: "Douglass knew what support would cost him: he predicts 'the fury of bigotry and the folly of prejudice'. He connects the two causes directly — some people who had come to accept that Black people had rights still could not accept that women did, and some had even left the anti-slavery movement over it. His conclusion is short and complete: if government rests on the consent of the governed, there is no reason to deny women the vote.",
+  after: `<p>Douglass remained a supporter of women's suffrage for the rest of his life. After the Civil War the alliance came under strain, when the Fifteenth Amendment gave the vote to Black men but not to women, and some suffrage leaders turned against it with racist arguments. Douglass backed the amendment. On the day he died in 1895, he had attended a meeting of the National Council of Women in Washington.</p>`,
+  abridged: false,
+  edition: "The North Star, 28 July 1848, as reprinted in History of Woman Suffrage, vol. 1 (1881), chapter 4, transcribed on Wikisource",
+  src: ["Wikisource: History of Woman Suffrage, vol. 1, chapter 4", "https://en.wikisource.org/wiki/History_of_Woman_Suffrage/Volume_1/Chapter_4"],
+  fixes: "",
+  body: [
+    { p: "The Rights of Women. — One of the most interesting events of the past week, was the holding of what is technically styled a Woman's Rights Convention at Seneca Falls. The speaking, addresses, and resolutions of this extraordinary meeting were almost wholly conducted by women; and although they evidently felt themselves in a novel position, it is but simple justice to say that their whole proceedings were characterized by marked ability and dignity. No one present, we think, however much he might be disposed to differ from the views advanced by the leading speakers on that occasion, will fail to give them credit for brilliant talents and excellent dispositions. In this meeting, as in other deliberative assemblies, there were frequent differences of opinion and animated discussion; but in no case was there the slightest absence of good feeling and decorum. Several interesting documents setting forth the rights as well as grievances of women were read. Among these was a Declaration of Sentiments, to be regarded as the basis of a grand movement for attaining the civil, social, political, and religious rights of women." },
+    { p: "We should not do justice to our own convictions, or to the excellent persons connected with this infant movement, if we did not in this connection offer a few remarks on the general subject which the Convention met to consider and the objects they seek to attain. In doing so, we are not insensible that the bare mention of this truly important subject in any other than terms of contemptuous ridicule and scornful disfavor, is likely to excite against us the fury of bigotry and the folly of prejudice. A discussion of the rights of animals would be regarded with far more complacency by many of what are called the wise and the good of our land, than would be a discussion of the rights of women. It is, in their estimation, to be guilty of evil thoughts, to think that woman is entitled to equal rights with man. Many who have at last made the discovery that the negroes have some rights as well as other members of the human family, have yet to be convinced that women are entitled to any. Eight years ago a number of persons of this description actually abandoned the anti-slavery cause, lest by giving their influence in that direction they might possibly be giving countenance to the dangerous heresy that woman, in respect to rights, stands on an equal footing with man. In the judgment of such persons the American slave system, with all its concomitant horrors, is less to be deplored than this wicked idea. It is perhaps needless to say, that we cherish little sympathy for such sentiments or respect for such prejudices." },
+    { p: "Standing as we do upon the watch-tower of human freedom, we can not be deterred from an expression of our approbation of any movement, however humble, to improve and elevate the character of any members of the human family. While it is impossible for us to go into this subject at length, and dispose of the various objections which are often urged against such a doctrine as that of female equality, we are free to say that in respect to political rights, we hold woman to be justly entitled to all we claim for man. We go farther, and express our conviction that all political rights which it is expedient for man to exercise, it is equally so for woman. All that distinguishes man as an intelligent and accountable being, is equally true of woman; and if that government only is just which governs by the free consent of the governed, there can be no reason in the world for denying to woman the exercise of the elective franchise, or a hand in making and administering the laws of the land. Our doctrine is that \"right is of no sex.\" We therefore bid the women engaged in this movement our humble Godspeed." }
+  ]
+},
+{
+  id: "eurekaoath",
+  title: "The Eureka Stockade: the oath on Bakery Hill",
+  author: "Raffaello Carboni",
+  year: 1855, place: "Australia",
+  kind: "Eyewitness account",
+  stories: ["eureka"],
+  heroStory: "eureka",
+  teaser: "An Italian gold-digger who was there — and was tried for high treason afterwards — describes the raising of the Southern Cross and the oath the miners swore beneath it.",
+  intro: `<p>Raffaello Carboni was an Italian radical who had taken part in the revolutions of 1848–49 before coming to the Victorian goldfields. At Ballarat he became one of the leaders of the diggers' protest against the licence fee and the police who enforced it. After soldiers stormed the Eureka Stockade on 3 December 1854, he was one of thirteen men tried for high treason. The juries acquitted them all.</p>
+<p>A year later he published his own account, The Eureka Stockade, planning to hand copies to subscribers on the site of the stockade on the first anniversary. It is passionate, digressive and full of Latin and Italian — and it is the only full account by one of the rebels.</p>`,
+  reading: "Carboni insists from his first page that he is an eyewitness: 'The words I quote, I did hear them with my own ears.' That is his claim to authority, and also a reason to read carefully, because he was writing to clear his name and honour his comrades. Notice how he describes the crowd under the flag — 'gold-diggers of all languages and colours'. Historians still argue about the dates: Carboni puts the flag's first appearance on 30 November, while other accounts say it was first flown at the mass meeting the day before.",
+  after: `<p>According to official records, 27 people died when the stockade was stormed, most of them rebels. Within two years, many of the miners' demands had been met: the licence was abolished, and men in Victoria won the vote and the secret ballot. The Southern Cross flag became one of the most widely used protest symbols in Australia, claimed over the years by trade unionists, republicans and, at times, by far-right groups.</p>`,
+  abridged: true,
+  edition: "Raffaello Carboni, The Eureka Stockade (1855), chapters I and XXXVII, as transcribed on Wikisource",
+  src: ["Wikisource: The Eureka Stockade", "https://en.wikisource.org/wiki/The_Eureka_Stockade"],
+  fixes: "",
+  body: [
+    { p: "I undertake to do what an honest man should do, let it thunder or rain. He who buys this book to lull himself to sleep had better spend his money in grog. He who reads this book to smoke a pipe over it, let him provide himself with plenty of tobacco—he will have to blow hard. A lover of truth—that's the man I want—and he will have in this book the truth, and nothing but the truth." },
+    { p: "When two boys are see-sawing on a plank, balanced on its centre, whilst the world around them is \"up\" with the one it is \"down\" with the other. The centre, however, is stationary. I was in the centre. I was an actor, and therefore an eye-witness. The events I relate, I did see them, pass before me. The persons I speak of, I know them face to face. The words I quote, I did hear them with my own ears." },
+    { gap: 1 },
+    { h: "XXXVII. Lalor stump, Bakery-Hill." },
+    { p: "On that Thursday, November 30th, more memorable than the disgraced Sunday, December 3rd, the SUN was on its way towards the west: in vain some scattered clouds would hamper its splendour-the god in the firmament generously ornamented them with golden fringes, and thus patches of blue sky far off were allowed to the sight, through the gilded openings among the clouds. The \"SOUTHERN CROSS\" was hoisted up the flagstaff—a very splendid pole, eighty feet in length, and straight as an arrow. This maiden appearance of our standard, in the midst of armed men, sturdy, self-overworking gold-diggers of all languages and colours, was a fascinating object to behold. There is no flag in old Europe half so beautiful as the \"Southern Cross\" of the Ballaarat miners, first hoisted on the old spot, Bakery-hill. The flag is silk, blue ground, with a large silver cross, similar to the one in our southern firmament; no device or arms, but all exceedingly chaste and natural." },
+    { p: "Peter Lalor, our Commander-in-chief, was on the stump, holding with his left hand the muzzle of his rifle, whose but-end rested on his foot. A gesture of his right hand, signified what he meant when he said, \"It is my duty now to swear you in, and to take with you the oath to be faithful to the Southern Cross. Hear me with attention. The man who, after this solemn oath does not stand by our standard, is a coward in heart." },
+    { p: "\"I order all persons who do not intend to take the oath, to leave the meeting at once." },
+    { p: "\"Let all divisions under arms 'fall in' in their order round the flag-staff.\"" },
+    { p: "The movement was made accordingly. Some five hundred armed diggers advanced in real sober earnestness, the captains of each division making the military salute to Lalor, who now knelt down, the head uncovered, and with the right hand pointing to the standard exclaimed in a firm measured tone:—" },
+    { p: "\"We swear by the Southern Cross to stand truly by each other, and fight to defend our rights and liberties.\"" },
+    { p: "An universal well rounded amen, was the determined reply; some five hundred right hands stretched towards our flag." }
+  ]
+},
+{
+  id: "spies",
+  title: "August Spies's address to the court",
+  author: "August Spies",
+  year: 1886, place: "United States",
+  kind: "Speech",
+  stories: ["haymarket"],
+  heroStory: "haymarket",
+  teaser: "'Here you will tread upon a spark, but there, and there… flames will blaze up.' One of the Haymarket defendants answers the judge before he is sentenced to death.",
+  intro: `<p>On 4 May 1886, at a rally in Chicago's Haymarket Square in support of the eight-hour day, someone threw a bomb at the police. Seven officers and at least four civilians died in the explosion and the police gunfire that followed. No one ever established who threw it.</p>
+<p>Eight anarchists were tried for conspiracy. The evidence suggested none of them threw the bomb, and only two had been present. August Spies, a German-born upholsterer who edited the anarchist paper Arbeiter-Zeitung, had spoken at the rally. In October 1886, before the judge passed sentence, each defendant was allowed to speak. Spies began.</p>`,
+  reading: "Spies is not asking for mercy. He speaks, as he says, 'as the representative of one class to the representative of another', and turns the trial into a trial of the system. Readers then and now have weighed his words differently: he denies any part in the bomb, but he also defends the anarchists' talk of dynamite and armed workers. The speech was given in English and taken down at the time; Wikisource does not name the printed edition its transcription comes from.",
+  after: `<p>Seven of the eight were sentenced to death. Two sentences were commuted, one man killed himself in jail, and Spies was hanged with three others on 11 November 1887. In 1893 the governor of Illinois pardoned the three survivors and condemned the trial as unjust. The movement for the eight-hour day, and the Haymarket executions, gave the world May Day as an international workers' day.</p>`,
+  abridged: true,
+  edition: "Address of August Spies to the court, October 1886, as transcribed on Wikisource",
+  src: ["Wikisource: Address of August Spies", "https://en.wikisource.org/wiki/Address_of_August_Spies"],
+  fixes: "Two transcription slips corrected: ‘except salvation’ to ‘expect salvation’ and ‘divest myself of the’ to ‘divest myself of them’.",
+  body: [
+    { p: "Your Honor: In addressing this court I speak as the representative of one class to the representative of another. …" },
+    { p: "I have been indicted on the charge of murder, as an accomplice or accessory. Upon this indictment I have been convicted. There was no evidence produced by the State to show or even indicate that I had any knowledge of the man who threw the bomb, or that I myself had anything to do with the throwing of the missile …" },
+    { gap: 1 },
+    { p: "But, if you think that by hanging us, you can stamp out the labor movement—the movement from which the downtrodden millions, the millions who toil and live in want and misery—the wage slaves—expect salvation—if this is your opinion, then hang us! Here you will tread upon a spark, but there, and there, and behind you and in front of you, and everywhere, flames will blaze up. It is a subterranean fire. You cannot put it out." },
+    { gap: 1 },
+    { p: "Now, these are my ideas. They constitute a part of myself. I cannot divest myself of them, nor would I, if I could. And if you think that you can crush out these ideas that are gaining ground more and more every day, if you think you can crush them out by sending us to the gallows—if you would once more have a people suffer the penalty of death because they dared to tell the truth—and I defy you to show us where we have told a lie—I say, if death is the penalty for proclaiming truth, then I will proudly and defiantly pay the costly price! Truth crucified in Socrates, in Christ, in Giordano Bruno, in Huss, Galileo still lives—they and others whose number is legion have preceded us on this path. We are ready to follow!" }
+  ]
+},
+{
+  id: "proclamation1916",
+  title: "The Proclamation of the Irish Republic",
+  author: "The Provisional Government of the Irish Republic",
+  year: 1916, place: "Ireland",
+  kind: "Proclamation",
+  stories: ["easter1916", "dublinlockout"],
+  heroStory: "easter1916",
+  teaser: "Read aloud outside the General Post Office on Easter Monday 1916 — a promise of 'equal rights and equal opportunities to all its citizens', signed by seven men who would all be executed.",
+  intro: `<p>On Easter Monday, 24 April 1916, while Britain was fighting the First World War, a few hundred members of the Irish Volunteers, the socialist Irish Citizen Army and the women's organisation Cumann na mBan seized buildings in the centre of Dublin. Outside their headquarters at the General Post Office, Patrick Pearse read this proclamation to a small and mostly puzzled crowd.</p>
+<p>It had been printed in secret the night before at Liberty Hall, the headquarters of the transport workers' union. Its seven signatories included the teacher and poet Pearse and the socialist and trade unionist James Connolly.</p>`,
+  reading: "The Proclamation speaks in two voices. One is the language of nation and sacrifice, 'the dead generations', and arms. The other is strikingly modern for 1916: it addresses 'Irishmen and Irishwomen', promises a government elected by 'all her men and women' — two years before any women in Britain or Ireland could vote — and pledges to cherish 'all the children of the nation equally'. Connolly's influence is often seen in those lines. It also claims the support of 'gallant allies in Europe' — meaning Germany, then at war with Britain.",
+  after: `<p>The rising was crushed within six days. Of the 485 people killed, more than half were civilians. All seven signatories were executed by firing squad in May 1916, along with other leaders of the rising. The executions turned much of Irish opinion towards the republicans, and the Proclamation became the founding document of Irish independence. Its promises — above all on equality — are still quoted against Irish governments today.</p>`,
+  abridged: false,
+  edition: "Poblacht na hÉireann (1916), as transcribed on Wikisource",
+  src: ["Wikisource: Proclamation of the Irish Republic", "https://en.wikisource.org/wiki/Proclamation_of_the_Irish_Republic"],
+  fixes: "",
+  body: [
+    { h: "Poblacht na h Eireann. The Provisional Government of the Irish Republic to the People of Ireland." },
+    { p: "IRISHMEN AND IRISHWOMEN: In the name of God and of the dead generations from which she receives her old tradition of nationhood, Ireland, through us, summons her children to her flag and strikes for her freedom." },
+    { p: "Having organised and trained her manhood through her secret revolutionary organisation, the Irish Republican Brotherhood, and through her open military organisations, the Irish Volunteers and the Irish Citizen Army, having patiently perfected her discipline, having resolutely waited for the right moment to reveal itself, she now seizes that moment, and supported by her exiled children in America and by gallant allies in Europe, but relying in the first on her own strength, she strikes in full confidence of victory." },
+    { p: "We declare the right of the people of Ireland to the ownership of Ireland and to the unfettered control of Irish destinies, to be sovereign and indefeasible. The long usurpation of that right by a foreign people and government has not extinguished the right, nor can it ever be extinguished except by the destruction of the Irish people. In every generation the Irish people have asserted their right to national freedom and sovereignty; six times during the past three hundred years they have asserted it in arms. Standing on that fundamental right and again asserting it in arms in the face of the world, we hereby proclaim the Irish Republic as a Sovereign Independent State, and we pledge our lives and the lives of our comrades in arms to the cause of its freedom, of its welfare, and of its exaltation among the nations." },
+    { p: "The Irish Republic is entitled to, and hereby claims, the allegiance of every Irishman and Irishwoman. The Republic guarantees religious and civil liberty, equal rights and equal opportunities to all its citizens, and declares its resolve to pursue the happiness and prosperity of the whole nation and of all its parts, cherishing all the children of the nation equally, and oblivious of the differences carefully fostered by an alien Government, which have divided a minority from the majority in the past." },
+    { p: "Until our arms have brought the opportune moment for the establishment of a permanent National Government, representative of the whole people of Ireland and elected by the suffrages of all her men and women, the Provisional Government, hereby constituted, will administer the civil and military affairs of the Republic in trust for the people." },
+    { p: "We place the cause of the Irish Republic under the protection of the Most High God, Whose blessing we invoke upon our arms, and we pray that no one who serves that cause will dishonour it by cowardice, inhumanity, or rapine. In this supreme hour the Irish nation must, by its valour and discipline, and by the readiness of its children to sacrifice themselves for the common good, prove itself worthy of the august destiny to which it is called." },
+    { p: "Signed on behalf of the Provisional Government, Thomas J. Clarke, Sean Mac Diarmada, P. H. Pearse, James Connolly, Thomas MacDonagh, Eamonn Ceannt, Joseph Plunkett." }
+  ]
+},
+{
+  id: "motherjones",
+  title: "Ludlow, in Mother Jones's words",
+  author: "Mary Harris 'Mother' Jones",
+  year: 1925, place: "United States",
+  kind: "Memoir",
+  stories: ["ludlow"],
+  heroStory: "ludlow",
+  teaser: "The miners' organiser, then in her seventies, on the Colorado coal strike and the day the soldiers burned the tent colony at Ludlow.",
+  intro: `<p>Mary Harris Jones was born in Ireland, lost her husband and four children to yellow fever in Tennessee, and her home and business to the Chicago fire of 1871. She spent the rest of her long life as a travelling organiser for coal miners and other workers, who called her 'Mother'.</p>
+<p>During the Colorado coal strike of 1913–14 against the Rockefeller-owned Colorado Fuel and Iron Company, she was repeatedly arrested and held for weeks without charge. She was not at Ludlow on the day of the massacre. This account comes from her autobiography, published in 1925, when she was in her late eighties.</p>`,
+  reading: "Mother Jones was an organiser and a fighter, and she writes like one: this is testimony and accusation, not a neutral report. Much of the first part is made up of stories told to her by strikers' families, which she passes on as she heard them. Her account of the day itself broadly matches what investigations later found — the machine guns, the killing of Louis Tikas, the fire, the women and children who died in the pit — but she gives the date as 19 April, when most sources give the 20th, and she leaves out the gun battles on both sides that the story describes.",
+  after: `<p>About 21 people were killed at Ludlow. In the 'Ten Days' War' that followed, armed miners attacked mines across the region until federal troops were sent in. The strike was lost, but the massacre shocked the country, led to congressional hearings, and pushed John D. Rockefeller Jr. to introduce a company union and reforms. The site is now a National Historic Landmark, owned by the United Mine Workers.</p>`,
+  abridged: true,
+  edition: "Autobiography of Mother Jones (1925), chapter XXI, as transcribed on Wikisource",
+  src: ["Wikisource: Autobiography of Mother Jones, chapter XXI", "https://en.wikisource.org/wiki/Autobiography_of_Mother_Jones/Chapter_21"],
+  fixes: "",
+  body: [
+    { p: "I was in Washington, D. C., at the time of the great coal strike against the Rockefeller holdings in southern Colorado. Ten years previous a strike against long endured exploitation and tyranny had been brutally suppressed with guns and by starvation. But the bitterness and despair of the workers smouldered and smouldered long after the fires of open rebellion had been extinguished. Finally after a decade of endurance the live coals in the hearts of the miners leaped into a roaring fire of revolt." },
+    { gap: 1 },
+    { p: "\"Lads,\" said I to the two silent chaps at the door, \"the great Standard Oil is certainly afraid of an old woman!\"" },
+    { p: "They grinned." },
+    { gap: 1 },
+    { p: "From January on until the final brutal outrage—the burning of the tent colony in Ludlow—my ears wearied with the stories of brutality and suffering. My eyes ached with the misery I witnessed. My brain sickened with the knowledge of man's inhumanity to man." },
+    { gap: 1 },
+    { p: "No one listened. No one cared. The tickers in the offices of 26 Broadway sounded louder than the sobs of women and children. Men in the steam heated luxury of Broadway offices could not feel the stinging cold of Colorado hillsides where families lived in tents." },
+    { p: "Then came Ludlow and the nation heard. Little children roasted alive make a front page story. Dying by inches of starvation and exposure does not." },
+    { p: "On the 19th of April, 1914, machine guns, used on the strikers in the Paint Creek strike, were placed in position above the tent colony of Ludlow. Major Pat Hamrock and Lieutenant K. E. Linderfelt were in charge of the militia, the majority of whom were company gunmen sworn in as soldiers." },
+    { p: "Early in the morning soldiers approached the colony with a demand from headquarters that Louis Tikas, leader of the Greeks, surrender two Italians. Tikas demanded a warrant for their arrest. They had none. Tikas refused to surrender them. The soldiers returned to headquarters. A signal bomb was fired. Then another. Immediately the machine guns began spraying the flimsy tent colony, the only home the wretched families of the miners had, spraying it with bullets. Like iron rain, bullets fell upon men, women and children." },
+    { gap: 1 },
+    { p: "Night came. A raw wind blew down the canyons where men, women and children shivered and wept. Then a blaze lighted the sky. The soldiers, drunk with blood and with the liquor they had looted from the saloon, set fire to the tents of Ludlow with oil-soaked torches. The tents, all the poor furnishings, the clothes and bedding of the miners' families burned. Coils of barbed wire were stuffed into the well, the miners' only water supply." },
+    { p: "After it was over, the wretched people crept back to bury their dead. In a dugout under a burned tent, the charred bodies of eleven little children and two women were found—unrecognizable. Everything lay in ruins. The wires of bed springs writhed on the ground as if they, too, had tried to flee the horror." }
+  ]
+}
+]);

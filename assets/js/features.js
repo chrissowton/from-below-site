@@ -91,7 +91,7 @@
   if (exMk && window.BEHIND) exMk.innerHTML = window.BEHIND.cards.map(c => `<article class="ex-card mk-card"><div class="ex-img" style="${MEDIA[c.hero] ? bg(c.hero, 600) : ""}"></div><div class="ex-body"><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="${c.route}">Open →</button></div></div></article>`).join("");
   const exG = document.getElementById("ex-guides");
   const exL = document.getElementById("ex-library");
-  if (exL) exL.innerHTML = (window.TEXTS || []).map(t => { const h = heroOf(t.heroStory); return `<article class="ex-card lib-card"><div class="ex-img" style="${h ? bg(h, 600) : ""}"></div><div class="ex-body"><small class="pw-level">${esc(t.kind)} · ${yr(t.year)}</small><h3>${esc(t.title)}</h3><p>${esc(t.teaser)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="text/${t.id}">Read it →</button></div></div></article>`; }).join("");
+  if (exL) exL.innerHTML = (window.TEXTS || []).map(t => { const h = heroOf(t.heroStory); return `<article class="ex-card lib-card"><div class="ex-img" style="${h ? bg(h, 600) : ""}"></div><div class="ex-body"><small class="pw-level">${esc(t.kind)} · ${t.when ? esc(t.when) : yr(t.year)}</small><h3>${esc(t.title)}</h3><p>${esc(t.teaser)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="text/${t.id}">Read it →</button></div></div></article>`; }).join("");
   if (exG) exG.innerHTML = (window.GUIDES || []).map(g => { const h = heroOf(g.heroStory); return `<article class="ex-card gd-card"><div class="ex-img" style="${h ? bg(h, 600) : ""}"></div><div class="ex-body"><small class="pw-level">Issue guide${g.sections ? ` · ${g.sections.length} chapters` : ""}</small><h3>${esc(g.title)}</h3><p>${esc(g.teaser)}</p><div class="ex-btns"><button type="button" class="btn-play" data-go="guide/${g.id}">Read the guide →</button></div></div></article>`; }).join("");
   if (exP) exP.innerHTML = PATHWAYS.map(p => `<article class="ex-card pw-card">
       <div class="ex-body"><small class="pw-level">Pathway · ${p.steps.length} stories</small><h3>${esc(p.title)}</h3><p>${esc(p.teaser)}</p>
@@ -336,6 +336,7 @@
 
   /* ---------- The Library: public-domain radical texts ---------- */
   const TEXTS = window.TEXTS || [];
+  const tYr = t => t.when ? esc(t.when) : yr(t.year);
   const libBody = t => t.body.map(b => b.gap ? `<p class="lib-gap" aria-label="Passage left out">· · ·</p>`
     : b.h ? `<h3 class="lib-h">${esc(b.h)}</h3>`
     : b.v ? `<p class="lib-verse">${b.v.map(esc).join("<br>")}</p>`
@@ -344,8 +345,8 @@
   FB.routes.library = () => {
     FB.showPage(`${pageHero("The Library", "Radical texts", "Declarations, pamphlets, poems and speeches by the people in these stories — in their own words, introduced and linked to the history around them.", heroOf("diggers"))}
       <div class="pg-body"><div class="wrap">
-        <p class="pg-lede">Every text in the Library is out of copyright and copied from a published edition, which is named on its page with a link to the full version. Long works are abridged, and the gaps are marked. Each comes with a short introduction, a note on how to read it, and what happened next.</p>
-        <div class="lib-grid">${TEXTS.slice().sort((a, b) => a.year - b.year).map(t => { const h = heroOf(t.heroStory); return `<button type="button" class="lib-tile" data-go="text/${t.id}"><span class="lib-tile-img" style="${h ? bg(h, 500) : ""}"></span><span class="lib-tile-txt"><small>${esc(t.kind)} · ${yr(t.year)} · ${esc(t.place)}</small><b>${esc(t.title)}</b><span>${esc(t.teaser)}</span><em>${esc(t.author)}</em></span></button>`; }).join("")}</div>
+        <p class="pg-lede">Every text in the Library is out of copyright. English texts are copied from a published edition; texts in other languages are either old published translations or new translations made for this site from the original, and each page says which. The source is always named, with a link to the full version. Long works are abridged, and the gaps are marked. Each comes with a short introduction, a note on how to read it, and what happened next.</p>
+        ${[["The ancient world", -9999, 500], ["1400–1799", 500, 1800], ["The nineteenth century", 1800, 1900], ["1900 onwards", 1900, 9999]].map(([lab, a, b]) => { const ts = TEXTS.filter(t => t.year >= a && t.year < b).sort((x, y) => x.year - y.year); return ts.length ? `<h2 class="lib-era">${lab} <span>${ts.length}</span></h2><div class="lib-grid">${ts.map(t => { const h = heroOf(t.heroStory); return `<button type="button" class="lib-tile" data-go="text/${t.id}"><span class="lib-tile-img" style="${h ? bg(h, 500) : ""}"></span><span class="lib-tile-txt"><small>${esc(t.kind)} · ${tYr(t)} · ${esc(t.place)}</small><b>${esc(t.title)}</b><span>${esc(t.teaser)}</span><em>${esc(t.author)}${t.translated ? ` · <i>new translation</i>` : ""}</em></span></button>`; }).join("")}</div>` : ""; }).join("")}
         <p class="pg-note lib-note">More recent texts are still in copyright, so they are not reproduced here. Where they matter to a story, the story's "Find out more" section points to an authorised edition.</p>
       </div></div>`, "The Library");
     return true;
@@ -353,9 +354,9 @@
   FB.routes.text = id => {
     const t = TEXTS.find(x => x.id === id); if (!t) return false;
     const h = heroOf(t.heroStory);
-    FB.showPage(`${pageHero(`The Library · ${esc(t.kind)} · ${yr(t.year)}`, t.title, t.teaser, h, `<button type="button" class="btn-ghost light" id="lib-print">Print</button><button type="button" class="btn-ghost light" data-go="library">All texts</button>`)}
+    FB.showPage(`${pageHero(`The Library · ${esc(t.kind)} · ${tYr(t)}`, t.title, t.teaser, h, `<button type="button" class="btn-ghost light" id="lib-print">Print</button><button type="button" class="btn-ghost light" data-go="library">All texts</button>`)}
       <div class="pg-body"><div class="wrap narrow lib">
-        <p class="lib-by">${esc(t.author)}</p>
+        <p class="lib-by">${esc(t.author)}${t.translated ? `<span class="lib-tr">Translated from the ${esc(t.translated)} for From Below</span>` : ""}</p>
         <section class="lib-box"><h2>Before you read</h2><div class="prose">${t.intro}</div></section>
         <article class="lib-text" lang="en">
           ${t.abridged ? `<p class="lib-abr">Abridged. Passages left out are marked <span>· · ·</span>, and the full text is linked at the end.</p>` : ""}
@@ -365,7 +366,7 @@
         <section class="lib-box"><h2>What happened next</h2><div class="prose">${t.after}</div></section>
         <section class="lib-box lib-stories"><h2>${t.stories.length > 1 ? "The stories" : "The story"}</h2><div class="mk-list lib-links">${t.stories.map(sid => storyLink(sid)).join("")}</div></section>
         <p class="lib-src"><b>Text:</b> ${esc(t.edition)}. <a href="${t.src[1]}" target="_blank" rel="noopener">Read the full text ↗</a>${t.fixes ? ` <span>Corrections: ${esc(t.fixes)}</span>` : ""}</p>
-        ${TEXTS.length > 1 ? `<section class="pg-sec"><h2>More from the Library</h2><div class="pg-others">${TEXTS.filter(x => x.id !== t.id).map(x => `<button type="button" class="pg-other" data-go="text/${x.id}"><small>${esc(x.kind)} · ${yr(x.year)}</small><b>${esc(x.title)}</b></button>`).join("")}</div></section>` : ""}
+        ${TEXTS.length > 1 ? `<section class="pg-sec"><h2>More from the Library</h2><div class="pg-others">${TEXTS.filter(x => x.id !== t.id).map(x => `<button type="button" class="pg-other" data-go="text/${x.id}"><small>${esc(x.kind)} · ${tYr(x)}</small><b>${esc(x.title)}</b></button>`).join("")}</div></section>` : ""}
       </div></div>`, t.title);
     FB.vc.querySelector("#lib-print").onclick = () => window.print();
     return true;
@@ -676,7 +677,7 @@
   };
   FB.hooks.voicesBox = e => !(e.voices && e.voices.length) ? "" : `<aside class="voices" aria-label="In their own words"><h3>In their own words</h3>${e.voices.map(v => `<figure><blockquote>${esc(v.q)}</blockquote><figcaption><b>${esc(v.who)}</b>${v.when ? ` · ${esc(v.when)}` : ""}${v.src ? FB.ref(v.src[0], v.src[1]) : ""}</figcaption></figure>`).join("")}</aside>`;
 const docQuote = p => `<blockquote class="ps-doc"><p>${esc(p.text.t)}</p><cite>${esc(p.text.from || "")}${p.text.src ? FB.ref(p.text.src[0], p.text.src[1]) : ""}</cite></blockquote>`;
-    const libCard = e => { const ts = (window.TEXTS || []).filter(t => t.stories.includes(e.id)); return ts.length ? `<div class="lib-inline"><span class="lib-inline-k">In the Library</span>${ts.map(t => `<a href="#text/${t.id}"><b>${esc(t.title)}</b><small>${esc(t.kind)} · ${yr(t.year)} — read it in full →</small></a>`).join("")}</div>` : ""; };
+    const libCard = e => { const ts = (window.TEXTS || []).filter(t => t.stories.includes(e.id)); return ts.length ? `<div class="lib-inline"><span class="lib-inline-k">In the Library</span>${ts.map(t => `<a href="#text/${t.id}"><b>${esc(t.title)}</b><small>${esc(t.kind)} · ${t.when ? esc(t.when) : yr(t.year)} — read it in full →</small></a>`).join("")}</div>` : ""; };
     FB.hooks.sourceBox = e => libCard(e) + sourceBox0(e);
     const sourceBox0 = e => {
     const p = e.primary;
